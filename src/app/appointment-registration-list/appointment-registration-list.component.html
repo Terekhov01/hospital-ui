@@ -1,0 +1,28 @@
+<h1>Appointment Registration List</h1>
+<table class = "table table-striped">
+  <thead>
+  <tr>
+    <th> Id </th>
+    <th> Address </th>
+    <th> Doctor </th>
+    <th> Patient </th>
+    <th> Date </th>
+    <th> Actions </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor = "let appointmentRegistration of appointmentRegistrations">
+    <td> {{appointmentRegistration.id}} </td>
+    <td> {{appointmentRegistration.address}} </td>
+    <td> {{appointmentRegistration.doctor.lastName}} </td>
+    <td> {{appointmentRegistration.patient.lastName}} </td>
+    <td> {{appointmentRegistration.start}} </td>
+    <td>
+      <button (click)="updateAppointmentRegistration(appointmentRegistration.id)" class="btn btn-info"> Update </button>
+      <button (click)="deleteAppointmentRegistration(appointmentRegistration.id)" class="btn btn-danger" style="margin-left: 10px"> Delete </button>
+      <button (click)="appointmentRegistrationDetails(appointmentRegistration.id)" class="btn btn-info" style="margin-left: 10px"> View </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+

@@ -1,0 +1,56 @@
+<div class="col-md-8 offset-md-2">
+<h3> Create Appointment </h3>
+<form (ngSubmit)="onSubmit()" >
+
+  <div class = "form-group">
+    <label> Doctor's Last Name </label>
+    <input type="text" class="form-control" id = "docLastName"
+           [(ngModel)]="doctor" name = "docLastName">
+  </div>
+
+  <div class = "form-group">
+    <label> Patient's Last Name </label>
+    <input type="text" class="form-control" id = "patLastName"
+           [(ngModel)]="patient" name = "patLastName">
+  </div>
+
+  <div class = "form-group">
+    <label> Description </label>
+    <input type="text" class="form-control" id = "description"
+        [(ngModel)]="appointment.description" name = "description">
+  </div>
+
+  <div class = "form-group">
+    <label> Doctor's Statement </label>
+    <input type="text" class="form-control" id = "docStatement"
+           [(ngModel)]="appointment.docStatement" name = "docStatement">
+  </div>
+
+  <div class = "form-group">
+    <label> Recipe </label>
+    <input type="text" class="form-control" id = "recipe"
+           [(ngModel)]="appointment.recipe" name = "recipe">
+  </div>
+
+  <div class = "form-group">
+    <label> Rehabilitation Plan </label>
+    <input type="text" class="form-control" id = "rehabPlan"
+           [(ngModel)]="appointment.rehabPlan" name = "rehabPlan">
+  </div>
+
+  <div class = "form-group">
+    <label> Service </label>
+    <input type="text" class="form-control" id = "service"
+           [(ngModel)]="appointment.service" name = "service">
+  </div>
+
+  <div class = "form-group">
+    <label> Treatment Plan </label>
+    <input type="text" class="form-control" id = "treatPlan"
+           [(ngModel)]="appointment.treatPlan" name = "treatPlan">
+  </div>
+
+  <button class = "btn btn-success" type = "submit"> Submits </button>
+
+</form>
+</div>
