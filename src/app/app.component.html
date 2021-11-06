@@ -1,1 +1,34 @@
-<app-schedule-table-component></app-schedule-table-component>
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+  <ul class="navbar-nav">
+    <li class = "nav-item">
+      <a routerLink="appointments" routerLinkActive="active" class = "nav-link"> Appointments List </a>
+    </li>
+    <li class = "nav-item">
+      <a routerLink="appointmentRegistrations" routerLinkActive="active" class = "nav-link"> Appointment Registrations List </a>
+    </li>
+    <li class = "nav-item">
+      <a routerLink="create-appointment" routerLinkActive="active" class = "nav-link"> Create Appointment </a>
+    </li>
+    <li class = "nav-item">
+      <a routerLink="create-appointment-registration" routerLinkActive="active" class = "nav-link"> Create Appointment Registration </a>
+    </li>
+  </ul>
+</nav>
+
+<h1 class = "text-center">{{title}}</h1>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<!--<footer class="page-footer font-small blue pt-4">-->
+<!--  <div class="footer-copyright text-center py-1">© 2021 Copyright:-->
+<!--    <a> All Rights Reserved </a>-->
+<!--  </div>-->
+<!--</footer>-->
+
+<footer class = "footer">
+  <div class = "container">
+    <span> All Rights Reserved 2021 </span>
+  </div>
+</footer>
+
