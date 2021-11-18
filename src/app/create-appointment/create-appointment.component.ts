@@ -34,19 +34,19 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   saveAppointment() {
-    this.appointment.doctor = new Doctor(this.doctor);
-    this.appointment.patient = new Patient(this.patient);
+    // this.appointment.doctor = new Doctor(this.doctor);
+    // this.appointment.patient = new Patient(this.patient);
     this.appointment.appointmentRegistration = new AppointmentRegistration();
     this.appointment.appointmentRegistration.doctor = new Doctor(this.doctor);
     this.appointment.appointmentRegistration.patient = new Patient(this.patient);
     this.doctorService.getDoctorByLastName(this.doctor).subscribe(data => {
-      this.appointment.doctor = data;
+      // this.appointment.doctor = data;
       this.appointment.appointmentRegistration.doctor = data;
       console.log(data);
     },
       error => console.log(error));
     this.patientService.getPatientByLastName(this.patient).subscribe( data => {
-      this.appointment.patient = data;
+      // this.appointment.patient = data;
       this.appointment.appointmentRegistration.patient = data;
       console.log(data);
     },

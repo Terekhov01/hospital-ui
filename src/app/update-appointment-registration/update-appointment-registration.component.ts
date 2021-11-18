@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Appointment} from "../appointment";
 import {AppointmentService} from "../appointment.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DoctorService} from "../doctor.service";
 import {PatientService} from "../patient.service";
 import {AppointmentRegistrationService} from "../appointment-registration.service";
 import {AppointmentRegistration} from "../appointment-registration";
-import {Doctor} from "../doctor";
-import {Patient} from "../patient";
 
 @Component({
   selector: 'app-update-appointment-registration',
@@ -35,6 +32,7 @@ export class UpdateAppointmentRegistrationComponent implements OnInit {
   }
 
   updateAppointmentRegistration(){
+    console.log(this.appointmentRegistration);
     this.appointmentRegistrationService.updateAppointmentRegistration(this.id, this.appointmentRegistration)
       .subscribe(data=>{
         console.log(data);

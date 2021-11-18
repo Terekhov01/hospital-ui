@@ -3,6 +3,7 @@ import {Doctor} from "./doctor";
 
 export class AppointmentRegistration {
    id: number;
+   service: string;
    start: Date;
    end: Date;
    address: string;

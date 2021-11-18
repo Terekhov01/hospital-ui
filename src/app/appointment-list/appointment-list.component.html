@@ -1,13 +1,13 @@
-<h1>Appointment List</h1>
+<h1>Список приемов</h1>
 <table class = "table table-striped">
   <thead>
     <tr>
       <th> Id </th>
-      <th> Description </th>
-      <th> Doctor </th>
-      <th> Patient </th>
-      <th> Date </th>
-      <th> Actions </th>
+      <th> Описание </th>
+      <th> Доктор </th>
+      <th> Пациент </th>
+      <th> Дата и время </th>
+      <th> Действия </th>
     </tr>
   </thead>
   <tbody>
@@ -18,9 +18,9 @@
       <td> {{appointment.appointmentRegistration.patient.lastName}} </td>
       <td> {{appointment.appointmentRegistration.start}} </td>
       <td>
-        <button (click)="updateAppointment(appointment.id)" class="btn btn-info"> Update </button>
-        <button (click)="deleteAppointment(appointment.id)" class="btn btn-danger" style="margin-left: 10px"> Delete </button>
-        <button (click)="appointmentDetails(appointment.id)" class="btn btn-info" style="margin-left: 10px"> View </button>
+        <button (click)="updateAppointment(appointment.id)" class="btn btn-info"> Обновить </button>
+        <button (click)="deleteAppointment(appointment.id)" class="btn btn-danger" style="margin-left: 10px"> Удалить </button>
+        <button (click)="appointmentDetails(appointment.id)" class="btn btn-info" style="margin-left: 10px"> Детали </button>
       </td>
     </tr>
   </tbody>

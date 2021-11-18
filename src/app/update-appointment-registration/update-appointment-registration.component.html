@@ -1,44 +1,55 @@
 <div class="col-md-8 offset-md-2">
-  <h3> Create Appointment Registration </h3>
+  <h3> Обновить запись на прием </h3>
   <form (ngSubmit)="onSubmit()" >
 
     <div class = "form-group">
-      <label> Doctor's Last Name </label>
+      <label> Фамилия доктора </label>
       <input type="text" class="form-control" id = "lastNameDoc"
              [(ngModel)]="appointmentRegistration.doctor.lastName" name = "lastNameDoc">
     </div>
 
     <div class = "form-group">
-      <label> Patient's Last Name </label>
+      <label> Фамилия пациета </label>
       <input type="text" class="form-control" id = "lastNamePat"
              [(ngModel)]="appointmentRegistration.patient.lastName" name = "lastNamePat">
     </div>
 
     <div class = "form-group">
-      <label> Appointment's Start Date Time </label>
+      <label> Услуга </label>
+      <select class="form-control" id="service"
+              [(ngModel)]="appointmentRegistration.service" name = "service">
+        <option>Прием ко врачу</option>
+        <option>Сдача анализов</option>
+        <option>Прививки/Вакцинация</option>
+        <option>Другое</option>
+      </select>
+    </div>
+
+    <div class = "form-group">
+      <label> Дата и время начала приема </label>
       <input type="datetime-local" class="form-control" id = "start"
              [(ngModel)]="appointmentRegistration.start" name = "start">
     </div>
 
     <div class = "form-group">
-      <label> Appointment's End Date Time </label>
+      <label> Дата и время конца приема </label>
       <input type="datetime-local" class="form-control" id = "end"
              [(ngModel)]="appointmentRegistration.end" name = "end">
     </div>
 
     <div class = "form-group">
-      <label> Appointment's Address </label>
+      <label> Адрес </label>
       <input type="text" class="form-control" id = "address"
              [(ngModel)]="appointmentRegistration.address" name = "address">
     </div>
 
     <div class = "form-group">
-      <label> Appointment's Room </label>
+      <label> Кабинет </label>
       <input type="text" class="form-control" id = "room"
              [(ngModel)]="appointmentRegistration.room" name = "room">
     </div>
 
-    <button class = "btn btn-success" type = "submit"> Submits </button>
+    <button class = "btn btn-success" type = "submit"> Подтвердить </button>
 
   </form>
 </div>

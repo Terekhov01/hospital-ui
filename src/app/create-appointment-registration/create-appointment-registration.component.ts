@@ -14,6 +14,7 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
 
   doctor: string;
   patient: string;
+  services: string[] = ["Запись к терапевту", "Сдача крови"];
   appointmentRegistration: AppointmentRegistration = new AppointmentRegistration();
 
   constructor(private appointmentRegistrationService: AppointmentRegistrationService,
