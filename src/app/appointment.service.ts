@@ -21,6 +21,9 @@ export class AppointmentService {
   }
 
   createAppointment(appointment: Appointment): Observable<Object>{
+    // const formData = new FormData();
+    // formData.append("Appointment", appointment.file, appointment.file.name);
+    // return form data instead of appointment
     return this.httpClient.post(`${this.baseURL}`, appointment);
   }
 
