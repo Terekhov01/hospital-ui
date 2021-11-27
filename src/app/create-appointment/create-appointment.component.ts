@@ -23,6 +23,7 @@ export class CreateAppointmentComponent implements OnInit {
   room: string;
   doctor: string;
   patient: string
+  appointmentRegistrations: AppointmentRegistration[];
 
   constructor(private appointmentService: AppointmentService,
               private doctorService: DoctorService,
@@ -31,6 +32,9 @@ export class CreateAppointmentComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    this.appointmentRegistrationService.getAppointmentRegistrationsList().subscribe(data => {
+      this.appointmentRegistrations = data;
+    })
   }
 
   saveAppointment() {
@@ -69,6 +73,10 @@ export class CreateAppointmentComponent implements OnInit {
 
   goToAppointmentList() {
     this.router.navigate(['/appointments']);
+  }
+
+  SelectAppointmentRegistration(id: number) {
+    let result = this.router.navigate(['appointment-creation', id]);
   }
 
   onSubmit() {

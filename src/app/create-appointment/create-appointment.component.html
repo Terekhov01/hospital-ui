@@ -1,61 +1,100 @@
-<div class="col-md-8 offset-md-2">
-<h3> Новый прием </h3>
-<form (ngSubmit)="onSubmit()" >
-
-  <div class = "form-group">
-    <label> Фамилия доктора </label>
-    <input type="text" class="form-control" id = "docLastName"
-           [(ngModel)]="doctor" name = "docLastName">
-  </div>
-
-  <div class = "form-group">
-    <label> Фамилия пациента </label>
-    <input type="text" class="form-control" id = "patLastName"
-           [(ngModel)]="patient" name = "patLastName">
-  </div>
-
-  <div class = "form-group">
-    <label> Описание </label>
-    <input type="text" class="form-control" id = "description"
-        [(ngModel)]="appointment.description" name = "description">
-  </div>
-
-  <div class = "form-group">
-    <label> Заключение врача </label>
-    <input type="text" class="form-control" id = "docStatement"
-           [(ngModel)]="appointment.docStatement" name = "docStatement">
-  </div>
-
-  <div class = "form-group">
-    <label> Рецепт </label>
-    <input type="text" class="form-control" id = "recipe"
-           [(ngModel)]="appointment.recipe" name = "recipe">
-  </div>
-
-  <div class = "form-group">
-    <label> План реабилитации </label>
-    <input type="text" class="form-control" id = "rehabPlan"
-           [(ngModel)]="appointment.rehabPlan" name = "rehabPlan">
-  </div>
+<!--<div class="col-md-8 offset-md-2">-->
+<!--<h3> Новый прием </h3>-->
+<!--<form (ngSubmit)="onSubmit()" >-->
 
 <!--  <div class = "form-group">-->
-<!--    <label> Service </label>-->
-<!--    <input type="text" class="form-control" id = "service"-->
-<!--           [(ngModel)]="appointment.service" name = "service">-->
+<!--    <label> Фамилия доктора </label>-->
+<!--    <input type="text" class="form-control" id = "docLastName"-->
+<!--           [(ngModel)]="doctor" name = "docLastName">-->
 <!--  </div>-->
 
-  <div class = "form-group">
-    <label> План лечения </label>
-    <input type="text" class="form-control" id = "treatPlan"
-           [(ngModel)]="appointment.treatPlan" name = "treatPlan">
-  </div>
+<!--  <div class = "form-group">-->
+<!--    <label> Фамилия пациента </label>-->
+<!--    <input type="text" class="form-control" id = "patLastName"-->
+<!--           [(ngModel)]="patient" name = "patLastName">-->
+<!--  </div>-->
 
-<!--  <input type="file" class="file-upload" onchange="console.log(event.target.files)">-->
-<!--         id = "file" [(ngModel)]="appointment.file" name = "file"-->
-<!--         onchange="console.log(event.target.files)">-->
+<!--  <div class = "form-group">-->
+<!--    <label> Описание </label>-->
+<!--    <input type="text" class="form-control" id = "description"-->
+<!--        [(ngModel)]="appointment.description" name = "description">-->
+<!--  </div>-->
 
-  <button class = "btn btn-success" type = "submit"> Подтвердить </button>
+<!--  <div class = "form-group">-->
+<!--    <label> Заключение врача </label>-->
+<!--    <input type="text" class="form-control" id = "docStatement"-->
+<!--           [(ngModel)]="appointment.docStatement" name = "docStatement">-->
+<!--  </div>-->
 
-</form>
-</div>
+<!--  <div class = "form-group">-->
+<!--    <label> Рецепт </label>-->
+<!--    <input type="text" class="form-control" id = "recipe"-->
+<!--           [(ngModel)]="appointment.recipe" name = "recipe">-->
+<!--  </div>-->
 
+<!--  <div class = "form-group">-->
+<!--    <label> План реабилитации </label>-->
+<!--    <input type="text" class="form-control" id = "rehabPlan"-->
+<!--           [(ngModel)]="appointment.rehabPlan" name = "rehabPlan">-->
+<!--  </div>-->
+
+<!--&lt;!&ndash;  <div class = "form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;    <label> Service </label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="text" class="form-control" id = "service"&ndash;&gt;-->
+<!--&lt;!&ndash;           [(ngModel)]="appointment.service" name = "service">&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+
+<!--  <div class = "form-group">-->
+<!--    <label> План лечения </label>-->
+<!--    <input type="text" class="form-control" id = "treatPlan"-->
+<!--           [(ngModel)]="appointment.treatPlan" name = "treatPlan">-->
+<!--  </div>-->
+
+<!--&lt;!&ndash;  <input type="file" class="file-upload" onchange="console.log(event.target.files)">&ndash;&gt;-->
+<!--&lt;!&ndash;         id = "file" [(ngModel)]="appointment.file" name = "file"&ndash;&gt;-->
+<!--&lt;!&ndash;         onchange="console.log(event.target.files)">&ndash;&gt;-->
+
+<!--  <button class = "btn btn-success" type = "submit"> Подтвердить </button>-->
+
+<!--</form>-->
+<!--</div>-->
+
+
+
+
+<!--<mat-selection-list #appointmentRegistrations [multiple]="false">-->
+<!--  <mat-list-option value="{{appointmentRegistration}}" *ngFor="let appointmentRegistration of appointmentRegistrations">-->
+<!--    {{appointmentRegistration}}-->
+<!--  </mat-list-option>-->
+<!--</mat-selection-list>-->
+
+<!--<p>-->
+<!--  Option selected: {{appointmentRegistrations}}-->
+<!--</p>-->
+
+
+<h3> Выберите запись для приема </h3>
+<table class = "table table-striped">
+  <thead>
+  <tr>
+    <th> Id </th>
+    <th> Адрес </th>
+    <th> Доктор </th>
+    <th> Пациент </th>
+    <th> Дата и время </th>
+    <th> Выбор </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor = "let appointmentRegistration of appointmentRegistrations">
+    <td> {{appointmentRegistration.id}} </td>
+    <td> {{appointmentRegistration.address}} </td>
+    <td> {{appointmentRegistration.doctor.lastName}} </td>
+    <td> {{appointmentRegistration.patient.lastName}} </td>
+    <td> {{appointmentRegistration.start}} </td>
+    <td>
+      <button (click)="SelectAppointmentRegistration(appointmentRegistration.id)" class="btn btn-info"> Выбрать </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
