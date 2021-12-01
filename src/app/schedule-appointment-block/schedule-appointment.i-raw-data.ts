@@ -24,6 +24,12 @@ export class ScheduleInterval
   {
     return this.isAssigned;
   }
+
+  setIsAssigned(value: boolean): void
+  {
+    this.isAssigned = value;
+  }
+
 }
 
 export interface IDoctorScheduleAppointmentsData
@@ -51,6 +57,11 @@ export class DoctorScheduleAppointmentsDataDaily
     //Should be filled after constructor is called!
     //Cannot fill it in constructor due to lack of sorted set in typescript
     this.intervalCollection = [];
+  }
+
+  getId(): bigint
+  {
+    return this.id;
   }
 
   getSpecializationName(): string

@@ -68,6 +68,9 @@ export class ScheduleFilterComponent implements OnInit
     {
       //console.log(this.doctorShortInformationFormControl.doctorShortInformationFormControl.value);
       console.log("Filter is valid!");
+      console.log("Array size: " + this.doctorShortInformationFormControl.doctorShortInformationFiltered.value.length)
+
+
       for (let doctorShortInfo of this.doctorShortInformationFormControl.doctorShortInformationFiltered.value)
       {
         if (doctorShortInfo.toString() === this.doctorShortInformationFormControl.doctorShortInformationFormControl.value)

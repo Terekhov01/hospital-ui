@@ -13,6 +13,7 @@ export class DoctorService {
   constructor(private httpClient: HttpClient) { }
 
   getDoctorByLastName(lastName: string): Observable<Doctor> {
+    console.log("Finding doctor by lastname: " + lastName)
     return this.httpClient.get<Doctor>(`${this.baseURL}/lastname/${lastName}`);
   }
 

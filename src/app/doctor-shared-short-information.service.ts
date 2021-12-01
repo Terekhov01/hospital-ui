@@ -11,7 +11,7 @@ export class DoctorSharedShortInformationService implements OnInit
 {
   private calendarUrl: string;
 
-  //These variables are used to allow interaction between filter and schedule appointment controllers
+  //These variables are used to allow interacion between filter and schedule appointment controllers
   //Initializing with NaN to prevent possible errors of accessing uninitialized instance
   private requestedInfo = new BehaviorSubject<FilterSettings>(new FilterSettings(NaN, new Date(), new Date()));
   sharedRequestedInformationAsObservable = this.requestedInfo.asObservable();

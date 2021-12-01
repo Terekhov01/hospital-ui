@@ -72,19 +72,3 @@ export class DoctorShortInformationFormControls implements OnInit
     }
   }
 }
-
-/*export function doctorShortInfoValidator(doctorsShortInformation: BehaviorSubject<DoctorShortInformation[]>): ValidatorFn
-{
-    return function (formControl: AbstractControl)
-    {
-        for (let doctorInformation of doctorsShortInformation.value)
-        {
-            if (formControl.value === doctorInformation.toString())
-            {
-                return null;
-            }
-        }
-
-        return { doctorShortInformationValidator: { message: "Input string is not associated with any doctor!" } };
-    }
-}*/

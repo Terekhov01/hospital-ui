@@ -14,6 +14,12 @@ import { UpdateAppointmentRegistrationComponent } from './update-appointment-reg
 import { AppointmentDetailsComponent } from './appointment-details/appointment-details.component';
 import { AppointmentRegistrationDetailsComponent } from './appointment-registration-details/appointment-registration-details.component';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+
+
+
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -63,6 +69,14 @@ import { ScheduleAppointmentBlockComponent } from './schedule-appointment-block/
 import { MaterialDateRangePickerComponent } from './material-date-range-picker/material-date-range-picker.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { ScheduleSpecifyAppointmentPageComponent } from './schedule-specify-appointment-page/schedule-specify-appointment-page.component';
+import { ScheduleProlongPageComponent } from './schedule-prolong-page/schedule-prolong-page.component';
+import { ScheduleTablePageComponent } from './schedule-table-page/schedule-table-page.component';
+import {AppointmentRegistrationInfoService} from "./appointment-registration-info.service";
+import {DoctorScheduleAppointmentsDataDaily} from "./schedule-appointment-block/schedule-appointment.i-raw-data";
+import {DoctorScheduleService} from "./doctor-schedule.service";
+import {DoctorSharedShortInformationService} from "./doctor-shared-short-information.service";
+
 
 @NgModule({
   declarations: [
@@ -79,7 +93,10 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
     ScheduleTableComponent,
     ScheduleFilterComponent,
     ScheduleAppointmentBlockComponent,
-    MaterialDateRangePickerComponent
+    MaterialDateRangePickerComponent,
+    ScheduleTablePageComponent,
+    ScheduleSpecifyAppointmentPageComponent,
+    ScheduleProlongPageComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +105,9 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
     NoopAnimationsModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

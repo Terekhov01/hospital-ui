@@ -1,13 +1,15 @@
 <div class = "appointmentBlocks mat-elevation-z4">
   <div *ngFor="let doctorScheduleAppointmentsDataDaily of doctorScheduleDailyAppointmentsArray">
     <div class="appointmentDailyDiv mat-elevation-z4">
+<!--      <button>-->
       <h1 class = "appointmentBlockDate">
         {{ utilsService.getDateStrRuLocale(doctorScheduleAppointmentsDataDaily.getDate()) }}
       </h1>
 
       <!-- (click)="createAssignment()" -->
       <div class = "appointmentBlockButtons">
-        <button *ngFor="let doctorDailyAppointment of doctorScheduleAppointmentsDataDaily.getIntervalCollection()" mat-stroked-button color="primary" class = "appointmentBlockButton">
+        <button *ngFor="let doctorDailyAppointment of doctorScheduleAppointmentsDataDaily.getIntervalCollection()" mat-stroked-button color="primary"
+                (click)="goToAppointmentRegistrationUpdate(doctorScheduleAppointmentsDataDaily, doctorDailyAppointment)" class = "appointmentBlockButton">
           {{ doctorDailyAppointment.getIntervalStartTime().toISOString().substr(11, 5) }}
         </button>
       </div>
@@ -19,6 +21,7 @@
       <h3 class = "appointmentBlockDoctorSpecialization">
         {{ doctorScheduleAppointmentsDataDaily.getSpecializationName() }}
       </h3>
+<!--      </button>-->
     </div>
   </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppointmentRegistrationInfoService } from "./appointment-registration-info.service";
 
 @Component({
   selector: 'app-root',

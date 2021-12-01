@@ -41,7 +41,7 @@ export class CreateAppointmentComponent implements OnInit {
     // this.appointment.doctor = new Doctor(this.doctor);
     // this.appointment.patient = new Patient(this.patient);
     this.appointment.appointmentRegistration = new AppointmentRegistration();
-    this.appointment.appointmentRegistration.doctor = new Doctor(this.doctor);
+    this.appointment.appointmentRegistration.doctor = new Doctor(this.doctor, "Терапевт", "Адрес 123", "Кабинет 123");
     this.appointment.appointmentRegistration.patient = new Patient(this.patient);
     this.doctorService.getDoctorByLastName(this.doctor).subscribe(data => {
       // this.appointment.doctor = data;

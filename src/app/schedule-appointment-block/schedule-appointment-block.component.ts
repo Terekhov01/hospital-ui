@@ -7,11 +7,14 @@ import { DoctorScheduleService } from '../doctor-schedule.service';
 import { DoctorSharedShortInformationService } from '../doctor-shared-short-information.service';
 import { FilterSettings } from '../schedule-filter/schedule-filter.filter-settings';
 import { IDoctorScheduleAppointmentsData, DoctorScheduleAppointmentsDataDaily, ScheduleInterval } from './schedule-appointment.i-raw-data';
+import {Router,ActivatedRoute} from "@angular/router";
+import {AppointmentRegistrationInfoService} from "../appointment-registration-info.service";
 
 @Component({
   selector: 'app-schedule-appointment-block',
   templateUrl: './schedule-appointment-block.component.html',
-  styleUrls: ['./schedule-appointment-block.component.css']
+  styleUrls: ['./schedule-appointment-block.component.css'],
+  // providers: [AppointmentRegistrationInfoService]
 })
 export class ScheduleAppointmentBlockComponent implements OnInit
 {
@@ -22,19 +25,22 @@ export class ScheduleAppointmentBlockComponent implements OnInit
 
   public doctorScheduleDailyAppointmentsArray: DoctorScheduleAppointmentsDataDaily[] = [];
 
-  constructor(private doctorScheduleService: DoctorScheduleService, private doctorShortInfoService: DoctorSharedShortInformationService, public utilsService: CommonUtilsService)
-  {}
+  constructor(private doctorScheduleService: DoctorScheduleService, private doctorShortInfoService: DoctorSharedShortInformationService, public utilsService: CommonUtilsService, private router: Router, private appointmentRegistrationInfoService: AppointmentRegistrationInfoService)
+  {
+    console.log(this.router.getCurrentNavigation()?.extras.state);
+  }
 
   ngOnInit(): void
   {
     this.doctorShortInformationSubscription = this.doctorShortInfoService.sharedRequestedInformationAsObservable.subscribe(sharedInformation =>
       {
         this.requestedInformation = sharedInformation;
-        if (isNaN(this.requestedInformation.getId()))
-        {
-          console.log("NaN in onInit")
-          // return;
-        }
+
+        // if (isNaN(this.requestedInformation.getId()))
+        // {
+        //   console.log("NaN in onInit")
+        //   // return;
+        // }
         this.presentAppointmentDates();
       },
       (error) => alert("Internal error. \
@@ -42,11 +48,47 @@ export class ScheduleAppointmentBlockComponent implements OnInit
                             Cannot invoke presentAppointmentDates method."));
   }
 
+  goToAppointmentRegistrationUpdate(info: DoctorScheduleAppointmentsDataDaily, interval: ScheduleInterval): void {
+    // this.appointmentRegistrationInfoService = new AppointmentRegistrationInfoService(info, interval);
+    // this.appointmentRegistrationInfoService.info = info;
+    // this.appointmentRegistrationInfoService.interval = interval;
+    // this.appointmentRegistrationInfoService.
+
+
+    // this.appointmentRegistrationInfoService.setId(info.getId());
+    // this.appointmentRegistrationInfoService.setSpecializationName(info.getSpecializationName());
+    // this.appointmentRegistrationInfoService.setDoctorName(info.getDoctorName());
+    // this.appointmentRegistrationInfoService.setDate(info.getDate());
+    //
+    // this.appointmentRegistrationInfoService.setIntervalStartTime(interval.getIntervalStartTime());
+    // this.appointmentRegistrationInfoService.setIsAssigned(interval.getIsAssigned());
+
+    this.appointmentRegistrationInfoService.id.next(info.getId());
+    this.appointmentRegistrationInfoService.specializationName.next(info.getSpecializationName());
+    this.appointmentRegistrationInfoService.doctorName.next(info.getDoctorName());
+    this.appointmentRegistrationInfoService.date.next(info.getDate());
+
+    this.appointmentRegistrationInfoService.intervalStartTime.next(interval.getIntervalStartTime());
+    this.appointmentRegistrationInfoService.isAssigned.next(interval.getIsAssigned());
+
+    // this.appointmentRegistrationInfoService.changeDoctorName(info.getDoctorName());
+
+    console.log("Written information to shared service!")
+
+    // this.appointmentRegistrationInfoService.doctorName.subscribe(data => {
+    //   console.log("WRITTEN: " + data);
+    // })
+    //
+    // this.appointmentRegistrationInfoService.doctorName.unsubscribe();
+
+    let result = this.router.navigate(['create-appointment-registration']);
+  }
+
   presentAppointmentDates(): void
   {
     if (isNaN(this.requestedInformation.getId()))
     {
-      console.log("NaN after onInit")
+      // console.log("NaN after onInit")
       return;
     }
 
@@ -87,29 +129,34 @@ export class ScheduleAppointmentBlockComponent implements OnInit
 
         let doctorScheduleAppointments = doctorScheduleAppointmentsSubjects.value[0];
 
+        console.log("Specialization is: " + doctorScheduleAppointments.specializationName)
+
         let intervalCounter = 0;
         let curDate = this.requestedInformation.getStartDate();
+        // console.log("cur date is: " + curDate.toISOString());
+        // console.log("doctorScheduleAppointments.intervalCollection.length is: " + doctorScheduleAppointments.intervalCollection.length);
         let intervalArray: ScheduleInterval[] = [];
         let curInterval: ScheduleInterval;
         while (curDate <= this.requestedInformation.getEndDate() && intervalCounter < doctorScheduleAppointments.intervalCollection.length)
         {
           curInterval = new ScheduleInterval(doctorScheduleAppointments.intervalCollection[intervalCounter])
+          // console.log("curInterval.getIntervalStartTime()" + curInterval.getIntervalStartTime().toISOString());
           if (datesHaveSameYearMonthAndDate(curDate, curInterval.getIntervalStartTime()))
           {
-            console.log("interval array push")
+            // console.log("interval array push")
             intervalArray.push(curInterval);
             intervalCounter++;
           }
           else
           {
-            // console.log("Else:")
+            // console.log("array length: " + intervalArray.length);
             if (intervalArray.length !== 0)
             {
               let doctorScheduleDailyAppointments = new DoctorScheduleAppointmentsDataDaily(doctorScheduleAppointments, new Date(curDate));
               doctorScheduleDailyAppointments.setIntervalCollection(intervalArray);
 
               this.doctorScheduleDailyAppointmentsArray.push(doctorScheduleDailyAppointments);
-              console.log("Pushing in array")
+              // console.log("Pushing in array")
               intervalArray = [];
             }
 
@@ -122,6 +169,13 @@ export class ScheduleAppointmentBlockComponent implements OnInit
         console.error();
       },
       () => {
+        if (isNaN(this.requestedInformation.getId()))
+        {
+          console.log("NaN in update")
+          return;
+        } else {
+          console.log("RequestedInformation is not NaN!")
+        }
         console.log("Receiving information successful");
       });
   }
@@ -136,3 +190,4 @@ function datesHaveSameYearMonthAndDate(first: Date, second: Date): boolean
   }
   return false;
 }
+

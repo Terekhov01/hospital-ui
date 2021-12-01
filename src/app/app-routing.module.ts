@@ -10,6 +10,10 @@ import {UpdateAppointmentRegistrationComponent} from "./update-appointment-regis
 import {AppointmentDetailsComponent} from "./appointment-details/appointment-details.component";
 import {AppointmentRegistrationDetailsComponent} from "./appointment-registration-details/appointment-registration-details.component";
 import {AppointmentCreationComponent} from "./appointment-creation/appointment-creation.component";
+import { ScheduleProlongPageComponent } from './schedule-prolong-page/schedule-prolong-page.component';
+import { ScheduleSpecifyAppointmentPageComponent } from './schedule-specify-appointment-page/schedule-specify-appointment-page.component';
+import { ScheduleTablePageComponent } from './schedule-table-page/schedule-table-page.component';
+
 
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
@@ -61,6 +65,8 @@ import {ScheduleAppointmentBlockComponent} from "./schedule-appointment-block/sc
 import {MaterialDateRangePickerComponent} from "./material-date-range-picker/material-date-range-picker.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import {DoctorScheduleAppointmentsDataDaily} from "./schedule-appointment-block/schedule-appointment.i-raw-data";
+import { AppointmentRegistrationInfoService } from "./appointment-registration-info.service";
 
 const routes: Routes = [
   {path: '', redirectTo: 'appointmentRegistrations', pathMatch: 'full'},
@@ -76,7 +82,17 @@ const routes: Routes = [
   {path: "schedule-table", component: ScheduleTableComponent},
   {path: "schedule-filter", component: ScheduleFilterComponent},
   {path: "schedule-appointment-block", component: ScheduleAppointmentBlockComponent},
-  {path: "material-date-range-picker", component: MaterialDateRangePickerComponent}
+  {path: "material-date-range-picker", component: MaterialDateRangePickerComponent},
+  {
+    path: "schedule",
+    children:
+      [
+        { path: "doctorsTable", component: ScheduleTablePageComponent },
+        { path: "specifyAppointment", component: ScheduleSpecifyAppointmentPageComponent },
+        { path: "edit", component: ScheduleProlongPageComponent}
+      ]
+  }
+
 ];
 
 @NgModule({

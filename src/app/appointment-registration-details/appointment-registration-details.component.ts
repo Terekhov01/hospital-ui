@@ -21,7 +21,7 @@ export class AppointmentRegistrationDetailsComponent implements OnInit {
               private appointmentRegistrationService: AppointmentRegistrationService) { }
 
   ngOnInit(): void {
-    this.appointmentRegistration.doctor = new Doctor("");
+    this.appointmentRegistration.doctor = new Doctor("", "Терапевт", "Адрес 123", "Кабинет 123");
     this.appointmentRegistration.patient = new Patient("");
     this.id = this.route.snapshot.params['id'];
     this.appointmentRegistrationService.getAppointmentRegistrationByID(this.id).subscribe(data => {
