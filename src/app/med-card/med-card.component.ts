@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./med-card.component.css']
 })
 export class MedCardComponent implements OnInit {
-  title = "Medical Card";
+  title = "Медицинская карта";
   medCard: MedCard;
 
   constructor(private medCardService: MedCardService,
@@ -34,5 +34,11 @@ export class MedCardComponent implements OnInit {
   }
   editContr(){
     this.router.navigate(['medCard/edit-contr'])
+  }
+  appointments(){
+    this.router.navigate(['appointments'])
+  }
+  appointmentOne(id: number){
+    this.router.navigate(['appointment-details', id]);
   }
 }
