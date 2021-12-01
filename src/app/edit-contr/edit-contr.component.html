@@ -1,0 +1,9 @@
+<h1>{{title}}</h1>
+<form (ngSubmit)="update()" >
+  <div class="form-group">
+    <label>Противоказания</label>
+    <input [(ngModel)]="contr" type="text" class="form-control" placeholder="{{medCard.contraindications}}"
+           name="hereditary">
+  </div>
+  <button class="btn btn-success" type="submit"> Подтвердить </button>
+</form>
