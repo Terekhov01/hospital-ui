@@ -1,0 +1,55 @@
+<div  *ngIf="!showAdminBoard">
+  <meta http-equiv="refresh" content="1; url=http://localhost:4200">
+</div>
+
+<div class="col-md-6 offset-md-3" *ngIf="showAdminBoard">
+  <h3> Create New User </h3>
+  <form (ngSubmit) = "onSubmit()">
+    <div class="form-group">
+      <label> Username</label>
+      <input type="text" class ="form-control" id = "username"
+             [(ngModel)] = "employee.username" name = "username">
+    </div>
+
+    <div class="form-group">
+      <label> Password</label>
+      <input type="text" class ="form-control" id = "password"
+             [(ngModel)] = "employee.password" name = "password">
+    </div>
+    <div class="form-group">
+      <label> First Name</label>
+      <input type="text" class ="form-control" id = "firstName"
+             [(ngModel)] = "employee.firstName" name = "firstName">
+    </div>
+
+    <div class="form-group">
+      <label> Last Name</label>
+      <input type="text" class ="form-control" id = "lastName"
+             [(ngModel)] = "employee.lastName" name = "lastName">
+    </div>
+
+    <div class="form-group">
+      <label>Patronymic</label>
+      <input type="text" class ="form-control" id = "patronymic"
+             [(ngModel)] = "employee.patronymic" name = "patronymic">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" class ="form-control" id = "email"
+             [(ngModel)] = "employee.email" name = "email">
+    </div>
+    <div class="form-group">
+      <label>Phone</label>
+      <input type="text" class ="form-control" id = "phone"
+             [(ngModel)] = "employee.phone" name = "phone">
+    </div>
+    <div class="form-group" *ngFor="let role of employee.roles">
+      <label>Role</label>
+      <input type="text" class ="form-control" id = "role.name"
+             [(ngModel)] = "role.id" name = "role.name">
+    </div>
+
+    <button class = "btn btn-success" type ="submit">Submit</button>
+
+  </form>
+</div>

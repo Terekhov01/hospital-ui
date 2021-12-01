@@ -1,0 +1,36 @@
+<div  *ngIf="!showAdminBoard">
+  <meta http-equiv="refresh" content="1; url=http://localhost:4200">
+</div>
+
+<table class = "table table-stripped table-hover" style="width:1500px;" *ngIf="showAdminBoard">
+  <thead>
+  <tr>
+    <th> Username</th>
+    <th> FirstName</th>
+    <th> LastName </th>
+    <th> Patronymic</th>
+    <th> Email </th>
+    <th> Phone </th>
+    <th> Role </th>
+    <th> Functions </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor = "let employee of employees" >
+    <td> {{ employee.username }} </td>
+    <td> {{ employee.firstName }} </td>
+    <td> {{ employee.lastName }} </td>
+    <td> {{ employee.patronymic }} </td>
+    <td> {{ employee.email }} </td>
+    <td> {{ employee.phone }} </td>
+    <td *ngFor="let role of employee.roles">
+      {{ role.name}}
+    </td>
+    <td>
+      <button (click) = "updateEmployee(employee.id)" class = "btn btn-info"> Update</button>
+      <button (click) = "deleteEmployee(employee.id)" class = "btn btn-danger" style="margin-left: 5px"> Delete</button>
+      <button (click) = "employeeDetails(employee.id)" class = "btn btn-info" style="margin-left: 5px"> View</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
