@@ -3,29 +3,39 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {UserComponent} from './user/user/user.component';
-import {AddUserComponent} from './add-doctor/add-user.component';
-import {FormsModule} from "@angular/forms";
+import {DoctorComponent} from './user/user/doctor.component';
+import {AddDoctorComponent} from './add-doctor/add-doctor.component';
+import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import {UserService} from "./user/user/user.service";
+import {DoctorService} from "./user/user/doctor.service";
 import { OrderByPipe } from './order-by.pipe';
 import { UpdateDoctorComponent } from './update-doctor/update-doctor.component';
+import { OurdoctorsComponent } from './ourdoctors/ourdoctors.component';
+import { OurdoctorsdetailsComponent } from './ourdoctorsdetails/ourdoctorsdetails.component';
+// import {ourdoctorsModel } from './ourdoctors/ourdoctors.model';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
-    AddUserComponent,
+    DoctorComponent,
+    AddDoctorComponent,
     OrderByPipe,
-    UpdateDoctorComponent
+    UpdateDoctorComponent,
+    OurdoctorsComponent,
+    OurdoctorsdetailsComponent,
+
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
-  ],
-  providers: [UserService],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+
+
+    ],
+  providers: [DoctorService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
