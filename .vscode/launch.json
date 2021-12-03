@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      // Based on: https://github.com/microsoft/vscode-recipes/tree/master/Angular-CLI
+      {
+        "name": "Launch ng serve & Chrome",
+        "type": "chrome",
+        "request": "launch",
+        "preLaunchTask": "npm: start",
+        "url": "http://localhost:4200/#",
+        "runtimeArgs": [
+            "--profile-directory=debug-profile",
+            "--noerrors",
+            "--disable-session-crashed-bubble",
+            "--disable-infobars",
+            //"--proxy-server=http://localhost:5555",
+            //"--proxy-bypass-list=<-loopback>"
+          ],
+        "browserLaunchLocation": "ui",
+  
+        // Note: The ./client directory
+        "webRoot": "${workspaceFolder}",
+      },
+    ]
+  }
+  
