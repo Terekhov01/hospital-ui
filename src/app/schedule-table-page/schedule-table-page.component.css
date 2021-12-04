@@ -1,0 +1,53 @@
+.scheduleDiv
+{
+    margin: 20px;
+    overflow: hidden;
+}
+
+.datePickerDiv
+{
+    width: fit-content;
+    margin: 20px 20px 0px;
+}
+
+.scheduleTableDiv
+{
+    max-width: 100vw;
+    max-height: 80vw;
+    margin: 0px 20px 20px;
+    overflow: auto;
+}
+
+/*Appplys to each column except header cells
+td.mat-column-name
+{
+    background-color: aqua;
+}*/
+
+/*Applys to each column
+[class *= "mat-column-"]
+{
+    background-color: aqua;
+}*/
+
+.mat-column-specialization
+{
+    padding: 10px;
+    min-width: 100px;
+    max-width: 400px;
+}
+
+.mat-column-name
+{
+    min-width: 40px;
+    max-width: 400px;
+    padding: 10px;
+    border-right: 1px solid #bdbdbd;
+}
+
+[class *= "mat-column-day"]
+{
+    text-align: center;
+    min-width: 100px;
+    max-width: 200px;
+}

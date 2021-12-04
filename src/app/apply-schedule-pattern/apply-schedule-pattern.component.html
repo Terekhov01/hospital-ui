@@ -1,0 +1,37 @@
+<div class = "mat-elevation-z4 patternUsageBlock">
+    <mat-form-field class = "dropdownInputField" appearance = "fill">
+        <mat-label>Название шаблона</mat-label>
+        <input type = "text"
+            placeholder = "Начните печатать..."
+            aria-label = ""
+            matInput
+            [formControl] = "patternAutocompleteFormControl.getFormControl()"
+            [matAutocomplete] = "auto">
+            
+            <button *ngIf="patternAutocompleteFormControl.getFormControl().value.length !== 0" matSuffix mat-icon-button aria-label="Clear" (click)="patternAutocompleteFormControl.getFormControl().setValue('')">
+                <mat-icon>close</mat-icon>
+            </button>
+
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" class = "autocompletePatternAutocomplete">
+            <!-- TODO - introduce categories of doctors by their profession -->
+            <!-- <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter"> -->
+            <mat-option *ngFor="let patternShortInfo of patternAutocompleteFormControl.patternShortInfoFiltered.value" [value] = "patternShortInfo.name">
+                {{ patternShortInfo.name }}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <form [formGroup]="patternRangePicker">
+        <mat-form-field appearance = "fill" class = "dateRangePickerField">
+            <mat-label>Выберите дату</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate formControlName = "rangeStartDate" placeholder="Start date">
+            <input matEndDate formControlName = "rangeEndDate" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+    </form>
+
+    <button mat-raised-button color = "primary" class = "changeButtonClass" [disabled] = "buttonFormControl.disabled" (click) = "onProlongButtonClicked()">Изменить</button>
+</div>

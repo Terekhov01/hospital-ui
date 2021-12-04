@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../employee';
-import { EmployeeService } from '../employee.service';
+import { EmployeeService } from '../_services/employee.service';
 import { Router } from '@angular/router';
 import {TokenStorageService} from '../_services/token-storage.service';
 

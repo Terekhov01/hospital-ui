@@ -1,0 +1,47 @@
+.filtersContainer
+{
+    display: flex;
+    max-width: 100%;
+    margin: 20px;
+
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.autocompleteDoctorFilterForm
+{
+    display: flex;
+    flex-grow: 1;
+    max-width: 500px;
+}
+
+.dropdownInputField
+{
+    flex-grow: 1;
+}
+
+.autocompleteDoctorFilterForm
+{
+    flex-grow: 1;
+    margin: 15px 15px 0px;
+}
+
+.datePickerAndFilterButton
+{
+    display: flex;
+    margin: 15px 15px 0px;
+}
+
+.datePickerFilterField
+{
+    display: block;
+    margin-right: 15px;
+}
+
+.filterButton
+{
+    display: block;
+    height: fit-content;
+    width: fit-content;
+    margin: 8px 15px 0px;
+}

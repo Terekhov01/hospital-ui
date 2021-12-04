@@ -1,0 +1,24 @@
+.patternUsageBlock
+{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0px 20px 20px;
+}
+
+.dropdownInputField
+{
+    margin: 20px 15px 5px;
+}
+
+.dateRangePickerField
+{
+    margin: 20px 15px 5px;
+}
+
+.changeButtonClass
+{
+    margin: 6px 15px 5px;
+    height: fit-content;
+    width: auto;
+}
