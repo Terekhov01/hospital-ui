@@ -10,6 +10,7 @@ import { DoctorShortInformation, IDoctorShortInformation } from '../schedule-fil
 export class DoctorSharedShortInformationService implements OnInit
 {
     private calendarUrl: string;
+    private doctorShortInfoUrl: string;
 
     //These variables are used to allow interacion between filter and schedule appointment controllers
     //Initializing with NaN to prevent possible errors of accessing uninitialized instance
@@ -19,6 +20,7 @@ export class DoctorSharedShortInformationService implements OnInit
     constructor(private http: HttpClient) 
     {
         this.calendarUrl = "http://localhost:8080/schedule/calendar/";
+        this.doctorShortInfoUrl = "http://localhost:8080/schedule/getDoctorNames";
     }
 
     ngOnInit(): void

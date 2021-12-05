@@ -21,9 +21,9 @@ export class DoctorScheduleService
     { 
         this.tableUrl = "http://localhost:8080/schedule/table";
         this.calendarUrl = "http://localhost:8080/schedule/calendar";
-        this.scheduleAddPatternUrl = "http://localhost:8080/schedule/add-pattern";
-        this.schedulePatternListUrl = "http://localhost:8080/schedule/list-patterns";
-        this.schedulePatternProlong = "http://localhost:8080/schedule/apply-pattern";
+        this.scheduleAddPatternUrl = "http://localhost:8080/schedule-pattern/add-pattern";
+        this.schedulePatternListUrl = "http://localhost:8080/schedule-pattern/list-patterns";
+        this.schedulePatternProlong = "http://localhost:8080/schedule-pattern/apply-pattern";
     }
 
     getDoctorScheduleTableObservables(startDate: Date, endDate: Date): Observable<IDoctorScheduleTableData[]>
