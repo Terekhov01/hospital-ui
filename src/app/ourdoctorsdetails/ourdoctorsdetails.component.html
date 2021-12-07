@@ -89,12 +89,12 @@
 <div class="col-md-6" >
 <!--  [formGroup]="" (ngSubmit)="addRating()"-->
   <h2 class="text-center">Добавление отзыва доктору</h2>
-  <form >
+  <form  [formGroup]="updateRatingForm"  (ngSubmit)="onSubmit()" >
 
 
     <div class="form-group">
-      <label for="room">Врач: </label>
-      <input    class="form-control"  type="number" readonly >
+      <label >Врач: </label>
+      <input    class="form-control"  type="number" readonly [(ngModel)]="doctorRating.doctorId" [formControlName]="'doctorId'" >
 
 <!--      placeholder={{name}}-->
 
@@ -102,13 +102,13 @@
 
 
     <div class="form-group">
-      <label for="room">Количество звезд</label>
-      <input  placeholder="5"  class="form-control" id="room" type="number">
+      <label for="rating">Количество звезд</label>
+      <input  placeholder="5"  class="form-control" id="rating" type="number" [(ngModel)]="doctorRating.rating" [formControlName]="'rating'" >
     </div>
 
     <div class="form-group">
-      <label for="specialist">Отзыв:</label>
-      <input placeholder="Напишите свои впечатления " name="specialist" class="form-control" id="specialist">
+      <label for="feedback">Отзыв:</label>
+      <input placeholder="Напишите свои впечатления " name="feedback" class="form-control" id="feedback" [(ngModel)]="doctorRating.feedback" [formControlName]="'feedback'">
     </div>
 
     <!--    createUser()-->

@@ -1,10 +1,9 @@
 export interface DoctorRatingRequest {
 
-  id: number;
   rating: number;
   feedback: string;
-
-
+  doctorId: number;
+  userId: number;
 
 
 }

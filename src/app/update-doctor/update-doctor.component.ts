@@ -57,20 +57,6 @@ export class UpdateDoctorComponent implements OnInit {
       error => console.log(error));
   }
 
-  // updateDoctor(user: User) {
-  //   this.userService.updateDoctor(user)
-  //     .subscribe(data => {
-  //       // console.log(data);
-  //
-  //       this.goToAppointmentList();
-  //     }, error => console.log(error));
-  //
-  // }
-
-  // goToAppointmentList() {
-  //   this.router.navigate(['/doctor-users']);
-  // }
-
   onSubmit(): void {
     console.log(this.user);
     this.user.id = this.updatedoctorform?.get('id')?.value;
