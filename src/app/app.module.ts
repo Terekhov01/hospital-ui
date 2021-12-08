@@ -38,6 +38,8 @@ import { MaterialDateRangePickerComponent } from './material-date-range-picker/m
 import { ScheduleSpecifyAppointmentPageComponent } from './schedule-specify-appointment-page/schedule-specify-appointment-page.component';
 import { ScheduleProlongPageComponent } from './schedule-prolong-page/schedule-prolong-page.component';
 import { ApplySchedulePatternComponent } from './apply-schedule-pattern/apply-schedule-pattern.component';
+//import { MaterialMultiSelectorComponent } from './material-multi-selector/material-multi-selector.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,8 @@ import { ApplySchedulePatternComponent } from './apply-schedule-pattern/apply-sc
     MaterialDateRangePickerComponent,
     ScheduleSpecifyAppointmentPageComponent,
     ScheduleProlongPageComponent,
-    ApplySchedulePatternComponent
+    ApplySchedulePatternComponent,
+    //MaterialMultiSelectorComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ import { ApplySchedulePatternComponent } from './apply-schedule-pattern/apply-sc
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
     FormsModule,

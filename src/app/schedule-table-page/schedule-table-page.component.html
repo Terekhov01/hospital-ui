@@ -1,6 +1,6 @@
 <div class = "scheduleDiv mat-elevation-z4">
     <div class = "datePickerDiv">
-        <app-material-date-range-picker (pickedValue) = "calendarValueChanged($event)"></app-material-date-range-picker>
+        <app-material-date-range-picker (pickedValue) = "calendarValueChanged($event)" [rangeMaxLengthInDays] = "31"></app-material-date-range-picker>
     </div>
     <div class="scheduleTableDiv mat-elevation-z4">
 

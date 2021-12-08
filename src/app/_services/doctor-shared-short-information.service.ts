@@ -34,7 +34,7 @@ export class DoctorSharedShortInformationService implements OnInit
            httpParams = httpParams.append("doctorIds", id.join(","));
         }
         
-        return this.http.get<IDoctorShortInformation[]>(this.calendarUrl.concat("/getDoctorNames"), {params: httpParams});
+        return this.http.get<IDoctorShortInformation[]>(this.doctorShortInfoUrl, {params: httpParams});
     }
 
     setRequestedInfo(message: FilterSettings): void

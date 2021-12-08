@@ -27,11 +27,11 @@ export class ScheduleTablePageComponent implements OnInit {
 
     getDayName(date: Date, locale: string): string
     {
-        let str = date.toLocaleDateString(locale, { weekday: 'long' });        
+        let str = date.toLocaleDateString(locale, { weekday: 'long' });
         return str.charAt(0).toUpperCase() + str.slice(1)
     }
 
-    constructor(private doctorScheduleService: DoctorScheduleService, private utilsService: CommonUtilsService) 
+    constructor(private doctorScheduleService: DoctorScheduleService, private utilsService: CommonUtilsService)
     {
         this.dataSource = new ScheduleTableDataSource(this.doctorScheduleService);
         this.userLocale = this.getUserLocale();

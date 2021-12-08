@@ -143,18 +143,19 @@ export class ScheduleProlongPageComponent implements OnInit {
 
         let response = this.scheduleService.postDoctorSchedulePattern(scheduleTablePattern);
 
-        response.subscribe((responseStr) => 
-        {
-            alert ("Сохранено");
-        },
-        (error) =>
-        {
-            if (error.error == "Could not save schedule pattern to database")
+        response.subscribe({
+            next: (responseStr) => 
             {
-                alert ("Шаблон не сохранен. Возможно, шаблон с таким именем уже существует.");
+                alert ("Сохранено");
+            },
+            error: (error) =>
+            {
+                if (error.error == "Could not save schedule pattern to database")
+                {
+                    alert ("Шаблон не сохранен. Возможно, шаблон с таким именем уже существует.");
+                }
             }
         });
-        //TODO - handle responses
     }
 
     getDataFromTable(): ScheduleDayPattern[] | undefined

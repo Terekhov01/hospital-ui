@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { IDoctorScheduleAppointmentsData } from '../schedule-appointment-block/schedule-appointment.i-raw-data';
 import { ScheduleTablePattern, TimeRounded } from '../schedule-prolong-page/schedule-prolong-page.i-raw-data';
 import { ISchedulePatternShortInfo } from '../apply-schedule-pattern/apply-schedule-pattern.i-raw-data';
+import { TokenStorageService } from './token-storage.service';
 
 @Injectable({
     providedIn: 'root'
@@ -17,12 +18,12 @@ export class DoctorScheduleService
     private schedulePatternListUrl: string;
     private schedulePatternProlong: string;
 
-    constructor(private http: HttpClient) 
+    constructor(private http: HttpClient, private tokenStorage: TokenStorageService) 
     { 
         this.tableUrl = "http://localhost:8080/schedule/table";
         this.calendarUrl = "http://localhost:8080/schedule/calendar";
-        this.scheduleAddPatternUrl = "http://localhost:8080/schedule-pattern/add-pattern";
         this.schedulePatternListUrl = "http://localhost:8080/schedule-pattern/list-patterns";
+        this.scheduleAddPatternUrl = "http://localhost:8080/schedule-pattern/add-pattern";
         this.schedulePatternProlong = "http://localhost:8080/schedule-pattern/apply-pattern";
     }
 
@@ -64,14 +65,15 @@ export class DoctorScheduleService
         let headers = new HttpHeaders();
         headers.append("Accept", "application/json");
         headers.append("Content-Type", "application/json");
-        //headers.append("Authorization", `my_token`);
 
         return this.http.post<string>(this.scheduleAddPatternUrl, { headers: headers, params: httpParams });
     }
 
     getPatternNames(): Observable<ISchedulePatternShortInfo[]>
     {
-        let httpParams = new HttpParams();
+        let httpHeaders = new HttpHeaders();
+        httpHeaders.append("Authorization", this.tokenStorage.getToken());
+
         return this.http.get<ISchedulePatternShortInfo[]>(this.schedulePatternListUrl);
     }
 

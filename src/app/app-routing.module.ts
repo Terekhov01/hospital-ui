@@ -14,6 +14,7 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 import { ScheduleTablePageComponent } from "./schedule-table-page/schedule-table-page.component";
 import { ScheduleSpecifyAppointmentPageComponent } from "./schedule-specify-appointment-page/schedule-specify-appointment-page.component";
 import { ScheduleProlongPageComponent } from "./schedule-prolong-page/schedule-prolong-page.component";
+//import { MaterialMultiSelectorComponent } from './material-multi-selector/material-multi-selector.component';
 
 const routes: Routes =
 [
@@ -36,7 +37,8 @@ const routes: Routes =
         { path: "specifyAppointment", component: ScheduleSpecifyAppointmentPageComponent },
         { path: "edit", component: ScheduleProlongPageComponent }
       ]
-    }
+    },
+    /*{ path: "testPath", component: MaterialMultiSelectorComponent}*/
 ];
 
 @NgModule({
