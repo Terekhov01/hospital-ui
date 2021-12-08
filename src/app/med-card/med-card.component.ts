@@ -41,4 +41,7 @@ export class MedCardComponent implements OnInit {
   appointmentOne(id: number){
     this.router.navigate(['appointment-details', id]);
   }
+  editAppointment(id: number){
+    this.router.navigate(['update-appointment', id])
+  }
 }

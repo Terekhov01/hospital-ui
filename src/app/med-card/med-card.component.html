@@ -15,13 +15,14 @@
   <div>
     <button (click)="appointments()" mat-icon-button color="warn">Посмотреть все</button>
     <ul *ngFor="let appointment of medCard.appointments">
-      <button (click)="appointmentOne(appointment.id)" mat-icon-button color="warn">Посмотреть запись</button>
+      <button (click)="appointmentOne(appointment.id)" mat-icon-button color="warn">Просмотреть прием</button>
       <li>{{appointment.description}}</li>
 <!--      <li>{{appointment.service}}</li>-->
       <li>{{appointment.recipe}}</li>
       <li>{{appointment.treatPlan}}</li>
       <li>{{appointment.rehabPlan}}</li>
       <li>{{appointment.docStatement}}</li>
+      <button (click)="editAppointment(appointment.id)" mat-icon-button color="primary"><mat-icon>border_color</mat-icon></button>
     </ul>
   </div>
 </div>

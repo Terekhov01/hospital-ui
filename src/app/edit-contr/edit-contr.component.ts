@@ -26,7 +26,7 @@ export class EditContrComponent implements OnInit {
   update(){
     this.medCardService.editContr(this.contr).subscribe(data =>{
     });
-    this.router.navigate(['medCard'])
+    this.router.navigate(['medCard']);
   }
 
 
