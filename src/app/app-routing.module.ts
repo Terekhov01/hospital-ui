@@ -14,6 +14,12 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 import { ScheduleTablePageComponent } from "./schedule-table-page/schedule-table-page.component";
 import { ScheduleSpecifyAppointmentPageComponent } from "./schedule-specify-appointment-page/schedule-specify-appointment-page.component";
 import { ScheduleProlongPageComponent } from "./schedule-prolong-page/schedule-prolong-page.component";
+import { DoctorComponent } from "./user/user/doctor.component";
+import { AddDoctorComponent } from "./add-doctor/add-doctor.component";
+import { UpdateDoctorComponent } from "./update-doctor/update-doctor.component";
+import { OurdoctorsComponent } from "./ourdoctors/ourdoctors.component";
+import { OurdoctorsdetailsComponent } from "./ourdoctorsdetails/ourdoctorsdetails.component";
+
 //import { MaterialMultiSelectorComponent } from './material-multi-selector/material-multi-selector.component';
 
 const routes: Routes =
@@ -29,7 +35,7 @@ const routes: Routes =
     { path: 'update-employee/:id', component: UpdateEmployeeComponent },
     { path: 'create-employee', component: CreateEmployeeComponent },
     { path: 'employee-details/:id', component: EmployeeDetailsComponent },
-    { 
+    {
       path: "schedule",
       children:
       [
@@ -38,6 +44,11 @@ const routes: Routes =
         { path: "edit", component: ScheduleProlongPageComponent }
       ]
     },
+    { path: 'doctor-users', component: DoctorComponent },
+    { path: 'add', component: AddDoctorComponent },
+    { path: 'update-doctor/:id', component: UpdateDoctorComponent },
+    { path: 'ourdoctors', component: OurdoctorsComponent },
+    { path: 'ourDoctorsDetails/:id', component: OurdoctorsdetailsComponent },
     /*{ path: "testPath", component: MaterialMultiSelectorComponent}*/
 ];
 

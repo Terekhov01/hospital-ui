@@ -49,25 +49,21 @@ export class ApplySchedulePatternComponent implements OnInit
         let patternShortInformationsSubject = new BehaviorSubject<ISchedulePatternShortInfo[]>([]);
 
         //Retrieve available patterns from server
-        this.patternSubscription = this.scheduleService.getPatternNames().pipe(
-            catchError((error) => 
-            {
-                console.error();
-                alert("Server inacessible or data malformed! Cannot load list of doctors available.");
-                return of([]);
-            })
-        ).subscribe(patternShortInfoList => 
+        this.patternSubscription = this.scheduleService.getPatternNames().subscribe({
+        next: (patternShortInfoList) => 
         {
             patternShortInformationsSubject.next(patternShortInfoList);
-        }, (error) => 
+        },
+        error: (error) => 
         { 
             alert("Error translating data from server! Cannot load list of doctors available.");
             console.error();
         },
-        () => 
+        complete: () => 
         { 
             console.log("Recieving information successful");
             this.patternAutocompleteFormControl.setPatternList(patternShortInformationsSubject);
+        }
         });
 
         //Set date range picker parameters depending on chosen pattern

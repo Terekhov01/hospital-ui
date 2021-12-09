@@ -40,6 +40,12 @@ import { ScheduleProlongPageComponent } from './schedule-prolong-page/schedule-p
 import { ApplySchedulePatternComponent } from './apply-schedule-pattern/apply-schedule-pattern.component';
 //import { MaterialMultiSelectorComponent } from './material-multi-selector/material-multi-selector.component';
 import { MatSelectModule } from '@angular/material/select';
+import { OurdoctorsComponent } from './ourdoctors/ourdoctors.component';
+import { OurdoctorsdetailsComponent } from './ourdoctorsdetails/ourdoctorsdetails.component';
+import { OrderByPipe } from './order-by.pipe';
+import { UpdateDoctorComponent } from './update-doctor/update-doctor.component';
+import { AddDoctorComponent } from './add-doctor/add-doctor.component';
+import { DoctorComponent } from './user/user/doctor.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +68,12 @@ import { MatSelectModule } from '@angular/material/select';
     ScheduleSpecifyAppointmentPageComponent,
     ScheduleProlongPageComponent,
     ApplySchedulePatternComponent,
+    DoctorComponent,
+    AddDoctorComponent,
+    OrderByPipe,
+    UpdateDoctorComponent,
+    OurdoctorsComponent,
+    OurdoctorsdetailsComponent
     //MaterialMultiSelectorComponent
   ],
   imports: [

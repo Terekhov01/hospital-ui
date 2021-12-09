@@ -19,7 +19,7 @@
         "browserLaunchLocation": "ui",
   
         // Note: The ./client directory
-        "webRoot": "${workspaceFolder}",
+        "webRoot": "${workspaceFolder}"
       },
     ]
   }
