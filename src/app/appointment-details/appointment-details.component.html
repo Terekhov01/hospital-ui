@@ -7,11 +7,11 @@
     <label> <b> Фамилия врача: </b>  </label> {{appointment.appointmentRegistration.patient.lastName}}
   </div>
   <div>
-    <label> <b> Дата и время начала приема: </b>  </label> {{appointment.appointmentRegistration.start}}
+    <label> <b> Дата и время начала приема: </b>  </label> {{datePipe.transform(appointment.appointmentRegistration.start, "yyyy/MM/dd HH:mm")}}
   </div>
-  <div>
-    <label> <b> Дата и время конца приема: </b>  </label> {{appointment.appointmentRegistration.end}}
-  </div>
+<!--  <div>-->
+<!--    <label> <b> Дата и время конца приема: </b>  </label> {{appointment.appointmentRegistration.end}}-->
+<!--  </div>-->
   <div>
     <label> <b> Специализация доктора: </b>  </label> {{appointment.appointmentRegistration.doctor.specialization}}
   </div>

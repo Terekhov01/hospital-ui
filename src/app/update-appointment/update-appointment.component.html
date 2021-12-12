@@ -2,6 +2,10 @@
   <h3> Обновить прием </h3>
   <form (ngSubmit)="onSubmit()" >
 
+    <div>
+      <label> <b> Услуга: </b>  </label> {{appointment.appointmentRegistration.service}}
+    </div>
+
     <div class = "form-group">
       <label> Фамилия доктора </label>
       <input type="text" class="form-control" id = "docLastName"

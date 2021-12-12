@@ -2,6 +2,10 @@
   <h3> Обновить запись на прием </h3>
   <form (ngSubmit)="onSubmit()" >
 
+    <div>
+      <label> <b> Услуга: </b>  </label> {{appointmentRegistration.service}}
+    </div>
+
     <div class = "form-group">
       <label> Фамилия доктора </label>
       <input type="text" class="form-control" id = "lastNameDoc"
@@ -14,16 +18,16 @@
              [(ngModel)]="appointmentRegistration.patient.lastName" name = "lastNamePat">
     </div>
 
-    <div class = "form-group">
-      <label> Услуга </label>
-      <select class="form-control" id="service"
-              [(ngModel)]="appointmentRegistration.service" name = "service">
-        <option>Прием ко врачу</option>
-        <option>Сдача анализов</option>
-        <option>Прививки/Вакцинация</option>
-        <option>Другое</option>
-      </select>
-    </div>
+<!--    <div class = "form-group">-->
+<!--      <label> Услуга </label>-->
+<!--      <select class="form-control" id="service"-->
+<!--              [(ngModel)]="appointmentRegistration.service" name = "service">-->
+<!--        <option>Прием ко врачу</option>-->
+<!--        <option>Сдача анализов</option>-->
+<!--        <option>Прививки/Вакцинация</option>-->
+<!--        <option>Другое</option>-->
+<!--      </select>-->
+<!--    </div>-->
 
     <div class = "form-group">
       <label> Дата и время начала приема </label>

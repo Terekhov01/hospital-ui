@@ -76,6 +76,7 @@ import {AppointmentRegistrationInfoService} from "./appointment-registration-inf
 import {DoctorScheduleAppointmentsDataDaily} from "./schedule-appointment-block/schedule-appointment.i-raw-data";
 import {DoctorScheduleService} from "./doctor-schedule.service";
 import {DoctorSharedShortInformationService} from "./doctor-shared-short-information.service";
+import {DatePipe} from '@angular/common';
 
 
 @NgModule({
@@ -109,7 +110,7 @@ import {DoctorSharedShortInformationService} from "./doctor-shared-short-informa
     MatFormFieldModule,
     NgxMaterialTimepickerModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
   exports: [
     A11yModule,

@@ -77,9 +77,9 @@
 <table class = "table table-striped">
   <thead>
   <tr>
-    <th> Id </th>
+<!--    <th> Id </th>-->
     <th> Адрес </th>
-    <th> Доктор </th>
+<!--    <th> Доктор </th>-->
     <th> Пациент </th>
     <th> Дата и время </th>
     <th> Выбор </th>
@@ -87,13 +87,13 @@
   </thead>
   <tbody>
   <tr *ngFor = "let appointmentRegistration of appointmentRegistrations">
-    <td> {{appointmentRegistration.id}} </td>
+<!--    <td> {{appointmentRegistration.id}} </td>-->
     <td> {{appointmentRegistration.address}} </td>
-    <td> {{appointmentRegistration.doctor.lastName}} </td>
+<!--    <td> {{appointmentRegistration.doctor.lastName}} </td>-->
     <td> {{appointmentRegistration.patient.lastName}} </td>
     <td> {{appointmentRegistration.start}} </td>
     <td>
-      <button (click)="SelectAppointmentRegistration(appointmentRegistration.id)" class="btn btn-info"> Выбрать </button>
+      <button (click)="SelectAppointmentRegistration(appointmentRegistration.id)" class="btn btn-info"> Начать прием </button>
     </td>
   </tr>
   </tbody>

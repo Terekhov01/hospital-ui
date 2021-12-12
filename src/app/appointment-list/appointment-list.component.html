@@ -1,10 +1,10 @@
-<h1>Список приемов</h1>
+<h1>Список прошедших приемов</h1>
 <table class = "table table-striped">
   <thead>
     <tr>
-      <th> Id </th>
+<!--      <th> Id </th>-->
       <th> Описание </th>
-      <th> Доктор </th>
+<!--      <th> Доктор </th>-->
       <th> Пациент </th>
       <th> Дата и время </th>
       <th> Действия </th>
@@ -12,14 +12,15 @@
   </thead>
   <tbody>
     <tr *ngFor = "let appointment of appointments">
-      <td> {{appointment.id}} </td>
+<!--      <td> {{appointment.id}} </td>-->
       <td> {{appointment.description}} </td>
-      <td> {{appointment.appointmentRegistration.doctor.lastName}} </td>
+<!--      <td> {{appointment.appointmentRegistration.doctor.lastName}} </td>-->
       <td> {{appointment.appointmentRegistration.patient.lastName}} </td>
-      <td> {{appointment.appointmentRegistration.start}} </td>
+<!--      <td> {{appointment.appointmentRegistration.start}} </td>-->
+      <td> {{datePipe.transform(appointment.appointmentRegistration.start, "yyyy/MM/dd HH:mm")}} </td>
       <td>
-        <button (click)="updateAppointment(appointment.id)" class="btn btn-info"> Обновить </button>
-        <button (click)="deleteAppointment(appointment.id)" class="btn btn-danger" style="margin-left: 10px"> Удалить </button>
+        <button (click)="updateAppointment(appointment.id)" class="btn btn-info"> Изменить </button>
+<!--        <button (click)="deleteAppointment(appointment.id)" class="btn btn-danger" style="margin-left: 10px"> Удалить </button>-->
         <button (click)="appointmentDetails(appointment.id)" class="btn btn-info" style="margin-left: 10px"> Детали </button>
       </td>
     </tr>

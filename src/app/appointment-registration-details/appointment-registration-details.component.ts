@@ -6,6 +6,7 @@ import {AppointmentRegistration} from "../appointment-registration";
 import {Doctor} from "../doctor";
 import {Patient} from "../patient";
 import {AppointmentRegistrationService} from "../appointment-registration.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-appointment-registration-details',
@@ -17,7 +18,7 @@ export class AppointmentRegistrationDetailsComponent implements OnInit {
   id: number;
   appointmentRegistration: AppointmentRegistration = new AppointmentRegistration();
 
-  constructor(private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute, public datePipe: DatePipe,
               private appointmentRegistrationService: AppointmentRegistrationService) { }
 
   ngOnInit(): void {

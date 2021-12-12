@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppointmentRegistration } from "../appointment-registration";
 import { AppointmentRegistrationService } from "../appointment-registration.service";
 import {Router} from "@angular/router";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-appointment-registration-list',
@@ -12,7 +13,7 @@ export class AppointmentRegistrationListComponent implements OnInit {
 
   appointmentRegistrations: AppointmentRegistration[] = [];
 
-  constructor(private appointmentRegistrationService: AppointmentRegistrationService,
+  constructor(private appointmentRegistrationService: AppointmentRegistrationService, public datePipe: DatePipe,
               private router: Router) { }
 
   ngOnInit(): void {

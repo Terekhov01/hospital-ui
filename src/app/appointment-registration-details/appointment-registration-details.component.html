@@ -13,11 +13,11 @@
     <label> <b> Услуга: </b>  </label> {{appointmentRegistration.service}}
   </div>
   <div>
-    <label> <b> Дата и время начала приема: </b>  </label> {{appointmentRegistration.start}}
+    <label> <b> Дата и время начала приема: </b>  </label> {{datePipe.transform(appointmentRegistration.start, "yyyy/MM/dd HH:mm")}}
   </div>
-  <div>
-    <label> <b> Дата и время конца приема: </b>  </label> {{appointmentRegistration.end}}
-  </div>
+<!--  <div>-->
+<!--    <label> <b> Дата и время конца приема: </b>  </label> {{appointmentRegistration.end}}-->
+<!--  </div>-->
   <div>
     <label> <b> Адрес: </b>  </label> {{appointmentRegistration.address}}
   </div>

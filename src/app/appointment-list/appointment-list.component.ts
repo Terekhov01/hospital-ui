@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Appointment} from "../appointment";
 import {AppointmentService} from "../appointment.service";
 import {Router} from "@angular/router";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-appointment-list',
@@ -12,7 +13,7 @@ export class AppointmentListComponent implements OnInit {
 
   appointments: Appointment[];
 
-  constructor(private appointmentService: AppointmentService,
+  constructor(private appointmentService: AppointmentService, public datePipe: DatePipe,
               private router: Router) { }
 
   ngOnInit(): void {
