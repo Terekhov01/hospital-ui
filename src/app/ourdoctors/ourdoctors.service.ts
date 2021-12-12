@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {User} from "../user/user/doctor.models";
 import {ourdoctorsModel} from "./ourdoctors.model";
 import {DoctorRatingRequest} from "../ourdoctorsdetails/doctor-rating-request.model";
+import {DoctorRequest} from "../user/user/doctor-request.model";
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 @Injectable({
@@ -15,13 +15,13 @@ const httpOptions = {
 })
 export class OurdoctorsService {
 
-  constructor(private http: HttpClient) {
-  }
-
   id?: number;
-
   private userUrl = 'http://localhost:8080/user-portal/ourdoctors';
   private RatingUrl = 'http://localhost:8080/user-portal/rating';
+  private doctorInfo = 'http://localhost:8080/user-portal/doctorinfo';
+
+  constructor(private http: HttpClient) {
+  }
 
   getOurDoctorsList(): Observable<ourdoctorsModel[]> {
     return this.http.get<ourdoctorsModel[]>(`${this.userUrl}`);
@@ -31,8 +31,8 @@ export class OurdoctorsService {
     return this.http.post(`${this.RatingUrl}`, doctorRating);
   }
 
-  // updateDoctorRating(doctorRating: DoctorRatingRequest): Observable<Object> {
-  //   return this.http.post(`${this.userUrl}/${doctorRating.doctorId}`, doctorRating);
-  // }
+  getDoctorsInfo(id: number | undefined): Observable<DoctorRequest> {
+    return this.http.get<DoctorRequest>(`${this.doctorInfo}/${id}`);
+  }
 
 }

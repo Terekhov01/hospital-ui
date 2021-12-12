@@ -5,13 +5,15 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {DoctorComponent} from './user/user/doctor.component';
 import {AddDoctorComponent} from './add-doctor/add-doctor.component';
-import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {DoctorService} from "./user/user/doctor.service";
-import { OrderByPipe } from './order-by.pipe';
-import { UpdateDoctorComponent } from './update-doctor/update-doctor.component';
-import { OurdoctorsComponent } from './ourdoctors/ourdoctors.component';
-import { OurdoctorsdetailsComponent } from './ourdoctorsdetails/ourdoctorsdetails.component';
+import {OrderByPipe} from './order-by.pipe';
+import {UpdateDoctorComponent} from './update-doctor/update-doctor.component';
+import {OurdoctorsComponent} from './ourdoctors/ourdoctors.component';
+import {OurdoctorsdetailsComponent} from './ourdoctorsdetails/ourdoctorsdetails.component';
+import {DoctorinfoComponent} from './doctorinfo/doctorinfo.component';
+
 // import {ourdoctorsModel } from './ourdoctors/ourdoctors.model';
 
 
@@ -24,17 +26,18 @@ import { OurdoctorsdetailsComponent } from './ourdoctorsdetails/ourdoctorsdetail
     UpdateDoctorComponent,
     OurdoctorsComponent,
     OurdoctorsdetailsComponent,
+    DoctorinfoComponent,
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
 
 
-    ],
+  ],
   providers: [DoctorService],
   bootstrap: [AppComponent]
 })

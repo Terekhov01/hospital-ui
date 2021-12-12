@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {DoctorService} from "../user/user/doctor.service";
-import {User} from "../user/user/doctor.models";
 import {ourdoctorsModel} from "./ourdoctors.model";
 import {OurdoctorsService} from "./ourdoctors.service";
 
@@ -13,17 +11,29 @@ import {OurdoctorsService} from "./ourdoctors.service";
 export class OurdoctorsComponent implements OnInit {
 
   ourusers?: ourdoctorsModel[];
-  id?: number ;
+  id?: number;
 
-  constructor(private router: Router, private userService: OurdoctorsService) { }
+  constructor(private router: Router, private userService: OurdoctorsService) {
+  }
 
   ngOnInit(): void {
     this.getADoctors()
   }
 
+  ourDoctorsDetails(id: number) {
+    let result = this.router.navigate(['ourDoctorsDetails', id]);
+  }
+
+  doctorInfo(id: number) {
+    console.log(id);
+    let result = this.router.navigate(['doctorInfo', id]);
+
+    // @ts-ignore
+    // this.users = new User(this.users);
+  }
 
   private getADoctors() {
-    this.userService.getOurDoctorsList().subscribe(data  => {
+    this.userService.getOurDoctorsList().subscribe(data => {
       console.log(data);
 
       // @ts-ignore
@@ -33,10 +43,6 @@ export class OurdoctorsComponent implements OnInit {
 
 
     })
-  }
-
-  ourDoctorsDetails(id: number) {
-    let result = this.router.navigate(['ourDoctorsDetails', id]);
   }
 
 

@@ -1,9 +1,15 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'orderBy'
 })
 export class OrderByPipe implements PipeTransform {
+
+  // transform(array: Array<any>, field: string): Array<any> {
+  //   array.sort( (a,b) => { return a-b } );
+  //   return array;
+  //
+  // }
 
   transform(array: any, field: string): any[] {
     array.sort((a: any, b: any) => {
@@ -18,4 +24,5 @@ export class OrderByPipe implements PipeTransform {
     return array;
 
   }
+
 }

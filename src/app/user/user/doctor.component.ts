@@ -4,7 +4,6 @@ import {Router} from "@angular/router";
 import {DoctorService} from "./doctor.service";
 
 
-
 @Component({
   selector: 'app-user',
   templateUrl: './doctor.component.html',
@@ -13,7 +12,7 @@ import {DoctorService} from "./doctor.service";
 export class DoctorComponent implements OnInit {
 
   users?: User[];
-  id?: number ;
+  id?: number;
 
 
   constructor(private router: Router, private userService: DoctorService) {
@@ -29,14 +28,8 @@ export class DoctorComponent implements OnInit {
     //       this.getEmployeeById(this.route.snapshot.params.id);
     //     }
     //   });
-     this.getADoctors()
+    this.getADoctors()
   };
-
-  private getADoctors() {
-    this.userService.getDoctorsList().subscribe(data => {
-      this.users = data;
-    })
-  }
 
   updateDoctor(id: number) {
     console.log(id);
@@ -64,6 +57,18 @@ export class DoctorComponent implements OnInit {
     // })
   }
 
+  updatePost(id: number): void {
+    let result = this.router.navigate(['update-doctor', id]);
+    // this.userService.getUsers()
+    //   .subscribe(
+    //     data => {
+    //       this.users = data;
+    //     },
+    //     error => {
+    //       console.error(error);
+    //     });
+  }
+
   // deleteUser(user: User): void {
   //   this.userService.deleteUser(user)
   //     .subscribe( data => {
@@ -83,16 +88,10 @@ export class DoctorComponent implements OnInit {
   //
   // };
 
-  updatePost(id: number): void {
-    let result = this.router.navigate(['update-doctor', id]);
-    // this.userService.getUsers()
-    //   .subscribe(
-    //     data => {
-    //       this.users = data;
-    //     },
-    //     error => {
-    //       console.error(error);
-    //     });
+  private getADoctors() {
+    this.userService.getDoctorsList().subscribe(data => {
+      this.users = data;
+    })
   }
 
 

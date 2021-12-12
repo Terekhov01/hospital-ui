@@ -1,23 +1,22 @@
 import {Injectable} from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from "./doctor.models";
 import {Observable} from "rxjs";
 import {DoctorRequest} from "./doctor-request.model";
 
 
-
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 @Injectable()
 export class DoctorService {
 
-  constructor(private http:HttpClient) {}
-
-  id?:number;
-
+  id?: number;
   private userUrl = 'http://localhost:8080/user-portal/doctorusers';
+
+  constructor(private http: HttpClient) {
+  }
   //private userUrl = '/api';
 
   // private usereditUrl = 'http://localhost:8080/user-portal/doctorusers';
@@ -58,21 +57,20 @@ export class DoctorService {
 //     return this.http.put(`${this.userUrl}/${id}`, data);
 //   }
 
-
-
   getDoctorsList(): Observable<User[]> {
     return this.http.get<User[]>(`${this.userUrl}`);
   }
+
 //| undefined
-  getDoctorByID(id: number| undefined): Observable<User> {
+  getDoctorByID(id: number | undefined): Observable<User> {
     return this.http.get<User>(`${this.userUrl}/${id}`)
   }
 
-  createDoctor(appointment: DoctorRequest): Observable<Object>{
+  createDoctor(appointment: DoctorRequest): Observable<Object> {
     return this.http.post(`${this.userUrl}`, appointment);
   }
 
-  updateDoctor(appointment: User): Observable<Object>{
+  updateDoctor(appointment: User): Observable<Object> {
     return this.http.put(`${this.userUrl}/${appointment.id}`, appointment);
   }
 

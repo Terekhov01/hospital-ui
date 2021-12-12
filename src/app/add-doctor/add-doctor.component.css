@@ -1,4 +1,4 @@
-.nav-item{
+.nav-item {
 
   text-decoration: none;
   list-style-type: none;
@@ -12,7 +12,8 @@ a.navbar-brand {
   background: #2E72E4;
   color: white;
 }
-a.nav-link{
+
+a.nav-link {
   margin: 0px auto 0px auto;
   padding: 0px 10px 0px 10px;
   border-radius: 8px;
@@ -20,7 +21,7 @@ a.nav-link{
   color: white;
 }
 
-a.navbar-brand:hover{
+a.navbar-brand:hover {
   padding: 0px 110px 0px 10px;
   border-radius: 8px;
   background: #2E72E4;
@@ -50,7 +51,7 @@ a.nav-link:hover {
   margin: 0;
 }
 
-.container-fluid{
+.container-fluid {
   background-color: #2E72E4;
 
 }
@@ -63,28 +64,26 @@ a.nav-link:hover {
 
 }
 
-table{
-  width:600px ;
-  border:2px ;
+table {
+  width: 600px;
+  border: 2px;
   display: inline-block;
 }
 
 
-.form-group{
+.form-group {
 
-  margin-bottom: 10px;
-
-;
+  margin-bottom: 10px;;
 }
 
 
-body h1{
+body h1 {
 
   margin: auto;
   /*background-image: url('https://news-iphone.ru/wp-content/uploads/2020/06/bg-paramhost-empresarial-1536x864.jpg')*/
 }
 
-body form{
+body form {
   margin: auto;
   align-content: center;
 }

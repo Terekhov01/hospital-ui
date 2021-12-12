@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DoctorRatingRequest} from "./doctor-rating-request.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {OurdoctorsService} from "../ourdoctors/ourdoctors.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {DoctorRequest} from "../user/user/doctor-request.model";
 import {ourdoctorsModel} from "../ourdoctors/ourdoctors.model";
 import {Subscription} from "rxjs";
 
@@ -23,9 +22,9 @@ export class OurdoctorsdetailsComponent implements OnInit {
 
   private subscription?: Subscription;
 
-  constructor(private router: Router,private route: ActivatedRoute,private userService: OurdoctorsService) {
+  constructor(private router: Router, private route: ActivatedRoute, private userService: OurdoctorsService) {
 
-    this.subscription = route.params.subscribe(params=>this.doctorId=params['id']);
+    this.subscription = route.params.subscribe(params => this.doctorId = params['id']);
 //     console.log("конструктор");
 // console.log(this.doctorId);
 
@@ -59,11 +58,11 @@ export class OurdoctorsdetailsComponent implements OnInit {
 
   }
 
- //  addRating(): void {
- // this.
- //
- //
- //  }
+  //  addRating(): void {
+  // this.
+  //
+  //
+  //  }
 
   onSubmit(): void {
     console.log(this.doctorRating);
@@ -83,7 +82,6 @@ export class OurdoctorsdetailsComponent implements OnInit {
       });
 
   };
-
 
 
   goToDoctorList() {
