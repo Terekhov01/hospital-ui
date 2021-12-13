@@ -1,0 +1,62 @@
+<div class="col-md-8 offset-md-2">
+  <h3> Обновить прием </h3>
+  <form (ngSubmit)="onSubmit()" >
+
+    <div>
+      <label> <b> Услуга: </b>  </label> {{appointment.appointmentRegistration.service}}
+    </div>
+
+    <div class = "form-group">
+      <label> Фамилия доктора </label>
+      <input type="text" class="form-control" id = "docLastName"
+             [(ngModel)]="appointment.appointmentRegistration.doctor.lastName" name = "docLastName">
+    </div>
+
+    <div class = "form-group">
+      <label> Фамилия пациента </label>
+      <input type="text" class="form-control" id = "patLastName"
+             [(ngModel)]="appointment.appointmentRegistration.patient.lastName" name = "patLastName">
+    </div>
+
+    <div class = "form-group">
+      <label> Описание </label>
+      <input type="text" class="form-control" id = "description"
+             [(ngModel)]="appointment.description" name = "description">
+    </div>
+
+    <div class = "form-group">
+      <label> Заключение врача </label>
+      <input type="text" class="form-control" id = "docStatement"
+             [(ngModel)]="appointment.docStatement" name = "docStatement">
+    </div>
+
+    <div class = "form-group">
+      <label> Рецепт </label>
+      <input type="text" class="form-control" id = "recipe"
+             [(ngModel)]="appointment.recipe" name = "recipe">
+    </div>
+
+    <div class = "form-group">
+      <label> План реабилитации </label>
+      <input type="text" class="form-control" id = "rehabPlan"
+             [(ngModel)]="appointment.rehabPlan" name = "rehabPlan">
+    </div>
+
+<!--    <div class = "form-group">-->
+<!--      <label> Service </label>-->
+<!--      <input type="text" class="form-control" id = "service"-->
+<!--             [(ngModel)]="appointment.service" name = "service">-->
+<!--    </div>-->
+
+    <div class = "form-group">
+      <label> План лечения </label>
+      <input type="text" class="form-control" id = "treatPlan"
+             [(ngModel)]="appointment.treatPlan" name = "treatPlan">
+    </div>
+
+    <input type="file" class="file-upload" onchange="console.log(event.target.files)">
+
+    <button class = "btn btn-success" type = "submit"> Подтвердить </button>
+
+  </form>
+</div>

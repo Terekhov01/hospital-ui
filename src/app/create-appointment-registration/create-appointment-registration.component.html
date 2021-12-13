@@ -1,0 +1,83 @@
+<div class="col-md-8 offset-md-2" xmlns:filter="http://www.w3.org/1999/xhtml">
+  <h3> Новая запись на прием </h3>
+  <form (ngSubmit)="onSubmit()" >
+
+    <div class = "form-group">
+      <label> <b> Фамилия доктора:    </b>  </label> {{appointmentRegistration.doctor.lastName}}
+    </div>
+
+    <div class = "form-group">
+      <label> Дата и время начала приема:    </label> {{appointmentRegistration.start.toDateString()}}
+      <!--      <input type="datetime-local" class="form-control" id = "start"-->
+      <!--             [(ngModel)]="appointmentRegistration.start" name = "start">-->
+    </div>
+
+    <div class = "form-group">
+      <label> Адрес:    </label> {{appointmentRegistration.doctor.address}}
+      <!--      <input type="text" class="form-control" id = "address"-->
+      <!--             [(ngModel)]="appointmentRegistration.address" name = "address">-->
+    </div>
+
+    <div class = "form-group">
+      <label> Кабинет:    </label> {{appointmentRegistration.doctor.room}}
+      <!--      <input type="text" class="form-control" id = "room"-->
+      <!--             [(ngModel)]="appointmentRegistration.room" name = "room">-->
+    </div>
+
+    <div class = "form-group">
+      <label> Фамилия пациента:    </label>
+      <input type="text" class="form-control" id = "lastNamePat"
+             [(ngModel)]="patient" name = "lastName">
+    </div>
+
+<!--    <div class = "form-group">-->
+<!--      <label> Service </label>-->
+<!--      <input type="text" class="form-control" id = "service"-->
+<!--             [(ngModel)]="appointmentRegistration.service" name = "service">-->
+<!--    </div>-->
+
+    <div class = "form-group">
+      <label> Услуга:    </label>
+      <div>
+
+      </div>
+<!--      <input type="text" class="form-control" id = "service"-->
+<!--             [(ngModel)]="appointmentRegistration.service" ng-blur="validateSelection()-->
+<!--             typeahead="item for item in services | filter:$viewValue"">-->
+
+
+
+      <input type = "text"
+             [formControl] = "serviceFormControl.ServiceFormControl"
+             [matAutocomplete] = "auto">
+
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" class = "autocompleteDoctorFilterField">
+        <!-- TODO - introduce categories of doctors by their profession -->
+        <!-- <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter"> -->
+        <mat-option *ngFor="let service of serviceFormControl.ServiceFiltered.value" [value] = "service.toString()">
+          {{ service.toString() }}
+        </mat-option>
+      </mat-autocomplete>
+
+<!--      <select class="form-control" id="service"-->
+<!--              [(ngModel)]="appointmentRegistration.service" name = "service">-->
+<!--        <option>Прием ко врачу</option>-->
+<!--        <option>Сдача анализов</option>-->
+<!--        <option>Прививки/Вакцинация</option>-->
+<!--        <option>Тестовый сервис</option>-->
+<!--        <option>Другое</option>-->
+<!--      </select>-->
+
+    </div>
+
+<!--    <div class = "form-group">-->
+<!--      <label> Дата и время конца приема </label>-->
+<!--      <input type="datetime-local" class="form-control" id = "end"-->
+<!--             [(ngModel)]="appointmentRegistration.end" name = "end">-->
+<!--    </div>-->
+
+    <button class = "btn btn-success" type = "submit"> Подтвердить </button>
+
+  </form>
+</div>
+

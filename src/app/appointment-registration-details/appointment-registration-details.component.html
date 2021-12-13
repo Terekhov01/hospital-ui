@@ -1,0 +1,27 @@
+<h3> Детали записи на прием </h3>
+<div>
+  <div>
+    <label> <b> Фамилия доктора: </b>  </label> {{appointmentRegistration.doctor.lastName}}
+  </div>
+  <div>
+    <label> <b> Фамилия пациента: </b>  </label> {{appointmentRegistration.patient.lastName}}
+  </div>
+  <div>
+    <label> <b> Специализация доктора: </b>  </label> {{appointmentRegistration.doctor.specialization}}
+  </div>
+  <div>
+    <label> <b> Услуга: </b>  </label> {{appointmentRegistration.service}}
+  </div>
+  <div>
+    <label> <b> Дата и время начала приема: </b>  </label> {{datePipe.transform(appointmentRegistration.start, "yyyy/MM/dd HH:mm")}}
+  </div>
+<!--  <div>-->
+<!--    <label> <b> Дата и время конца приема: </b>  </label> {{appointmentRegistration.end}}-->
+<!--  </div>-->
+  <div>
+    <label> <b> Адрес: </b>  </label> {{appointmentRegistration.address}}
+  </div>
+  <div>
+    <label> <b> Кабинет: </b>  </label> {{appointmentRegistration.room}}
+  </div>
+</div>
