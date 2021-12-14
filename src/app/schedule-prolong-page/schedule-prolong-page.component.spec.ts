@@ -6,13 +6,6 @@ describe('ScheduleProlongPageComponent', () => {
   let component: ScheduleProlongPageComponent;
   let fixture: ComponentFixture<ScheduleProlongPageComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ScheduleProlongPageComponent ]
-    })
-    .compileComponents();
-  });
-
   beforeEach(() => {
     fixture = TestBed.createComponent(ScheduleProlongPageComponent);
     component = fixture.componentInstance;

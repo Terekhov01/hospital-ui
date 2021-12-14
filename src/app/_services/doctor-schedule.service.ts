@@ -16,6 +16,7 @@ export class DoctorScheduleService
     private calendarUrl: string;
     private scheduleAddPatternUrl: string;
     private schedulePatternListUrl: string;
+    private schedulePatternViewUrl: string;
     private schedulePatternProlong: string;
 
     constructor(private http: HttpClient, private tokenStorage: TokenStorageService) 
@@ -23,6 +24,7 @@ export class DoctorScheduleService
         this.tableUrl = "http://localhost:8080/schedule/table";
         this.calendarUrl = "http://localhost:8080/schedule/calendar";
         this.schedulePatternListUrl = "http://localhost:8080/schedule-pattern/list-patterns";
+        this.schedulePatternViewUrl = "http://localhost:8080/schedule-pattern/view-pattern";
         this.scheduleAddPatternUrl = "http://localhost:8080/schedule-pattern/add-pattern";
         this.schedulePatternProlong = "http://localhost:8080/schedule-pattern/apply-pattern";
     }
@@ -62,11 +64,11 @@ export class DoctorScheduleService
         console.log(patternString);
         httpParams = httpParams.append("schedulePattern", patternString);
 
-        let headers = new HttpHeaders();
+        /*let headers = new HttpHeaders();
         headers.append("Accept", "application/json");
-        headers.append("Content-Type", "application/json");
+        headers.append("Content-Type", "application/json");*/
 
-        return this.http.post<string>(this.scheduleAddPatternUrl, { headers: headers, params: httpParams });
+        return this.http.post<string>(this.scheduleAddPatternUrl, { params: httpParams });
     }
 
     getPatternNames(): Observable<ISchedulePatternShortInfo[]>
@@ -75,6 +77,17 @@ export class DoctorScheduleService
         httpHeaders.append("Authorization", this.tokenStorage.getToken());
 
         return this.http.get<ISchedulePatternShortInfo[]>(this.schedulePatternListUrl);
+    }
+
+    getSchedulePattern(patternName: string): Observable<ScheduleTablePattern>
+    {
+        let httpParams = new HttpParams();
+        httpParams = httpParams.append("patternName", patternName);
+
+        /*let httpHeaders = new HttpHeaders();
+        httpHeaders.append("Authorization", this.tokenStorage.getToken());*/
+
+        return this.http.get<ScheduleTablePattern>(this.schedulePatternViewUrl, { params: httpParams });
     }
 
     patchScheduleByPattern(patternName: string, dateToApply: Date): Observable<string>

@@ -4,6 +4,8 @@ import { DateAdapter } from '@angular/material/core';
 import { MAT_DATE_RANGE_SELECTION_STRATEGY } from '@angular/material/datepicker';
 import { BehaviorSubject, of, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { SchedulePatternDataSource } from '../schedule-prolong-page/schedule-prolong-page.data-source';
+import { ScheduleDayPattern, ScheduleTablePattern, TimeRounded } from '../schedule-prolong-page/schedule-prolong-page.i-raw-data';
 import { DoctorScheduleService } from '../_services/doctor-schedule.service';
 import { ISchedulePatternShortInfo } from './apply-schedule-pattern.i-raw-data';
 import { PatternDayRangeSelectionStrategy } from './apply-schedule-pattern.selection-stratedy';
@@ -26,6 +28,8 @@ export class ApplySchedulePatternComponent implements OnInit
     public patternAutocompleteFormControl = new PatternAutocompleteFormControl();
 
     public buttonFormControl = new FormControl();
+
+    tableData: SchedulePatternDataSource = new SchedulePatternDataSource(this.formBuilder);
 
     public patternRangePicker = this.formBuilder.group(
     {
@@ -56,8 +60,7 @@ export class ApplySchedulePatternComponent implements OnInit
         },
         error: (error) => 
         { 
-            alert("Error translating data from server! Cannot load list of doctors available.");
-            console.error();
+            alert(error.error);
         },
         complete: () => 
         { 
@@ -66,7 +69,60 @@ export class ApplySchedulePatternComponent implements OnInit
         }
         });
 
-        //Set date range picker parameters depending on chosen pattern
+        this.patternAutocompleteFormControl.getFormControl().valueChanges.subscribe(
+            {
+                next: (value) =>
+                {
+                    if (value == "")
+                    {
+                        return;
+                    }
+
+                    let patternObservable = this.scheduleService.getSchedulePattern(value);
+                    patternObservable.subscribe(
+                    {
+                        next: (schedulePatternRepresentation: ScheduleTablePattern) =>
+                        {
+                            let scheduleDailyPatterns: ScheduleDayPattern[] = [];
+
+                            for (let dayPatternRepresentation of schedulePatternRepresentation.scheduleDailyPatterns)
+                            {                                
+                                let scheduleDayPattern = new ScheduleDayPattern(dayPatternRepresentation.dayNumber, [])
+                                for (let timeRoundedRepresentation of dayPatternRepresentation.timesRounded)
+                                {
+                                    let timeRounded = new TimeRounded();
+                                    timeRounded.setTime(timeRoundedRepresentation.hour, timeRoundedRepresentation.minute);
+                                    scheduleDayPattern.timesRounded.push(timeRounded);
+                                }
+                                scheduleDailyPatterns.push(scheduleDayPattern);
+                            }
+
+                            let schedulePattern: ScheduleTablePattern = new ScheduleTablePattern(schedulePatternRepresentation.patternName,
+                                                                           schedulePatternRepresentation.daysLength,
+                                                                           scheduleDailyPatterns);
+                            
+                            this.tableData.displayPattern(schedulePattern);
+                        },
+                        error: (error) =>
+                        {
+                            alert(error.error);
+                        },
+                        complete: () =>
+                        {}
+                    });
+                },
+                error: (error) =>
+                {
+                    alert("Internal error. Schedule pattern name is changed, but event cannot be processed");
+                },
+                complete: () =>
+                {
+
+                },
+            }
+        );
+        
+        //Set date range picker parameters depending on chosen pattern and repeat count
         this.patternAutocompleteFormControl.getFormControl().valueChanges.subscribe((value) =>
         {
             if (this.patternAutocompleteFormControl.getFormControl().valid)
@@ -110,13 +166,16 @@ export class ApplySchedulePatternComponent implements OnInit
 
         let response = this.scheduleService.patchScheduleByPattern(patternName, dateToApply);
 
-        response.subscribe((value) =>
+        response.subscribe(
         {
-            alert ("Расписание изменено");
-        },
-        (error) =>
-        {
-            alert ("Расписание не изменено. Неизвестная ошибка");
+            next: (value) =>
+            {
+                alert("Расписание изменено");
+            },
+            error: (error) =>
+            {
+                alert(error.error);
+            }
         });
     }
 

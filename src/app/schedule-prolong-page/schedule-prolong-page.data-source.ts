@@ -2,7 +2,7 @@ import { CollectionViewer, DataSource } from "@angular/cdk/collections";
 import { map } from 'rxjs/operators';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn } from "@angular/forms";
 import { BehaviorSubject, Observable } from "rxjs";
-import { TimeRounded } from "./schedule-prolong-page.i-raw-data";
+import { Interval, ScheduleTablePattern, TimeRounded } from "./schedule-prolong-page.i-raw-data";
 
 export class SchedulePatternDataSource implements DataSource<AbstractControl>//, OnInit, OnDestroy
 {
@@ -20,11 +20,7 @@ export class SchedulePatternDataSource implements DataSource<AbstractControl>//,
         return rowControls;
     }));
 
-    private displayedColumns =  new BehaviorSubject<string[]>(["1"]);
-
-    private loadingSubject = new BehaviorSubject<boolean>(false);
-
-    public loading$ = this.loadingSubject.asObservable();
+    private displayedColumns = new BehaviorSubject<string[]>(["1"]);
 
     constructor(private formBuilder: FormBuilder) 
     {
@@ -38,8 +34,8 @@ export class SchedulePatternDataSource implements DataSource<AbstractControl>//,
                         [
                             this.formBuilder.group(
                             {
-                                startTimePicker: new FormControl(),
-                                endTimePicker: new FormControl()
+                                startTime: new FormControl(),
+                                endTime: new FormControl()
                             },  
                             {
                                 validators: [this.timeIntervalValidator()],
@@ -50,6 +46,63 @@ export class SchedulePatternDataSource implements DataSource<AbstractControl>//,
                 ])
             })
         );
+    }
+
+    displayPattern(schedulePattern: ScheduleTablePattern): void
+    {
+        let displayedColumnsTmp: string[] = [];
+        let tableFormGroup = this.formBuilder.group({ rows: this.formBuilder.array([]) });
+
+        //Fill column description
+        for (let columnCounter = 1; columnCounter <= schedulePattern.daysLength; columnCounter++)
+        {
+            displayedColumnsTmp.push(String(columnCounter));
+        }
+
+        let maxIntervalAmount = 0;
+
+        //Determine maximum interval amount that equals the amount of rows in table
+        for (let dailyPattern of schedulePattern.scheduleDailyPatterns)
+        {
+            if (maxIntervalAmount < dailyPattern.getIntervals().length)
+            {
+                maxIntervalAmount = dailyPattern.getIntervals().length;
+            }
+        }
+
+        //Create formgroup
+        for (let rowCounter = 0; rowCounter < maxIntervalAmount; rowCounter++)
+        {
+            let rowArray = <FormArray>tableFormGroup.get("rows");
+            rowArray.push(this.formBuilder.group({ cells: this.formBuilder.array([]) }));
+            for (let columnCounter = 0; columnCounter < schedulePattern.daysLength; columnCounter++)
+            {
+                let curCellsGroup = <FormGroup>rowArray.get(String(rowCounter));
+                let curCellsArray = <FormArray>curCellsGroup.get("cells");
+                let curInterval: Interval = schedulePattern.scheduleDailyPatterns[columnCounter].getIntervals()[rowCounter];
+                if (curInterval == null)
+                {
+                    curCellsArray.push(this.formBuilder.group(
+                        {
+                            startTime: new FormControl(""),
+                            endTime: new FormControl("")
+                        })
+                    );
+                }
+                else
+                {
+                    curCellsArray.push(this.formBuilder.group(
+                        {
+                            startTime: new FormControl(curInterval.start.toStringHHMM()),
+                            endTime: new FormControl(curInterval.end.toStringHHMM())
+                        })
+                    );
+                }
+            }
+        }
+        
+        this.displayedColumns.next(displayedColumnsTmp);
+        this.tableDataSubject.next(tableFormGroup);
     }
 
     getTableDataSubject(): BehaviorSubject<FormGroup>
@@ -65,7 +118,6 @@ export class SchedulePatternDataSource implements DataSource<AbstractControl>//,
 
     disconnect(collectionViewer: CollectionViewer): void {
         this.tableDataSubject.complete();
-        this.loadingSubject.complete();
         this.displayedColumns.complete();
     }
 
@@ -91,8 +143,8 @@ export class SchedulePatternDataSource implements DataSource<AbstractControl>//,
 
             let newCellControl = new FormGroup(
                 {
-                    startTimePicker: new FormControl(),
-                    endTimePicker: new FormControl()
+                    startTime: new FormControl(),
+                    endTime: new FormControl()
                 },  
                 {
                     validators: [this.timeIntervalValidator()],
@@ -144,8 +196,8 @@ export class SchedulePatternDataSource implements DataSource<AbstractControl>//,
         {
             let curGroup = this.formBuilder.group(
             {
-                startTimePicker: new FormControl(),
-                endTimePicker: new FormControl()
+                startTime: new FormControl(),
+                endTime: new FormControl()
             },
             {
                 validators: [this.timeIntervalValidator()],
@@ -176,8 +228,8 @@ export class SchedulePatternDataSource implements DataSource<AbstractControl>//,
         {
             let startTime = new TimeRounded(), endTime = new TimeRounded();
             
-            let startTimeForm = intervalGroup.get("startTimePicker");
-            let endTimeForm = intervalGroup.get("endTimePicker");
+            let startTimeForm = intervalGroup.get("startTime");
+            let endTimeForm = intervalGroup.get("endTime");
 
             if(startTimeForm!.value == null && endTimeForm!.value == null)
             {

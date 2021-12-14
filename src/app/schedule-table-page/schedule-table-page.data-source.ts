@@ -39,7 +39,7 @@ export class ScheduleTableDataSource implements DataSource<IDoctorScheduleTableD
     {
         this.loadingSubject.next(true);
 
-        this.tableDataSubscription = this.doctorScheduleService.getDoctorScheduleTableObservables(startDate, endDate).pipe(
+        this.tableDataSubscription = this.doctorScheduleService.getDoctorScheduleTableObservables(startDate, endDate)/*.pipe(
             catchError((error) => 
             {
                 console.error();
@@ -47,18 +47,22 @@ export class ScheduleTableDataSource implements DataSource<IDoctorScheduleTableD
                 return of([]);
             }),
             finalize(() => this.loadingSubject.next(false))
-        ).subscribe((doctorScheduleArray: IDoctorScheduleTableData[]) => 
+        )*/
+        .subscribe(
         {
-            this.doctorSchedulesSubject.next(doctorScheduleArray);
-        }, (error) => 
-        { 
-            alert("Error translating data from server!");
-            console.error();
-         },
-         () => { 
-             console.log("Recieving information successful");
+            next: (doctorScheduleArray: IDoctorScheduleTableData[]) => 
+            {
+                this.doctorSchedulesSubject.next(doctorScheduleArray);
+            }, 
+            error: (error) => 
+            { 
+                alert(error.error);
+            },
+            complete: () =>
+            { 
              onDataRecieved();
-            });
+            }
+        });
     }
 
     unsubscribeTableData()

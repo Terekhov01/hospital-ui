@@ -69,12 +69,6 @@ export class ScheduleTablePageComponent implements OnInit {
         }
     }
 
-    a(): boolean
-    {
-        console.log("Goose");
-        return true;
-    }
-
     incrementDailyInformationCounter(): void
     {
         this.dailyInformationCounter++;

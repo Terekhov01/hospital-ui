@@ -46,6 +46,7 @@ import { OrderByPipe } from './order-by.pipe';
 import { UpdateDoctorComponent } from './update-doctor/update-doctor.component';
 import { AddDoctorComponent } from './add-doctor/add-doctor.component';
 import { DoctorComponent } from './user/user/doctor.component';
+import { ScheduleViewPatternComponent } from './schedule-view-pattern/schedule-view-pattern.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { DoctorComponent } from './user/user/doctor.component';
     OrderByPipe,
     UpdateDoctorComponent,
     OurdoctorsComponent,
-    OurdoctorsdetailsComponent
+    OurdoctorsdetailsComponent,
+    ScheduleViewPatternComponent
     //MaterialMultiSelectorComponent
   ],
   imports: [

@@ -138,7 +138,7 @@ export class ScheduleProlongPageComponent implements OnInit {
         }
 
         let scheduleTablePattern = new ScheduleTablePattern(this.newPatternName, 
-                                                            this.tableData.getColumnAmount() - 1,
+                                                            this.tableData.getColumnAmount(),
                                                             tableData);
 
         let response = this.scheduleService.postDoctorSchedulePattern(scheduleTablePattern);
@@ -146,14 +146,11 @@ export class ScheduleProlongPageComponent implements OnInit {
         response.subscribe({
             next: (responseStr) => 
             {
-                alert ("Сохранено");
+                alert("Сохранено");
             },
             error: (error) =>
             {
-                if (error.error == "Could not save schedule pattern to database")
-                {
-                    alert ("Шаблон не сохранен. Возможно, шаблон с таким именем уже существует.");
-                }
+                alert (error.error);
             }
         });
     }
@@ -189,8 +186,8 @@ export class ScheduleProlongPageComponent implements OnInit {
             {
                 let cell = <FormGroup> cellArray.get(String(cellNum));
 
-                let startTimeForm = cell.get("startTimePicker");
-                let endTimeForm = cell.get("endTimePicker");
+                let startTimeForm = cell.get("startTime");
+                let endTimeForm = cell.get("endTime");
 
                 let startTimeStr = startTimeForm!.value;
                 let endTimeStr = endTimeForm!.value;

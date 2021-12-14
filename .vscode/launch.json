@@ -22,5 +22,4 @@
         "webRoot": "${workspaceFolder}"
       },
     ]
-  }
-  
+}

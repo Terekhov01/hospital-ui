@@ -13,6 +13,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+"sourceMap": true,
+"buildOptimizer": false,
+"optimization": false,
+"serviceWorker": false,
             "outputPath": "dist/hospitalApplication",
             "index": "src/index.html",
             "main": "src/main.ts",
