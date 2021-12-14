@@ -29,30 +29,33 @@ export class ScheduleFilterComponent implements OnInit
     {
         let doctorsShortInformationSubject = new BehaviorSubject<DoctorShortInformation[]>([]);
         //Subscribe to doctor short information (includes name, specialization and id)
-        this.doctorShortInformationSubscription = this.doctorShortInfoService.getDoctorShortInformationObservables(undefined).pipe(
+        this.doctorShortInformationSubscription = this.doctorShortInfoService.getDoctorShortInformationObservables(undefined)/*.pipe(
             catchError((error) => 
             {
                 console.error();
                 alert("Server inacessible or data malformed! Cannot load list of doctors available.");
                 return of([]);
             })
-        ).subscribe(IDoctorShortInformationArray => 
+        )*/.subscribe(
         {
-            let doctorShortInformationArray = <DoctorShortInformation[]>([]);
-            for (let doctorShortInformation of IDoctorShortInformationArray)
+            next: IDoctorShortInformationArray => 
             {
-                doctorShortInformationArray.push(new DoctorShortInformation(doctorShortInformation));
+                let doctorShortInformationArray = <DoctorShortInformation[]>([]);
+                for (let doctorShortInformation of IDoctorShortInformationArray)
+                {
+                    doctorShortInformationArray.push(new DoctorShortInformation(doctorShortInformation));
+                }
+                doctorsShortInformationSubject.next(doctorShortInformationArray);
+            },
+            error: (error) => 
+            { 
+                alert(error.error);
+            },
+            complete: () => 
+            { 
+                console.log("Recieving information successful");
+                this.doctorShortInformationFormControl.setDoctorShortInfoList(doctorsShortInformationSubject);
             }
-            doctorsShortInformationSubject.next(doctorShortInformationArray);
-        }, (error) => 
-        { 
-            alert("Error translating data from server! Cannot load list of doctors available.");
-            console.error();
-         },
-        () => 
-        { 
-             console.log("Recieving information successful");
-             this.doctorShortInformationFormControl.setDoctorShortInfoList(doctorsShortInformationSubject);
         });
     }
 
@@ -68,7 +71,9 @@ export class ScheduleFilterComponent implements OnInit
         {
             //console.log(this.doctorShortInformationFormControl.doctorShortInformationFormControl.value);
             console.log("Filter is valid!");
-            for (let doctorShortInfo of this.doctorShortInformationFormControl.doctorShortInformationFiltered.value)
+            let pickedDoctorShortInfo = <DoctorShortInformation>this.doctorShortInformationFormControl.getFormControl().value;
+            this.doctorShortInfoService.setRequestedInfo(new FilterSettings(pickedDoctorShortInfo.id, startDate, endDate));
+            /*for (let doctorShortInfo of this.doctorShortInformationFormControl.doctorShortInformationFiltered.value)
             {
                 if (doctorShortInfo.toString() === this.doctorShortInformationFormControl.doctorShortInformationFormControl.value)
                 {
@@ -76,7 +81,7 @@ export class ScheduleFilterComponent implements OnInit
                     this.doctorShortInfoService.setRequestedInfo(new FilterSettings(doctorShortInfo.id, 
                                             startDate, endDate));
                 }
-            }
+            }*/
         }
         else
         {

@@ -20,7 +20,7 @@ export class DoctorSharedShortInformationService implements OnInit
     constructor(private http: HttpClient) 
     {
         this.calendarUrl = "http://localhost:8080/schedule/calendar/";
-        this.doctorShortInfoUrl = "http://localhost:8080/schedule/getDoctorNames";
+        this.doctorShortInfoUrl = "http://localhost:8080/schedule/getDoctorShortInfo";
     }
 
     ngOnInit(): void

@@ -8,7 +8,6 @@ import {DoctorService} from "../doctor.service";
 import {PatientService} from "../patient.service";
 import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse, HttpEvent, HttpEventType} from "@angular/common/http";
-import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-appointment-creation',

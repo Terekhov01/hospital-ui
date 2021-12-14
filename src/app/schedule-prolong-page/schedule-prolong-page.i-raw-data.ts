@@ -2,8 +2,8 @@ export class TimeRounded
 {
     //0-60 minutes per interval
     private static readonly timeIntervalLength = 30;
-    private hour: number;
-    private minute: number;
+    hour: number;
+    minute: number;
 
     constructor()
     {
@@ -226,8 +226,8 @@ export class Interval
 
 export class ScheduleDayPattern
 {
-    private dayNumber: number;
-    private timesRounded: TimeRounded[];
+    dayNumber: number;
+    timesRounded: TimeRounded[];
 
     constructor(dayId: number, intervals: Interval[])
     {
@@ -236,17 +236,17 @@ export class ScheduleDayPattern
         this.addIntervals(intervals);
     }
 
-    getDayId(): number
+    public getDayId(): number
     {
         return this.dayNumber;
     }
 
-    getTimesRounded(): TimeRounded[]
+    public getTimesRounded(): TimeRounded[]
     {
         return this.timesRounded;
     }
 
-    addIntervals(intervals: Interval[]): void
+    public addIntervals(intervals: Interval[]): void
     {
         for (let interval of intervals)
         {
@@ -294,6 +294,36 @@ export class ScheduleDayPattern
             return !e.equals(a[i - 1]);
         });
     }
+
+    public getIntervals(): Interval[]
+    {
+        let retVal: Interval[] = [];
+        let currentInterval: Interval = new Interval(new TimeRounded(), new TimeRounded());
+        let prevTimeRounded: TimeRounded = null;
+        for (let timeRounded of this.timesRounded)
+        {
+            if (prevTimeRounded == null)
+            {
+                currentInterval.start = timeRounded;
+                currentInterval.end = timeRounded.getNextRounded();
+            }
+            else if (prevTimeRounded.getNextRounded().equals(timeRounded))
+            {
+                currentInterval.end = timeRounded.getNextRounded()
+            }
+            else
+            {
+                retVal.push(currentInterval);
+                currentInterval.start = timeRounded;
+                currentInterval.end = timeRounded.getNextRounded();
+            }
+            prevTimeRounded = timeRounded;
+        }
+
+        retVal.push(currentInterval);
+
+        return retVal;
+    }
 }
 
 export class ScheduleTablePattern
@@ -307,5 +337,10 @@ export class ScheduleTablePattern
         this.patternName = patternName;
         this.daysLength = daysLength;
         this.scheduleDailyPatterns = scheduleDayPattern;
+    }
+
+    getPatternName(): string
+    {
+        return this.patternName;
     }
 }

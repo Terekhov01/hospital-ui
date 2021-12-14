@@ -28,14 +28,20 @@ export class ScheduleAppointmentBlockComponent implements OnInit
 
     ngOnInit(): void
     {
-        this.doctorShortInformationSubscription = this.doctorShortInfoService.sharedRequestedInformationAsObservable.subscribe(sharedInformation => 
+        this.doctorShortInformationSubscription = this.doctorShortInfoService.sharedRequestedInformationAsObservable.subscribe(
+        {
+            next: sharedInformation => 
             {
                 this.requestedInformation = sharedInformation;
                 this.presentAppointmentDates();
             },
-            (error) => alert("Internal error. \
+            error: (error) => 
+            {
+                alert("Internal error. \
                             Failed loading available appointments data to ScheduleAppointmentBlockComponent. \
-                            Cannot invoke presentAppointmentDates method."));
+                            Cannot invoke presentAppointmentDates method.")
+            }
+        });
     }
 
     presentAppointmentDates(): void
@@ -51,74 +57,78 @@ export class ScheduleAppointmentBlockComponent implements OnInit
                                     this.requestedInformation.getEndDate(), 
                                     true);
         
-        this.doctorAppointmentDataSubscription = appointmentDataObservables.pipe(
+        this.doctorAppointmentDataSubscription = appointmentDataObservables/*.pipe(
             catchError((error) => 
             {
                 console.error();
                 alert("Server inacessible or data malformed! Cannot load available appointment dates.");
                 return of([]);
             })
-        ).subscribe((doctorAppointmentsData) => 
+        ).*/.subscribe(
         {
-            let doctorScheduleAppointmentsSubjects = new BehaviorSubject<IDoctorScheduleAppointmentsData[]>([]);
-            doctorScheduleAppointmentsSubjects.next(doctorAppointmentsData);
-
-            //Here we assume that there is only one doctor contained in responce from server. Function on server is capable
-            //of sending msny doctors' info, but we want to present data nicely so we create a request and recieve data of
-            //the only doctor. Next if statement checks if server responds with relative information.
-            if (doctorScheduleAppointmentsSubjects.value.length > 1)
+            next: (doctorAppointmentsData) => 
             {
-                alert("Server responce is invalid - multiple doctors' information recieved. Parsing first doctor.");
-            }
+                let doctorScheduleAppointmentsSubjects = new BehaviorSubject<IDoctorScheduleAppointmentsData[]>([]);
+                doctorScheduleAppointmentsSubjects.next(doctorAppointmentsData);
 
-            if (doctorScheduleAppointmentsSubjects.value.length === 0)
-            {
-                alert("No appointments available.");
-            }
-
-            let doctorScheduleAppointments = doctorScheduleAppointmentsSubjects.value[0];
-
-            let intervalCounter = 0;
-            let curDate = this.requestedInformation.getStartDate();
-            let intervalArray: ScheduleInterval[] = [];
-            let curInterval: ScheduleInterval;
-
-            while (curDate <= this.requestedInformation.getEndDate() && intervalCounter < doctorScheduleAppointments.intervalCollection.length)
-            {
-                curInterval = new ScheduleInterval(doctorScheduleAppointments.intervalCollection[intervalCounter])
-                if (datesHaveSameYearMonthAndDate(curDate, curInterval.getIntervalStartTime()))
+                //Here we assume that there is only one doctor contained in responce from server. Function on server is capable
+                //of sending msny doctors' info, but we want to present data nicely so we create a request and recieve data of
+                //the only doctor. Next if statement checks if server responds with relative information.
+                if (doctorScheduleAppointmentsSubjects.value.length > 1)
                 {
-                    intervalArray.push(curInterval);
-                    intervalCounter++;
+                    alert("Server responce is invalid - multiple doctors' information recieved. Parsing first doctor.");
                 }
-                else
+
+                if (doctorScheduleAppointmentsSubjects.value.length === 0)
                 {
-                    if (intervalArray.length !== 0)
+                    alert("No appointments available.");
+                }
+
+                let doctorScheduleAppointments = doctorScheduleAppointmentsSubjects.value[0];
+
+                let intervalCounter = 0;
+                let curDate = this.requestedInformation.getStartDate();
+                let intervalArray: ScheduleInterval[] = [];
+                let curInterval: ScheduleInterval;
+
+                while (curDate <= this.requestedInformation.getEndDate() && intervalCounter < doctorScheduleAppointments.intervalCollection.length)
+                {
+                    curInterval = new ScheduleInterval(doctorScheduleAppointments.intervalCollection[intervalCounter])
+                    if (datesHaveSameYearMonthAndDate(curDate, curInterval.getIntervalStartTime()))
                     {
-                        let doctorScheduleDailyAppointments = new DoctorScheduleAppointmentsDataDaily(doctorScheduleAppointments, new Date(curDate));
-                        doctorScheduleDailyAppointments.setIntervalCollection(intervalArray);
-        
-                        this.doctorScheduleDailyAppointmentsArray.push(doctorScheduleDailyAppointments);
-                        intervalArray = [];
+                        intervalArray.push(curInterval);
+                        intervalCounter++;
                     }
+                    else
+                    {
+                        if (intervalArray.length !== 0)
+                        {
+                            let doctorScheduleDailyAppointments = new DoctorScheduleAppointmentsDataDaily(doctorScheduleAppointments, new Date(curDate));
+                            doctorScheduleDailyAppointments.setIntervalCollection(intervalArray);
+            
+                            this.doctorScheduleDailyAppointmentsArray.push(doctorScheduleDailyAppointments);
+                            intervalArray = [];
+                        }
 
-                    curDate.setDate(curDate.getDate() + 1);
+                        curDate.setDate(curDate.getDate() + 1);
+                    }
                 }
-            }
 
-            if (intervalArray.length !== 0)
-            {
-                let doctorScheduleDailyAppointments = new DoctorScheduleAppointmentsDataDaily(doctorScheduleAppointments, new Date(curDate));
-                doctorScheduleDailyAppointments.setIntervalCollection(intervalArray);
-                this.doctorScheduleDailyAppointmentsArray.push(doctorScheduleDailyAppointments);
+                if (intervalArray.length !== 0)
+                {
+                    let doctorScheduleDailyAppointments = new DoctorScheduleAppointmentsDataDaily(doctorScheduleAppointments, new Date(curDate));
+                    doctorScheduleDailyAppointments.setIntervalCollection(intervalArray);
+                    this.doctorScheduleDailyAppointmentsArray.push(doctorScheduleDailyAppointments);
+                }
+            },
+            error: (error) => 
+            { 
+                alert(error.error);
+            },
+            complete: () =>
+            { 
+                console.log("Recieving information successful");
             }
-        }, (error) => 
-        { 
-            alert("Error translating data from server! Cannot load available appointment dates.");
-            console.error();
-         },
-         () => { 
-             console.log("Recieving information successful");
         });
     }
 

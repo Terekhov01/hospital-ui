@@ -84,32 +84,37 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
 
     let serviceSubject = new BehaviorSubject<Service[]>([]);
     //Subscribe to doctor short information (includes name, specialization and id)
-    this.serviceSubscription = this.serviceService.getServicesList().pipe(
+    this.serviceSubscription = this.serviceService.getServicesList()/*.pipe(
       catchError((error) =>
       {
         console.error();
         alert("Server inacessible or data malformed! Cannot load list of doctors available.");
         return of([]);
       })
-    ).subscribe(IserviceArray =>
+    )*/.subscribe(
       {
-        let serviceArray = <Service[]>([]);
-        console.log("IserviceArray size 1: " + IserviceArray.length)
-        for (let service of IserviceArray)
+        next: (IServiceArray) =>
         {
-          serviceArray.push(new Service(service.serviceName));
+          let serviceArray = <Service[]>([]);
+          console.log("IserviceArray size 1: " + IServiceArray.length)
+          for (let service of IServiceArray)
+          {
+            serviceArray.push(new Service(service.serviceName));
+          }
+          serviceSubject.next(serviceArray);
+        },
+        error: (error) =>
+        {
+          alert(error.error);
+          //alert("Error translating data from server! Cannot load list of doctors available.");
+          //console.error();
+        },
+        complete: () =>
+        {
+          /*console.log("Recieving information successful");
+          console.log("serviceSubject array size: " + serviceSubject.value.length)*/
+          this.serviceFormControl.setServiceList(serviceSubject);
         }
-        serviceSubject.next(serviceArray);
-      }, (error) =>
-      {
-        alert("Error translating data from server! Cannot load list of doctors available.");
-        console.error();
-      },
-      () =>
-      {
-        console.log("Recieving information successful");
-        console.log("serviceSubject array size: " + serviceSubject.value.length)
-        this.serviceFormControl.setServiceList(serviceSubject);
       });
 
 

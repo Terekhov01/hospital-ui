@@ -13,7 +13,7 @@
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" class = "autocompleteDoctorFilterField">
                 <!-- TODO - introduce categories of doctors by their profession -->
                 <!-- <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter"> -->
-                <mat-option *ngFor="let doctorShortInformation of doctorShortInformationFormControl.doctorShortInformationFiltered.value" [value] = "doctorShortInformation.toString()">
+                <mat-option *ngFor="let doctorShortInformation of doctorShortInformationFormControl.doctorShortInformationFiltered.value" [value] = "doctorShortInformation">
                     {{ doctorShortInformation.toString() }}
                 </mat-option>
             </mat-autocomplete>

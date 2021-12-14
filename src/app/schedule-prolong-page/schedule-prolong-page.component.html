@@ -31,13 +31,13 @@
                                 <td mat-cell *matCellDef = "let element; let j = index;" [formGroupName] = "j" class = "dynamicAmountColumnContents">
                                     <div formArrayName = "cells">
                                         <div [formGroupName] = "i">
-                                            <div class="startTimePicker">
-                                                <input placeholder="" aria-label = "" [format] = "24" [ngxTimepicker] = "startTime" formControlName = "startTimePicker" readonly>
+                                            <div class="startTime">
+                                                <input placeholder="" aria-label = "" [format] = "24" [ngxTimepicker] = "startTime" formControlName = "startTime" readonly>
                                                 <ngx-material-timepicker #startTime [enableKeyboardInput]="true" [minutesGap] = "30" [theme] = "primaryTheme"></ngx-material-timepicker>
                                             </div>
                     
-                                            <div class="endTimePicker">
-                                                <input placeholder="" aria-label = "" [format] = "24" [ngxTimepicker] = "endTime" formControlName = "endTimePicker" readonly>
+                                            <div class="endTime">
+                                                <input placeholder="" aria-label = "" [format] = "24" [ngxTimepicker] = "endTime" formControlName = "endTime" readonly>
                                                 <ngx-material-timepicker #endTime [enableKeyboardInput]="true" [minutesGap] = "30" [theme] = "primaryTheme"></ngx-material-timepicker>
                                             </div>
                                         </div>

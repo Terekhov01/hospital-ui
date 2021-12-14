@@ -32,9 +32,16 @@ export class DoctorShortInformationFormControls implements OnInit
         this.doctorShortInformationFormControl = new FormControl("", 
                         [this.doctorShortInfoValidator]);
 
-        this.formValueSubscription = this.doctorShortInformationFormControl.valueChanges.subscribe((value) => 
+        this.formValueSubscription = this.doctorShortInformationFormControl.valueChanges.subscribe(
         {
-            this.doctorShortInformationFiltered.next(this.filterDoctorShortInformation(value));
+            next: (value: DoctorShortInformation) => 
+            {
+                this.doctorShortInformationFiltered.next(this.filterDoctorShortInformation(value.toString()));
+            },
+            error: (error) =>
+            {
+                alert("Internal error: " + error.error);
+            }
         });
 
         //Following line emits valueChange event. It make autocomplete menu pop up on click (when symbols are yet to be inserted)

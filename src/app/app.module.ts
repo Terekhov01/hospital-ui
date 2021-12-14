@@ -9,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -46,6 +46,7 @@ import { OrderByPipe } from './order-by.pipe';
 import { UpdateDoctorComponent } from './update-doctor/update-doctor.component';
 import { AddDoctorComponent } from './add-doctor/add-doctor.component';
 import { DoctorComponent } from './user/user/doctor.component';
+import { ScheduleViewPatternComponent } from './schedule-view-pattern/schedule-view-pattern.component';
 
 import { AppointmentListComponent } from './appointment-list/appointment-list.component';
 import { CreateAppointmentComponent } from './create-appointment/create-appointment.component';
@@ -133,6 +134,8 @@ import {DatePipe} from '@angular/common';
     AppointmentDetailsComponent,
     AppointmentRegistrationDetailsComponent,
     AppointmentCreationComponent,
+    OurdoctorsdetailsComponent,
+    ScheduleViewPatternComponent
     //MaterialMultiSelectorComponent
   ],
   imports: [
