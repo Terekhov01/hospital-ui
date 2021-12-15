@@ -31,7 +31,6 @@ export class MedCardComponent implements OnInit {
               private router: Router,
               private pagerService: PagerService) {
     this.medCard = new MedCard();
-    this.selectedService = new Service("Анализы");
   }
 
   ngOnInit(): void {
