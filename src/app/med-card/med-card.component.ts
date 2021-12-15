@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {MedCard} from "../med-card";
 import {MedCardService} from "../med-card.service";
 import {Router} from "@angular/router";
+import {Appointment} from "../appointment";
+import {PagerService} from "../pager.service";
+import {ServiceServiceService} from "../service-service.service";
+import {Service} from "../service";
 
 @Component({
   selector: 'app-med-card',
@@ -11,16 +15,43 @@ import {Router} from "@angular/router";
 export class MedCardComponent implements OnInit {
   title = "Медицинская карта";
   medCard: MedCard;
+  pager: any = {};
+  pagedItems: Appointment[];
+  allItems: Appointment[];
+  services: any[];
+  selectedService: Service;
 
   constructor(private medCardService: MedCardService,
-              private router: Router) {
+              private serviceService: ServiceServiceService,
+              private router: Router,
+              private pagerService: PagerService) {
     this.medCard = new MedCard();
   }
 
   ngOnInit(): void {
     this.medCardService.getAll().subscribe(data => {
       this.medCard = data;
+      this.allItems = data.appointments;
+      this.setPage(1);
     });
+    this.serviceService.getServicesList().subscribe(data => {
+      this.services = data;
+    })
+  }
+
+  setPage(page: number) {
+    // get pager object from service
+    this.pager = this.pagerService.getPager(this.allItems.length, page);
+
+    // get current page of items
+    this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
+  }
+
+  onServiceChange(){
+    this.allItems = this.medCard.appointments.filter(app => app.appointmentRegistration.service === this.selectedService.serviceName);
+    console.log(this.allItems);
+    console.log(this.selectedService);
+    this.setPage(1);
   }
 
   getHereditary(){

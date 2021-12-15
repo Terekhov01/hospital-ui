@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-
-  constructor() { }
+  count: number;
+  constructor() {this.count = 6212}
 
   ngOnInit(): void {
   }
