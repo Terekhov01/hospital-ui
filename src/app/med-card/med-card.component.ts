@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MedCard} from "../med-card";
 import {MedCardService} from "../med-card.service";
 import {Router} from "@angular/router";
@@ -6,6 +6,8 @@ import {Appointment} from "../appointment";
 import {PagerService} from "../pager.service";
 import {ServiceServiceService} from "../service-service.service";
 import {Service} from "../service";
+// import {DoctorService} from "../user/user/doctor.service";
+// import {User} from "../user/user/doctor.models";
 
 @Component({
   selector: 'app-med-card',
@@ -20,23 +22,27 @@ export class MedCardComponent implements OnInit {
   allItems: Appointment[];
   services: any[];
   selectedService: Service;
+  room: string;
+  // doctors: User[];
+  // selectedDoctor: User;
 
   constructor(private medCardService: MedCardService,
               private serviceService: ServiceServiceService,
               private router: Router,
               private pagerService: PagerService) {
     this.medCard = new MedCard();
+    this.selectedService = new Service("Анализы");
   }
 
   ngOnInit(): void {
-    this.medCardService.getAll().subscribe(data => {
+    this.medCardService.getAll(0).subscribe(data => {
       this.medCard = data;
-      this.allItems = data.appointments;
-      this.setPage(1);
+      this.allItems = this.medCard.appointments;
+      this.onServiceChange();
     });
     this.serviceService.getServicesList().subscribe(data => {
       this.services = data;
-    })
+    });
   }
 
   setPage(page: number) {
@@ -48,9 +54,13 @@ export class MedCardComponent implements OnInit {
   }
 
   onServiceChange(){
-    this.allItems = this.medCard.appointments.filter(app => app.appointmentRegistration.service === this.selectedService.serviceName);
-    console.log(this.allItems);
-    console.log(this.selectedService);
+    this.allItems = this.medCard.appointments.filter(app => app.appointmentRegistration.service === this.selectedService.toString());
+    this.setPage(1);
+  }
+
+  roomSearch(){
+    this.allItems = this.medCard.appointments.filter(app => app.appointmentRegistration.service === this.selectedService.toString());
+    this.allItems = this.allItems.filter(app => app.appointmentRegistration.room === this.room);
     this.setPage(1);
   }
 
@@ -66,13 +76,7 @@ export class MedCardComponent implements OnInit {
   editContr(){
     this.router.navigate(['medCard/edit-contr'])
   }
-  appointments(){
-    this.router.navigate(['appointments'])
-  }
   appointmentOne(id: number){
     this.router.navigate(['appointment-details', id]);
-  }
-  editAppointment(id: number){
-    this.router.navigate(['update-appointment', id])
   }
 }

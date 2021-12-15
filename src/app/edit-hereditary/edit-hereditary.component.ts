@@ -19,12 +19,12 @@ export class EditHereditaryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.medCardService.getAll().subscribe(data => {
+    this.medCardService.getAll(0).subscribe(data => {
       this.medCard = data;
     });
   }
   update(){
-    this.medCardService.editHereditary(this.hereditary).subscribe(data =>{
+    this.medCardService.editHereditary(0, this.hereditary).subscribe(data =>{
     });
     this.router.navigate(['medCard'])
   }

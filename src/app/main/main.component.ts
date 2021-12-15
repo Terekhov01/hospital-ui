@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ServiceServiceService} from "../service-service.service";
+import {Service} from "../service";
 
 @Component({
   selector: 'app-main',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  count: number;
-  constructor() {this.count = 6212}
-
+  patientAmount: number = 589;
+  doctorAmount: number = 136;
+  services: Service[];
+  popularService: Service;
+  constructor(private serviceService: ServiceServiceService) {
+  }
   ngOnInit(): void {
+    this.serviceService.getServicesList().subscribe(data => {
+      this.services = data;
+    });
+
   }
 
 }

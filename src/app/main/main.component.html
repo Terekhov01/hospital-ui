@@ -1,9 +1,16 @@
-<mat-grid-list cols="2" rowHeight="2:1">
+<h6>О больнице</h6>
+<br>
+<div>
+  <p>В нашей замечательной больнице побывало пациентов: {{patientAmount}}</p>
+  <p>Здесь работают {{doctorAmount}} специалистов: </p>
+  <p>Самая популярная услуга: {{popularService}}: </p>
+</div>
+<mat-grid-list cols="2" rowHeight="4:1">
   <mat-grid-tile class="nav-item">
     <a routerLink="create-appointment-registration" routerLinkActive="active" class="nav-link">Записаться на прием</a>
   </mat-grid-tile>
   <mat-grid-tile>
-    <a routerLink="medCard" routerLinkActive="active" class="nav-link">Медицинская карта</a>
+    <a routerLink="/medCard" routerLinkActive="active" class="nav-link">Медицинская карта</a>
   </mat-grid-tile>
   <mat-grid-tile>
     <a routerLink="" routerLinkActive="active" class="nav-link">Наши врачи</a>
@@ -12,13 +19,4 @@
     <a routerLink="" routerLinkActive="active" class="nav-link">Вот так вот</a>
   </mat-grid-tile>
 </mat-grid-list>
-<h6>Новости</h6>
-<br>
-<div>
-  <p>Оперштаб: в Москве выявлено 3 004 новых случая COVID-19</p>
-  <p>Оперативный штаб по контролю и мониторингу ситуации с коронавирусом в Москве сообщает, что в Москве выявлено 3 004 новых случая заражения коронавирусной инфекцией. За сутки госпитализированы 919 человек. На ИВЛ находятся 553 человека.</p>
-  <p>
-    <a href="https://mosgorzdrav.ru/ru-RU/news/default/card/6212.html">Читать на сайте Департамента здравоохранения города Москвы</a>
-  </p>
-</div>
 

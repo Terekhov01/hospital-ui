@@ -17,7 +17,7 @@ export class ContrComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.medCardService.getAll().subscribe(data => {
+    this.medCardService.getAll(0).subscribe(data => {
       this.medCard = data;
     });
   }

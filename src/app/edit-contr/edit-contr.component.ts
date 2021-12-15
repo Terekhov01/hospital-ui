@@ -19,12 +19,12 @@ export class EditContrComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.medCardService.getAll().subscribe(data => {
+    this.medCardService.getAll(0).subscribe(data => {
       this.medCard = data;
     });
   }
   update(){
-    this.medCardService.editContr(this.contr).subscribe(data =>{
+    this.medCardService.editContr(0, this.contr).subscribe(data =>{
     });
     this.router.navigate(['medCard']);
   }

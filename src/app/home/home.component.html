@@ -3,3 +3,26 @@
     <p>{{ content }}</p>
   </header>
 </div>
+<h4>О больнице</h4>
+<br>
+<div>
+  <p>В нашей замечательной больнице побывало пациентов: {{patientAmount}}</p>
+  <p>Здесь работают {{doctorAmount}} специалистов: </p>
+  <p>Самая популярная услуга: {{popularService}}</p>
+</div>
+<mat-grid-list cols="2" rowHeight="4:1">
+  <mat-grid-tile class="nav-item">
+    <a routerLink="create-appointment-registration" routerLinkActive="active" class="nav-link">Записаться на прием</a>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <a routerLink="/medCard" routerLinkActive="active" class="nav-link">Медицинская карта</a>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <a routerLink="" routerLinkActive="active" class="nav-link">Наши врачи</a>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <a routerLink="" routerLinkActive="active" class="nav-link"><img src="logo.jpg"></a>
+  </mat-grid-tile>
+</mat-grid-list>
+
+

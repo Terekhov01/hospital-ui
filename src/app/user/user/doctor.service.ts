@@ -17,7 +17,7 @@ export class DoctorService {
 
   id?:number;
 
-  private userUrl = 'http://localhost:8080/user-portal/doctorusers';
+  private userUrl = 'http://localhost:8080/api/doctors';
   //private userUrl = '/api';
 
   // private usereditUrl = 'http://localhost:8080/user-portal/doctorusers';
