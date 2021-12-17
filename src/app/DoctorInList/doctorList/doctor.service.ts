@@ -13,7 +13,8 @@ const httpOptions = {
 export class DoctorService {
 
   id?: number;
-  private userUrl = 'http://localhost:8080/user-portal/doctorusers';
+  private userUrl = 'http://localhost:8080/doctorusers';
+  // private userUrl = 'http://localhost:8080/user-portal/doctorusers';
 
   constructor(private http: HttpClient) {
   }

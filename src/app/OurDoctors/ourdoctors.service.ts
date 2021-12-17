@@ -16,9 +16,13 @@ const httpOptions = {
 export class OurdoctorsService {
 
   id?: number;
-  private userUrl = 'http://localhost:8080/user-portal/ourdoctors';
-  private RatingUrl = 'http://localhost:8080/user-portal/rating';
-  private doctorInfo = 'http://localhost:8080/user-portal/doctorinfo';
+  private userUrl = 'http://localhost:8080/ourdoctors';
+  private RatingUrl = 'http://localhost:8080/rating';
+  private doctorInfo = 'http://localhost:8080/doctorinfo';
+
+  // private userUrl = 'http://localhost:8080/user-portal/ourdoctors';
+  // private RatingUrl = 'http://localhost:8080/user-portal/rating';
+  // private doctorInfo = 'http://localhost:8080/user-portal/doctorinfo';
 
   constructor(private http: HttpClient) {
   }
