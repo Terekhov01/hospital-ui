@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ourdoctorsModel} from "./ourdoctors.model";
-import {DoctorRatingRequest} from "../ourdoctorsdetails/doctor-rating-request.model";
-import {DoctorRequest} from "../user/user/doctor-request.model";
+import {DoctorRatingRequest} from "../OurDoctorsAddRating/doctor-rating-request.model";
+import {DoctorRequest} from "../DoctorInList/doctorList/doctor-request.model";
 
 
 const httpOptions = {

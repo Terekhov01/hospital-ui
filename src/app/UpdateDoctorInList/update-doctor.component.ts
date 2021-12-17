@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {DoctorService} from "../user/user/doctor.service";
-import {User} from "../user/user/doctor.models";
+import {DoctorService} from "../DoctorInList/doctorList/doctor.service";
+import {User} from "../DoctorInList/doctorList/doctor.models";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({

@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {DoctorComponent} from "./user/user/doctor.component";
-import {AddDoctorComponent} from "./add-doctor/add-doctor.component";
-import {UpdateDoctorComponent} from "./update-doctor/update-doctor.component";
-import {OurdoctorsComponent} from "./ourdoctors/ourdoctors.component";
-import {OurdoctorsdetailsComponent} from "./ourdoctorsdetails/ourdoctorsdetails.component";
-import {DoctorinfoComponent} from "./doctorinfo/doctorinfo.component";
+import {DoctorComponent} from "./DoctorInList/doctorList/doctor.component";
+import {AddDoctorComponent} from "./AddNewDoctorInList/add-doctor.component";
+import {UpdateDoctorComponent} from "./UpdateDoctorInList/update-doctor.component";
+import {OurdoctorsComponent} from "./OurDoctors/ourdoctors.component";
+import {OurdoctorsdetailsComponent} from "./OurDoctorsAddRating/ourdoctorsdetails.component";
+import {DoctorinfoComponent} from "./OurDoctorsMoreInfo/doctorinfo.component";
 
 const routes: Routes = [
   {path: 'doctorlist', component: DoctorComponent},

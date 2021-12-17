@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {DoctorService} from "../user/user/doctor.service";
+import {DoctorService} from "../DoctorInList/doctorList/doctor.service";
 import localeRu from '@angular/common/locales/ru';
 import {registerLocaleData} from "@angular/common";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {DoctorRequest} from "../user/user/doctor-request.model";
+import {DoctorRequest} from "../DoctorInList/doctorList/doctor-request.model";
 
 registerLocaleData(localeRu);
 
