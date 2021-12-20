@@ -97,6 +97,12 @@ import {AppointmentRegistrationInfoService} from "./appointment-registration-inf
 import {DoctorScheduleAppointmentsDataDaily} from "./schedule-appointment-block/schedule-appointment.i-raw-data";
 import {DoctorSharedShortInformationService} from "./doctor-shared-short-information.service";
 import {DatePipe} from '@angular/common';
+import { MedCardComponent } from './med-card/med-card.component';
+import { HereditaryComponent } from './hereditary/hereditary.component';
+import { ContrComponent } from './contr/contr.component';
+import { EditHereditaryComponent } from './edit-hereditary/edit-hereditary.component';
+import { EditContrComponent } from './edit-contr/edit-contr.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
@@ -135,13 +141,18 @@ import {DatePipe} from '@angular/common';
     AppointmentRegistrationDetailsComponent,
     AppointmentCreationComponent,
     OurdoctorsdetailsComponent,
-    ScheduleViewPatternComponent
+    ScheduleViewPatternComponent,
+    MedCardComponent,
+    HereditaryComponent,
+    ContrComponent,
+    EditHereditaryComponent,
+    EditContrComponent,
+    MainComponent
     //MaterialMultiSelectorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatTableModule,
@@ -157,14 +168,13 @@ import {DatePipe} from '@angular/common';
     MatButtonModule,
     MatIconModule,
     NgxMaterialTimepickerModule,
-    NoopAnimationsModule,
     MatFormFieldModule,
+    MatGridListModule
   ],
   providers: [authInterceptorProviders, DatePipe],
   bootstrap: [AppComponent],
   exports: [
     A11yModule,
-    NoopAnimationsModule,
     BrowserAnimationsModule,
     ClipboardModule,
     CdkStepperModule,
@@ -207,7 +217,7 @@ import {DatePipe} from '@angular/common';
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule,
+    ScrollingModule
   ]
 })
 export class AppModule { }

@@ -29,6 +29,12 @@ import {AppointmentCreationComponent} from "./appointment-creation/appointment-c
 import { ScheduleProlongPageComponent } from './schedule-prolong-page/schedule-prolong-page.component';
 import { ScheduleSpecifyAppointmentPageComponent } from './schedule-specify-appointment-page/schedule-specify-appointment-page.component';
 import { ScheduleTablePageComponent } from './schedule-table-page/schedule-table-page.component';
+import { MedCardComponent } from "./med-card/med-card.component";
+import { HereditaryComponent } from "./hereditary/hereditary.component";
+import { ContrComponent } from "./contr/contr.component";
+import { EditHereditaryComponent } from "./edit-hereditary/edit-hereditary.component";
+import { EditContrComponent } from "./edit-contr/edit-contr.component";
+import { MainComponent } from "./main/main.component";
 
 //import { MaterialMultiSelectorComponent } from './material-multi-selector/material-multi-selector.component';
 
@@ -92,10 +98,10 @@ const routes: Routes =
     { path: "medCard/edit-hereditary", component: EditHereditaryComponent },
     { path: "medCard/edit-contr", component: EditContrComponent },
     { path: "", component: MainComponent},
-    { path: "", redirectTo: 'medCard', pathMatch: 'full'},
+    //{ path: "", redirectTo: 'medCard', pathMatch: 'full'},
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
+    //{ path: 'register', component: RegisterComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'user', component: BoardUserComponent },
     { path: 'mod', component: BoardModeratorComponent },
@@ -183,6 +189,7 @@ const routes: Routes =
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule]
+    ScrollingModule
+  ]
 })
 export class AppRoutingModule { }
