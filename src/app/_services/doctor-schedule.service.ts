@@ -4,7 +4,7 @@ import { IDoctorScheduleTableData } from '../schedule-table-page/schedule-table-
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { IDoctorScheduleAppointmentsData } from '../schedule-appointment-block/schedule-appointment.i-raw-data';
 import { ScheduleTablePattern, TimeRounded } from '../schedule-prolong-page/schedule-prolong-page.i-raw-data';
-import { ISchedulePatternShortInfo } from '../apply-schedule-pattern/apply-schedule-pattern.i-raw-data';
+import { ISchedulePatternShortInfo } from '../schedule-apply-pattern/apply-schedule-pattern.i-raw-data';
 import { TokenStorageService } from './token-storage.service';
 
 @Injectable({

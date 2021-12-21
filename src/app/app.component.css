@@ -2,3 +2,9 @@
 {
     width: 100%;
 }
+
+#dropdownScheduleMenu
+{
+    margin-top: -1px;
+    font-size: 14px;
+}

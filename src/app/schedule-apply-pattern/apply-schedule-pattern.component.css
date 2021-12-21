@@ -22,3 +22,14 @@
     height: fit-content;
     width: auto;
 }
+
+.timeInterval
+{
+    width: 120px;
+}
+
+.timeField
+{
+    display: inline-block;
+    width: 50px;
+}

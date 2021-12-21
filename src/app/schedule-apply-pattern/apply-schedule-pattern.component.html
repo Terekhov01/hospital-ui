@@ -41,9 +41,9 @@
                                 <div formArrayName = "cells">
                                     <div [formGroupName] = "i">
                                         <div class="timeInterval">
-                                            <input formControlName = "startTime" readonly>
-                                            <p> - </p>
-                                            <input formControlName = "endTime" readonly>
+                                            <input formControlName = "startTime" class = "timeField" readonly>
+                                            <p style = "display: inline-block; padding: 5px;"> - </p>
+                                            <input formControlName = "endTime" class = "timeField" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -55,25 +55,6 @@
                     <tr mat-row *matRowDef="let row; columns: tableData.getDisplayedColumns().value;"></tr>
                 </mat-table>
             </ng-container>
-
-            <div class = "columnButtonBlock">
-                <button mat-stroked-button color = "primary" (click) = "tableData.addColumn()">
-                    <mat-icon>add</mat-icon>
-                </button>
-                <button mat-stroked-button color = "primary" (click) = "tableData.removeColumn()">
-                    <mat-icon>remove</mat-icon>
-                </button>
-            </div>
-    
-            <div class = "rowButtonBlock">
-                <button mat-stroked-button color = "primary" (click) = "tableData.addRow()">
-                    <mat-icon>add</mat-icon>
-                </button>
-                <button mat-stroked-button color = "primary" (click) = "tableData.removeRow()">
-                    <mat-icon>remove</mat-icon>
-                </button>
-            </div>
-
         </div>
     </form>
 

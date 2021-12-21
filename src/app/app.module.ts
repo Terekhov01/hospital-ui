@@ -37,7 +37,7 @@ import { ScheduleAppointmentBlockComponent } from './schedule-appointment-block/
 import { MaterialDateRangePickerComponent } from './material-date-range-picker/material-date-range-picker.component';
 import { ScheduleSpecifyAppointmentPageComponent } from './schedule-specify-appointment-page/schedule-specify-appointment-page.component';
 import { ScheduleProlongPageComponent } from './schedule-prolong-page/schedule-prolong-page.component';
-import { ApplySchedulePatternComponent } from './apply-schedule-pattern/apply-schedule-pattern.component';
+import { ApplySchedulePatternComponent } from './schedule-apply-pattern/apply-schedule-pattern.component';
 //import { MaterialMultiSelectorComponent } from './material-multi-selector/material-multi-selector.component';
 import { MatSelectModule } from '@angular/material/select';
 import { OurdoctorsComponent } from './ourdoctors/ourdoctors.component';
@@ -103,6 +103,7 @@ import { ContrComponent } from './contr/contr.component';
 import { EditHereditaryComponent } from './edit-hereditary/edit-hereditary.component';
 import { EditContrComponent } from './edit-contr/edit-contr.component';
 import { MainComponent } from './main/main.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -169,7 +170,8 @@ import { MainComponent } from './main/main.component';
     MatIconModule,
     NgxMaterialTimepickerModule,
     MatFormFieldModule,
-    MatGridListModule
+    MatGridListModule,
+    NgbModule
   ],
   providers: [authInterceptorProviders, DatePipe],
   bootstrap: [AppComponent],

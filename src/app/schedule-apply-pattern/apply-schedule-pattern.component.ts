@@ -71,7 +71,7 @@ export class ApplySchedulePatternComponent implements OnInit
 
         this.patternAutocompleteFormControl.getFormControl().valueChanges.subscribe(
             {
-                next: (value) =>
+                next: (value: string) =>
                 {
                     if (value == "")
                     {

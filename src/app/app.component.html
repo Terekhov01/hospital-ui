@@ -3,28 +3,44 @@
     <a href="#" class="navbar-brand">LOGO</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Home </a>
+        <a href="/home" class="nav-link" routerLink="home">Домашняя страница</a>
       </li>
       <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+        <a href="/admin" class="nav-link" routerLink="admin">Панель администратора</a>
       </li>
       <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/create-employee" class="nav-link" routerLink="create-employee">CreateEmployee</a>
+        <a href="/create-employee" class="nav-link" routerLink="create-employee">Добавить врача</a>
       </li>
       <li class="nav-item" *ngIf="showModeratorBoard">
-        <a href="/mod" class="nav-link" routerLink="mod">Doctor Board</a>
+        <a href="/mod" class="nav-link" routerLink="mod">Панель врача</a>
       </li>
       <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Пользователь</a>
+      </li>
+
+      <!-- Выпадающее меню расписания https://ng-bootstrap.github.io/#/components/dropdown/examples -->
+      <!-- Для этого нужен ngbootstrap -->
+      <!-- Кроме того, выровнял на 1 пиксель вверх, см. css файл по #dropdownScheduleMenu -->
+      <!-- Возникнут проблемы - спрашивайте у меня (Олег) -->
+      <div class="nav-item dropdown" ngbDropdown #myDrop="ngbDropdown" *ngIf="showModeratorBoard">
+        <button class="btn btn-primary nav-link" id="dropdownScheduleMenu" ngbDropdownAnchor (focus)="myDrop.open()">Расписание</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownScheduleMenu">
+          <button ngbDropdownItem routerLink = "schedule/doctorsTable">Просмотр</button>
+          <button ngbDropdownItem routerLink = "schedule/edit">Редактирование</button>
+        </div>
+      </div>
+
+      <li *ngIf="isLoggedIn && !showModeratorBoard">
+        <a class = "nav-link" routerLink = "schedule/doctorsTable">Расписание</a>
       </li>
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
       <li class="nav-item">
-        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+        <a href="/register" class="nav-link" routerLink="register">Регистрация</a>
       </li>
       <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login">Login</a>
+        <a href="/login" class="nav-link" routerLink="login">Войти</a>
       </li>
     </ul>
 
@@ -33,7 +49,7 @@
         <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
       </li>
       <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">LogOut</a>
+        <a href class="nav-link" (click)="logout()">Выйти</a>
       </li>
     </ul>
   </nav>

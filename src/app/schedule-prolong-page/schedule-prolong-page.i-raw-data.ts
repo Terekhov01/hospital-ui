@@ -309,11 +309,12 @@ export class ScheduleDayPattern
             }
             else if (prevTimeRounded.getNextRounded().equals(timeRounded))
             {
-                currentInterval.end = timeRounded.getNextRounded()
+                currentInterval.end = timeRounded.getNextRounded();
             }
             else
             {
                 retVal.push(currentInterval);
+                currentInterval = new Interval(new TimeRounded(), new TimeRounded());
                 currentInterval.start = timeRounded;
                 currentInterval.end = timeRounded.getNextRounded();
             }
