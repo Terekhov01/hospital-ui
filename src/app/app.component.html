@@ -1,30 +1,51 @@
 <div id="app">
   <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
-    <a href="#" class="navbar-brand">LOGO</a>
+<!--    <a href="#" class="navbar-brand">LOGO</a>-->
+    <img href="/home" src="assets/logo.jpg" width="7%" height="7%" routerLink="home"/>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
+
+<!--      <li class="nav-item">-->
+<!--        <a class="brand-logo" routerLink=""><img src="assets/logo.jpg" width="7%" height="77%"/></a>-->
+<!--      </li>-->
+
+<!--      <li class="nav-item">-->
+<!--        <a href="/home" class="nav-link" routerLink="home">Главная </a>-->
+<!--      </li>-->
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a href="/admin" class="nav-link" routerLink="admin">Панель Администартора</a>
+      </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a href="/create-employee" class="nav-link" routerLink="create-employee">Новый пользователь</a>
+      </li>
+<!--      <li class="nav-item" *ngIf="showModeratorBoard">-->
+<!--        <a href="/mod" class="nav-link" routerLink="mod">Doctor Board</a>-->
+<!--      </li>-->
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Home </a>
-      </li>
-      <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
-      </li>
-      <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/create-employee" class="nav-link" routerLink="create-employee">CreateEmployee</a>
+        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Личный кабинет</a>
       </li>
       <li class="nav-item" *ngIf="showModeratorBoard">
-        <a href="/mod" class="nav-link" routerLink="mod">Doctor Board</a>
+        <a href="/appointments" class="nav-link" routerLink="appointments">Архив приемов</a>
+      </li>
+      <li class="nav-item" *ngIf="showModeratorBoard">
+        <a href="/create-appointment" class="nav-link" routerLink="create-appointment">Новый прием</a>
+      </li>
+      <li class="nav-item" *ngIf="showModeratorBoard">
+        <a href="/schedule/edit" class="nav-link" routerLink="/schedule/edit">Моё расписание</a>
       </li>
       <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+        <a href="/appointmentRegistrations" class="nav-link" *ngIf="!showModeratorBoard && !showAdminBoard" routerLink="appointmentRegistrations">Мои записи</a>
+      </li>
+      <li class="nav-item">
+        <a href="/schedule/specifyAppointment" class="nav-link" *ngIf="!showModeratorBoard && !showAdminBoard" routerLink="schedule/specifyAppointment">Записаться ко врачу</a>
       </li>
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
       <li class="nav-item">
-        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+        <a href="/register" class="nav-link" routerLink="register">Регистрация</a>
       </li>
       <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login">Login</a>
+        <a href="/login" class="nav-link" routerLink="login">Вход</a>
       </li>
     </ul>
 
@@ -33,7 +54,7 @@
         <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
       </li>
       <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">LogOut</a>
+        <a href class="nav-link" (click)="logout()">Выйти</a>
       </li>
     </ul>
   </nav>

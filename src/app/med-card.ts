@@ -10,7 +10,7 @@ export class MedCard {
 
   constructor() {
     this.id = 0;
-    this.patient = new Patient("asd");
+    new Patient("", "", BigInt(0), "", "", "", "", "", "", "");
     this.contraindications = "contraindications";
     this.hereditary = "hereditary";
     this.appointments = [];

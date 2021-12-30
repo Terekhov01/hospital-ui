@@ -90,8 +90,8 @@
 <!--    <td> {{appointmentRegistration.id}} </td>-->
     <td> {{appointmentRegistration.address}} </td>
 <!--    <td> {{appointmentRegistration.doctor.lastName}} </td>-->
-    <td> {{appointmentRegistration.patient.lastName}} </td>
-    <td> {{appointmentRegistration.start}} </td>
+    <td> {{appointmentRegistration.patient.user.lastName}} </td>
+    <td> {{datePipe.transform(appointmentRegistration.start, "yyyy/MM/dd HH:mm")}} </td>
     <td>
       <button (click)="SelectAppointmentRegistration(appointmentRegistration.id)" class="btn btn-info"> Начать прием </button>
     </td>

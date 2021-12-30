@@ -1,15 +1,17 @@
 import {User} from "./user";
+import {Room} from "./room";
 
-export class Doctor extends User {
-  id: number;
-  specialization: string;
-  address: string;
-  room: string;
+export class Doctor {
+  id: bigint;
+  dateOfEmployment: Date;
+  education: string;
+  user: User;
+  room: Room;
 
-  constructor(lastName: string, specialization: string, address: string, room: string) {
-    super(lastName);
-    this.address = address;
-    this.room = room;
-    this.specialization = specialization;
+  constructor(firstname: string, lastname: string, patronymic: string, phone: string, username: string, email:string, password:string, dateOfEmployment: Date, education: string) {
+    this.user = new User(firstname, lastname, patronymic, phone, username, email, password);
+    this.dateOfEmployment = dateOfEmployment;
+    this.education = education;
+    this.room = new Room();
   }
 }

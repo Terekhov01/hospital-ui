@@ -147,7 +147,7 @@ import { MainComponent } from './main/main.component';
     ContrComponent,
     EditHereditaryComponent,
     EditContrComponent,
-    MainComponent
+    MainComponent,
     //MaterialMultiSelectorComponent
   ],
   imports: [
