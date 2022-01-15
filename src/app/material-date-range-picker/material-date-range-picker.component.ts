@@ -35,7 +35,7 @@ export class MaterialDateRangePickerComponent implements OnInit
     public maxDate = new Date(2199, 11, 31);
     
     @Output()
-    pickedValue: EventEmitter<PickedDates> = new EventEmitter();
+    pickedDateRange: EventEmitter<PickedDates> = new EventEmitter();
 
     datePickerGroup: FormGroup;
 
@@ -64,9 +64,13 @@ export class MaterialDateRangePickerComponent implements OnInit
         this._adapter.setLocale('ru');
         this.datePickerGroup.valueChanges.subscribe((dates) => 
         {
-            if (this.datePickerGroup.valid)
+            if (this.datePickerGroup.get('daterange').get('start').value != null && this.datePickerGroup.get('daterange').get('end').value != null && this.datePickerGroup.valid)
             {
-                this.pickedValue.emit(new PickedDates(this.datePickerGroup.value.daterange.start, this.datePickerGroup.value.daterange.end));
+                this.pickedDateRange.emit(new PickedDates(this.datePickerGroup.value.daterange.start, this.datePickerGroup.value.daterange.end));
+            }
+            else
+            {
+                this.pickedDateRange.emit(new PickedDates(null, null));
             }
         });
     }
@@ -82,7 +86,6 @@ export class MaterialDateRangePickerComponent implements OnInit
             const diffDays = Math.ceil(diffMills / (1000 * 60 * 60 * 24)); 
             if (diffDays >= this.rangeMaxLengthInDays)
             {
-                alert('Date range is too big! Please shrink it to interval of 30 days or less');
                 return { rengeLengthValidator: { message: "Date range is too big! Please shrink it to interval of" + this.rangeMaxLengthInDays + " days or less" } };
             }
 

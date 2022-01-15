@@ -35,6 +35,9 @@ import { ContrComponent } from "./contr/contr.component";
 import { EditHereditaryComponent } from "./edit-hereditary/edit-hereditary.component";
 import { EditContrComponent } from "./edit-contr/edit-contr.component";
 import { MainComponent } from "./main/main.component";
+import {DoctorScheduleAppointmentsDataDaily} from "./schedule-appointment-block/schedule-appointment.i-raw-data";
+import { AppointmentRegistrationInfoService } from "./appointment-registration-info.service";
+import { MaterialMultiSelectorComponent } from "./doctor-selector/doctor-selector.component";
 
 //import { MaterialMultiSelectorComponent } from './material-multi-selector/material-multi-selector.component';
 
@@ -87,8 +90,6 @@ import {ScheduleAppointmentBlockComponent} from "./schedule-appointment-block/sc
 import {MaterialDateRangePickerComponent} from "./material-date-range-picker/material-date-range-picker.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import {DoctorScheduleAppointmentsDataDaily} from "./schedule-appointment-block/schedule-appointment.i-raw-data";
-import { AppointmentRegistrationInfoService } from "./appointment-registration-info.service";
 
 const routes: Routes =
 [
@@ -134,7 +135,7 @@ const routes: Routes =
     {path: "appointment-details/:id", component: AppointmentDetailsComponent},
     {path: "appointment-registration-details/:id", component: AppointmentRegistrationDetailsComponent},
     {path: "appointment-creation/:id", component: AppointmentCreationComponent},
-    /*{ path: "testPath", component: MaterialMultiSelectorComponent}*/
+    { path: "testPath", component: MaterialMultiSelectorComponent}
 ];
 
 @NgModule({

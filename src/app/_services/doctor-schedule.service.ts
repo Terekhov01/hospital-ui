@@ -29,11 +29,12 @@ export class DoctorScheduleService
         this.schedulePatternProlong = "http://localhost:8080/schedule-pattern/apply-pattern";
     }
 
-    getDoctorScheduleTableObservables(startDate: Date, endDate: Date): Observable<IDoctorScheduleTableData[]>
+    getDoctorScheduleTableObservables(startDate: Date, endDate: Date, doctorIds: number[]): Observable<IDoctorScheduleTableData[]>
     {
         let httpParams = new HttpParams();
         httpParams = httpParams.append("dateBeginRepresent", startDate.toISOString());
         httpParams = httpParams.append("dateEndRepresent", endDate.toISOString());
+        httpParams = httpParams.append("doctorIds", doctorIds.toString());
 
         return this.http.get<IDoctorScheduleTableData[]>(this.tableUrl, {params: httpParams});
     }
@@ -61,12 +62,7 @@ export class DoctorScheduleService
             }
             return value;
         });
-        console.log(patternString);
         httpParams = httpParams.append("schedulePattern", patternString);
-
-        /*let headers = new HttpHeaders();
-        headers.append("Accept", "application/json");
-        headers.append("Content-Type", "application/json");*/
 
         return this.http.post<string>(this.scheduleAddPatternUrl, { params: httpParams });
     }

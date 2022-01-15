@@ -35,20 +35,11 @@ export class ScheduleTableDataSource implements DataSource<IDoctorScheduleTableD
         this.unsubscribeTableData();
     }
 
-    loadDoctorSchedules(onDataRecieved: CallableFunction, startDate: Date, endDate: Date)
+    loadDoctorSchedules(onDataRecieved: CallableFunction, startDate: Date, endDate: Date, doctorIds: number[])
     {
         this.loadingSubject.next(true);
 
-        this.tableDataSubscription = this.doctorScheduleService.getDoctorScheduleTableObservables(startDate, endDate)/*.pipe(
-            catchError((error) => 
-            {
-                console.error();
-                alert("Server inacessible or data malformed!");
-                return of([]);
-            }),
-            finalize(() => this.loadingSubject.next(false))
-        )*/
-        .subscribe(
+        this.tableDataSubscription = this.doctorScheduleService.getDoctorScheduleTableObservables(startDate, endDate, doctorIds).subscribe(
         {
             next: (doctorScheduleArray: IDoctorScheduleTableData[]) => 
             {
@@ -60,7 +51,7 @@ export class ScheduleTableDataSource implements DataSource<IDoctorScheduleTableD
             },
             complete: () =>
             { 
-             onDataRecieved();
+                onDataRecieved();
             }
         });
     }

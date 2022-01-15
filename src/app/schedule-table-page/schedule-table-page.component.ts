@@ -1,15 +1,67 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonUtilsService } from '../_services/common-utils.service';
 import { DoctorScheduleService } from '../_services/doctor-schedule.service';
 import { PickedDates } from '../material-date-range-picker/material-date-range-picker.component';
 import { ScheduleTableDataSource } from './schedule-table-page.data-source';
 
+class FilterSettings
+{
+    private startDate: Date;
+    private endDate: Date;
+    private pickedDoctors: number[];
+
+    setStartDate(startDate: Date)
+    {
+        this.startDate = startDate;
+    }
+
+    getStartDate(): Date
+    {
+        return this.startDate;
+    }
+
+    setEndDate(endDate: Date)
+    {
+        this.endDate = endDate;
+    }
+
+    getEndDate(): Date
+    {
+        return this.endDate;
+    }
+
+    setDoctors(pickedDoctors: number[])
+    {
+        this.pickedDoctors = pickedDoctors;
+    }
+
+    getPickedDoctors(): number[]
+    {
+        return this.pickedDoctors;
+    }
+
+    isStateValid(): boolean
+    {
+        if (this.startDate != null && this.endDate != null && this.pickedDoctors.length > 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+}
+
 @Component({
     selector: 'app-schedule-table-page-component',
     templateUrl: './schedule-table-page.component.html',
-    styleUrls: ['./schedule-table-page.component.css']
+    styleUrls: ['./schedule-table-page.component.css'],
+        // Need to remove view encapsulation so that the custom tooltip style defined in
+        // `tooltip-custom-class-example.css` will not be scoped to this component's view.
+    encapsulation: ViewEncapsulation.None
 })
-export class ScheduleTablePageComponent implements OnInit {
+export class ScheduleTablePageComponent implements OnInit
+{
+    filterSettings = new FilterSettings();
 
     displayedColumns: string[];
     columnHeaderDates: string[];
@@ -35,7 +87,7 @@ export class ScheduleTablePageComponent implements OnInit {
     {
         this.dataSource = new ScheduleTableDataSource(this.doctorScheduleService);
         this.userLocale = this.getUserLocale();
-        this.displayedColumns = ["specialization", "name"];
+        this.displayedColumns = ["lastName", "firstName", "specialization"];
         this.columnHeaderDates = [];
         this.columnHeaderDayOfWeekNames = [];
         this.dailyInformationCounter = 0;
@@ -43,18 +95,13 @@ export class ScheduleTablePageComponent implements OnInit {
 
     ngOnInit(): void
     {
-        //TODO - refactor this to obtain data from user
-        /*let startDate = new Date("01.01.2000");
-        let endDate = new Date("01.20.2000");
-
-        this.dataSource.loadDoctorSchedules(() => { this.fillTableContents(startDate, endDate); }, startDate, endDate);*/
     }
 
     fillTableContents(startDate: Date, endDate: Date): void
     {
         this.columnHeaderDates = [];
         this.columnHeaderDayOfWeekNames = [];
-        this.displayedColumns = ["specialization", "name"];
+        this.displayedColumns = ["lastName", "firstName", "specialization"];
         let counter = 0;
 
         let curDate = new Date(startDate);
@@ -79,15 +126,26 @@ export class ScheduleTablePageComponent implements OnInit {
         this.dailyInformationCounter = 0;
     }
 
-    calendarValueChanged(pickedDates: PickedDates): void
+    calendarDateRangeChanged(pickedDates: PickedDates): void
     {
-        if (pickedDates.getStartDate() == undefined || pickedDates.getEndDate() == undefined)
-        {
-            return;
-        }
+        this.filterSettings.setStartDate(pickedDates.getStartDate());
+        this.filterSettings.setEndDate(pickedDates.getEndDate());
+    }
 
-        let startDate = pickedDates.getStartDate();
-        let endDate = pickedDates.getEndDate();
-        this.dataSource.loadDoctorSchedules(() => { this.fillTableContents(startDate!, endDate!); }, startDate!, endDate!);
+    doctorsPickedChanged(pickedDoctors: number[]): void
+    {
+        this.filterSettings.setDoctors(pickedDoctors);
+    }
+
+    showSchedule(): void
+    {
+        if (this.filterSettings.isStateValid())
+        {
+            this.dataSource.loadDoctorSchedules(() => { this.fillTableContents(this.filterSettings.getStartDate(), this.filterSettings.getEndDate()); }, this.filterSettings.getStartDate(), this.filterSettings.getEndDate(), this.filterSettings.getPickedDoctors());
+        }
+        else
+        {
+            alert("Заполните фильтры. Интервал времени не может быть больше месяца.");
+        }
     }
 }

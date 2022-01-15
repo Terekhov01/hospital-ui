@@ -1,0 +1,52 @@
+<!-- Select specialization -->
+<!--<form [formGroup]="specializationForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Специализации</mat-label>
+    <mat-select formControlName="specializationGroup">
+      <mat-optgroup *ngFor="let group of specializationGroupOptions  | async | keyvalue" [label]="group.key">
+        <mat-option *ngFor="let specializationName of group.value" [value]="specializationName">
+          {{specializationName}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+  </mat-form-field>
+</form>-->
+
+<!-- Select specialization -->
+<form [formGroup]="specializationForm">
+  <mat-form-field appearance="fill" class = "specializationForm">
+    <mat-label>Специализации</mat-label>
+    <input type="text"
+            matInput
+            formControlName="specializationControl"
+            required
+            [matAutocomplete]="autoGroup">
+    <button *ngIf="specializationForm.get('specializationControl').value" matSuffix mat-icon-button aria-label="Clear" (click)="specializationForm.get('specializationControl').setValue('')">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <mat-autocomplete #autoGroup="matAutocomplete">
+      <mat-optgroup *ngFor="let group of specializationGroupOptions | async | keyvalue" [label]="group.key">
+        <mat-option *ngFor="let specializationName of group.value" [value]="specializationName">
+          {{ specializationName }}
+        </mat-option>
+    </mat-optgroup>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+
+<!-- Select doctors -->
+<form [formGroup] = "doctorsMultiselectForm">
+  <mat-form-field appearance="fill" class = "doctorsMultiselectForm">
+    <mat-label>Доктора</mat-label>
+    <mat-select formControlName="doctorsMultiselectControl" multiple>
+      <mat-select-trigger>
+        {{ (doctorsMultiselectForm.get('doctorsMultiselectControl').value && doctorsMultiselectForm.get('doctorsMultiselectControl').value[0]) ? doctorsMultiselectForm.get('doctorsMultiselectControl').value[0].lastName : '' }}
+        <span *ngIf="doctorsMultiselectForm.get('doctorsMultiselectControl').value?.length > 1" class="example-additional-selection">
+          (+{{ doctorsMultiselectForm.get('doctorsMultiselectControl').value.length - 1 }} {{ doctorsMultiselectForm.get('doctorsMultiselectControl').value?.length === 2 ? 'other' : 'others' }})
+        </span>
+      </mat-select-trigger>
+      <mat-option *ngFor="let doctor of doctorsWithSpecializations" [value]="doctor">{{ doctor.lastName.concat(" ").concat(doctor.firstName).concat(" ").concat(doctor.middleName) }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

@@ -8,7 +8,9 @@ export interface ITableDailyInfo
 export interface IDoctorScheduleTableData
 {
     id: bigint;
-    specializationName: string;
-    doctorName: string;
+    specializationNames: string[];
+    firstName: string;
+    lastName: string;
+    middleName: string;
     dailyInformation: Array<ITableDailyInfo>;
 }

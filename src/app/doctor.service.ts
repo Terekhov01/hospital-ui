@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Doctor} from "./doctor";
+import { IUserNameId } from "./doctor-selector/doctor-selector.i-raw-data";
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import {Doctor} from "./doctor";
 export class DoctorService {
 
   private baseURL = "http://localhost:8080/api/doctors";
+  private getBySpecializationURL = "http://localhost:8080/doctorusers/find-by/specialization";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -17,4 +19,11 @@ export class DoctorService {
     return this.httpClient.get<Doctor>(`${this.baseURL}/lastname/${lastName}`);
   }
 
+  getDoctorShortInfoBySpecialization(specialization: string): Observable<IUserNameId[]>
+  {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append("specialization", specialization);
+
+    return this.httpClient.get<IUserNameId[]>(this.getBySpecializationURL, { params: httpParams });
+  }
 }

@@ -1,13 +1,45 @@
+#spacer
+{
+    display: inline-block;
+    color: black;
+    width: 1px;
+    min-height: 20px;
+}
+
 .scheduleDiv
 {
     margin: 20px;
     overflow: hidden;
 }
 
-.datePickerDiv
+.filtersDiv
 {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    margin: 20px 20px 20px;
+}
+
+#doctorSelector
+{
+    display: flex;
+    flex-flow: row wrap;
     width: fit-content;
-    margin: 20px 20px 0px;
+}
+
+#dateRangePicker
+{
+    display: block;
+    width: fit-content;
+    margin: 0px 5px 0px;
+}
+
+/* Shifted 14 px down so the button is placed in center */
+#showScheduleButton
+{
+    width: max-content;
+    height: max-content;
+    margin: -14px 5px 5px;
 }
 
 .scheduleTableDiv
@@ -17,6 +49,12 @@
     margin: 0px 20px 20px;
     overflow: auto;
 }
+
+/*.scheduleTable
+{
+    width: 800px;
+    height: 600px;
+}*/
 
 /*Appplys to each column except header cells
 td.mat-column-name
@@ -30,24 +68,85 @@ td.mat-column-name
     background-color: aqua;
 }*/
 
+.tool-tip
+{
+    font-size: 15px !important;
+    white-space: pre-wrap;
+}
+
+.stickyColumn
+{
+    position: fixed;
+    min-width: 100px !important;
+    width: 100px !important;
+    max-width: 100px !important;
+    /*background-color: aqua;
+    border: solid red;
+    border-right-width: 2px;*/
+}
+
+.stickyColumn > *
+{
+    background-color: inherit;
+    text-align: center;
+}
+
+.stickyHeader
+{
+    position: fixed;
+    /*background-color: lightgray;*/
+    min-width: 100px !important;
+    width: 100px !important;
+    max-width: 100px !important;
+ /*   background-color: aqua;
+    border: solid red;
+    border-right-width: 2px;*/
+}
+
+.stickyHeader > *
+{
+    /*background-color: red;*/
+    text-align: center;
+}
+
+.mat-column-lastName
+{
+    left: 0px !important;
+}
+
+.mat-column-lastName > *
+{
+    margin-left: -25px;
+}
+
+.mat-column-firstName
+{
+    left: 100px !important;
+    /*border: 1px red solid;
+    border-width: 1px;*/
+    /*border-right: 1px solid #bdbdbd;*/
+}
+
+/*.mat-table-sticky:last-child
+{
+    background-color: red;
+    border-right: 1px solid #bdbdbd;
+}*/
+
 .mat-column-specialization
 {
-    padding: 10px;
-    min-width: 100px;
-    max-width: 400px;
+    min-width: 140px !important;
+    width: 140px !important;
+    max-width: 140px !important;
+    text-align: center !important;
+    overflow: auto;
 }
 
-.mat-column-name
-{
-    min-width: 40px;
-    max-width: 400px;
-    padding: 10px;
-    border-right: 1px solid #bdbdbd;
-}
-
-[class *= "mat-column-day"]
+[class *= "mat-column-day"],
+.dynamicAmountColumnHeader > div
 {
     text-align: center;
     min-width: 100px;
-    max-width: 200px;
+    width: 100px;
+    max-width: 100px;
 }

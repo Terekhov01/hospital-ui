@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MaterialMultiSelectorComponent } from './material-multi-selector.component';
+import { MaterialMultiSelectorComponent } from './doctor-selector.component';
 
 describe('MaterialMultiSelectorComponent', () => {
   let component: MaterialMultiSelectorComponent;

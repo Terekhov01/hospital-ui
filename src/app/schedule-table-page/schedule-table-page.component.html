@@ -1,6 +1,8 @@
 <div class = "scheduleDiv mat-elevation-z4">
-    <div class = "datePickerDiv">
-        <app-material-date-range-picker (pickedValue) = "calendarValueChanged($event)" [rangeMaxLengthInDays] = "31"></app-material-date-range-picker>
+    <div class = "filtersDiv">
+        <app-doctor-selector (pickedDoctors) = "doctorsPickedChanged($event)" [maxPickAmount] = "5" id = "doctorSelector"></app-doctor-selector>
+        <app-material-date-range-picker (pickedDateRange) = "calendarDateRangeChanged($event)" [rangeMaxLengthInDays] = "31" id = "dateRangePicker"></app-material-date-range-picker>
+        <button mat-raised-button color = "primary" (click) = "showSchedule()" id = "showScheduleButton">Показать</button>
     </div>
     <div class="scheduleTableDiv mat-elevation-z4">
 
@@ -9,17 +11,50 @@
             <!--- Note that these columns can be defined in any order.
                         The actual rendered columns are set as a property on the row definition" -->
 
-            <ng-container matColumnDef="specialization" sticky>
+            <ng-container matColumnDef="lastName" sticky>
+                <th mat-header-cell *matHeaderCellDef class = "stickyHeader"> 
+                    <div>
+                        Фамилия
+                    </div>
+                </th>
+
+                <td mat-cell *matCellDef="let row" class = "stickyColumn"> 
+                    <div>
+                        {{row.lastName}}
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="firstName" sticky>
+                <th mat-header-cell *matHeaderCellDef class = "stickyHeader">
+                    <div style = "display: inline-block;">
+                        Имя
+                        <td style = "display: inline-block; width: 10px; height: inherit; background-color: black"></td>
+                    </div>
+                </th>
+                
+                <td mat-cell *matCellDef="let row" class = "stickyColumn"> 
+                    <div>
+                        {{row.firstName}}
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="specialization">
                 <th mat-header-cell *matHeaderCellDef> Специализация </th>
-                <td mat-cell *matCellDef="let row"> {{row.specializationName}} </td>
+                <td mat-cell *matCellDef="let row">
+                    <div *ngIf = "row.specializationNames.length === 0; else hasSpecialization">Не укзано</div>
+                    <ng-template #hasSpecialization>
+                        <div style = "text-decoration: underline;" matTooltipClass = "tool-tip" [matTooltip] = "row.specializationNames.join(', ')" aria-label = "Обновите браузер, чтобы посмотреть специальности врача.">
+                            Посмотреть
+                        </div>
+                    </ng-template>
+                </td>
             </ng-container>
 
-            <ng-container matColumnDef="name" sticky>
-                <th mat-header-cell *matHeaderCellDef> Имя </th>
-                <td mat-cell *matCellDef="let row"> {{row.doctorName}} </td>
-            </ng-container>
-
-            <ng-container *ngFor="let header of columnHeaderDates; let i = index;" matColumnDef = {{displayedColumns[i+2]}}>
+            <!-- Do not forget to change index in following line if you want to change columns amount before dynamic columns block
+                and to set style with absolute width/position so angular can draw spacer and items correctly -->
+            <ng-container *ngFor="let header of columnHeaderDates; let i = index;" matColumnDef = {{displayedColumns[i+3]}}>
                 <!-- Reset counter before each row (person) is processed -->
                 <div style="display: none;">{{ resetDailyInformationCounter() }}</div>
 
@@ -51,7 +86,7 @@
 
             </ng-container>
         
-            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
     </div>

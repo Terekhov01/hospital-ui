@@ -38,7 +38,7 @@ import { MaterialDateRangePickerComponent } from './material-date-range-picker/m
 import { ScheduleSpecifyAppointmentPageComponent } from './schedule-specify-appointment-page/schedule-specify-appointment-page.component';
 import { ScheduleProlongPageComponent } from './schedule-prolong-page/schedule-prolong-page.component';
 import { ApplySchedulePatternComponent } from './schedule-apply-pattern/apply-schedule-pattern.component';
-//import { MaterialMultiSelectorComponent } from './material-multi-selector/material-multi-selector.component';
+import { MaterialMultiSelectorComponent } from './doctor-selector/doctor-selector.component';
 import { MatSelectModule } from '@angular/material/select';
 import { OurdoctorsComponent } from './ourdoctors/ourdoctors.component';
 import { OurdoctorsdetailsComponent } from './ourdoctorsdetails/ourdoctorsdetails.component';
@@ -148,8 +148,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ContrComponent,
     EditHereditaryComponent,
     EditContrComponent,
-    MainComponent
-    //MaterialMultiSelectorComponent
+    MainComponent,
+    MaterialMultiSelectorComponent
   ],
   imports: [
     BrowserModule,
