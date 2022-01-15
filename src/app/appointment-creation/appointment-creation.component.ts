@@ -66,7 +66,7 @@ export class AppointmentCreationComponent implements OnInit {
     //
     // this.onUploadFiles(this.files, this.appointmentRegistration.patient.id);
 
-    this.patientService.postFile(this.fileToUpload!, this.appointment.appointmentRegistration.patient.id).subscribe(data => {
+    this.patientService.postFile(this.fileToUpload!, Number(this.appointment.appointmentRegistration.patient.user.id)).subscribe(data => {
       console.log(data);
     }, error => {
       console.log(error);
