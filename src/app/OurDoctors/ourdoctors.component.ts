@@ -2,16 +2,27 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ourdoctorsModel} from "./ourdoctors.model";
 import {OurdoctorsService} from "./ourdoctors.service";
+// import {SurnamefilterPipe} from "../surnamefilter.pipe";
+
 
 @Component({
   selector: 'app-ourdoctors',
+  // @ts-ignore
+  pipes: [SurnamefilterPipe],
+
   templateUrl: './ourdoctors.component.html',
-  styleUrls: ['./ourdoctors.component.css']
+  styleUrls: ['./ourdoctors.component.css'],
+
+
 })
 export class OurdoctorsComponent implements OnInit {
 
-  ourusers?: ourdoctorsModel[];
+  // @ts-ignore
+  ourusers: ourdoctorsModel[];
   id?: number;
+
+  // @ts-ignore
+  filterText :string;
 
   constructor(private router: Router, private userService: OurdoctorsService) {
   }
@@ -45,5 +56,20 @@ export class OurdoctorsComponent implements OnInit {
     })
   }
 
+// Search(){
+//
+//     if(this.searchText!==""){
+//       let searchValue = this.searchText.toLocaleLowerCase();
+//       this.ourusers = this.ourusers?.filter((firstName:any)=>
+//         {
+//           return this.ourusers..toLocaleLowerCase().match(searchValue);
+//         });
+//
+//     }
+// }
 
-}
+  search(value: string): void {
+    this.ourusers = this.ourusers.filter((val)=>
+    val.lastName.toLowerCase().includes(value));
+  }
+  }

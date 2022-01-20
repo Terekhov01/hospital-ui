@@ -13,6 +13,8 @@ import {UpdateDoctorComponent} from './UpdateDoctorInList/update-doctor.componen
 import {OurdoctorsComponent} from './OurDoctors/ourdoctors.component';
 import {OurdoctorsdetailsComponent} from './OurDoctorsAddRating/ourdoctorsdetails.component';
 import {DoctorinfoComponent} from './OurDoctorsMoreInfo/doctorinfo.component';
+// import { SurnamefilterPipe } from './surnamefilter.pipe';
+import {Ng2SearchPipeModule} from "ng2-search-filter";
 
 // import {ourdoctorsModel } from './ourdoctors/ourdoctors.model';
 
@@ -27,12 +29,15 @@ import {DoctorinfoComponent} from './OurDoctorsMoreInfo/doctorinfo.component';
     OurdoctorsComponent,
     OurdoctorsdetailsComponent,
     DoctorinfoComponent,
+    // SurnamefilterPipe,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    //---
+    Ng2SearchPipeModule,
     FormsModule,
     ReactiveFormsModule,
 

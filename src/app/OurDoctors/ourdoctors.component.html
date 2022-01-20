@@ -97,6 +97,9 @@
   </div>
   <div class="col-2" style="text-align: center;">Наши врачи
 
+    <input type="text" [(ngModel)]="filterText"
+           class="form-control" placeholder="Искать" />
+
   </div>
   <div class="col-2">
     <!--    <button type="submit" class="btn btn-success" routerLink="/add"> Добавить</button>-->
@@ -130,7 +133,8 @@
     <tbody>
     <!--    *ngFor="let user of users "-->
     <!--ng-repeat= "user in users | orderBy:'-id'-->
-    <tr *ngFor="let user of ourusers|orderBy:'id'">
+<!--    |orderBy:'id'"-->
+    <tr *ngFor="let user of ourusers | filter :filterText">
       <!--      <td class="hidden">{{user.id}}</td>-->
       <!--      |orderBy:'id'"-->
 
