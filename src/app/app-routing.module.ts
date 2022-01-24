@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import {DoctorinfoComponent} from "./OurDoctorsMoreInfo/doctorinfo.component";
 import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -110,6 +111,10 @@ const routes: Routes =
     { path: 'admin', component: EmployeeListComponent },
     { path: 'update-employee/:id', component: UpdateEmployeeComponent },
     { path: 'create-employee', component: CreateEmployeeComponent },
+  {path: 'doctorlist', component: DoctorComponent},
+  {path: 'doctoradd', component: AddDoctorComponent},
+  {path: 'doctorInfo/:id', component: DoctorinfoComponent},
+
     { path: 'employee-details/:id', component: EmployeeDetailsComponent },
     {
       path: "schedule",

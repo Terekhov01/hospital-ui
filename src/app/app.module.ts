@@ -11,6 +11,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
+import {Ng2SearchPipeModule} from "ng2-search-filter";
+//import {DoctorComponent} from './DoctorInList/doctorList/doctor.component';
+//import {AddDoctorComponent} from './AddNewDoctorInList/add-doctor.component';
+//import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+//import {HttpClientModule} from "@angular/common/http";
+import {DoctorService} from "./DoctorInList/doctorList/doctor.service";
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -171,9 +178,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgxMaterialTimepickerModule,
     MatFormFieldModule,
     MatGridListModule,
+    Ng2SearchPipeModule,
     NgbModule
   ],
-  providers: [authInterceptorProviders, DatePipe],
+  providers: [authInterceptorProviders, DatePipe,DoctorService],
   bootstrap: [AppComponent],
   exports: [
     A11yModule,
