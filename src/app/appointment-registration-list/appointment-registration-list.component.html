@@ -16,7 +16,7 @@
 <!--    <td> {{appointmentRegistration.id}} </td>-->
     <td> {{appointmentRegistration.address}} </td>
     <td> {{appointmentRegistration.room}} </td>
-    <td> {{appointmentRegistration.doctor.lastName}} </td>
+    <td> {{appointmentRegistration.doctor.user.lastName}} </td>
 <!--    <td> {{appointmentRegistration.patient.lastName}} </td>-->
     <td> {{datePipe.transform(appointmentRegistration.start, "yyyy/MM/dd HH:mm")}} </td>
     <td>

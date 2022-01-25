@@ -8,6 +8,7 @@ import {Patient} from "../patient";
 import {AppointmentRegistrationService} from "../appointment-registration.service";
 import {DoctorService} from "../_services/doctor.service";
 import {PatientService} from "../patient.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-create-appointment',
@@ -29,7 +30,7 @@ export class CreateAppointmentComponent implements OnInit {
               private doctorService: DoctorService,
               private patientService: PatientService,
               private appointmentRegistrationService: AppointmentRegistrationService,
-              private router: Router) { }
+              private router: Router, public datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.appointmentRegistrationService.getAppointmentRegistrationsList().subscribe(data => {
@@ -41,8 +42,8 @@ export class CreateAppointmentComponent implements OnInit {
     // this.appointment.doctor = new Doctor(this.doctor);
     // this.appointment.patient = new Patient(this.patient);
     this.appointment.appointmentRegistration = new AppointmentRegistration();
-    this.appointment.appointmentRegistration.doctor = new Doctor(this.doctor, "Терапевт", "Адрес 123", "Кабинет 123");
-    this.appointment.appointmentRegistration.patient = new Patient(this.patient);
+    this.appointment.appointmentRegistration.doctor = new Doctor("", "", "", "123", "", "", "", new Date(), "");
+    this.appointment.appointmentRegistration.patient = new Patient("", "", BigInt(0), "", this.patient, "", "", "", "", "")
     this.doctorService.getDoctorByLastName(this.doctor).subscribe(data => {
       // this.appointment.doctor = data;
       this.appointment.appointmentRegistration.doctor = data;

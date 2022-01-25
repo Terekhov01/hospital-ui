@@ -10,14 +10,14 @@ import {Service} from "../service";
 export class MainComponent implements OnInit {
   patientAmount: number = 589;
   doctorAmount: number = 136;
-  services: Service[];
+  // services: Service[];
   popularService: Service;
   constructor(private serviceService: ServiceServiceService) {
   }
   ngOnInit(): void {
-    this.serviceService.getServicesList().subscribe(data => {
-      this.services = data;
-    });
+    // this.serviceService.getServicesList().subscribe(data => {
+    //   this.services = data;
+    // });
 
   }
 

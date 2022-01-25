@@ -44,8 +44,8 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.appointmentRegistration = new AppointmentRegistration();
-    this.appointmentRegistration.doctor = new Doctor(this.doctor, "Терапевт", "Адрес 123", "Кабинет 123");
-    this.appointmentRegistration.patient = new Patient(this.patient);
+    this.appointmentRegistration.doctor = new Doctor("", "", "", "123", "", "", "", new Date(), "");
+    this.appointmentRegistration.patient = new Patient("", "", BigInt(0), "", this.patient, "", "", "", "", "")
     // this.appointmentRegistration.doctor = new Doctor("No name", "specialization", "Address", "Room");
     // this.state$ = this.activatedRoute.paramMap.pipe(map(() =>window.history.state))
     // this.state$.subscribe(data => {
@@ -121,10 +121,10 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
   }
 
   saveAppointmentRegistration() {
-    this.appointmentRegistration.doctor = new Doctor(this.doctor, "Терапевт", "Адрес 123", "Кабинет 123");
-    this.appointmentRegistration.patient = new Patient(this.patient);
-    this.appointmentRegistration.room = this.appointmentRegistration.doctor.room;
-    this.appointmentRegistration.address = this.appointmentRegistration.doctor.address;
+    this.appointmentRegistration.doctor = new Doctor("", "", "", "123", "", "", "", new Date(), "");
+    this.appointmentRegistration.patient = new Patient("", "", BigInt(0), "", this.patient, "", "", "", "", "")
+    this.appointmentRegistration.room = this.appointmentRegistration.doctor.room.num.toString();
+    this.appointmentRegistration.address = this.appointmentRegistration.doctor.room.phone;
     console.log("Saving appointment registration")
     console.log("Size of array: " + this.serviceFormControl.ServiceFiltered.value.length)
 

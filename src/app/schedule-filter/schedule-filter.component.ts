@@ -30,7 +30,7 @@ export class ScheduleFilterComponent implements OnInit
         let doctorsShortInformationSubject = new BehaviorSubject<DoctorShortInformation[]>([]);
         //Subscribe to doctor short information (includes name, specialization and id)
         this.doctorShortInformationSubscription = this.doctorShortInfoService.getDoctorShortInformationObservables(undefined)/*.pipe(
-            catchError((error) => 
+            catchError((error) =>
             {
                 console.error();
                 alert("Server inacessible or data malformed! Cannot load list of doctors available.");
@@ -38,7 +38,7 @@ export class ScheduleFilterComponent implements OnInit
             })
         )*/.subscribe(
         {
-            next: IDoctorShortInformationArray => 
+            next: IDoctorShortInformationArray =>
             {
                 let doctorShortInformationArray = <DoctorShortInformation[]>([]);
                 for (let doctorShortInformation of IDoctorShortInformationArray)
@@ -47,12 +47,12 @@ export class ScheduleFilterComponent implements OnInit
                 }
                 doctorsShortInformationSubject.next(doctorShortInformationArray);
             },
-            error: (error) => 
-            { 
+            error: (error) =>
+            {
                 alert(error.error);
             },
-            complete: () => 
-            { 
+            complete: () =>
+            {
                 console.log("Recieving information successful");
                 this.doctorShortInformationFormControl.setDoctorShortInfoList(doctorsShortInformationSubject);
             }
@@ -63,10 +63,10 @@ export class ScheduleFilterComponent implements OnInit
     {
         let startDate = this.pickedDates.getStartDate();
         let endDate = this.pickedDates.getEndDate();
-        if (this.doctorShortInformationFormControl.doctorShortInformationFormControl.valid 
+        if (this.doctorShortInformationFormControl.doctorShortInformationFormControl.valid
                     && startDate != undefined
                     && endDate != undefined)
-                    /*&& this.datePickerGroup.value.daterange.start != null 
+                    /*&& this.datePickerGroup.value.daterange.start != null
                     && this.datePickerGroup.value.daterange.end != null)*/
         {
             //console.log(this.doctorShortInformationFormControl.doctorShortInformationFormControl.value);
@@ -78,7 +78,7 @@ export class ScheduleFilterComponent implements OnInit
                 if (doctorShortInfo.toString() === this.doctorShortInformationFormControl.doctorShortInformationFormControl.value)
                 {
                     //After this function executes appointment forms pop up. See doctor-shared-short-information service
-                    this.doctorShortInfoService.setRequestedInfo(new FilterSettings(doctorShortInfo.id, 
+                    this.doctorShortInfoService.setRequestedInfo(new FilterSettings(doctorShortInfo.id,
                                             startDate, endDate));
                 }
             }*/
