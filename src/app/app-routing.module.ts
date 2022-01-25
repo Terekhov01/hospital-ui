@@ -13,10 +13,10 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 import { CreateEmployeeComponent } from './create-employee/create-employee.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
-import { DoctorComponent } from "./user/user/doctor.component";
-import { AddDoctorComponent } from "./add-doctor/add-doctor.component";
-import { UpdateDoctorComponent } from "./update-doctor/update-doctor.component";
-import { OurdoctorsComponent } from "./ourdoctors/ourdoctors.component";
+// import { DoctorComponent } from "./user/user/doctor.component";
+// import { AddDoctorComponent } from "./add-doctor/add-doctor.component";
+// import { UpdateDoctorComponent } from "./update-doctor/update-doctor.component";
+import { OurdoctorsComponent } from "./OurDoctorsInClinic/ourdoctors.component";
 import { OurdoctorsdetailsComponent } from "./ourdoctorsdetails/ourdoctorsdetails.component";
 import {AppointmentListComponent} from "./appointment-list/appointment-list.component";
 import {CreateAppointmentComponent} from "./create-appointment/create-appointment.component";
@@ -91,6 +91,9 @@ import {ScheduleAppointmentBlockComponent} from "./schedule-appointment-block/sc
 import {MaterialDateRangePickerComponent} from "./material-date-range-picker/material-date-range-picker.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import {DoctorComponent} from "./DoctorInList/doctorList/doctor.component";
+import {AddDoctorComponent} from "./AddNewDoctorInList/add-doctor.component";
+import {UpdateDoctorComponent} from "./UpdateDoctorInList/update-doctor.component";
 
 const routes: Routes =
 [

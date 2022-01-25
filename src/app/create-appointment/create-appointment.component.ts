@@ -6,7 +6,7 @@ import {AppointmentRegistration} from "../appointment-registration";
 import {Doctor} from "../doctor";
 import {Patient} from "../patient";
 import {AppointmentRegistrationService} from "../appointment-registration.service";
-import {DoctorService} from "../doctor.service";
+import {DoctorService} from "../_services/doctor.service";
 import {PatientService} from "../patient.service";
 
 @Component({

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {DoctorRatingRequest} from "./doctor-rating-request.model";
 import {ActivatedRoute, Router} from "@angular/router";
-import {OurdoctorsService} from "../OurDoctors/ourdoctors.service";
+import {OurdoctorsService} from "../OurDoctorsInClinic/ourdoctors.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ourdoctorsModel} from "../OurDoctors/ourdoctors.model";
+import {ourdoctorsModel} from "../OurDoctorsInClinic/ourdoctors.model";
 import {Subscription} from "rxjs";
 
 @Component({

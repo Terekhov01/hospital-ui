@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {ourdoctorsModel} from "../OurDoctors/ourdoctors.model";
+import {ourdoctorsModel} from "../OurDoctorsInClinic/ourdoctors.model";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {OurdoctorsService} from "../OurDoctors/ourdoctors.service";
+import {OurdoctorsService} from "../OurDoctorsInClinic/ourdoctors.service";
 import {DoctorRequest} from "../DoctorInList/doctorList/doctor-request.model";
 
 @Component({

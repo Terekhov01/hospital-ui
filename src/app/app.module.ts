@@ -47,12 +47,12 @@ import { ScheduleProlongPageComponent } from './schedule-prolong-page/schedule-p
 import { ApplySchedulePatternComponent } from './schedule-apply-pattern/apply-schedule-pattern.component';
 import { MaterialMultiSelectorComponent } from './doctor-selector/doctor-selector.component';
 import { MatSelectModule } from '@angular/material/select';
-import { OurdoctorsComponent } from './ourdoctors/ourdoctors.component';
+import { OurdoctorsComponent } from './OurDoctorsInClinic/ourdoctors.component';
 import { OurdoctorsdetailsComponent } from './ourdoctorsdetails/ourdoctorsdetails.component';
 import { OrderByPipe } from './order-by.pipe';
-import { UpdateDoctorComponent } from './update-doctor/update-doctor.component';
-import { AddDoctorComponent } from './add-doctor/add-doctor.component';
-import { DoctorComponent } from './user/user/doctor.component';
+// import { UpdateDoctorComponent } from './update-doctor/update-doctor.component';
+// import { AddDoctorComponent } from './add-doctor/add-doctor.component';
+// import { DoctorComponent } from './user/user/doctor.component';
 import { ScheduleViewPatternComponent } from './schedule-view-pattern/schedule-view-pattern.component';
 
 import { AppointmentListComponent } from './appointment-list/appointment-list.component';
@@ -111,6 +111,10 @@ import { EditHereditaryComponent } from './edit-hereditary/edit-hereditary.compo
 import { EditContrComponent } from './edit-contr/edit-contr.component';
 import { MainComponent } from './main/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {DoctorinfoComponent} from "./OurDoctorsMoreInfo/doctorinfo.component";
+import {DoctorComponent} from "./DoctorInList/doctorList/doctor.component";
+import {AddDoctorComponent} from "./AddNewDoctorInList/add-doctor.component";
+import {UpdateDoctorComponent} from "./UpdateDoctorInList/update-doctor.component";
 
 @NgModule({
   declarations: [
@@ -156,7 +160,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     EditHereditaryComponent,
     EditContrComponent,
     MainComponent,
-    MaterialMultiSelectorComponent
+    MaterialMultiSelectorComponent,
+    DoctorinfoComponent,
+    UpdateDoctorComponent
   ],
   imports: [
     BrowserModule,
@@ -181,7 +187,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     Ng2SearchPipeModule,
     NgbModule
   ],
-  providers: [authInterceptorProviders, DatePipe,DoctorService],
+  providers: [authInterceptorProviders, DatePipe, DoctorService],
   bootstrap: [AppComponent],
   exports: [
     A11yModule,
@@ -227,6 +233,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
+    // DoctorinfoComponent,
     ScrollingModule
   ]
 })

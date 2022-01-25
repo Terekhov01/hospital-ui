@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AppointmentService} from "../appointment.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {DoctorService} from "../doctor.service";
+import {DoctorService} from "../_services/doctor.service";
 import {PatientService} from "../patient.service";
 import {AppointmentRegistrationService} from "../appointment-registration.service";
 import {AppointmentRegistration} from "../appointment-registration";

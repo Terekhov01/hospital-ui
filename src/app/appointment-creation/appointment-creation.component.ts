@@ -4,7 +4,7 @@ import {AppointmentService} from "../appointment.service";
 import {Router} from "@angular/router";
 import {AppointmentRegistration} from "../appointment-registration";
 import {AppointmentRegistrationService} from "../appointment-registration.service";
-import {DoctorService} from "../doctor.service";
+import {DoctorService} from "../_services/doctor.service";
 import {PatientService} from "../patient.service";
 import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse, HttpEvent, HttpEventType} from "@angular/common/http";

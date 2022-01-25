@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { BehaviorSubject, Observable, of, Subscription } from "rxjs";
 import { startWith, map, first, reduce, last } from "rxjs/operators";
-import { DoctorService } from '../doctor.service';
+import { DoctorService } from '../_services/doctor.service';
 import { SpecializationService } from '../_services/specialization.service';
 import { IUserNameId, UserNameId } from './doctor-selector.i-raw-data';
 import { BehaviorEventEmitter } from "../common-utility-classes/behavior-event-emitter";
@@ -12,7 +12,7 @@ import { BehaviorEventEmitter } from "../common-utility-classes/behavior-event-e
     selector: 'app-doctor-selector',
     templateUrl: './doctor-selector.component.html',
     styleUrls: ['./doctor-selector.component.css']
-})  
+})
 export class MaterialMultiSelectorComponent implements OnInit
 {
     specializationForm: FormGroup = this._formBuilder.group({
@@ -28,7 +28,7 @@ export class MaterialMultiSelectorComponent implements OnInit
     //All existing specializations and a subscription to it
     specializationGroups = new Map<string, string[]>();
     autocompleteSpecializationSubscription: Subscription | null = null;
-    
+
     //Filtered specializations
     specializationGroupOptions: Observable<Map<string, string[]>> = of(this.specializationGroups);
 

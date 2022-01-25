@@ -11,7 +11,7 @@ import {
 } from "../schedule-appointment-block/schedule-appointment.i-raw-data";
 import {BehaviorSubject, Observable, of, Subscription} from "rxjs";
 import {catchError, map} from "rxjs/operators";
-import {DoctorService} from "../doctor.service";
+import {DoctorService} from "../_services/doctor.service";
 import {ServiceFormControls} from "./sevice-form-controls";
 import {ServiceServiceService} from "../service-service.service";
 import {Service} from "../service";

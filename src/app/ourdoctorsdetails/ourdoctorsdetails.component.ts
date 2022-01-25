@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {DoctorRatingRequest} from "./doctor-rating-request.model";
 import {ActivatedRoute, Router} from "@angular/router";
-import {OurdoctorsService} from "../ourdoctors/ourdoctors.service";
+import {OurdoctorsService} from "../OurDoctorsInClinic/ourdoctors.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {DoctorRequest} from "../user/user/doctor-request.model";
-import {ourdoctorsModel} from "../ourdoctors/ourdoctors.model";
+// import {DoctorRequest} from "../user/user/doctor-request.model";
+import {ourdoctorsModel} from "../OurDoctorsInClinic/ourdoctors.model";
 import {Subscription} from "rxjs";
 
 @Component({

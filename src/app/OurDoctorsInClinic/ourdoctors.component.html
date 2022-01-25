@@ -1,0 +1,120 @@
+<html>
+<!--Взята с доктор мустачи-->
+<head>
+  <link href="ourdoctors.component.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <meta charset="UTF-8"/>
+
+
+  <!--  <script src=" src/app/doctor.spec.ts"></script>-->
+</head>
+
+<header>
+
+</header>
+
+<body>
+
+<div class="form_wapper">
+
+
+</div>
+
+<div class="row">
+  <div class="col-3">
+
+  </div>
+  <div class="col-4" style="text-align: center;">Врачи в нашей поликлинике
+
+    <input type="text" [(ngModel)]="filterText"
+           class="form-control" placeholder="Поиск" />
+
+  </div>
+  <div class="col-2">
+    <!--    <button type="submit" class="btn btn-success" routerLink="/add"> Добавить</button>-->
+  </div>
+  <div class="col-3">
+
+  </div>
+</div>
+
+<!--</div>-->
+<!--<div style="text-align: center;">Список врачей-->
+<!--  <button type="submit" class="btn btn-success" routerLink="/add"> Добавить</button>-->
+<!--</div>-->
+
+<div style="text-align: center;">
+
+  <table class="table table-striped ">
+    <thead>
+    <tr>
+      <!--      <th class="hidden">Id</th>-->
+
+      <th>Имя</th>
+      <th>Фамилия</th>
+      <th>Рейтинг</th>
+      <!--      <th>Ср. Рейтинг</th>-->
+      <!--      <th> Действия</th>-->
+      <!--      <th>room</th>-->
+      <!--      <th>specialist</th>-->
+    </tr>
+    </thead>
+    <tbody>
+    <!--    *ngFor="let user of users "-->
+    <!--ng-repeat= "user in users | orderBy:'-id'-->
+<!--    |orderBy:'id'"-->
+    <tr *ngFor="let user of ourusers | filter :filterText">
+      <!--      <td class="hidden">{{user.id}}</td>-->
+      <!--      |orderBy:'id'"-->
+
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.rating | number:'1.1-2'}}
+        <span *ng-show="user.rating">{{user.rating}}>
+
+        </span>
+        <span *ngIf="!user.rating">0.0
+
+        </span>
+      </td>
+
+      <!--      <td>{{user.role}}</td>-->
+      <td>
+        <button (click)="ourDoctorsDetails(user.id)" class="btn btn-primary"> Добавить отзыв
+        </button>
+      </td>
+      <td>
+        <button (click)="doctorInfo(user.id)" class="btn btn-primary"> Посмотреть профиль
+        </button>
+
+      </td>
+
+
+    </tr>
+    </tbody>
+  </table>
+
+
+</div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
