@@ -1,18 +1,3 @@
-<!-- Select specialization -->
-<!--<form [formGroup]="specializationForm">
-  <mat-form-field appearance="fill">
-    <mat-label>Специализации</mat-label>
-    <mat-select formControlName="specializationGroup">
-      <mat-optgroup *ngFor="let group of specializationGroupOptions  | async | keyvalue" [label]="group.key">
-        <mat-option *ngFor="let specializationName of group.value" [value]="specializationName">
-          {{specializationName}}
-        </mat-option>
-      </mat-optgroup>
-    </mat-select>
-  </mat-form-field>
-</form>-->
-
-<!-- Select specialization -->
 <form [formGroup]="specializationForm">
   <mat-form-field appearance="fill" class = "specializationForm">
     <mat-label>Специализации</mat-label>
@@ -21,7 +6,7 @@
             formControlName="specializationControl"
             required
             [matAutocomplete]="autoGroup">
-    <button *ngIf="specializationForm.get('specializationControl').value" matSuffix mat-icon-button aria-label="Clear" (click)="specializationForm.get('specializationControl').setValue('')">
+    <button *ngIf="specializationForm.get('specializationControl').value" matSuffix mat-icon-button aria-label="Clear" (click)="clearPickedValues()">
       <mat-icon>close</mat-icon>
     </button>
 

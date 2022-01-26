@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FilterSettings } from './schedule-filter/schedule-filter.filter-settings';
-import { DoctorShortInformation, IDoctorShortInformation } from './schedule-filter/schedule-filter.i-raw-data';
+import { DoctorShortInformation, IDoctorShortInformation } from './schedule-transfer-data/schedule-filter.data-transfer-objects';
 
 @Injectable({
   providedIn: 'root'

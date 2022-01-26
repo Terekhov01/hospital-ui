@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ScheduleProlongPageComponent } from './schedule-prolong-page.component';
+import { ScheduleCreatePatternComponent } from './schedule-create-pattern.component';
 
 describe('ScheduleProlongPageComponent', () => {
-  let component: ScheduleProlongPageComponent;
-  let fixture: ComponentFixture<ScheduleProlongPageComponent>;
+  let component: ScheduleCreatePatternComponent;
+  let fixture: ComponentFixture<ScheduleCreatePatternComponent>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ScheduleProlongPageComponent);
+    fixture = TestBed.createComponent(ScheduleCreatePatternComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

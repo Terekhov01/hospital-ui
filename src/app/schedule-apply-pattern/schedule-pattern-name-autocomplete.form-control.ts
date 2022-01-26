@@ -1,27 +1,14 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { ISchedulePatternShortInfo } from './apply-schedule-pattern.i-raw-data';
+import { ISchedulePatternShortInfo } from '../schedule-transfer-data/schedule-apply-pattern.data-transfer-obects';
 
 @Injectable()
 export class PatternAutocompleteFormControl implements OnInit
 {
     private patternShortInfoSourceList = new BehaviorSubject<ISchedulePatternShortInfo[]>([]);
     public patternShortInfoFiltered = new BehaviorSubject<ISchedulePatternShortInfo[]>([]);
-    private patternAutocompleteFormControl: FormControl = new FormControl("", [this.patternValidator()]/*(formControl: AbstractControl) =>
-    {
-        for (let patternShortInfo of this.patternShortInfoSourceList.value)
-        {
-            if (formControl.value === patternShortInfo.name)
-            {
-                this.autocompleteInsertedSchedulePattern = patternShortInfo;
-                return null;
-            }
-        }
-
-        this.autocompleteInsertedSchedulePattern = null;
-        return { doctorShortInformationValidator: { message: "Input string is not associated with any pattern!" } };
-    }*/);
+    private patternAutocompleteFormControl: FormControl = new FormControl("", [this.patternValidator()]);
     private formValueSubscription: Subscription | undefined;
     private autocompleteInsertedSchedulePattern: ISchedulePatternShortInfo | null = null;
 

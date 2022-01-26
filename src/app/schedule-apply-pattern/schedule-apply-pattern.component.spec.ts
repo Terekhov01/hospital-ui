@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ApplySchedulePatternComponent } from './apply-schedule-pattern.component';
+import { ScheduleApplyPatternComponent } from './schedule-apply-pattern.component';
 
 describe('ApplySchedulePatternComponent', () => {
-  let component: ApplySchedulePatternComponent;
-  let fixture: ComponentFixture<ApplySchedulePatternComponent>;
+  let component: ScheduleApplyPatternComponent;
+  let fixture: ComponentFixture<ScheduleApplyPatternComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ApplySchedulePatternComponent ]
+      declarations: [ ScheduleApplyPatternComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ApplySchedulePatternComponent);
+    fixture = TestBed.createComponent(ScheduleApplyPatternComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

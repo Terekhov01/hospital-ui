@@ -4,90 +4,70 @@
         <app-material-date-range-picker (pickedDateRange) = "calendarDateRangeChanged($event)" [rangeMaxLengthInDays] = "31" id = "dateRangePicker"></app-material-date-range-picker>
         <button mat-raised-button color = "primary" (click) = "showSchedule()" id = "showScheduleButton">Показать</button>
     </div>
-    <div class="scheduleTableDiv mat-elevation-z4">
 
-        <table mat-table [dataSource]="dataSource" class = "scheduleTable">
+    <div *ngFor = "let doctorSchedule of dataSource.getSchedulesSubject() | async; let doctorCounter = index">    
 
-            <!--- Note that these columns can be defined in any order.
-                        The actual rendered columns are set as a property on the row definition" -->
+        <hr>
 
-            <ng-container matColumnDef="lastName" sticky>
-                <th mat-header-cell *matHeaderCellDef class = "stickyHeader"> 
-                    <div>
-                        Фамилия
-                    </div>
-                </th>
-
-                <td mat-cell *matCellDef="let row" class = "stickyColumn"> 
-                    <div>
-                        {{row.lastName}}
-                    </div>
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="firstName" sticky>
-                <th mat-header-cell *matHeaderCellDef class = "stickyHeader">
-                    <div style = "display: inline-block;">
-                        Имя
-                        <td style = "display: inline-block; width: 10px; height: inherit; background-color: black"></td>
-                    </div>
-                </th>
-                
-                <td mat-cell *matCellDef="let row" class = "stickyColumn"> 
-                    <div>
-                        {{row.firstName}}
-                    </div>
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="specialization">
-                <th mat-header-cell *matHeaderCellDef> Специализация </th>
-                <td mat-cell *matCellDef="let row">
-                    <div *ngIf = "row.specializationNames.length === 0; else hasSpecialization">Не укзано</div>
-                    <ng-template #hasSpecialization>
-                        <div style = "text-decoration: underline;" matTooltipClass = "tool-tip" [matTooltip] = "row.specializationNames.join(', ')" aria-label = "Обновите браузер, чтобы посмотреть специальности врача.">
-                            Посмотреть
-                        </div>
-                    </ng-template>
-                </td>
-            </ng-container>
-
-            <!-- Do not forget to change index in following line if you want to change columns amount before dynamic columns block
-                and to set style with absolute width/position so angular can draw spacer and items correctly -->
-            <ng-container *ngFor="let header of columnHeaderDates; let i = index;" matColumnDef = {{displayedColumns[i+3]}}>
-                <!-- Reset counter before each row (person) is processed -->
-                <div style="display: none;">{{ resetDailyInformationCounter() }}</div>
-
-                <th mat-header-cell *matHeaderCellDef class = "dynamicAmountColumnHeader"> 
-                    <div>{{columnHeaderDayOfWeekNames[i]}}</div> 
-                    <div>{{header}}</div>
-                </th>
-
-                <td mat-cell *matCellDef="let row" class = "dynamicAmountColumnContents">
-
-                    <ng-template *ngIf="dailyInformationCounter < row.dailyInformation.length; then accessAndCheck; else fillEmptyInterval"></ng-template>
-                    <ng-template #accessAndCheck>
-                        <ng-template #accessAndCheck *ngIf="header == row.dailyInformation[dailyInformationCounter].date; then fillCellWithData; else fillEmptyInterval"></ng-template>
-                    </ng-template>
-                    <ng-template #fillCellWithData>
-                        <div>
-                            <!-- DEBUG "{{header}}" "{{row.dailyInformation[dailyInformationCounter].date}}"-->
-                            {{ row.dailyInformation[dailyInformationCounter].startOfDay.concat("-").concat(row.dailyInformation[dailyInformationCounter].endOfDay) }}
-                        </div>
-                        <!-- Increment counter that iterates over dailyInformation -->
-                        <div style="display: none;">{{ incrementDailyInformationCounter() }}</div>
-                    </ng-template>
-
-                    <ng-template #fillEmptyInterval>Выходной <!-- DEBUG "{{dailyInformationCounter}}" "{{row.dailyInformation.length}}" "{{dailyInformationCounter&lt;row.dailyInformation.length}}"--></ng-template>
-
-                    <!-- DEBUG <ng-template #debug>{{header}} {{row.dailyInformation[dailyInformationCounter].date}} {{header == row.dailyInformation[dailyInformationCounter].date}}</ng-template>-->
-
-                </td> 
-
-            </ng-container>
+        <div class = "doctorNameDiv">
+            {{ dataSource.getDoctorsInfoSubject().value[doctorCounter].lastName }}
+            {{ dataSource.getDoctorsInfoSubject().value[doctorCounter].firstName }}
+            {{ dataSource.getDoctorsInfoSubject().value[doctorCounter].middleName }}
+        </div>
         
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+        <div *ngIf = "dataSource.getDoctorsInfoSubject().value[doctorCounter].specializationNames.length === 0; else hasSpecializations;" class = "specializationNamesDiv">
+            Специализации: Не указано
+        </div>
+
+        <ng-template #hasSpecializations>
+            <div *ngIf = "dataSource.getDoctorsInfoSubject().value[doctorCounter].specializationNames.join(', ').length <= 40; else hasLongSpecializations" class = "specializationNamesDiv">
+                Специализации: {{ dataSource.getDoctorsInfoSubject().value[doctorCounter].specializationNames.join(', ') }}
+            </div>
+        </ng-template>
+        
+        <ng-template #hasLongSpecializations>
+            <div style = "text-decoration: underline;" matTooltipClass = "tool-tip" 
+                            [matTooltip] = "dataSource.getDoctorsInfoSubject().value[doctorCounter].specializationNames.join(', ')" 
+                            [aria-label] = "dataSource.getDoctorsInfoSubject().value[doctorCounter].specializationNames.join(', ')" class = "specializationNamesDiv">
+                Наведите, чтобы посмотреть специализации
+            </div>
+        </ng-template>
+
+
+        <div class="scheduleTableDiv mat-elevation-z4">        
+
+            <table mat-table [dataSource] = "doctorSchedule" class = "scheduleTable">
+
+                <!-- Do not forget to change index in following line if you want to change columns amount before dynamic columns block
+                    and to set style with absolute width/position so angular can draw spacer and items correctly -->
+                <ng-container *ngFor = "let header of columnHeaderDates; let columnCounter = index" matColumnDef = {{displayedColumns[columnCounter]}}>
+
+                    <th mat-header-cell *matHeaderCellDef class = "dynamicAmountColumnHeader"> 
+                        <div>{{columnHeaderDayOfWeekNames[columnCounter]}}</div> 
+                        <div>{{header}}</div>
+                    </th>
+
+                    <td mat-cell *matCellDef = "let row; let rowCounter = index;" class = "dynamicAmountColumnContents">
+
+                        <ng-template *ngIf = "row[columnCounter] != null;
+                                        then printInterval;
+                                        else printEmpty">
+                        </ng-template>
+
+                        <ng-template #printInterval>
+                            <div>
+                                {{ row[columnCounter].toString() }}
+                            </div>
+                        </ng-template>
+
+                        <ng-template #printEmpty></ng-template>
+                    </td> 
+
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
     </div>
 </div>

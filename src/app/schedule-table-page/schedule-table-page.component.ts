@@ -3,6 +3,8 @@ import { CommonUtilsService } from '../_services/common-utils.service';
 import { DoctorScheduleService } from '../_services/doctor-schedule.service';
 import { PickedDates } from '../material-date-range-picker/material-date-range-picker.component';
 import { ScheduleTableDataSource } from './schedule-table-page.data-source';
+import { DatePipe } from '@angular/common';
+import { DailyInformation } from '../schedule-transfer-data/schedule-table-page.data-transfer-objects';
 
 class FilterSettings
 {
@@ -42,7 +44,7 @@ class FilterSettings
 
     isStateValid(): boolean
     {
-        if (this.startDate != null && this.endDate != null && this.pickedDoctors.length > 0)
+        if (this.startDate != null && this.endDate != null && this.pickedDoctors != null && this.pickedDoctors.length > 0)
         {
             return true;
         }
@@ -68,7 +70,6 @@ export class ScheduleTablePageComponent implements OnInit
     columnHeaderDayOfWeekNames: string[];
     dataSource: ScheduleTableDataSource;
     userLocale: string;
-    dailyInformationCounter: number
 
     getUserLocale() : string
     {
@@ -83,47 +84,35 @@ export class ScheduleTablePageComponent implements OnInit
         return str.charAt(0).toUpperCase() + str.slice(1)
     }
 
-    constructor(private doctorScheduleService: DoctorScheduleService, private utilsService: CommonUtilsService)
+    constructor(private doctorScheduleService: DoctorScheduleService, private utilsService: CommonUtilsService, public datePipe: DatePipe)
     {
         this.dataSource = new ScheduleTableDataSource(this.doctorScheduleService);
         this.userLocale = this.getUserLocale();
-        this.displayedColumns = ["lastName", "firstName", "specialization"];
+        this.displayedColumns = [];
         this.columnHeaderDates = [];
         this.columnHeaderDayOfWeekNames = [];
-        this.dailyInformationCounter = 0;
     }
 
     ngOnInit(): void
-    {
-    }
+    {}
 
     fillTableContents(startDate: Date, endDate: Date): void
     {
         this.columnHeaderDates = [];
         this.columnHeaderDayOfWeekNames = [];
-        this.displayedColumns = ["lastName", "firstName", "specialization"];
+        this.displayedColumns = [];
         let counter = 0;
 
         let curDate = new Date(startDate);
         while (curDate <= endDate)
         {
-            this.columnHeaderDates.push(this.utilsService.getDateStrEnLocale(curDate));
+            this.columnHeaderDates.push(this.datePipe.transform(curDate, 'dd.MM.yyyy'));
             this.columnHeaderDayOfWeekNames.push(this.getDayName(curDate, this.userLocale));
             let newDate = curDate.setDate(curDate.getDate() + 1);
             curDate = new Date(newDate);
             this.displayedColumns.push("day" + counter);
             counter++;
         }
-    }
-
-    incrementDailyInformationCounter(): void
-    {
-        this.dailyInformationCounter++;
-    }
-
-    resetDailyInformationCounter(): void
-    {
-        this.dailyInformationCounter = 0;
     }
 
     calendarDateRangeChanged(pickedDates: PickedDates): void
@@ -137,8 +126,15 @@ export class ScheduleTablePageComponent implements OnInit
         this.filterSettings.setDoctors(pickedDoctors);
     }
 
+    debug(value): boolean
+    {
+        console.log(value);
+        return false;
+    }
+
     showSchedule(): void
     {
+        this.dataSource.clearData();
         if (this.filterSettings.isStateValid())
         {
             this.dataSource.loadDoctorSchedules(() => { this.fillTableContents(this.filterSettings.getStartDate(), this.filterSettings.getEndDate()); }, this.filterSettings.getStartDate(), this.filterSettings.getEndDate(), this.filterSettings.getPickedDoctors());

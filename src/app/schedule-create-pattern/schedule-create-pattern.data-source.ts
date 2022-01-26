@@ -2,7 +2,8 @@ import { CollectionViewer, DataSource } from "@angular/cdk/collections";
 import { map } from 'rxjs/operators';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn } from "@angular/forms";
 import { BehaviorSubject, Observable } from "rxjs";
-import { Interval, ScheduleTablePattern, TimeRounded } from "./schedule-prolong-page.i-raw-data";
+import { Interval, TimeRounded } from "../schedule-transfer-data/schedule-interval.data-transfer-objects";
+import { ScheduleTablePattern } from "../schedule-transfer-data/schedule-prolong-page.data-transfer-objects";
 
 export class SchedulePatternDataSource implements DataSource<AbstractControl>//, OnInit, OnDestroy
 {

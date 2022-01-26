@@ -4,17 +4,18 @@ import { DateAdapter } from '@angular/material/core';
 import { MAT_DATE_RANGE_SELECTION_STRATEGY } from '@angular/material/datepicker';
 import { BehaviorSubject, of, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { SchedulePatternDataSource } from '../schedule-prolong-page/schedule-prolong-page.data-source';
-import { ScheduleDayPattern, ScheduleTablePattern, TimeRounded } from '../schedule-prolong-page/schedule-prolong-page.i-raw-data';
+import { SchedulePatternDataSource } from '../schedule-create-pattern/schedule-create-pattern.data-source';
+import { ScheduleDayPattern, ScheduleTablePattern } from '../schedule-transfer-data/schedule-prolong-page.data-transfer-objects';
 import { DoctorScheduleService } from '../_services/doctor-schedule.service';
-import { ISchedulePatternShortInfo } from './apply-schedule-pattern.i-raw-data';
-import { PatternDayRangeSelectionStrategy } from './apply-schedule-pattern.selection-stratedy';
+import { ISchedulePatternShortInfo } from '../schedule-transfer-data/schedule-apply-pattern.data-transfer-obects';
+import { PatternDayRangeSelectionStrategy } from './schedule-apply-pattern.selection-stratedy';
 import { PatternAutocompleteFormControl } from './schedule-pattern-name-autocomplete.form-control';
+import { TimeRounded } from '../schedule-transfer-data/schedule-interval.data-transfer-objects';
 
 @Component({
-  selector: 'app-apply-schedule-pattern',
-  templateUrl: './apply-schedule-pattern.component.html',
-  styleUrls: ['./apply-schedule-pattern.component.css'],
+  selector: 'app-schedule-apply-pattern',
+  templateUrl: './schedule-apply-pattern.component.html',
+  styleUrls: ['./schedule-apply-pattern.component.css'],
   providers: [
     {
       provide: MAT_DATE_RANGE_SELECTION_STRATEGY,
@@ -22,7 +23,7 @@ import { PatternAutocompleteFormControl } from './schedule-pattern-name-autocomp
     },
   ]
 })
-export class ApplySchedulePatternComponent implements OnInit
+export class ScheduleApplyPatternComponent implements OnInit
 {
 
     public patternAutocompleteFormControl = new PatternAutocompleteFormControl();
@@ -133,7 +134,13 @@ export class ApplySchedulePatternComponent implements OnInit
                     throw "Internal logic error!\n Name pattern validator returned true but no information is present about it!";
                 }
 
-                PatternDayRangeSelectionStrategy.setPatternLength(this.patternAutocompleteFormControl.getAutocompleteInsertedSchedulePattern()!.daysLength);
+                if (this.patternAutocompleteFormControl.getAutocompleteInsertedSchedulePattern()!.daysLength < 1)
+                {
+                    alert("Pattern is invalid - it's length is less than 1");
+                    return;
+                }
+
+                PatternDayRangeSelectionStrategy.setPatternLength(this.patternAutocompleteFormControl.getAutocompleteInsertedSchedulePattern()!.daysLength - 1);
 
                 this.patternRangePicker.enable();
             }

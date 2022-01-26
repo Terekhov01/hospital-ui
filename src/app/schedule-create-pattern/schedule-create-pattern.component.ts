@@ -2,15 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { NgxMaterialTimepickerTheme } from 'ngx-material-timepicker';
 import { DoctorScheduleService } from '../_services/doctor-schedule.service';
-import { SchedulePatternDataSource } from './schedule-prolong-page.data-source';
-import { Interval, ScheduleDayPattern, ScheduleTablePattern, TimeRounded } from './schedule-prolong-page.i-raw-data';
+import { SchedulePatternDataSource } from './schedule-create-pattern.data-source';
+import { ScheduleDayPattern, ScheduleTablePattern } from '../schedule-transfer-data/schedule-prolong-page.data-transfer-objects';
+import { Interval, TimeRounded } from '../schedule-transfer-data/schedule-interval.data-transfer-objects';
 
 @Component({
-  selector: 'app-schedule-prolong-page',
-  templateUrl: './schedule-prolong-page.component.html',
-  styleUrls: ['./schedule-prolong-page.component.css']
+  selector: 'app-create-pattern',
+  templateUrl: './schedule-create-pattern.component.html',
+  styleUrls: ['./schedule-create-pattern.component.css']
 })
-export class ScheduleProlongPageComponent implements OnInit {
+export class ScheduleCreatePatternComponent implements OnInit {
 
     primaryTheme: NgxMaterialTimepickerTheme = {
         container:
@@ -131,6 +132,12 @@ export class ScheduleProlongPageComponent implements OnInit {
     onSubmitClicked(): void
     {
         let tableData = this.getDataFromTable();
+
+        if (tableData.length === 0)
+        {
+            alert("Шаблон не может быть пустым!");
+            return;
+        }
         
         if (tableData == undefined)
         {

@@ -27,7 +27,7 @@ import {UpdateAppointmentRegistrationComponent} from "./update-appointment-regis
 import {AppointmentDetailsComponent} from "./appointment-details/appointment-details.component";
 import {AppointmentRegistrationDetailsComponent} from "./appointment-registration-details/appointment-registration-details.component";
 import {AppointmentCreationComponent} from "./appointment-creation/appointment-creation.component";
-import { ScheduleProlongPageComponent } from './schedule-prolong-page/schedule-prolong-page.component';
+import { ScheduleCreatePatternComponent } from './schedule-create-pattern/schedule-create-pattern.component';
 import { ScheduleSpecifyAppointmentPageComponent } from './schedule-specify-appointment-page/schedule-specify-appointment-page.component';
 import { ScheduleTablePageComponent } from './schedule-table-page/schedule-table-page.component';
 import { MedCardComponent } from "./med-card/med-card.component";
@@ -36,7 +36,7 @@ import { ContrComponent } from "./contr/contr.component";
 import { EditHereditaryComponent } from "./edit-hereditary/edit-hereditary.component";
 import { EditContrComponent } from "./edit-contr/edit-contr.component";
 import { MainComponent } from "./main/main.component";
-import {DoctorScheduleAppointmentsDataDaily} from "./schedule-appointment-block/schedule-appointment.i-raw-data";
+import { DoctorScheduleAppointmentsDataDaily } from "./schedule-transfer-data/schedule-appointment.data-transfer-objects";
 import { AppointmentRegistrationInfoService } from "./appointment-registration-info.service";
 import { MaterialMultiSelectorComponent } from "./doctor-selector/doctor-selector.component";
 
@@ -125,7 +125,7 @@ const routes: Routes =
       [
         { path: "doctorsTable", component: ScheduleTablePageComponent },
         { path: "specifyAppointment", component: ScheduleSpecifyAppointmentPageComponent },
-        { path: "edit", component: ScheduleProlongPageComponent }
+        { path: "edit", component: ScheduleCreatePatternComponent }
       ]
     },
     { path: 'doctor-users', component: DoctorComponent },
