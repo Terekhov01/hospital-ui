@@ -31,13 +31,15 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 import { CreateEmployeeComponent } from './create-employee/create-employee.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+
 import { ScheduleTablePageComponent } from './schedule-table-page/schedule-table-page.component';
 import { ScheduleFilterComponent } from './schedule-filter/schedule-filter.component';
 import { ScheduleAppointmentBlockComponent } from './schedule-appointment-block/schedule-appointment-block.component';
 import { MaterialDateRangePickerComponent } from './material-date-range-picker/material-date-range-picker.component';
 import { ScheduleSpecifyAppointmentPageComponent } from './schedule-specify-appointment-page/schedule-specify-appointment-page.component';
-import { ScheduleProlongPageComponent } from './schedule-prolong-page/schedule-prolong-page.component';
-import { ApplySchedulePatternComponent } from './schedule-apply-pattern/apply-schedule-pattern.component';
+import { ScheduleCreatePatternComponent } from './schedule-create-pattern/schedule-create-pattern.component';
+import { ApplySchedulePatternComponent } from './schedule-apply-pattern/schedule-apply-pattern.component';
+
 import { MaterialMultiSelectorComponent } from './doctor-selector/doctor-selector.component';
 import { MatSelectModule } from '@angular/material/select';
 import { OurdoctorsComponent } from './ourdoctors/ourdoctors.component';
@@ -46,7 +48,6 @@ import { OrderByPipe } from './order-by.pipe';
 import { UpdateDoctorComponent } from './update-doctor/update-doctor.component';
 import { AddDoctorComponent } from './add-doctor/add-doctor.component';
 import { DoctorComponent } from './user/user/doctor.component';
-import { ScheduleViewPatternComponent } from './schedule-view-pattern/schedule-view-pattern.component';
 
 import { AppointmentListComponent } from './appointment-list/appointment-list.component';
 import { CreateAppointmentComponent } from './create-appointment/create-appointment.component';
@@ -92,10 +93,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { AppointmentCreationComponent } from './appointment-creation/appointment-creation.component';
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import {AppointmentRegistrationInfoService} from "./appointment-registration-info.service";
-import {DoctorScheduleAppointmentsDataDaily} from "./schedule-appointment-block/schedule-appointment.i-raw-data";
-import {DoctorSharedShortInformationService} from "./doctor-shared-short-information.service";
 import {DatePipe} from '@angular/common';
 import { MedCardComponent } from './med-card/med-card.component';
 import { HereditaryComponent } from './hereditary/hereditary.component';
@@ -104,6 +101,7 @@ import { EditHereditaryComponent } from './edit-hereditary/edit-hereditary.compo
 import { EditContrComponent } from './edit-contr/edit-contr.component';
 import { MainComponent } from './main/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ScheduleTransferDataComponent } from './schedule-transfer-data/schedule-transfer-data.component';
 
 @NgModule({
   declarations: [
@@ -124,7 +122,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ScheduleAppointmentBlockComponent,
     MaterialDateRangePickerComponent,
     ScheduleSpecifyAppointmentPageComponent,
-    ScheduleProlongPageComponent,
+    ScheduleCreatePatternComponent,
     ApplySchedulePatternComponent,
     DoctorComponent,
     AddDoctorComponent,
@@ -142,14 +140,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppointmentRegistrationDetailsComponent,
     AppointmentCreationComponent,
     OurdoctorsdetailsComponent,
-    ScheduleViewPatternComponent,
     MedCardComponent,
     HereditaryComponent,
     ContrComponent,
     EditHereditaryComponent,
     EditContrComponent,
     MainComponent,
-    MaterialMultiSelectorComponent
+    MaterialMultiSelectorComponent,
+    ScheduleTransferDataComponent
   ],
   imports: [
     BrowserModule,

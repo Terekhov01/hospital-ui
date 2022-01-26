@@ -133,9 +133,15 @@ export class MaterialMultiSelectorComponent implements OnInit
             },
             error: (error) =>
             {
-                console.log(error.error)
+                console.log(error.error);
             }
         });
+    }
+
+    public clearPickedValues(): void
+    {
+        this.specializationForm.get('specializationControl').setValue('');
+        this.pickedDoctors.emit([]);
     }
 
     private _filterMap(value: string): Map<string, string[]>

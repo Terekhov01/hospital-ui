@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ApplySchedulePatternComponent } from './apply-schedule-pattern.component';
+import { ApplySchedulePatternComponent } from './schedule-apply-pattern.component';
 
 describe('ApplySchedulePatternComponent', () => {
   let component: ApplySchedulePatternComponent;

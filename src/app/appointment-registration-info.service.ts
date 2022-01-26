@@ -3,7 +3,7 @@ import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 import {
   DoctorScheduleAppointmentsDataDaily,
   ScheduleInterval
-} from "./schedule-appointment-block/schedule-appointment.i-raw-data";
+} from "./schedule-transfer-data/schedule-appointment.data-transfer-objects";
 import {BehaviorSubject} from "rxjs";
 import {BigInteger} from "@angular/compiler/src/i18n/big_integer";
 

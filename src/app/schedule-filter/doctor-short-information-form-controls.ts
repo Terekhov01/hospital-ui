@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { DoctorShortInformation } from './schedule-filter.i-raw-data';
+import { DoctorShortInformation } from '../schedule-transfer-data/schedule-filter.data-transfer-objects';
 
 @Injectable()
 export class DoctorShortInformationFormControls implements OnInit

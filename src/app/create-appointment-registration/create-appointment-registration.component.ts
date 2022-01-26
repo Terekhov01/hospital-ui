@@ -8,7 +8,7 @@ import {AppointmentRegistrationInfoService} from "../appointment-registration-in
 import {
   DoctorScheduleAppointmentsDataDaily,
   ScheduleInterval
-} from "../schedule-appointment-block/schedule-appointment.i-raw-data";
+} from "../schedule-transfer-data/schedule-appointment.data-transfer-objects";
 import {BehaviorSubject, Observable, of, Subscription} from "rxjs";
 import {catchError, map} from "rxjs/operators";
 import {DoctorService} from "../doctor.service";

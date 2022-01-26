@@ -5,7 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { DoctorScheduleService } from '../_services/doctor-schedule.service';
 import { DoctorSharedShortInformationService } from '../_services/doctor-shared-short-information.service';
 import { DoctorShortInformationFormControls } from './doctor-short-information-form-controls';
-import { DoctorShortInformation } from './schedule-filter.i-raw-data';
+import { DoctorShortInformation } from '../schedule-transfer-data/schedule-filter.data-transfer-objects';
 import { FilterSettings } from './schedule-filter.filter-settings';
 import { PickedDates } from '../material-date-range-picker/material-date-range-picker.component';
 

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { observable, Observable } from 'rxjs';
-import { IDoctorScheduleTableData } from '../schedule-table-page/schedule-table-page.i-raw-data';
+import { IDoctorSchedule } from '../schedule-transfer-data/schedule-table-page.data-transfer-objects';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { IDoctorScheduleAppointmentsData } from '../schedule-appointment-block/schedule-appointment.i-raw-data';
-import { ScheduleTablePattern, TimeRounded } from '../schedule-prolong-page/schedule-prolong-page.i-raw-data';
-import { ISchedulePatternShortInfo } from '../schedule-apply-pattern/apply-schedule-pattern.i-raw-data';
+import { IDoctorScheduleAppointmentsData } from '../schedule-transfer-data/schedule-appointment.data-transfer-objects';
+import { TimeRounded } from '../schedule-transfer-data/schedule-interval.data-transfer-objects';
+import { ISchedulePatternShortInfo } from '../schedule-transfer-data/schedule-apply-pattern.data-transfer-obects';
 import { TokenStorageService } from './token-storage.service';
+import { ScheduleTablePattern } from '../schedule-transfer-data/schedule-prolong-page.data-transfer-objects';
 
 @Injectable({
     providedIn: 'root'
@@ -29,14 +30,14 @@ export class DoctorScheduleService
         this.schedulePatternProlong = "http://localhost:8080/schedule-pattern/apply-pattern";
     }
 
-    getDoctorScheduleTableObservables(startDate: Date, endDate: Date, doctorIds: number[]): Observable<IDoctorScheduleTableData[]>
+    getDoctorScheduleTableObservables(startDate: Date, endDate: Date, doctorIds: number[]): Observable<IDoctorSchedule[]>
     {
         let httpParams = new HttpParams();
         httpParams = httpParams.append("dateBeginRepresent", startDate.toISOString());
         httpParams = httpParams.append("dateEndRepresent", endDate.toISOString());
         httpParams = httpParams.append("doctorIds", doctorIds.toString());
 
-        return this.http.get<IDoctorScheduleTableData[]>(this.tableUrl, {params: httpParams});
+        return this.http.get<IDoctorSchedule[]>(this.tableUrl, {params: httpParams});
     }
 
     getDoctorScheduleAppointmentDataObservables(id: number, startDate: Date, endDate: Date, isShowingAllIntervals: boolean): Observable<IDoctorScheduleAppointmentsData[]>

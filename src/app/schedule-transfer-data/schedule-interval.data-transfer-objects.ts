@@ -1,3 +1,5 @@
+//These are shared classes that are used in multiple components of an application
+
 export class TimeRounded
 {
     //0-60 minutes per interval
@@ -222,32 +224,18 @@ export class Interval
         this.start = start;
         this.end = end;
     }
+
+    toString(): string
+    {
+        return this.start.toStringHHMM() + " - " + this.end.toStringHHMM();
+    }
 }
 
-export class ScheduleDayPattern
+export class RoundedTimeIntervalConverter
 {
-    dayNumber: number;
-    timesRounded: TimeRounded[];
-
-    constructor(dayId: number, intervals: Interval[])
+    public static toRounded(intervals: Interval[]): TimeRounded[]
     {
-        this.dayNumber = dayId;
-        this.timesRounded = [];
-        this.addIntervals(intervals);
-    }
-
-    public getDayId(): number
-    {
-        return this.dayNumber;
-    }
-
-    public getTimesRounded(): TimeRounded[]
-    {
-        return this.timesRounded;
-    }
-
-    public addIntervals(intervals: Interval[]): void
-    {
+        let timesRounded: TimeRounded[] = [];
         for (let interval of intervals)
         {
             let curTime = interval.start;
@@ -258,30 +246,30 @@ export class ScheduleDayPattern
                 {
                     let timeRounded = new TimeRounded();
                     timeRounded.setTime(curTime.getHour(), curTime.getMinute());
-                    this.timesRounded.push(timeRounded);
+                    timesRounded.push(timeRounded);
                     curTime = curTime.getNextRounded();
                 }
 
                 let timeRounded = new TimeRounded();
                 timeRounded.setTime(curTime.getHour(), curTime.getMinute());
-                this.timesRounded.push(timeRounded);
+                timesRounded.push(timeRounded);
             }
 
             while (curTime.isBefore(interval.end))
             {
                 let timeRounded = new TimeRounded();
                 timeRounded.setTime(curTime.getHour(), curTime.getMinute());
-                this.timesRounded.push(timeRounded);
+                timesRounded.push(timeRounded);
                 curTime = curTime.getNextRounded();
             }
         }
 
-        this.timesRounded.sort((first, second) => 
+        timesRounded.sort((first, second) => 
         {
             return first.compareTo(second);
         });
 
-        this.timesRounded = this.timesRounded.filter(function (e, i, a) 
+        timesRounded = timesRounded.filter(function (e, i, a) 
         {
             if (i === 0) 
             {
@@ -293,14 +281,16 @@ export class ScheduleDayPattern
 
             return !e.equals(a[i - 1]);
         });
+
+        return timesRounded;
     }
 
-    public getIntervals(): Interval[]
+    public static toIntervals(timesRounded: TimeRounded[]): Interval[]
     {
         let retVal: Interval[] = [];
         let currentInterval: Interval = new Interval(new TimeRounded(), new TimeRounded());
         let prevTimeRounded: TimeRounded = null;
-        for (let timeRounded of this.timesRounded)
+        for (let timeRounded of timesRounded)
         {
             if (prevTimeRounded == null)
             {
@@ -324,24 +314,5 @@ export class ScheduleDayPattern
         retVal.push(currentInterval);
 
         return retVal;
-    }
-}
-
-export class ScheduleTablePattern
-{
-    patternName: string;
-    daysLength: number;
-    scheduleDailyPatterns: ScheduleDayPattern[];
-
-    constructor(patternName: string, daysLength: number, scheduleDayPattern: ScheduleDayPattern[])
-    {
-        this.patternName = patternName;
-        this.daysLength = daysLength;
-        this.scheduleDailyPatterns = scheduleDayPattern;
-    }
-
-    getPatternName(): string
-    {
-        return this.patternName;
     }
 }

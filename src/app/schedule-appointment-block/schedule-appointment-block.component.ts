@@ -7,7 +7,7 @@ import { CommonUtilsService } from '../_services/common-utils.service';
 import { DoctorScheduleService } from '../_services/doctor-schedule.service';
 import { DoctorSharedShortInformationService } from '../_services/doctor-shared-short-information.service';
 import { FilterSettings } from '../schedule-filter/schedule-filter.filter-settings';
-import { IDoctorScheduleAppointmentsData, DoctorScheduleAppointmentsDataDaily, ScheduleInterval } from './schedule-appointment.i-raw-data';
+import { IDoctorScheduleAppointmentsData, DoctorScheduleAppointmentsDataDaily, ScheduleInterval } from '../schedule-transfer-data/schedule-appointment.data-transfer-objects';
 
 @Component({
   selector: 'app-schedule-appointment-block',
