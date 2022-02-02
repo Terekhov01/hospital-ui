@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./edit-hereditary.component.css']
 })
 export class EditHereditaryComponent implements OnInit {
-  title = "Medical Card";
+  title = "Медицинская карта";
   hereditary: string;
   medCard: MedCard;
   constructor(private medCardService: MedCardService,

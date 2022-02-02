@@ -1,5 +1,5 @@
-import {Patient} from "./patient";
-import {Appointment} from "./appointment";
+import {Patient} from './patient';
+import {Appointment} from './appointment';
 
 export class MedCard {
   id: number;
@@ -10,9 +10,9 @@ export class MedCard {
 
   constructor() {
     this.id = 0;
-    new Patient("", "", BigInt(0), "", "", "", "", "", "", "");
-    this.contraindications = "contraindications";
-    this.hereditary = "hereditary";
+    this.patient = new Patient('', '', BigInt(0), '', '', '', '', '', '', '');
+    this.contraindications = 'contraindications';
+    this.hereditary = 'hereditary';
     this.appointments = [];
   }
 

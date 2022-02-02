@@ -10,7 +10,7 @@ import {Appointment} from "./appointment";
 export class MedCardService {
   private medCardUrl: string;
   constructor(private http: HttpClient) {
-    this.medCardUrl = `http://localhost:8080/medCard`;
+    this.medCardUrl = `http://localhost:8080/api/medCard`;
   }
   public getAll(id: number): Observable<MedCard>{
     return this.http.get<MedCard>(`${this.medCardUrl}/${id}`);

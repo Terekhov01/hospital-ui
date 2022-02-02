@@ -4,12 +4,12 @@
   <div>Пациент: {{medCard.patient.user.lastName}}</div>
   <div>
     Противопоказания: {{medCard.contraindications}}
-    <button (click)="getContr()" mat-icon-button color="warn"><mat-icon>remove_red_eye</mat-icon></button>
+<!--    <button (click)="getContr()" mat-icon-button color="warn">Просмотреть</button>-->
     <button (click)="editContr()" mat-icon-button color="primary"><mat-icon>border_color</mat-icon></button>
   </div>
   <div>
-    Наследственное: {{medCard.hereditary}}
-    <button (click)="getHereditary()" mat-icon-button color="warn"><mat-icon>remove_red_eye</mat-icon></button>
+    Наследственные заболевания: {{medCard.hereditary}}
+<!--    <button (click)="getHereditary()" mat-icon-button color="warn">Просмотреть</button>-->
     <button (click)="editHereditary()" mat-icon-button color="primary"><mat-icon>border_color</mat-icon></button>
   </div>
   <mat-card>
@@ -22,7 +22,7 @@
       <div class="form-group">
         <input class="mt-2 p-0" type="text" [(ngModel)]="room" name="room"/>
       </div>
-      <button type="submit" mat-icon-button color="primary">Найти</button>
+      <button type="submit" mat-stroked-button color="primary">Найти</button>
     </form>
     <mat-card *ngFor="let appointment of pagedItems">
       <mat-card>
@@ -31,7 +31,7 @@
         <mat-card-content>Описание: {{appointment.description}}</mat-card-content>
         <mat-card-content>Заключение: {{appointment.docStatement}}</mat-card-content>
         <mat-card-actions>
-          <button (click)="appointmentOne(appointment.id)" mat-icon-button color="warn">Просмотреть прием</button>
+          <button (click)="appointmentOne(appointment.id)" mat-stroked-button color="primary">Просмотреть прием</button>
         </mat-card-actions>
       </mat-card>
       <br>

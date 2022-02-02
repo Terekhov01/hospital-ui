@@ -6,6 +6,20 @@
 <h4>О больнице</h4>
 <br>
 <div>
+  <mat-drawer-container>
+    <mat-drawer position="end">Start</mat-drawer>
+    <mat-drawer-content>
+      <section class="nav-item">
+        <a routerLink="create-appointment-registration" routerLinkActive="active" class="nav-link">Записаться на прием</a>
+      </section>
+      <section>
+        <a *ngIf="!isDoctor" routerLink="/medCard/{{user.id}}" routerLinkActive="active" class="nav-link">Медицинская карта</a>
+      </section>
+      <section>
+        <a routerLink="/ourdoctors" routerLinkActive="active" class="nav-link">Наши врачи</a>
+      </section>
+    </mat-drawer-content>
+  </mat-drawer-container>
   <p>В нашей замечательной больнице побывало пациентов: {{patientAmount}}</p>
   <p>Здесь работают {{doctorAmount}} специалистов: </p>
   <p>Самая популярная услуга: {{popularService}}</p>

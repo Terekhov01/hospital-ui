@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./edit-contr.component.css']
 })
 export class EditContrComponent implements OnInit {
-  title = "Medical Card";
+  title = "Медицинская карта";
   contr: string;
   medCard: MedCard;
   constructor(private medCardService: MedCardService,

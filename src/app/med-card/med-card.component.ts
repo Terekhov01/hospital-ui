@@ -1,11 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {MedCard} from "../med-card";
-import {MedCardService} from "../med-card.service";
-import {Router} from "@angular/router";
-import {Appointment} from "../appointment";
-import {PagerService} from "../pager.service";
-import {ServiceServiceService} from "../service-service.service";
-import {Service} from "../service";
+import {MedCard} from '../med-card';
+import {MedCardService} from '../med-card.service';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {Appointment} from '../appointment';
+import {PagerService} from '../pager.service';
+import {ServiceServiceService} from '../service-service.service';
+import {Service} from '../service';
+import {catchError} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {error} from 'protractor';
+import {OurdoctorsService} from '../OurDoctorsInClinic/ourdoctors.service';
+import {query} from '@angular/animations';
 // import {DoctorService} from "../user/user/doctor.service";
 // import {User} from "../user/user/doctor.models";
 
@@ -15,7 +21,8 @@ import {Service} from "../service";
   styleUrls: ['./med-card.component.css']
 })
 export class MedCardComponent implements OnInit {
-  title = "Медицинская карта";
+  courses$: Observable<any>;
+  title = 'Медицинская карта';
   medCard: MedCard;
   pager: any = {};
   pagedItems: Appointment[];
@@ -23,26 +30,37 @@ export class MedCardComponent implements OnInit {
   services: any[];
   selectedService: Service;
   room: string;
+  id: number;
   // doctors: User[];
   // selectedDoctor: User;
 
   constructor(private medCardService: MedCardService,
               private serviceService: ServiceServiceService,
               private router: Router,
-              private pagerService: PagerService) {
+              private pagerService: PagerService,
+              private actRoute: ActivatedRoute,
+              ) {
     this.medCard = new MedCard();
   }
 
   ngOnInit(): void {
-    this.medCardService.getAll(0).subscribe(data => {
+    this.id = this.actRoute.snapshot.params.id;
+    this.medCardService.getAll(this.id).subscribe(
+      data => {
       this.medCard = data;
       this.allItems = this.medCard.appointments;
-      this.onServiceChange();
-    });
+      this.setPage(1);
+    },
+      error => {
+        this.router.navigate(['accessDeniedPage']);
+      }
+    );
     this.serviceService.getServicesList().subscribe(data => {
       this.services = data;
     });
+    this.actRoute.params.subscribe((params: Params) => this.id = params.id);
   }
+
 
   setPage(page: number) {
     // get pager object from service
@@ -64,16 +82,16 @@ export class MedCardComponent implements OnInit {
   }
 
   getHereditary(){
-    this.router.navigate(['medCard/hereditary'])
+    this.router.navigate(['medCard/hereditary', this.id]);
   }
   editHereditary(){
-    this.router.navigate(['medCard/edit-hereditary'])
+    this.router.navigate(['medCard/edit-hereditary', this.id]);
   }
   getContr(){
-    this.router.navigate(['medCard/contraindications'])
+    this.router.navigate(['medCard/contraindications', this.id]);
   }
   editContr(){
-    this.router.navigate(['medCard/edit-contr'])
+    this.router.navigate(['medCard/edit-contr', this.id]);
   }
   appointmentOne(id: number){
     this.router.navigate(['appointment-details', id]);

@@ -18,6 +18,10 @@ export class PatientService {
     return this.httpClient.get<Patient>(`${this.baseURL}/lastname/${lastName}`);
   }
 
+  getAllPatients(): Observable<Patient[]>{
+    return this.httpClient.get<Patient[]>(`${this.baseURL}`);
+  }
+
   // uploadFile(file: File, id: number): Observable<Object>{
   //   return this.httpClient.post(`${this.fileURL}/${id}`, file);
   // }

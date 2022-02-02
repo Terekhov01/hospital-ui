@@ -1,0 +1,4 @@
+mat-drawer-container {
+  position: absolute;
+  left: calc(100% - 200px);
+}

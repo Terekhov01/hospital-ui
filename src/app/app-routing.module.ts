@@ -96,12 +96,12 @@ import {AddDoctorComponent} from "./AddNewDoctorInList/add-doctor.component";
 import {UpdateDoctorComponent} from "./UpdateDoctorInList/update-doctor.component";
 
 const routes: Routes =
-[
-    { path: "medCard", component: MedCardComponent },
-    { path: "medCard/hereditary", component: HereditaryComponent },
-    { path: "medCard/contraindications", component: ContrComponent },
-    { path: "medCard/edit-hereditary", component: EditHereditaryComponent },
-    { path: "medCard/edit-contr", component: EditContrComponent },
+  [
+    { path: "medCard/:id", component: MedCardComponent },
+    { path: "medCard/hereditary/:id", component: HereditaryComponent },
+    { path: "medCard/contraindications/:id", component: ContrComponent },
+    { path: "medCard/edit-hereditary/:id", component: EditHereditaryComponent },
+    { path: "medCard/edit-contr/:id", component: EditContrComponent },
     { path: "", component: MainComponent},
     //{ path: "", redirectTo: 'medCard', pathMatch: 'full'},
     { path: 'home', component: HomeComponent },
