@@ -9,29 +9,32 @@
 
         <hr>
 
-        <div class = "doctorNameDiv">
-            {{ dataSource.getDoctorsInfoSubject().value[doctorCounter].lastName }}
-            {{ dataSource.getDoctorsInfoSubject().value[doctorCounter].firstName }}
-            {{ dataSource.getDoctorsInfoSubject().value[doctorCounter].middleName }}
-        </div>
-        
-        <div *ngIf = "dataSource.getDoctorsInfoSubject().value[doctorCounter].specializationNames.length === 0; else hasSpecializations;" class = "specializationNamesDiv">
-            Специализации: Не указано
-        </div>
+        <div class = "preTableDiv mat-elevation-z4">
+            <div class = "doctorNameDiv">
+                Врач: 
+                {{ dataSource.getDoctorsInfoSubject().value[doctorCounter].lastName }}
+                {{ dataSource.getDoctorsInfoSubject().value[doctorCounter].firstName }}
+                {{ dataSource.getDoctorsInfoSubject().value[doctorCounter].middleName }}
+            </div>
+            
+            <div *ngIf = "dataSource.getDoctorsInfoSubject().value[doctorCounter].specializationNames.length === 0; else hasSpecializations;" class = "specializationNamesDiv">
+                Специализации: Не указано
+            </div>
 
-        <ng-template #hasSpecializations>
-            <div *ngIf = "dataSource.getDoctorsInfoSubject().value[doctorCounter].specializationNames.join(', ').length <= 40; else hasLongSpecializations" class = "specializationNamesDiv">
-                Специализации: {{ dataSource.getDoctorsInfoSubject().value[doctorCounter].specializationNames.join(', ') }}
-            </div>
-        </ng-template>
-        
-        <ng-template #hasLongSpecializations>
-            <div style = "text-decoration: underline;" matTooltipClass = "tool-tip" 
-                            [matTooltip] = "dataSource.getDoctorsInfoSubject().value[doctorCounter].specializationNames.join(', ')" 
-                            [aria-label] = "dataSource.getDoctorsInfoSubject().value[doctorCounter].specializationNames.join(', ')" class = "specializationNamesDiv">
-                Наведите, чтобы посмотреть специализации
-            </div>
-        </ng-template>
+            <ng-template #hasSpecializations>
+                <div *ngIf = "dataSource.getDoctorsInfoSubject().value[doctorCounter].specializationNames.join(', ').length <= 40; else hasLongSpecializations" class = "specializationNamesDiv">
+                    Специализации (-я): {{ dataSource.getDoctorsInfoSubject().value[doctorCounter].specializationNames.join(', ') }}
+                </div>
+            </ng-template>
+            
+            <ng-template #hasLongSpecializations>
+                <div style = "text-decoration: underline;" matTooltipClass = "tool-tip" 
+                                [matTooltip] = "dataSource.getDoctorsInfoSubject().value[doctorCounter].specializationNames.join(', ')" 
+                                [aria-label] = "dataSource.getDoctorsInfoSubject().value[doctorCounter].specializationNames.join(', ')" class = "specializationNamesDiv">
+                    Наведите, чтобы посмотреть специализации
+                </div>
+            </ng-template>
+        </div>
 
 
         <div class="scheduleTableDiv mat-elevation-z4">        
@@ -54,13 +57,13 @@
                                         else printEmpty">
                         </ng-template>
 
-                        <ng-template #printInterval>
+                        <ng-template #printInterval class = "cellContents">
                             <div>
                                 {{ row[columnCounter].toString() }}
                             </div>
                         </ng-template>
 
-                        <ng-template #printEmpty></ng-template>
+                        <ng-template #printEmpty class = "cellContents"></ng-template>
                     </td> 
 
                 </ng-container>

@@ -42,10 +42,17 @@
     margin: -14px 5px 5px;
 }
 
+.preTableDiv
+{
+    margin: 5px 20px 10px;
+    /*width: fit-content;
+    border: lightgray 1px solid;*/
+}
+
 .doctorNameDiv,
 .specializationNamesDiv
 {
-    margin: 5px 20px;
+    margin: 5px;
 }
 
 .scheduleTableDiv
@@ -176,7 +183,7 @@ td.mat-column-name
     border: solid 1px lightgray;
 }
 
-.dynamicAmountColumnContents > *
+.cellContents
 {
     min-width: 110px;
     width: 110px;

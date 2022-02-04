@@ -1,7 +1,7 @@
 .scheduleTableDiv
 {
     display: block;
-    margin: 20px;
+    margin: 10px 0px;
 }
 
 .schedulePatternInputBlock
@@ -28,6 +28,28 @@
     grid-row: 1;
     max-height: 80vw;
     overflow: auto;
+}
+
+.dynamicAmountColumnHeader
+{
+    text-align: center;
+    border: lightgray 1px solid;
+}
+
+.cellClass
+{
+    width: 120px;
+}
+
+.dynamicAmountColumnContents
+{
+    text-align: center;
+    border: lightgray 1px solid;
+}
+
+.timePicker
+{
+    width: 45px;
 }
 
 .columnButtonBlock

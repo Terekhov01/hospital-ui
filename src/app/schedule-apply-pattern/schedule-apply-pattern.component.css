@@ -1,35 +1,71 @@
+.blockContents
+{
+    margin: 10px 0px;
+}
+
 .patternUsageBlock
 {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 0px 20px 20px;
+    margin: 0px 5px;
+    padding: 5px 15px;
 }
 
 .dropdownInputField
 {
-    margin: 20px 15px 5px;
+    margin: 15px 0px -10px;
 }
 
-.dateRangePickerField
+.flexSpaceBetween
 {
-    margin: 20px 15px 5px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.changeButtonClass
+#deleteButton,
+#changeButton
 {
-    margin: 6px 15px 5px;
     height: fit-content;
-    width: auto;
+    width: fit-content;
+    margin: 25px 30px 0px;
+}
+
+.scheduleApplyRepeatCnt
+{
+    margin: 10px 5px;
+}
+
+.tableDiv
+{
+    display: block;
+    max-width: 100%;
+}
+
+.scheduleTable
+{
+    margin: 5px 0px 5px;
+    max-height: 80vw;
+    max-width: 100%;
+    overflow: auto;
+}
+
+.dynamicAmountColumnHeader
+{
+    text-align: center;
+    border: lightgray 1px solid;
 }
 
 .timeInterval
 {
     width: 120px;
+    margin-top: 13px;
+}
+
+.dynamicAmountColumnContents
+{
+    text-align: center;
+    border: lightgray 1px solid;
 }
 
 .timeField
 {
-    display: inline-block;
-    width: 50px;
+    width: 45px;
 }
