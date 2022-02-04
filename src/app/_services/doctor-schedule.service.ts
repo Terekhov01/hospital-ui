@@ -19,6 +19,7 @@ export class DoctorScheduleService
     private schedulePatternListUrl: string;
     private schedulePatternViewUrl: string;
     private schedulePatternProlong: string;
+    private schedulePatternDelete: string;
 
     constructor(private http: HttpClient, private tokenStorage: TokenStorageService) 
     { 
@@ -28,6 +29,7 @@ export class DoctorScheduleService
         this.schedulePatternViewUrl = "http://localhost:8080/schedule-pattern/view-pattern";
         this.scheduleAddPatternUrl = "http://localhost:8080/schedule-pattern/add-pattern";
         this.schedulePatternProlong = "http://localhost:8080/schedule-pattern/apply-pattern";
+        this.schedulePatternDelete = "http://localhost:8080/schedule-pattern/delete";
     }
 
     getDoctorScheduleTableObservables(startDate: Date, endDate: Date, doctorIds: number[]): Observable<IDoctorSchedule[]>
@@ -87,13 +89,22 @@ export class DoctorScheduleService
         return this.http.get<ScheduleTablePattern>(this.schedulePatternViewUrl, { params: httpParams });
     }
 
-    patchScheduleByPattern(patternName: string, dateToApply: Date): Observable<string>
+    patchScheduleByPattern(patternName: string, dateToApply: Date, repeatCnt: number): Observable<string>
     {
         let requestBody =
         {
             patternName: patternName,
-            dateToApplyStr: dateToApply.toISOString()
+            dateToApplyStr: dateToApply.toISOString(),
+            repeatCnt: repeatCnt
         };
         return this.http.patch<string>(this.schedulePatternProlong, requestBody);
+    }
+
+    deletePattern(patternName: string): Observable<string>
+    {
+        let httpParams = new HttpParams();
+        httpParams = httpParams.append("patternName", patternName);
+
+        return this.http.delete<string>(this.schedulePatternDelete, { params: httpParams });
     }
 }

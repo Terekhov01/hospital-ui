@@ -23,22 +23,20 @@
                         
                         <ng-container *ngFor="let columnId of tableData.getDisplayedColumns().value; let i = index;" matColumnDef = {{columnId}}>
                             <th mat-header-cell *matHeaderCellDef class = "dynamicAmountColumnHeader"> 
-                                <div>День {{columnId}}</div>
+                                <div style = "margin-top: 5px;">День {{columnId}}</div>
                             </th>
                 
                             <div>
                                 <td mat-cell *matCellDef = "let element; let j = index;" [formGroupName] = "j" class = "dynamicAmountColumnContents">
                                     <div formArrayName = "cells">
-                                        <div [formGroupName] = "i">
-                                            <div class="startTime">
-                                                <input placeholder="" aria-label = "" [format] = "24" [ngxTimepicker] = "startTime" formControlName = "startTime" readonly>
-                                                <ngx-material-timepicker #startTime [enableKeyboardInput]="true" [minutesGap] = "30" [theme] = "primaryTheme"></ngx-material-timepicker>
-                                            </div>
-                    
-                                            <div class="endTime">
-                                                <input placeholder="" aria-label = "" [format] = "24" [ngxTimepicker] = "endTime" formControlName = "endTime" readonly>
-                                                <ngx-material-timepicker #endTime [enableKeyboardInput]="true" [minutesGap] = "30" [theme] = "primaryTheme"></ngx-material-timepicker>
-                                            </div>
+                                        <div [formGroupName] = "i" class = "cellClass">
+                                            <input aria-label = "Time picker. Update your browser to get this functionality" [format] = "24" [ngxTimepicker] = "startTime" formControlName = "startTime" class = "timePicker" readonly>
+                                            <ngx-material-timepicker #startTime [enableKeyboardInput]="true" [minutesGap] = "30" [theme] = "primaryTheme"></ngx-material-timepicker>
+                                            
+                                            <p style = "display: inline-block; padding: 5px;"> - </p>
+
+                                            <input aria-label = "Time picker. Update your browser to get this functionality" [format] = "24" [ngxTimepicker] = "endTime" formControlName = "endTime" class = "timePicker" readonly>
+                                            <ngx-material-timepicker #endTime [enableKeyboardInput]="true" [minutesGap] = "30" [theme] = "primaryTheme"></ngx-material-timepicker>
                                         </div>
                                     </div>
                                 </td>

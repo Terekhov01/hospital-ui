@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { SchedulePatternDataSource } from '../schedule-create-pattern/schedule-create-pattern.data-source';
 import { ScheduleDayPattern, ScheduleTablePattern } from '../schedule-transfer-data/schedule-prolong-page.data-transfer-objects';
 import { DoctorScheduleService } from '../_services/doctor-schedule.service';
-import { ISchedulePatternShortInfo } from '../schedule-transfer-data/schedule-apply-pattern.data-transfer-obects';
+import { ISchedulePatternShortInfo, SchedulePatternShortInfo } from '../schedule-transfer-data/schedule-apply-pattern.data-transfer-obects';
 import { PatternDayRangeSelectionStrategy } from './schedule-apply-pattern.selection-stratedy';
 import { PatternAutocompleteFormControl } from './schedule-pattern-name-autocomplete.form-control';
 import { TimeRounded } from '../schedule-transfer-data/schedule-interval.data-transfer-objects';
@@ -28,7 +28,11 @@ export class ScheduleApplyPatternComponent implements OnInit
 
     public patternAutocompleteFormControl = new PatternAutocompleteFormControl();
 
-    public buttonFormControl = new FormControl();
+    public scheduleApplyRepeatFormControl = new FormControl("1", { validators: this.patternRepeatInputValidator() });
+    
+    public deleteButtonFormControl = new FormControl();
+    
+    public changeButtonFormControl = new FormControl();
 
     tableData: SchedulePatternDataSource = new SchedulePatternDataSource(this.formBuilder);
 
@@ -51,32 +55,39 @@ export class ScheduleApplyPatternComponent implements OnInit
 
     ngOnInit(): void
     {
-        let patternShortInformationsSubject = new BehaviorSubject<ISchedulePatternShortInfo[]>([]);
-
-        //Retrieve available patterns from server
-        this.patternSubscription = this.scheduleService.getPatternNames().subscribe({
-        next: (patternShortInfoList) => 
-        {
-            patternShortInformationsSubject.next(patternShortInfoList);
-        },
-        error: (error) => 
-        { 
-            alert(error.error);
-        },
-        complete: () => 
-        { 
-            console.log("Recieving information successful");
-            this.patternAutocompleteFormControl.setPatternList(patternShortInformationsSubject);
-        }
-        });
+        this.updatePatternListFromServer();
 
         this.patternAutocompleteFormControl.getFormControl().valueChanges.subscribe(
             {
                 next: (value: string) =>
                 {
-                    if (value == "")
+                    this.tableData = new SchedulePatternDataSource(this.formBuilder);
+                    this.patternRangePicker.get("rangeStartDate")!.setValue("");
+                    this.patternRangePicker.get("rangeEndDate")!.setValue("");
+                    this.deleteButtonFormControl.disable();
+                    this.patternRangePicker.disable();
+
+                    if (this.patternAutocompleteFormControl.getAutocompleteInsertedSchedulePattern() == null)
                     {
+                        //Not a valid pattern name
                         return;
+                    }
+
+                    if (this.patternAutocompleteFormControl.getFormControl().valid)
+                    {        
+                        this.deleteButtonFormControl.enable();
+                        
+                        if (this.patternAutocompleteFormControl.getAutocompleteInsertedSchedulePattern()!.daysLength < 1)
+                        {
+                            alert("Шаблон некорректен - его длина менее 1 дня");
+                            return;
+                        }
+        
+                        if (this.scheduleApplyRepeatFormControl.valid)
+                        {
+                            PatternDayRangeSelectionStrategy.setPatternLength(this.patternAutocompleteFormControl.getAutocompleteInsertedSchedulePattern()!.daysLength * this.scheduleApplyRepeatFormControl.value - 1);
+                            this.patternRangePicker.enable();
+                        }
                     }
 
                     let patternObservable = this.scheduleService.getSchedulePattern(value);
@@ -106,6 +117,7 @@ export class ScheduleApplyPatternComponent implements OnInit
                         },
                         error: (error) =>
                         {
+                            this.tableData = new SchedulePatternDataSource(this.formBuilder);
                             alert(error.error);
                         },
                         complete: () =>
@@ -114,66 +126,87 @@ export class ScheduleApplyPatternComponent implements OnInit
                 },
                 error: (error) =>
                 {
-                    alert("Internal error. Schedule pattern name is changed, but event cannot be processed");
+                    alert("Внутренняя ошибка. Имя шаблона расписания изменено, но событие не может быть обработано. " + error.error);
                 },
                 complete: () =>
-                {
-
-                },
+                {},
             }
         );
         
-        //Set date range picker parameters depending on chosen pattern and repeat count
-        this.patternAutocompleteFormControl.getFormControl().valueChanges.subscribe((value) =>
-        {
-            if (this.patternAutocompleteFormControl.getFormControl().valid)
+        this.scheduleApplyRepeatFormControl.valueChanges.subscribe(
             {
-                if (this.patternAutocompleteFormControl.getAutocompleteInsertedSchedulePattern() == null)
+                next: (value) =>
                 {
-                    this.patternRangePicker.disable();
-                    throw "Internal logic error!\n Name pattern validator returned true but no information is present about it!";
+                    if (this.scheduleApplyRepeatFormControl.valid)
+                    {
+                        if (this.patternAutocompleteFormControl.getFormControl().valid)
+                        {
+                            PatternDayRangeSelectionStrategy.setPatternLength(this.patternAutocompleteFormControl.getAutocompleteInsertedSchedulePattern()!.daysLength * this.scheduleApplyRepeatFormControl.value - 1);
+                        }
+                    }
+                    else
+                    {
+                        if (this.scheduleApplyRepeatFormControl.value !== null)
+                        {
+                            alert(this.scheduleApplyRepeatFormControl.errors);
+                        }
+                    }
                 }
-
-                if (this.patternAutocompleteFormControl.getAutocompleteInsertedSchedulePattern()!.daysLength < 1)
-                {
-                    alert("Pattern is invalid - it's length is less than 1");
-                    return;
-                }
-
-                PatternDayRangeSelectionStrategy.setPatternLength(this.patternAutocompleteFormControl.getAutocompleteInsertedSchedulePattern()!.daysLength - 1);
-
-                this.patternRangePicker.enable();
             }
-            else
-            {
-                this.patternRangePicker.get("rangeStartDate")!.setValue("");
-                this.patternRangePicker.get("rangeEndDate")!.setValue("");
-                this.patternRangePicker.disable();
-            }
-        });
+        );
 
         //Set submit button disabled or enabled depending on previous fields status
         this.patternRangePicker.valueChanges.subscribe((value) =>
         {
             if (this.patternRangePicker.enabled && this.patternRangePicker.valid)
             {
-                this.buttonFormControl.enable();
+                this.changeButtonFormControl.enable();
             }
             else
             {
-                this.buttonFormControl.disable();
+                this.changeButtonFormControl.disable();
             }
         });
     }
 
+    updatePatternListFromServer(): void
+    {
+        let patternShortInfosList: ISchedulePatternShortInfo[] = [];
+        //Retrieve available patterns from server
+        this.patternSubscription = this.scheduleService.getPatternNames().subscribe({
+            next: (patternShortInfoList) => 
+            {
+                for (let shortInfo of patternShortInfoList)
+                {
+                    patternShortInfosList.push(new SchedulePatternShortInfo(shortInfo));
+                }
+            },
+            error: (error) => 
+            { 
+                alert(error.error);
+            },
+            complete: () => 
+            { 
+                this.patternAutocompleteFormControl.setPatternList(patternShortInfosList);
+                this.patternSubscription.unsubscribe();
+            }
+            });
+    }
+
     onProlongButtonClicked(): void
     {
+        if (this.scheduleApplyRepeatFormControl.invalid)
+        {
+            return;
+        }
+
+        let repeatCnt = parseInt(this.scheduleApplyRepeatFormControl.value);
         let patternName = this.patternAutocompleteFormControl.getFormControl().value;
         let dateToApply: Date = this.patternRangePicker.get("rangeStartDate")!.value;
 
-        let response = this.scheduleService.patchScheduleByPattern(patternName, dateToApply);
+        let response = this.scheduleService.patchScheduleByPattern(patternName, dateToApply, repeatCnt);
 
-        response.subscribe(
+        let subscription = response.subscribe(
         {
             next: (value) =>
             {
@@ -182,8 +215,50 @@ export class ScheduleApplyPatternComponent implements OnInit
             error: (error) =>
             {
                 alert(error.error);
+            },
+            complete: () =>
+            {
+                subscription.unsubscribe();
             }
         });
+    }
+
+    onDeleteButtonClicked()
+    {
+        let patternName = this.patternAutocompleteFormControl.getFormControl().value;
+
+        let response = this.scheduleService.deletePattern(patternName);
+        let subscription = response.subscribe(
+            {
+                next: (value) =>
+                {
+                    alert("Уделено успешно");
+                },
+                error: (error) =>
+                {
+                    alert(error.error);
+                },
+                complete: () =>
+                {
+                    subscription.unsubscribe();
+                }
+            }
+        );
+    }
+
+    patternRepeatInputValidator(): ValidatorFn
+    {
+        return (validationField: AbstractControl) =>
+        {
+            let repeatCnt = Number(validationField.value);
+
+            if (isNaN(repeatCnt) || repeatCnt < 1 || repeatCnt > 30 || !Number.isInteger(repeatCnt))
+            {
+                return { integerValidator: { message: "Введенное значение повторений шаблона некорректно. Это должно быть число от 1 до 30" } };
+            }
+
+            return null;
+        }
     }
 
     dateRangePickerValidator(): ValidatorFn

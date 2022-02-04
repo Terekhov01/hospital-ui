@@ -1,16 +1,16 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { ISchedulePatternShortInfo } from '../schedule-transfer-data/schedule-apply-pattern.data-transfer-obects';
+import { SchedulePatternShortInfo } from '../schedule-transfer-data/schedule-apply-pattern.data-transfer-obects';
 
 @Injectable()
 export class PatternAutocompleteFormControl implements OnInit
 {
-    private patternShortInfoSourceList = new BehaviorSubject<ISchedulePatternShortInfo[]>([]);
-    public patternShortInfoFiltered = new BehaviorSubject<ISchedulePatternShortInfo[]>([]);
+    private patternShortInfoSourceList: SchedulePatternShortInfo[] = [];
+    public patternShortInfoFiltered: SchedulePatternShortInfo[] = [];
     private patternAutocompleteFormControl: FormControl = new FormControl("", [this.patternValidator()]);
     private formValueSubscription: Subscription | undefined;
-    private autocompleteInsertedSchedulePattern: ISchedulePatternShortInfo | null = null;
+    private autocompleteInsertedSchedulePattern: SchedulePatternShortInfo | null = null;
 
     DoctorShortInformationFormControls()
     {}
@@ -20,34 +20,29 @@ export class PatternAutocompleteFormControl implements OnInit
         this.formValueSubscription = undefined;
     }
 
-    private filterSourcePatterns(value: string): ISchedulePatternShortInfo[]
+    private filterSourcePatterns(value: string): SchedulePatternShortInfo[]
     {
         const filterValue = value.toLowerCase();
     
-        return this.patternShortInfoSourceList.value.filter(option => option.name.toLowerCase().includes(filterValue));
+        return this.patternShortInfoSourceList.filter(option => option.name.toLowerCase().includes(filterValue));
     }
 
-    setPatternList(doctorShortInformationList: BehaviorSubject<ISchedulePatternShortInfo[]>): void
+    setPatternList(doctorShortInformationList: SchedulePatternShortInfo[]): void
     {
         this.patternShortInfoSourceList = doctorShortInformationList;
 
+        if (this.formValueSubscription !== undefined)
+        {
+            this.formValueSubscription.unsubscribe();
+        }
+
         this.formValueSubscription = this.patternAutocompleteFormControl.valueChanges.subscribe((value) => 
         {
-            this.patternShortInfoFiltered.next(this.filterSourcePatterns(value));
+            this.patternShortInfoFiltered = this.filterSourcePatterns(value);
         });
 
         //Following line emits valueChange event. It make autocomplete menu pop up on click (when symbols are yet to be inserted)
         this.patternAutocompleteFormControl.updateValueAndValidity({ onlySelf: false, emitEvent: true });
-
-        // CODE FOR DEBUGGING
-        /*
-        this.doctorShortInformationFormControl.valueChanges.subscribe((value) => console.log(value));
-        this.doctorShortInformationFormControl.statusChanges.subscribe((status) => 
-            {
-                console.log(this.doctorShortInformationFormControl.errors);
-                console.log(status);
-            });
-        */
     }
 
     getFormControl(): FormControl
@@ -55,7 +50,7 @@ export class PatternAutocompleteFormControl implements OnInit
         return this.patternAutocompleteFormControl;
     }
 
-    getAutocompleteInsertedSchedulePattern(): ISchedulePatternShortInfo | null
+    getAutocompleteInsertedSchedulePattern(): SchedulePatternShortInfo | null
     {
         return this.autocompleteInsertedSchedulePattern;
     }
@@ -64,7 +59,7 @@ export class PatternAutocompleteFormControl implements OnInit
     {
         return (formControl: AbstractControl) =>
         {
-            for (let patternShortInfo of this.patternShortInfoSourceList.value)
+            for (let patternShortInfo of this.patternShortInfoSourceList)
             {
                 if (formControl.value === patternShortInfo.name)
                 {
