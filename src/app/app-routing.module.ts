@@ -35,6 +35,7 @@ import { ContrComponent } from "./contr/contr.component";
 import { EditHereditaryComponent } from "./edit-hereditary/edit-hereditary.component";
 import { EditContrComponent } from "./edit-contr/edit-contr.component";
 import { MainComponent } from "./main/main.component";
+import { FileViewerComponent } from "./file-viewer/file-viewer.component";
 
 //import { MaterialMultiSelectorComponent } from './material-multi-selector/material-multi-selector.component';
 
@@ -134,6 +135,7 @@ const routes: Routes =
     {path: "appointment-details/:id", component: AppointmentDetailsComponent},
     {path: "appointment-registration-details/:id", component: AppointmentRegistrationDetailsComponent},
     {path: "appointment-creation/:id", component: AppointmentCreationComponent},
+    {path: "file-viewer/:id", component: FileViewerComponent}
     /*{ path: "testPath", component: MaterialMultiSelectorComponent}*/
 ];
 

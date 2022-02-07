@@ -20,9 +20,9 @@
 <!--    <td> {{appointmentRegistration.patient.lastName}} </td>-->
     <td> {{datePipe.transform(appointmentRegistration.start, "yyyy/MM/dd HH:mm")}} </td>
     <td>
-      <button (click)="updateAppointmentRegistration(appointmentRegistration.id)" class="btn btn-info"> Изменить запись </button>
-      <button (click)="deleteAppointmentRegistration(appointmentRegistration.id)" class="btn btn-danger" style="margin-left: 10px"> Отменить запись </button>
-      <button (click)="appointmentRegistrationDetails(appointmentRegistration.id)" class="btn btn-info" style="margin-left: 10px"> Детали </button>
+      <button (click)="updateAppointmentRegistration(appointmentRegistration.id)" mat-raised-button color="primary"> Изменить запись </button>
+      <button (click)="deleteAppointmentRegistration(appointmentRegistration.id)" mat-raised-button color="warn" style="margin-left: 10px"> Отменить запись </button>
+      <button (click)="appointmentRegistrationDetails(appointmentRegistration.id)" mat-raised-button color="primary" style="margin-left: 10px"> Детали </button>
     </td>
   </tr>
   </tbody>

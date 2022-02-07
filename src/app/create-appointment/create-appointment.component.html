@@ -93,7 +93,7 @@
     <td> {{appointmentRegistration.patient.user.lastName}} </td>
     <td> {{datePipe.transform(appointmentRegistration.start, "yyyy/MM/dd HH:mm")}} </td>
     <td>
-      <button (click)="SelectAppointmentRegistration(appointmentRegistration.id)" class="btn btn-info"> Начать прием </button>
+      <button (click)="SelectAppointmentRegistration(appointmentRegistration.id)" mat-raised-button color="primary"> Начать прием </button>
     </td>
   </tr>
   </tbody>

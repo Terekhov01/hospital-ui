@@ -57,6 +57,9 @@ import { UpdateAppointmentRegistrationComponent } from './update-appointment-reg
 import { AppointmentDetailsComponent } from './appointment-details/appointment-details.component';
 import { AppointmentRegistrationDetailsComponent } from './appointment-registration-details/appointment-registration-details.component';
 
+// import { PdfViewerComponent } from 'ng2-pdf-viewer';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer'
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -103,9 +106,14 @@ import { ContrComponent } from './contr/contr.component';
 import { EditHereditaryComponent } from './edit-hereditary/edit-hereditary.component';
 import { EditContrComponent } from './edit-contr/edit-contr.component';
 import { MainComponent } from './main/main.component';
+import { SafePipe } from './safe.pipe';
+import { FileViewerComponent } from './file-viewer/file-viewer.component';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
 
 @NgModule({
   declarations: [
+    // PdfViewerComponent,
+    SafePipe,
     AppComponent,
     LoginComponent,
     RegisterComponent,
@@ -148,9 +156,14 @@ import { MainComponent } from './main/main.component';
     EditHereditaryComponent,
     EditContrComponent,
     MainComponent,
+    SafePipe,
+    FileViewerComponent,
     //MaterialMultiSelectorComponent
   ],
   imports: [
+    NgxDocViewerModule,
+    NgxExtendedPdfViewerModule,
+    PdfViewerModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

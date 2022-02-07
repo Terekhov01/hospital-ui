@@ -12,6 +12,7 @@ export class Appointment {
   treatPlan: string;
   rehabPlan: string;
   docStatement: string;
+  // files: File[];
   // file: File;
   constructor() {
     // this.doctor = new Doctor("");

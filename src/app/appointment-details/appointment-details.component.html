@@ -1,4 +1,4 @@
-<h3> Детали приема </h3>
+<h2> Детали приема </h2>
 <div>
   <div>
     <label> <b> Фамилия доктора: </b>  </label> {{appointment.appointmentRegistration.doctor.user.lastName}}
@@ -39,4 +39,38 @@
   <div>
     <label> <b> План лечения: </b>  </label> {{appointment.treatPlan}}
   </div>
+
+<!--  <div>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th> Файл </th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--      <tr *ngFor = "let file of files">-->
+<!--        <td> {{file.toString()}} </td>-->
+<!--      </tr>-->
+<!--    </tbody>-->
+<!--  </div>-->
+
+  <div>
+    <br>
+  </div>
+
+  <div>
+
+    <button (click)="goToFileViewer(this.id)" mat-raised-button color="primary"> Просмотреть файлы </button>
+
+  </div>
+
+  <div>
+    <br>
+  </div>
+
+  <div>
+
+    <button (click)="printRecipe(this.id)" mat-raised-button color="primary"> Напечатать рецепт </button>
+
+  </div>
+
 </div>

@@ -1,0 +1,56 @@
+<div>
+  <br>
+</div>
+
+<ngx-extended-pdf-viewer
+  [src]="fileURL"
+  [useBrowserLocale]="true"
+  [textLayer]="true"
+  [showHandToolButton]="true"
+  [showPresentationModeButton]="true"
+  [showDownloadButton]="false"
+>
+</ngx-extended-pdf-viewer>
+
+<!--<ngx-doc-viewer id="docViewer" viewer="google"-->
+<!--                style="width:100%;height:93vh;">-->
+<!--</ngx-doc-viewer>-->
+
+<!--<iframe [attr.src]="safeURL" type="pdf"></iframe>-->
+
+<!--<iframe src="https://docs.google.com/gview?url=http://ieee802.org/secmail/docIZSEwEqHFr.doc&embedded=true" frameborder="0">-->
+<!--</iframe>-->
+
+<div>
+  <br>
+</div>
+
+<!--<iframe src="https://onedrive.live.com/embed?cid=CA582F2BC3AD1590&resid=CA582F2BC3AD1590%2133463&authkey=AFh1O3tkDLAQzzw&em=2" width="402" height="327" frameborder="0" scrolling="no"></iframe>-->
+
+<!--<iframe src="{{this.safeURL}}" width="402" height="327" frameborder="0" scrolling="no"></iframe>-->
+
+
+<!--<iframe id="frame" frameborder="0" allowfullscreen></iframe>-->
+
+<!--<object id="object" type="application/pdf">-->
+<!--  <iframe id="frame"></iframe>-->
+<!--</object>-->
+
+<!--<iframe class="doc" src="https://docs.google.com/gview?url=http://writing.engr.psu.edu/workbooks/formal_report_template.doc&embedded=true"></iframe>-->
+
+<div>
+  <br>
+</div>
+
+<button (click)="backToDetails(this.id)" mat-raised-button color="primary"> Назад </button>
+
+<div>
+  <br>
+</div>
+
+
+<button mat-raised-button color="primary" (click)="downloadFiles()"> Скачать файлы </button>
+
+<div>
+  <br>
+</div>
