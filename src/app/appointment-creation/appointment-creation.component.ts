@@ -66,17 +66,41 @@ export class AppointmentCreationComponent implements OnInit {
     //
     // this.onUploadFiles(this.files, this.appointmentRegistration.patient.id);
 
-    this.patientService.postFile(this.fileToUpload!, Number(this.appointment.appointmentRegistration.patient.user.id)).subscribe(data => {
-      console.log(data);
-    }, error => {
-      console.log(error);
-    });
+    // this.patientService.postFile(this.fileToUpload!, Number(this.appointment.appointmentRegistration.patient.user.id)).subscribe(data => {
+    //   console.log(data);
+    // }, error => {
+    //   console.log(error);
+    // });
 
-    this.appointmentService.createAppointment(this.appointment).subscribe(data => {
+    // this.appointment.files = [];
+    // this.appointment.files.push(this.fileToUpload!)
+
+    //get last appointment of current patient and take it's id
+
+    let app = this.appointmentService.createAppointment(this.appointment).subscribe(data => {
         console.log(data);
+        this.id = data.id;
+        console.log(this.id)
+        this.appointmentService.postFile(this.fileToUpload!, Number(this.id)).subscribe(data => {
+          console.log(data);
+        }, error => {
+          console.log(error);
+        });
         this.goToAppointmentList();
+        // this.goToAppointmentList();
       },
       error => console.log(error));
+
+    // console.log('this id id ' + this.id)
+
+    // this.appointmentService.postFile(this.fileToUpload!, Number(this.id)).subscribe(data => {
+    //   console.log(data);
+    // }, error => {
+    //   console.log(error);
+    // });
+
+    // this.goToAppointmentList();
+
   }
 
   // onUploadFiles(files: Blob[], id: number): void {

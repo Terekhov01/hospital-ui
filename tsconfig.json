@@ -32,10 +32,15 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+<<<<<<< HEAD
     "target": "es2017",
     "module": "es2020",
+=======
+    "target": "es2020",
+    "module": "es2017",
+>>>>>>> origin/s02180053-Appointment
     "lib": [
-      "es2017",
+      "es2020",
       "dom"
     ]
   },

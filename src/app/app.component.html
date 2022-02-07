@@ -5,17 +5,40 @@
       <li class="nav-item">
         <a href="/home" class="nav-link" routerLink="home">Домашняя страница</a>
       </li>
+
+<!--      <li class="nav-item">-->
+<!--        <a class="brand-logo" routerLink=""><img src="assets/logo.jpg" width="7%" height="77%"/></a>-->
+<!--      </li>-->
+
+<!--      <li class="nav-item">-->
+<!--        <a href="/home" class="nav-link" routerLink="home">Главная </a>-->
+<!--      </li>-->
       <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/admin" class="nav-link" routerLink="admin">Панель администратора</a>
-      </li>
-      <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/create-employee" class="nav-link" routerLink="create-employee">Добавить врача</a>
       </li>
       <li class="nav-item" *ngIf="showModeratorBoard">
         <a href="/mod" class="nav-link" routerLink="mod">Панель врача</a>
       </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a href="/create-employee" class="nav-link" routerLink="create-employee">Добавить врача</a>
+      </li>
+<!--      <li class="nav-item" *ngIf="showModeratorBoard">-->
+<!--        <a href="/mod" class="nav-link" routerLink="mod">Doctor Board</a>-->
+<!--      </li>-->
       <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Пользователь</a>
+        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Личный кабинет</a>
+      </li>
+      <li class="nav-item" *ngIf="showModeratorBoard">
+        <a href="/appointments" class="nav-link" routerLink="appointments">Архив приемов</a>
+      </li>
+      <li class="nav-item" *ngIf="showModeratorBoard">
+        <a href="/create-appointment" class="nav-link" routerLink="create-appointment">Новый прием</a>
+      </li>
+      <li class="nav-item">
+        <a href="/appointmentRegistrations" class="nav-link" *ngIf="!showModeratorBoard && !showAdminBoard" routerLink="appointmentRegistrations">Мои записи</a>
+      </li>
+      <li class="nav-item">
+        <a href="/schedule/specifyAppointment" class="nav-link" *ngIf="!showModeratorBoard && !showAdminBoard" routerLink="schedule/specifyAppointment">Записаться ко врачу</a>
       </li>
 
       <!-- Выпадающее меню расписания https://ng-bootstrap.github.io/#/components/dropdown/examples -->

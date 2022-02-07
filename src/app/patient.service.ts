@@ -11,6 +11,7 @@ export class PatientService {
 
   private baseURL = "http://localhost:8080/api/patients";
   private fileURL = "http://localhost:8080/api/files";
+  private downloadURL = "http://localhost:8080/api/files/download/"
 
   constructor(private httpClient: HttpClient) { }
 
@@ -38,6 +39,28 @@ export class PatientService {
     formData.append('files', fileToUpload, fileToUpload.name);
     return this.httpClient
       .post(`${this.fileURL}/${id}`, formData);
+  }
+
+  getFiles(id: number): Observable<File[]> {
+    return this.httpClient.get<File[]>(`${this.fileURL}/id/${id}`);
+  }
+
+  // getFile(id: number):  Observable<Blob> {
+  //   return this.httpClient.get(`${this.downloadURL}${id}`, {
+  //     responseType: 'blob'
+  //   })
+  // }
+
+  download(id: number): Observable<Blob> {
+    return this.httpClient.get(`${this.downloadURL}${id}`, {
+      responseType: 'blob'
+    })
+  }
+
+  printRecipe(id: number): Observable<Blob> {
+    return this.httpClient.get(`${this.fileURL}/getRecipe/${id}`, {
+      responseType: 'blob'
+    })
   }
 
 }

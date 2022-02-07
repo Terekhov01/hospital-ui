@@ -12,10 +12,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import {Ng2SearchPipeModule} from "ng2-search-filter";
-//import {DoctorComponent} from './DoctorInList/doctorList/doctor.component';
-//import {AddDoctorComponent} from './AddNewDoctorInList/add-doctor.component';
-//import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-//import {HttpClientModule} from "@angular/common/http";
 import {DoctorService} from "./DoctorInList/doctorList/doctor.service";
 
 
@@ -46,7 +42,6 @@ import { ScheduleCreatePatternComponent } from './schedule-create-pattern/schedu
 import { ScheduleApplyPatternComponent } from "./schedule-apply-pattern/schedule-apply-pattern.component";
 import { MaterialDateRangePickerComponent } from './material-date-range-picker/material-date-range-picker.component';
 import { ScheduleSpecifyAppointmentPageComponent } from './schedule-specify-appointment-page/schedule-specify-appointment-page.component';
-import { MaterialMultiSelectorComponent } from './doctor-selector/doctor-selector.component';
 import { MatSelectModule } from '@angular/material/select';
 import { OurdoctorsComponent } from './OurDoctorsInClinic/ourdoctors.component';
 import { OurdoctorsdetailsComponent } from './ourdoctorsdetails/ourdoctorsdetails.component';
@@ -61,6 +56,9 @@ import { UpdateAppointmentRegistrationComponent } from './update-appointment-reg
 import { AppointmentDetailsComponent } from './appointment-details/appointment-details.component';
 import { AppointmentRegistrationDetailsComponent } from './appointment-registration-details/appointment-registration-details.component';
 
+// import { PdfViewerComponent } from 'ng2-pdf-viewer';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer'
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -111,9 +109,15 @@ import { DoctorinfoComponent } from "./OurDoctorsMoreInfo/doctorinfo.component";
 import { DoctorComponent } from "./DoctorInList/doctorList/doctor.component";
 import { AddDoctorComponent } from "./AddNewDoctorInList/add-doctor.component";
 import { UpdateDoctorComponent } from "./UpdateDoctorInList/update-doctor.component";
+import { SafePipe } from './safe.pipe';
+import { FileViewerComponent } from './file-viewer/file-viewer.component';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
+import { MaterialMultiSelectorComponent } from './doctor-selector/doctor-selector.component';
 
 @NgModule({
   declarations: [
+    // PdfViewerComponent,
+    SafePipe,
     AppComponent,
     LoginComponent,
     RegisterComponent,
@@ -130,6 +134,7 @@ import { UpdateDoctorComponent } from "./UpdateDoctorInList/update-doctor.compon
     ScheduleFilterComponent,
     ScheduleAppointmentBlockComponent,
     MaterialDateRangePickerComponent,
+    MaterialMultiSelectorComponent,
     ScheduleSpecifyAppointmentPageComponent,
     ScheduleCreatePatternComponent,
     ScheduleApplyPatternComponent,
@@ -155,12 +160,16 @@ import { UpdateDoctorComponent } from "./UpdateDoctorInList/update-doctor.compon
     EditHereditaryComponent,
     EditContrComponent,
     MainComponent,
-    MaterialMultiSelectorComponent,
     ScheduleTransferDataComponent,
     DoctorinfoComponent,
-    UpdateDoctorComponent
+    UpdateDoctorComponent,
+    SafePipe,
+    FileViewerComponent
   ],
   imports: [
+    NgxDocViewerModule,
+    NgxExtendedPdfViewerModule,
+    PdfViewerModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
