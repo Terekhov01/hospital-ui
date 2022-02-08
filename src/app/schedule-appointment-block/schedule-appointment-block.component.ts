@@ -81,13 +81,13 @@ export class ScheduleAppointmentBlockComponent implements OnInit
 
                 if (doctorScheduleAppointmentsSubjects.value.length === 0)
                 {
-                    alert("No appointments available.");
+                    alert("Нет доступного для записи времени");
                 }
 
                 let doctorScheduleAppointments = doctorScheduleAppointmentsSubjects.value[0];
 
                 let intervalCounter = 0;
-                let curDate = this.requestedInformation.getStartDate();
+                let curDate = new Date(this.requestedInformation.getStartDate());
                 let intervalArray: ScheduleInterval[] = [];
                 let curInterval: ScheduleInterval;
 

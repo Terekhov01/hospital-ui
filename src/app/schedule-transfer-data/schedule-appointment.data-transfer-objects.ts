@@ -1,6 +1,6 @@
 export interface IScheduleInterval
 {
-    intervalStartTime: string;
+    startTime: string;
     isAssigned: string;
 }
 
@@ -11,7 +11,7 @@ export class ScheduleInterval
 
     constructor(iInterval: IScheduleInterval)
     {
-        this.intervalStartTime = new Date(iInterval.intervalStartTime);
+        this.intervalStartTime = new Date(iInterval.startTime);
         this.isAssigned = iInterval.isAssigned == "true";
     }
 

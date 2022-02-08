@@ -86,7 +86,7 @@ export class MaterialDateRangePickerComponent implements OnInit
             const diffDays = Math.ceil(diffMills / (1000 * 60 * 60 * 24)); 
             if (diffDays >= this.rangeMaxLengthInDays)
             {
-                return { rengeLengthValidator: { message: "Date range is too big! Please shrink it to interval of" + this.rangeMaxLengthInDays + " days or less" } };
+                return { rengeLengthValidator: { message: "Интервал слишком длинный. Введите интервал из " + this.rangeMaxLengthInDays + " дней или меньше" } };
             }
 
             return null;

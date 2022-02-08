@@ -21,7 +21,7 @@
     </form>
 
     <div class = "datePickerAndFilterButton">
-        <app-material-date-range-picker (pickedValue) = "calendarValueChanged($event)"></app-material-date-range-picker>
+        <app-material-date-range-picker (pickedDateRange) = "calendarDateRangeChanged($event)" [rangeMaxLengthInDays] = "31"></app-material-date-range-picker>
 
         <button mat-stroked-button color="primary" (click)="checkInputAndPresentAppointmentDates()" class = "filterButton">Filter</button>
     </div>

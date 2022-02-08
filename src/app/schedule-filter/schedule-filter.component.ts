@@ -90,7 +90,7 @@ export class ScheduleFilterComponent implements OnInit
         }
     }
 
-    calendarValueChanged(pickedDates: PickedDates)
+    calendarDateRangeChanged(pickedDates: PickedDates)
     {
         this.pickedDates = pickedDates;
     }
