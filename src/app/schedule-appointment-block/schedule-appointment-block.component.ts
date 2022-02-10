@@ -8,13 +8,15 @@ import { DoctorScheduleService } from '../_services/doctor-schedule.service';
 import { DoctorSharedShortInformationService } from '../_services/doctor-shared-short-information.service';
 import { FilterSettings } from '../schedule-filter/schedule-filter.filter-settings';
 import { IDoctorScheduleAppointmentsData, DoctorScheduleAppointmentsDataDaily, ScheduleInterval } from '../schedule-transfer-data/schedule-appointment.data-transfer-objects';
+import { AppointmentRegistrationInfoService } from "../appointment-registration-info.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-schedule-appointment-block',
   templateUrl: './schedule-appointment-block.component.html',
   styleUrls: ['./schedule-appointment-block.component.css']
 })
-export class ScheduleAppointmentBlockComponent implements OnInit 
+export class ScheduleAppointmentBlockComponent implements OnInit
 {
     //Initializing with NaN to prevent possible errors of accessing uninitialized instance
     public requestedInformation: FilterSettings = new FilterSettings(NaN, new Date(), new Date());
@@ -23,19 +25,20 @@ export class ScheduleAppointmentBlockComponent implements OnInit
 
     public doctorScheduleDailyAppointmentsArray: DoctorScheduleAppointmentsDataDaily[] = [];
 
-    constructor(private doctorScheduleService: DoctorScheduleService, private doctorShortInfoService: DoctorSharedShortInformationService, public utilsService: CommonUtilsService) 
+    constructor(private doctorScheduleService: DoctorScheduleService, private doctorShortInfoService: DoctorSharedShortInformationService, public utilsService: CommonUtilsService,
+                private appointmentRegistrationInfoService: AppointmentRegistrationInfoService, private router: Router)
     {}
 
     ngOnInit(): void
     {
         this.doctorShortInformationSubscription = this.doctorShortInfoService.sharedRequestedInformationAsObservable.subscribe(
         {
-            next: sharedInformation => 
+            next: sharedInformation =>
             {
                 this.requestedInformation = sharedInformation;
                 this.presentAppointmentDates();
             },
-            error: (error) => 
+            error: (error) =>
             {
                 alert("Internal error. \
                             Failed loading available appointments data to ScheduleAppointmentBlockComponent. \
@@ -52,13 +55,13 @@ export class ScheduleAppointmentBlockComponent implements OnInit
         }
 
         let appointmentDataObservables = this.doctorScheduleService.getDoctorScheduleAppointmentDataObservables(
-                                    this.requestedInformation.getId(), 
-                                    this.requestedInformation.getStartDate(), 
-                                    this.requestedInformation.getEndDate(), 
+                                    this.requestedInformation.getId(),
+                                    this.requestedInformation.getStartDate(),
+                                    this.requestedInformation.getEndDate(),
                                     true);
-        
+
         this.doctorAppointmentDataSubscription = appointmentDataObservables/*.pipe(
-            catchError((error) => 
+            catchError((error) =>
             {
                 console.error();
                 alert("Server inacessible or data malformed! Cannot load available appointment dates.");
@@ -66,7 +69,7 @@ export class ScheduleAppointmentBlockComponent implements OnInit
             })
         ).*/.subscribe(
         {
-            next: (doctorAppointmentsData) => 
+            next: (doctorAppointmentsData) =>
             {
                 let doctorScheduleAppointmentsSubjects = new BehaviorSubject<IDoctorScheduleAppointmentsData[]>([]);
                 doctorScheduleAppointmentsSubjects.next(doctorAppointmentsData);
@@ -105,7 +108,7 @@ export class ScheduleAppointmentBlockComponent implements OnInit
                         {
                             let doctorScheduleDailyAppointments = new DoctorScheduleAppointmentsDataDaily(doctorScheduleAppointments, new Date(curDate));
                             doctorScheduleDailyAppointments.setIntervalCollection(intervalArray);
-            
+
                             this.doctorScheduleDailyAppointmentsArray.push(doctorScheduleDailyAppointments);
                             intervalArray = [];
                         }
@@ -121,15 +124,22 @@ export class ScheduleAppointmentBlockComponent implements OnInit
                     this.doctorScheduleDailyAppointmentsArray.push(doctorScheduleDailyAppointments);
                 }
             },
-            error: (error) => 
-            { 
+            error: (error) =>
+            {
                 alert(error.error);
             },
             complete: () =>
-            { 
+            {
                 console.log("Recieving information successful");
             }
         });
+    }
+
+    selectDateTime(dateTime: Date) {
+      console.log("In select date time method");
+      console.log("Date time is: ")
+      this.appointmentRegistrationInfoService.changeDate(dateTime);
+      this.router.navigate(['/create-appointment-registration'])
     }
 
     /*debugger(value: any, value2: any): boolean

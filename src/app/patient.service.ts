@@ -3,6 +3,7 @@ import {HttpClient, HttpEvent} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Patient} from "./patient";
 import {AppointmentRegistration} from "./appointment-registration";
+import {Doctor} from "./doctor";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class PatientService {
   private baseURL = "http://localhost:8080/api/patients";
   private fileURL = "http://localhost:8080/api/files";
   private downloadURL = "http://localhost:8080/api/files/download/"
+  private doctorURL = "http://localhost:8080/api/doctors";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -19,8 +21,15 @@ export class PatientService {
     return this.httpClient.get<Patient>(`${this.baseURL}/lastname/${lastName}`);
   }
 
+  getPatientById(id: bigint): Observable<Patient> {
+    return this.httpClient.get<Patient>(`${this.baseURL}/id/${id}`)
+  }
+
   getAllPatients(): Observable<Patient[]>{
     return this.httpClient.get<Patient[]>(`${this.baseURL}`);
+  }
+  getDoctorById(id: bigint): Observable<Doctor> {
+    return this.httpClient.get<Doctor>(`${this.doctorURL}/id/${id}`)
   }
 
   // uploadFile(file: File, id: number): Observable<Object>{

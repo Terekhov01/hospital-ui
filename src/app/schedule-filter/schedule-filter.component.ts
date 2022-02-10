@@ -8,6 +8,7 @@ import { DoctorShortInformationFormControls } from './doctor-short-information-f
 import { DoctorShortInformation } from '../schedule-transfer-data/schedule-filter.data-transfer-objects';
 import { FilterSettings } from './schedule-filter.filter-settings';
 import { PickedDates } from '../material-date-range-picker/material-date-range-picker.component';
+import { AppointmentRegistrationInfoService } from "../appointment-registration-info.service";
 
 @Component({
     selector: 'app-schedule-filter',
@@ -21,7 +22,7 @@ export class ScheduleFilterComponent implements OnInit
     public doctorShortInformationFormControl: DoctorShortInformationFormControls = new DoctorShortInformationFormControls();
     private pickedDates = new PickedDates(undefined, undefined);
 
-    constructor(private doctorScheduleService: DoctorScheduleService, private doctorShortInfoService: DoctorSharedShortInformationService)
+    constructor(private doctorScheduleService: DoctorScheduleService, private doctorShortInfoService: DoctorSharedShortInformationService, private appointmentRegistrationInfoService: AppointmentRegistrationInfoService)
     {
     }
 
@@ -72,6 +73,11 @@ export class ScheduleFilterComponent implements OnInit
             //console.log(this.doctorShortInformationFormControl.doctorShortInformationFormControl.value);
             console.log("Filter is valid!");
             let pickedDoctorShortInfo = <DoctorShortInformation>this.doctorShortInformationFormControl.getFormControl().value;
+            console.log("Picked doctor is: " + pickedDoctorShortInfo.lastName + " " + pickedDoctorShortInfo.firstName)
+            // console.log("His ID is: " + pickedDoctorShortInfo.id)
+            this.appointmentRegistrationInfoService.changeDoctorName(pickedDoctorShortInfo.lastName);
+            this.appointmentRegistrationInfoService.changeDoctorId(BigInt(pickedDoctorShortInfo.id));
+            console.log("Picked Doctor id is: " + pickedDoctorShortInfo.id)
             this.doctorShortInfoService.setRequestedInfo(new FilterSettings(pickedDoctorShortInfo.id, startDate, endDate));
             /*for (let doctorShortInfo of this.doctorShortInformationFormControl.doctorShortInformationFiltered.value)
             {

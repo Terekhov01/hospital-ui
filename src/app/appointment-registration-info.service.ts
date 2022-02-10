@@ -7,6 +7,7 @@ import {
 import {BehaviorSubject} from "rxjs";
 import {BigInteger} from "@angular/compiler/src/i18n/big_integer";
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -41,8 +42,25 @@ export class AppointmentRegistrationInfoService {
     this.doctorName.next(name);
   }
 
+  changeDoctorId(id: bigint) {
+    console.log("CHANGING DOCTOR ID: " + id)
+    this.id.next(id);
+  }
 
+  changeDate(date: Date) {
+    console.log("CHANGING DATE: ")
+    this.date.next(date);
+  }
 
+  changeIntervalStartTime(intervalStartTime: Date) {
+    console.log("CHANGING intervalStartTime: " + intervalStartTime.toDateString())
+    this.intervalStartTime.next(intervalStartTime);
+  }
+
+  changeIsAssigned(isAssigned: boolean) {
+    console.log("CHANGING isAssigned: " + isAssigned)
+    this.isAssigned.next(isAssigned);
+  }
 
   // getId(): bigint {
   //   return this.id;

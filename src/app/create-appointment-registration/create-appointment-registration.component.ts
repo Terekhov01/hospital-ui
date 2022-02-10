@@ -16,6 +16,11 @@ import {ServiceFormControls} from "./sevice-form-controls";
 import {ServiceServiceService} from "../service-service.service";
 import {Service} from "../service";
 import {FilterSettings} from "../schedule-filter/schedule-filter.filter-settings";
+import {User} from "../user";
+import {TokenStorageService} from "../_services/token-storage.service";
+import {DatePipe} from "@angular/common";
+import {PatientService} from "../patient.service";
+
 
 @Component({
   selector: 'app-create-appointment-registration',
@@ -27,6 +32,7 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
 
   doctor: string;
   patient: string;
+  user: User;
   // services: string[] = ["Запись к терапевту", "Сдача крови"];
   appointmentRegistration: AppointmentRegistration = new AppointmentRegistration();
   public info: DoctorScheduleAppointmentsDataDaily;
@@ -36,16 +42,28 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
   docName: Subscription | undefined;
   private serviceSubscription: Subscription | undefined;
   doc: Observable<Doctor>;
+  doc_id: bigint;
   // docInfo: Doctor;
 
 
   constructor(private appointmentRegistrationService: AppointmentRegistrationService, private activatedRoute: ActivatedRoute, private serviceService: ServiceServiceService,
-              private router: Router, private doctorService: DoctorService, public appointmentRegistrationInfoService: AppointmentRegistrationInfoService) { }
+              private router: Router, private doctorService: DoctorService, public appointmentRegistrationInfoService: AppointmentRegistrationInfoService,
+              private tokenStorageService: TokenStorageService, public datePipe: DatePipe, private patientService: PatientService) { }
 
   ngOnInit(): void {
     this.appointmentRegistration = new AppointmentRegistration();
     this.appointmentRegistration.doctor = new Doctor("", "", "", "123", "", "", "", new Date(), "");
     this.appointmentRegistration.patient = new Patient("", "", BigInt(0), "", this.patient, "", "", "", "", "")
+    this.user = this.tokenStorageService.getUser();
+    let usr_id = window.sessionStorage.getItem("USER_ID")
+    console.log("Current user is: " + usr_id);
+    let user_id = BigInt(usr_id);
+    this.patientService.getPatientById(user_id).subscribe(data => {
+      this.appointmentRegistration.patient = data;
+      console.log("RECEIVED INFORMATION ABOUT PATIENT: " + data)
+    })
+
+    // console.log("Current usr: " + Auth.getCurentUser()._id)
     // this.appointmentRegistration.doctor = new Doctor("No name", "specialization", "Address", "Room");
     // this.state$ = this.activatedRoute.paramMap.pipe(map(() =>window.history.state))
     // this.state$.subscribe(data => {
@@ -64,21 +82,34 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
     //   console.log("RECIEVED DATA IS: " + data)
     //   console.log("DOCTOR IS: " + this.doctor)
     // })
-    this.appointmentRegistrationInfoService.doctorName.subscribe(name => this.doctor = name)
+    this.appointmentRegistrationInfoService.id.subscribe(id => {
+      this.doc_id = id;
+    });
+    console.log("DOC ID RECEIVED: " + this.doc_id);
+
+    this.patientService.getDoctorById(this.doc_id).subscribe(data => {
+      this.appointmentRegistration.doctor = data
+    })
+
+    console.log("RECEIVED DOCTOR: " + this.appointmentRegistration.doctor)
+
+    // this.appointmentRegistrationInfoService.doctorName.subscribe(name => this.doctor = name)
     // this.doc = this.doctorService.getDoctorByLastName(this.doctor);
     // this.doc.subscribe(data => this.docInfo);
-    this.doctorService.getDoctorByLastName(this.doctor).subscribe(data => {
-        // this.appointment.doctor = data;
-        this.appointmentRegistration.doctor = data;
-        console.log("In subscription data: " + data);
-      },
-      error => console.log(error));
+    // this.doctorService.getDoctorByLastName(this.doctor).subscribe(data => {
+    //     // this.appointment.doctor = data;
+    //     this.appointmentRegistration.doctor = data;
+    //     // console.log("In subscription data: " + data);
+    //   },
+    //   error => console.log(error));
 
-    console.log("DOCTOR IS: " + this.doctor)
+    // console.log("DOCTOR IS: " + this.doctor)
     // console.log("Doc Service: " + this.docInfo.lastName)
     // this.appointmentRegistration = new AppointmentRegistration();
     // this.appointmentRegistration.doctor = this.docInfo;
-    this.appointmentRegistrationInfoService.intervalStartTime.subscribe(data => this.appointmentRegistration.start = data)
+    this.appointmentRegistrationInfoService.date.subscribe(data => {
+      this.appointmentRegistration.start = data
+    });
 
 
 
@@ -121,8 +152,8 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
   }
 
   saveAppointmentRegistration() {
-    this.appointmentRegistration.doctor = new Doctor("", "", "", "123", "", "", "", new Date(), "");
-    this.appointmentRegistration.patient = new Patient("", "", BigInt(0), "", this.patient, "", "", "", "", "")
+    // this.appointmentRegistration.doctor = new Doctor("", "", "", "123", "", "", "", new Date(), "");
+    // this.appointmentRegistration.patient = new Patient("", "", BigInt(0), "", this.patient, "", "", "", "", "")
     this.appointmentRegistration.room = this.appointmentRegistration.doctor.room.num.toString();
     this.appointmentRegistration.address = this.appointmentRegistration.doctor.room.phone;
     console.log("Saving appointment registration")
