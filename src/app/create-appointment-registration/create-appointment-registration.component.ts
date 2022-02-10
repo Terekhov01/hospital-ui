@@ -15,35 +15,30 @@ import {DoctorService} from "../_services/doctor.service";
 import {ServiceFormControls} from "./sevice-form-controls";
 import {ServiceServiceService} from "../service-service.service";
 import {Service} from "../service";
-import {FilterSettings} from "../schedule-filter/schedule-filter.filter-settings";
 import {User} from "../user";
 import {TokenStorageService} from "../_services/token-storage.service";
 import {DatePipe} from "@angular/common";
 import {PatientService} from "../patient.service";
 
-
 @Component({
   selector: 'app-create-appointment-registration',
   templateUrl: './create-appointment-registration.component.html',
   styleUrls: ['./create-appointment-registration.component.css'],
-  // providers: [AppointmentRegistrationInfoService]
 })
 export class CreateAppointmentRegistrationComponent implements OnInit {
 
   doctor: string;
   patient: string;
   user: User;
-  // services: string[] = ["Запись к терапевту", "Сдача крови"];
   appointmentRegistration: AppointmentRegistration = new AppointmentRegistration();
   public info: DoctorScheduleAppointmentsDataDaily;
   public interval: ScheduleInterval;
   public serviceFormControl: ServiceFormControls = new ServiceFormControls();
-  // state$: Observable<DoctorScheduleAppointmentsDataDaily>;
   docName: Subscription | undefined;
   private serviceSubscription: Subscription | undefined;
   doc: Observable<Doctor>;
   doc_id: bigint;
-  // docInfo: Doctor;
+  public dateTime: string;
 
 
   constructor(private appointmentRegistrationService: AppointmentRegistrationService, private activatedRoute: ActivatedRoute, private serviceService: ServiceServiceService,
@@ -62,67 +57,22 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
       this.appointmentRegistration.patient = data;
       console.log("RECEIVED INFORMATION ABOUT PATIENT: " + data)
     })
-
-    // console.log("Current usr: " + Auth.getCurentUser()._id)
-    // this.appointmentRegistration.doctor = new Doctor("No name", "specialization", "Address", "Room");
-    // this.state$ = this.activatedRoute.paramMap.pipe(map(() =>window.history.state))
-    // this.state$.subscribe(data => {
-    //   console.log(typeof data);
-    // }, error => {
-    //   console.log(error)
-    // });
-    // this.info = this.appointmentRegistrationInfoService.info;
-    // this.interval = this.appointmentRegistrationInfoService.interval;
-    // console.log("Doctor name: " + this.info.getDoctorName());
-    // console.log("Date" + this.info.getDate().toISOString());
-    // console.log("info: " + window.history.state.info.getSpecializationName());
-    // console.log("Info: " + this.appointmentRegistrationInfoService.getDoctorName())
-    // this.docName = this.appointmentRegistrationInfoService.doctorName.subscribe(data => {
-    //   this.doctor = data;
-    //   console.log("RECIEVED DATA IS: " + data)
-    //   console.log("DOCTOR IS: " + this.doctor)
-    // })
     this.appointmentRegistrationInfoService.id.subscribe(id => {
       this.doc_id = id;
     });
     console.log("DOC ID RECEIVED: " + this.doc_id);
-
     this.patientService.getDoctorById(this.doc_id).subscribe(data => {
       this.appointmentRegistration.doctor = data
     })
-
-    console.log("RECEIVED DOCTOR: " + this.appointmentRegistration.doctor)
-
-    // this.appointmentRegistrationInfoService.doctorName.subscribe(name => this.doctor = name)
-    // this.doc = this.doctorService.getDoctorByLastName(this.doctor);
-    // this.doc.subscribe(data => this.docInfo);
-    // this.doctorService.getDoctorByLastName(this.doctor).subscribe(data => {
-    //     // this.appointment.doctor = data;
-    //     this.appointmentRegistration.doctor = data;
-    //     // console.log("In subscription data: " + data);
-    //   },
-    //   error => console.log(error));
-
-    // console.log("DOCTOR IS: " + this.doctor)
-    // console.log("Doc Service: " + this.docInfo.lastName)
-    // this.appointmentRegistration = new AppointmentRegistration();
-    // this.appointmentRegistration.doctor = this.docInfo;
+    console.log("RECEIVED DOCTOR: " + this.appointmentRegistration.doctor.user.lastName)
     this.appointmentRegistrationInfoService.date.subscribe(data => {
       this.appointmentRegistration.start = data
     });
-
-
-
+    console.log("Date received: " + this.appointmentRegistration.start.toISOString())
+    let str = this.appointmentRegistration.start.toISOString();
+    this.dateTime = str.substr(0, 10) + " " + str.substr(11,5);;
     let serviceSubject = new BehaviorSubject<Service[]>([]);
-    //Subscribe to doctor short information (includes name, specialization and id)
-    this.serviceSubscription = this.serviceService.getServicesList()/*.pipe(
-      catchError((error) =>
-      {
-        console.error();
-        alert("Server inacessible or data malformed! Cannot load list of doctors available.");
-        return of([]);
-      })
-    )*/.subscribe(
+    this.serviceSubscription = this.serviceService.getServicesList().subscribe(
       {
         next: (IServiceArray) =>
         {
@@ -137,23 +87,15 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
         error: (error) =>
         {
           alert(error.error);
-          //alert("Error translating data from server! Cannot load list of doctors available.");
-          //console.error();
         },
         complete: () =>
         {
-          /*console.log("Recieving information successful");
-          console.log("serviceSubject array size: " + serviceSubject.value.length)*/
           this.serviceFormControl.setServiceList(serviceSubject);
         }
       });
-
-
   }
 
   saveAppointmentRegistration() {
-    // this.appointmentRegistration.doctor = new Doctor("", "", "", "123", "", "", "", new Date(), "");
-    // this.appointmentRegistration.patient = new Patient("", "", BigInt(0), "", this.patient, "", "", "", "", "")
     this.appointmentRegistration.room = this.appointmentRegistration.doctor.room.num.toString();
     this.appointmentRegistration.address = this.appointmentRegistration.doctor.room.phone;
     console.log("Saving appointment registration")
@@ -168,10 +110,8 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
     for (let service of this.serviceFormControl.ServiceFiltered.value)
     {
       console.log("Service: " + service.serviceName)
-      // console.log("Array: " + this.serviceFormControl.ServiceFormControl.value.serviceName)
       if (service.toString() === this.serviceFormControl.ServiceFormControl.value)
       {
-        //After this function executes appointment forms pop up. See doctor-shared-short-information service
         this.appointmentRegistration.service = service.serviceName;
       }
     }

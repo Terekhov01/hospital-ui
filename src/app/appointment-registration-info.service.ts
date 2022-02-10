@@ -48,7 +48,7 @@ export class AppointmentRegistrationInfoService {
   }
 
   changeDate(date: Date) {
-    console.log("CHANGING DATE: ")
+    console.log("CHANGING DATE: " + date.toISOString())
     this.date.next(date);
   }
 

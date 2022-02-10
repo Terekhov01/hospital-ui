@@ -1,6 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+// import { registerLocaleData } from '@angular/common';
+// import localeRu from '@angular/common/locales/ru';
+//
+// registerLocaleData(localeRu);
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -113,6 +118,7 @@ import { SafePipe } from './safe.pipe';
 import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { MaterialMultiSelectorComponent } from './doctor-selector/doctor-selector.component';
+import {TranslateLoader, TranslateModule, TranslateService, TranslateStore} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
@@ -164,9 +170,10 @@ import { MaterialMultiSelectorComponent } from './doctor-selector/doctor-selecto
     DoctorinfoComponent,
     UpdateDoctorComponent,
     SafePipe,
-    FileViewerComponent
+    FileViewerComponent,
   ],
   imports: [
+    TranslateModule.forRoot(),
     NgxDocViewerModule,
     NgxExtendedPdfViewerModule,
     PdfViewerModule,
@@ -192,9 +199,16 @@ import { MaterialMultiSelectorComponent } from './doctor-selector/doctor-selecto
     Ng2SearchPipeModule,
     NgbModule
   ],
-  providers: [authInterceptorProviders, DatePipe, DoctorService],
+  providers: [authInterceptorProviders,
+    DatePipe,
+    DoctorService,
+    TranslateService,
+    TranslateStore,
+    // { provide: LOCALE_ID, useValue: "en" }
+  ],
   bootstrap: [AppComponent],
   exports: [
+    TranslateModule,
     A11yModule,
     BrowserAnimationsModule,
     ClipboardModule,
