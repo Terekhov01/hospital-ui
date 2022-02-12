@@ -1,0 +1,29 @@
+#sickListLabel
+{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#sickLeaveContainer
+{
+    margin-bottom: 20px;
+}
+
+#sickLeaveBlock
+{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/*#sickLeaveDatePicker
+{
+    margin: 0px 30px 0px 0px;
+}*/
+
+#sickLeaveButton
+{
+    height: fit-content;
+    width: fit-content;
+    margin-top: 7px;
+}

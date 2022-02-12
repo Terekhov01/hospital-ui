@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Appointment} from "./appointment";
+import {Appointment, AppointmentCreationDTO} from "./appointment";
 
 @Injectable({
   providedIn: 'root'
@@ -17,31 +17,38 @@ export class AppointmentService {
     return this.httpClient.get<Appointment[]>(`${this.baseURL}`);
   }
 
-  getAppointmentByID(id: number): Observable<Appointment> {
+  getAppointmentByID(id: bigint): Observable<Appointment> {
     return this.httpClient.get<Appointment>(`${this.baseURL}/${id}`)
   }
 
-  createAppointment(appointment: Appointment): Observable<Appointment>{
-    // const formData = new FormData();
-    // formData.append("Appointment", appointment.file, appointment.file.name);
-    // return form data instead of appointment
+  // При создании встречи необходимо, чтобы создание записи о встрече в таблице и загрузка файла, 
+  // а также больничного происзходили в одной транзакции. Иначе невозможно гарантировать, что больничный выпишется,
+  // если врач завершит встречу. Поэтому передавать информацию нужно в одном запросе, а не разбивать его на два.
+  // Я переписал запись на прием
+  createAppointment(appointmentDTO: AppointmentCreationDTO): Observable<string>
+  {
+    let appointmentDTOStr = JSON.stringify(appointmentDTO);
+    const blob = new Blob([appointmentDTOStr], {
+      type: 'application/json'
+    });
 
-    return this.httpClient.post<Appointment>(`${this.baseURL}`, appointment);
+    const formData: FormData = new FormData();
+
+    formData.append("appointmentDTOBlob", blob);
+
+    for (let fileToUpload of appointmentDTO.filesToUpload)
+    {
+      formData.append("filesToUpload", fileToUpload, fileToUpload.name);
+    }
+
+    return this.httpClient.post<string>(`${this.baseURL}`, formData);
   }
 
-  updateAppointment(id: number, appointment: Appointment): Observable<Object>{
+  updateAppointment(id: bigint, appointment: Appointment): Observable<Object>{
     return this.httpClient.put(`${this.baseURL}/${id}`, appointment);
   }
 
-  deleteAppointment(id: number): Observable<Appointment> {
+  deleteAppointment(id: bigint): Observable<Appointment> {
     return this.httpClient.delete<Appointment>(`${this.baseURL}/${id}`);
   }
-
-  postFile(fileToUpload: File, id: number): Observable<Object> {
-    const formData: FormData = new FormData();
-    formData.append('files', fileToUpload, fileToUpload.name);
-    return this.httpClient
-      .post(`${this.fileURL}/${id}`, formData);
-  }
-
 }

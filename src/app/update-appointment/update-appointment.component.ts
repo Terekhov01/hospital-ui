@@ -15,7 +15,8 @@ import {AppointmentRegistration} from "../appointment-registration";
 export class UpdateAppointmentComponent implements OnInit {
 
   appointment: Appointment = new Appointment();
-  id: number;
+  appointmentRegistration: AppointmentRegistration = null;
+  id: bigint;
 
   constructor(private appointmentService: AppointmentService,
               private route: ActivatedRoute,
@@ -27,10 +28,16 @@ export class UpdateAppointmentComponent implements OnInit {
   ngOnInit(): void {
     this.appointment.appointmentRegistration = new AppointmentRegistration();
     this.id = this.route.snapshot.params['id'];
-    this.appointmentService.getAppointmentByID(this.id).subscribe(data => {
-      this.appointment = data;
-    },
-      error => console.log(error));
+    let appointmentSubscription = this.appointmentService.getAppointmentByID(this.id).subscribe({
+      next: (data) => {
+        this.appointment = data;
+      },
+      error: (error) => console.log(error),
+      complete: () =>
+      {
+        appointmentSubscription.unsubscribe();
+      }
+    });
   }
 
   updateAppointment(){

@@ -14,7 +14,7 @@ import {AppointmentRegistration} from "../appointment-registration";
 export class UpdateAppointmentRegistrationComponent implements OnInit {
 
   appointmentRegistration: AppointmentRegistration = new AppointmentRegistration();
-  id: number;
+  id: bigint;
 
   constructor(private appointmentService: AppointmentService,
               private route: ActivatedRoute,

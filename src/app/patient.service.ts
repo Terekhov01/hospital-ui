@@ -57,7 +57,7 @@ export class PatientService {
     })
   }
 
-  printRecipe(id: number): Observable<Blob> {
+  printRecipe(id: bigint): Observable<Blob> {
     return this.httpClient.get(`${this.fileURL}/getRecipe/${id}`, {
       responseType: 'blob'
     })

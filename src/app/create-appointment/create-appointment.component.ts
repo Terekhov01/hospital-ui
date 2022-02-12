@@ -38,39 +38,53 @@ export class CreateAppointmentComponent implements OnInit {
     })
   }
 
-  saveAppointment() {
+  /*saveAppointment() {
     // this.appointment.doctor = new Doctor(this.doctor);
     // this.appointment.patient = new Patient(this.patient);
     this.appointment.appointmentRegistration = new AppointmentRegistration();
     this.appointment.appointmentRegistration.doctor = new Doctor("", "", "", "123", "", "", "", new Date(), "");
     this.appointment.appointmentRegistration.patient = new Patient("", "", BigInt(0), "", this.patient, "", "", "", "", "")
-    this.doctorService.getDoctorByLastName(this.doctor).subscribe(data => {
+    this.doctorService.getDoctorByLastName(this.doctor).subscribe({
+      next: (data) => {
       // this.appointment.doctor = data;
       this.appointment.appointmentRegistration.doctor = data;
       console.log(data);
-    },
-      error => console.log(error));
-    this.patientService.getPatientByLastName(this.patient).subscribe( data => {
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+    
+    this.patientService.getPatientByLastName(this.patient).subscribe({
+      next: (data) => {
       // this.appointment.patient = data;
       this.appointment.appointmentRegistration.patient = data;
       console.log(data);
-    },
-      error => console.log(error));
-    this.appointmentRegistrationService.getAppointmentRegistrationByDocAndPat(this.doctor, this.patient).subscribe(data => {
+      },
+      error: error => console.log(error)
+    });
+
+    this.appointmentRegistrationService.getAppointmentRegistrationByDocAndPat(this.doctor, this.patient).subscribe({
+      next: (data) => {
         this.appointment.appointmentRegistration = data;
         console.log(data);
       },
-      error => console.log(error));
+      error: (error) => console.log(error)
+    });
+
     this.appointment.appointmentRegistration.room = this.room;
     this.appointment.appointmentRegistration.address = this.address;
     this.appointment.appointmentRegistration.start = this.start;
     this.appointment.appointmentRegistration.end = this.end;
-    this.appointmentService.createAppointment(this.appointment).subscribe(data => {
+    
+    this.appointmentService.createAppointment(this.appointment).subscribe({
+      next: (data) => {
       console.log(data);
       this.goToAppointmentList();
-    },
-      error => console.log(error));
-  }
+      },
+      error: (error) => console.log(error)
+    });
+  }*/
 
   goToAppointmentList() {
     this.router.navigate(['/appointments']);
@@ -80,9 +94,9 @@ export class CreateAppointmentComponent implements OnInit {
     let result = this.router.navigate(['appointment-creation', id]);
   }
 
-  onSubmit() {
+  /*onSubmit() {
     console.log(this.appointment);
     this.saveAppointment();
-  }
+  }*/
 
 }
