@@ -15,7 +15,7 @@ import {DatePipe} from "@angular/common";
 })
 export class AppointmentRegistrationDetailsComponent implements OnInit {
 
-  id: number;
+  id: bigint;
   appointmentRegistration: AppointmentRegistration = new AppointmentRegistration();
 
   constructor(private route: ActivatedRoute, public datePipe: DatePipe,

@@ -17,7 +17,7 @@ export class AppointmentRegistrationService {
     return this.httpClient.get<AppointmentRegistration[]>(`${this.baseURL}`);
   }
 
-  getAppointmentRegistrationByID(id: number): Observable<AppointmentRegistration> {
+  getAppointmentRegistrationByID(id: bigint): Observable<AppointmentRegistration> {
     return this.httpClient.get<AppointmentRegistration>(`${this.baseURL}/${id}`)
   }
 
@@ -29,11 +29,11 @@ export class AppointmentRegistrationService {
     return this.httpClient.post(`${this.baseURL}`, appointmentRegistration);
   }
 
-  updateAppointmentRegistration(id: number, appointmentRegistration: AppointmentRegistration): Observable<Object>{
+  updateAppointmentRegistration(id: bigint, appointmentRegistration: AppointmentRegistration): Observable<Object>{
     return this.httpClient.put(`${this.baseURL}/${id}`, appointmentRegistration);
   }
 
-  deleteAppointmentRegistration(id: number): Observable<AppointmentRegistration> {
+  deleteAppointmentRegistration(id: bigint): Observable<AppointmentRegistration> {
     return this.httpClient.delete<AppointmentRegistration>(`${this.baseURL}/${id}`);
   }
 

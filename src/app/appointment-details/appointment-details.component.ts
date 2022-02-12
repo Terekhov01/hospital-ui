@@ -20,7 +20,7 @@ import { pdfDefaultOptions } from "ngx-extended-pdf-viewer";
 export class AppointmentDetailsComponent implements OnInit {
 
 
-  id: number;
+  id: bigint;
   appointment: Appointment = new Appointment();
   files: any[] = [];
   fileURL: string;
@@ -51,12 +51,12 @@ export class AppointmentDetailsComponent implements OnInit {
 
   }
 
-  goToFileViewer(id: number) {
+  goToFileViewer(id: bigint) {
     console.log("passing id: " + id)
     let res = this.router.navigate(['file-viewer', id])
   }
 
-  printRecipe(id: number) {
+  printRecipe(id: bigint) {
     this.patientService.printRecipe(id).subscribe(data => {
       const blobUrl = URL.createObjectURL(data);
       printJS(blobUrl);

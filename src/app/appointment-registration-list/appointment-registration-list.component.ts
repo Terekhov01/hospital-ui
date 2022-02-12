@@ -32,18 +32,18 @@ export class AppointmentRegistrationListComponent implements OnInit {
     })
   }
 
-  updateAppointmentRegistration(id: number) {
+  updateAppointmentRegistration(id: bigint) {
     let result = this.router.navigate(['update-appointment-registration', id]);
   }
 
-  deleteAppointmentRegistration(id: number) {
+  deleteAppointmentRegistration(id: bigint) {
     this.appointmentRegistrationService.deleteAppointmentRegistration(id).subscribe(data => {
       console.log(data);
       this.getAppointmentRegistrations();
     })
   }
 
-  appointmentRegistrationDetails(id: number) {
+  appointmentRegistrationDetails(id: bigint) {
     let result = this.router.navigate(['appointment-registration-details', id]);
   }
 

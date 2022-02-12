@@ -26,18 +26,18 @@ export class AppointmentListComponent implements OnInit {
     })
   }
 
-  updateAppointment(id: number) {
+  updateAppointment(id: bigint) {
     let result = this.router.navigate(['update-appointment', id]);
   }
 
-  deleteAppointment(id: number) {
+  deleteAppointment(id: bigint) {
     this.appointmentService.deleteAppointment(id).subscribe(data => {
       console.log(data);
       this.getAppointments();
     })
   }
 
-  appointmentDetails(id: number) {
+  appointmentDetails(id: bigint) {
     let result = this.router.navigate(['appointment-details', id]);
   }
 

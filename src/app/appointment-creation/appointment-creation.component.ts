@@ -1,5 +1,5 @@
-import { Component, OnInit, EventEmitter  } from '@angular/core';
-import {Appointment} from "../appointment";
+import { Component, OnInit, EventEmitter, OnDestroy  } from '@angular/core';
+import { AppointmentCreationDTO, FileDTO } from "../appointment";
 import {AppointmentService} from "../appointment.service";
 import {Router} from "@angular/router";
 import {AppointmentRegistration} from "../appointment-registration";
@@ -8,15 +8,17 @@ import {DoctorService} from "../_services/doctor.service";
 import {PatientService} from "../patient.service";
 import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse, HttpEvent, HttpEventType} from "@angular/common/http";
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-appointment-creation',
   templateUrl: './appointment-creation.component.html',
   styleUrls: ['./appointment-creation.component.css']
 })
-export class AppointmentCreationComponent implements OnInit {
+export class AppointmentCreationComponent implements OnInit, OnDestroy {
 
-  appointment: Appointment = new Appointment();
+  appointmentDTO: AppointmentCreationDTO = new AppointmentCreationDTO();
   start: Date;
   end: Date;
   address: string;
@@ -24,9 +26,17 @@ export class AppointmentCreationComponent implements OnInit {
   doctor: string;
   patient: string
   appointmentRegistration: AppointmentRegistration = new AppointmentRegistration();
-  id: number;
+  id: bigint;
   file: Blob;
   files: Blob[] = [];
+  sickLeaveStartDate = new Date();
+  sickLeaveDatePickerFormGroup = this.formBuilder.group(
+  {
+      sickLeaveDatePickerFormControl: new FormControl()
+  });
+  sickLeaveButtonDisabled = true;
+  sickLeaveButtonToggled = false;
+  sickLeaveDatePickerSubscription: Subscription | undefined = undefined;
 
   fileToUpload: File | null = null;
 
@@ -35,13 +45,47 @@ export class AppointmentCreationComponent implements OnInit {
               private doctorService: DoctorService,
               private patientService: PatientService,
               private appointmentRegistrationService: AppointmentRegistrationService,
-              private router: Router) { }
+              private router: Router,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.appointmentRegistrationService.getAppointmentRegistrationByID(this.id).subscribe(data => {
+    let appointmentRegistrationSubscription = this.appointmentRegistrationService.getAppointmentRegistrationByID(this.id).subscribe({
+      next: (data) => {
       this.appointmentRegistration = data;
+      },
+      complete: () =>
+      {
+        appointmentRegistrationSubscription.unsubscribe();
+      }
     })
+
+    this.sickLeaveDatePickerSubscription = this.sickLeaveDatePickerFormGroup.get('sickLeaveDatePickerFormControl').valueChanges.subscribe({
+      next: (value) =>
+      {
+        if (this.sickLeaveButtonToggled)
+        {
+          this.sickLeaveButtonDisabled = false;
+        }
+        else if (this.sickLeaveDatePickerFormGroup.get('sickLeaveDatePickerFormControl').valid && value != null)
+        {
+          this.sickLeaveButtonDisabled = false;
+        }
+        else
+        {
+          this.sickLeaveButtonDisabled = true;
+        }
+      },
+      error: (error) =>
+      {
+        alert(error.error);
+      }
+    });
+  }
+
+  ngOnDestroy(): void
+  {
+      this.sickLeaveDatePickerSubscription.unsubscribe();
   }
 
   goToAppointmentList() {
@@ -49,83 +93,70 @@ export class AppointmentCreationComponent implements OnInit {
   }
 
   saveAppointment() {
-    this.appointment.appointmentRegistration = this.appointmentRegistration;
-    this.appointment.appointmentRegistration.room = this.room;
-    this.appointment.appointmentRegistration.address = this.address;
-    this.appointment.appointmentRegistration.start = this.start;
-    this.appointment.appointmentRegistration.end = this.end;
+    this.appointmentDTO = new AppointmentCreationDTO();
+    this.appointmentDTO.appointmentRegistrationId = this.id;
+    this.appointmentDTO.sickListNeeded = this.sickLeaveButtonToggled;
 
+    if (this.sickLeaveDatePickerFormGroup.get('sickLeaveDatePickerFormControl').valid)
+    {
+      this.appointmentDTO.recoveryDate = this.sickLeaveDatePickerFormGroup.get('sickLeaveDatePickerFormControl').value;
+    }
+    else
+    {
+      if (this.sickLeaveDatePickerFormGroup.get('sickLeaveDatePickerFormControl').disabled)
+      {
+        this.appointmentDTO.recoveryDate = this.sickLeaveDatePickerFormGroup.getRawValue().sickLeaveDatePickerFormControl;
+      }
+      else
+      {
+        this.appointmentDTO.recoveryDate = null;
+      }
+    }
 
-    // this.patientService.uploadFile(this.file, this.appointmentRegistration.patient.id).subscribe(data => {
-    //   console.log(data);
-    // });
-    //
-    // console.log(this.file);
+    if (this.fileToUpload !== null)
+    {
+      this.appointmentDTO.filesToUpload.push(this.fileToUpload);
+    }
 
-    // this.files.push(this.file);
-    //
-    // this.onUploadFiles(this.files, this.appointmentRegistration.patient.id);
-
-    // this.patientService.postFile(this.fileToUpload!, Number(this.appointment.appointmentRegistration.patient.user.id)).subscribe(data => {
-    //   console.log(data);
-    // }, error => {
-    //   console.log(error);
-    // });
-
-    // this.appointment.files = [];
-    // this.appointment.files.push(this.fileToUpload!)
-
-    //get last appointment of current patient and take it's id
-
-    let app = this.appointmentService.createAppointment(this.appointment).subscribe(data => {
-        console.log(data);
-        this.id = data.id;
-        console.log(this.id)
-        this.appointmentService.postFile(this.fileToUpload!, Number(this.id)).subscribe(data => {
-          console.log(data);
-        }, error => {
-          console.log(error);
-        });
-        this.goToAppointmentList();
-        // this.goToAppointmentList();
+    let uploadSubscription = this.appointmentService.createAppointment(this.appointmentDTO).subscribe({
+      next: (value) =>
+      {
+        alert("Результаты приема записаны");
       },
-      error => console.log(error));
-
-    // console.log('this id id ' + this.id)
-
-    // this.appointmentService.postFile(this.fileToUpload!, Number(this.id)).subscribe(data => {
-    //   console.log(data);
-    // }, error => {
-    //   console.log(error);
-    // });
-
-    // this.goToAppointmentList();
-
+      error: (error) =>
+      {
+        alert(error.error);
+      },
+      complete: () =>
+      {
+        uploadSubscription.unsubscribe();
+      }
+    });
   }
 
-  // onUploadFiles(files: Blob[], id: number): void {
-  //   const formData = new FormData();
-  //   for (const file of files) {
-  //     formData.append('file', file, "file");
-  //   }
-  //   this.patientService.upload(formData, this.appointmentRegistration.patient.id).subscribe(
-  //     event => {
-  //       console.log(event);
-  //
-  //     },
-  //     (error: HttpErrorResponse) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
+  sickLeaveButtonClicked(): void
+  {
+    this.sickLeaveButtonToggled = !this.sickLeaveButtonToggled;
+
+    if (this.sickLeaveButtonToggled)
+    {
+      this.sickLeaveDatePickerFormGroup.get('sickLeaveDatePickerFormControl').disable();
+      alert("Больничный прикреплен");
+    }
+    else
+    {
+      this.sickLeaveDatePickerFormGroup.get('sickLeaveDatePickerFormControl').enable();
+      alert("Больничный откреплен");
+    }
+  }
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
   }
 
-    onSubmit() {
-    console.log(this.appointment);
+  confirmationButtonClicked()
+  {
+    console.log(this.appointmentDTO);
     this.saveAppointment();
   }
-
 }

@@ -72,9 +72,6 @@ export class DoctorScheduleService
 
     getPatternNames(): Observable<ISchedulePatternShortInfo[]>
     {
-        let httpHeaders = new HttpHeaders();
-        httpHeaders.append("Authorization", this.tokenStorage.getToken());
-
         return this.http.get<ISchedulePatternShortInfo[]>(this.schedulePatternListUrl);
     }
 
@@ -82,9 +79,6 @@ export class DoctorScheduleService
     {
         let httpParams = new HttpParams();
         httpParams = httpParams.append("patternName", patternName);
-
-        /*let httpHeaders = new HttpHeaders();
-        httpHeaders.append("Authorization", this.tokenStorage.getToken());*/
 
         return this.http.get<ScheduleTablePattern>(this.schedulePatternViewUrl, { params: httpParams });
     }
