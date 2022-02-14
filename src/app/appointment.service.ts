@@ -21,7 +21,15 @@ export class AppointmentService {
     return this.httpClient.get<Appointment>(`${this.baseURL}/${id}`)
   }
 
-  // При создании встречи необходимо, чтобы создание записи о встрече в таблице и загрузка файла, 
+  getDoctorAppointments(id: bigint): Observable<Appointment[]> {
+    return this.httpClient.get<Appointment[]>(`${this.baseURL}/doctor/${id}`);
+  }
+
+  getPatientAppointments(id: bigint): Observable<Appointment[]> {
+    return this.httpClient.get<Appointment[]>(`${this.baseURL}/patient/${id}`);
+  }
+
+  // При создании встречи необходимо, чтобы создание записи о встрече в таблице и загрузка файла,
   // а также больничного происзходили в одной транзакции. Иначе невозможно гарантировать, что больничный выпишется,
   // если врач завершит встречу. Поэтому передавать информацию нужно в одном запросе, а не разбивать его на два.
   // Я переписал запись на прием

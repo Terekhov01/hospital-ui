@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AppointmentRegistration} from "./appointment-registration";
-import {Appointment} from "./appointment";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +18,14 @@ export class AppointmentRegistrationService {
 
   getAppointmentRegistrationByID(id: bigint): Observable<AppointmentRegistration> {
     return this.httpClient.get<AppointmentRegistration>(`${this.baseURL}/${id}`)
+  }
+
+  getDoctorAppointmentRegistrations(id: bigint): Observable<AppointmentRegistration[]> {
+    return this.httpClient.get<AppointmentRegistration[]>(`${this.baseURL}/doctor/${id}`);
+  }
+
+  getPatientAppointmentRegistrations(id: bigint): Observable<AppointmentRegistration[]> {
+    return this.httpClient.get<AppointmentRegistration[]>(`${this.baseURL}/patient/${id}`);
   }
 
   getAppointmentRegistrationByDocAndPat(doc: string, pat: string): Observable<AppointmentRegistration> {

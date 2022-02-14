@@ -32,13 +32,13 @@ export class FileViewerComponent implements OnInit {
     this.patientService.download(this.id).subscribe(data => {
       this.fileURL = URL.createObjectURL(data)
       // docViewer.href = URL.createObjectURL(data)
-      frame.src = "http://localhost:8080/api/files/download/291"
+      // frame.src = "http://localhost:8080/api/files/download/291"
       // obj.data = URL.createObjectURL(data);
       this.safeURL = this.sanitizer.bypassSecurityTrustResourceUrl(this.fileURL);
       // this.safeURL = this.sanitizer.sanitize(SecurityContext.URL, this.safeURL);
       console.log(data.type)
       // this.fileURL = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
-      this.fileURL = "http://localhost:8080/api/files/download/291";
+      // this.fileURL = "http://localhost:8080/api/files/download/291";
 
       console.log(this.fileURL)
       console.log(this.safeURL)

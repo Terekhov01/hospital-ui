@@ -8,6 +8,8 @@ const USER_KEY = 'auth-user';
 })
 export class TokenStorageService {
 
+  user_role: string;
+
   constructor() { }
 
   signOut(): void {
@@ -31,6 +33,10 @@ export class TokenStorageService {
   public getUser(): any {
     console.log("LOGGGGG: " + sessionStorage.getItem(USER_KEY));
     let usr = JSON.parse(sessionStorage.getItem(USER_KEY));
+    let role = JSON.parse(sessionStorage.getItem(USER_KEY));
+    this.user_role = role.roles;
+    console.log("Role: " + this.user_role);
+    window.sessionStorage.setItem("USER_ROLE", this.user_role);
     // console.log("Current user id: " + usr.id)
     window.sessionStorage.setItem("USER_ID", usr.id);
     return JSON.parse(sessionStorage.getItem(USER_KEY));

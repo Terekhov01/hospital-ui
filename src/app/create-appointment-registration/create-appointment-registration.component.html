@@ -24,11 +24,11 @@
 
       </div>
 
-      <input type = "text"
+      <input size="39" type = "text"
              [formControl] = "serviceFormControl.ServiceFormControl"
              [matAutocomplete] = "auto">
 
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" class = "autocompleteDoctorFilterField">
+      <mat-autocomplete [panelWidth]="300" autoActiveFirstOption #auto="matAutocomplete" class = "autocompleteDoctorFilterField">
         <!-- TODO - introduce categories of doctors by their profession -->
         <mat-option *ngFor="let service of serviceFormControl.ServiceFiltered.value" [value] = "service.toString()">
           {{ service.toString() }}

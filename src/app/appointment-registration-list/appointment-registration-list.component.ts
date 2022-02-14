@@ -27,9 +27,19 @@ export class AppointmentRegistrationListComponent implements OnInit {
   }
 
   private getAppointmentRegistrations() {
-    this.appointmentRegistrationService.getAppointmentRegistrationsList().subscribe(data => {
-      this.appointmentRegistrations = data;
-    })
+    let usr_role = window.sessionStorage.getItem("USER_ROLE")
+    console.log("ROLE: " + usr_role)
+    if (usr_role == "ROLE_PATIENT") {
+      this.appointmentRegistrationService.getPatientAppointmentRegistrations(BigInt(window.sessionStorage.getItem("USER_ID"))).subscribe(data => {
+        this.appointmentRegistrations = data;
+      })
+    } else if (usr_role == "ROLE_DOCTOR") {
+      this.appointmentRegistrationService.getDoctorAppointmentRegistrations(BigInt(window.sessionStorage.getItem("USER_ID"))).subscribe(data => {
+        this.appointmentRegistrations = data;
+      })
+    } else {
+      alert("ERROR: UNAUTHORIZED")
+    }
   }
 
   updateAppointmentRegistration(id: bigint) {
