@@ -1,7 +1,7 @@
 <h1>{{title}}</h1>
 
 <div>
-  <div>Пациент: {{medCard.patient.user.lastName}}</div>
+  <div>Пациент: {{medCard.patient.user.lastName}} {{medCard.patient.user.firstName}}</div>
   <div>
     Противопоказания: {{medCard.contraindications}}
 <!--    <button (click)="getContr()" mat-icon-button color="warn">Просмотреть</button>-->
@@ -15,7 +15,8 @@
   <mat-card>
     <mat-card-title>Мои приемы в клинике</mat-card-title>
     <br>
-    <select [(ngModel)]="selectedService" (ngModelChange)="onServiceChange()">
+    <select required  [(ngModel)]="selectedService" (ngModelChange)="onServiceChange()">
+      <option value="">Выберите услугу</option>
       <option *ngFor="let service of services">{{service.serviceName}}</option>
     </select>
     <form (ngSubmit)="roomSearch()">
@@ -23,11 +24,12 @@
         <input class="mt-2 p-0" type="text" [(ngModel)]="room" name="room"/>
       </div>
       <button type="submit" mat-stroked-button color="primary">Найти</button>
+      <button (click)="ngOnInit()" type="submit" mat-stroked-button color="primary">Сбросить фильтры</button>
     </form>
     <mat-card *ngFor="let appointment of pagedItems">
       <mat-card>
         <mat-card-title>{{appointment.appointmentRegistration.service}}</mat-card-title>
-        <mat-card-content>Доктор: {{appointment.appointmentRegistration.doctor.lastName}}</mat-card-content>
+        <mat-card-content>Доктор: {{appointment.appointmentRegistration.doctor.user.lastName}}</mat-card-content>
         <mat-card-content>Описание: {{appointment.description}}</mat-card-content>
         <mat-card-content>Заключение: {{appointment.docStatement}}</mat-card-content>
         <mat-card-actions>
@@ -36,21 +38,22 @@
       </mat-card>
       <br>
     </mat-card>
+    <a *ngIf="allItemsEmpty">Поиск не дал результатов</a>
     <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
       <li [ngClass]="{disabled:pager.currentPage === 1}">
-        <button (click)="setPage(1)" mat-icon-button color="primary">First</button>
+        <button (click)="setPage(1)" mat-icon-button color="primary">Первая</button>
       </li>
       <li [ngClass]="{disabled:pager.currentPage === 1}">
-        <button (click)="setPage(pager.currentPage - 1)" mat-icon-button color="primary">Previous</button>
+        <button (click)="setPage(pager.currentPage - 1)" mat-icon-button color="primary">Пред</button>
       </li>
       <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
         <button (click)="setPage(page)" mat-icon-button color="primary">{{page}}</button>
       </li>
       <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-        <button (click)="setPage(pager.currentPage + 1)" mat-icon-button color="primary">Next</button>
+        <button (click)="setPage(pager.currentPage + 1)" mat-icon-button color="primary">След</button>
       </li>
       <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-        <button (click)="setPage(pager.totalPages)" mat-icon-button color="primary">Last</button>
+        <button (click)="setPage(pager.totalPages)" mat-icon-button color="primary">Последняя</button>
       </li>
     </ul>
   </mat-card>

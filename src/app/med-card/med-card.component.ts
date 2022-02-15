@@ -31,6 +31,7 @@ export class MedCardComponent implements OnInit {
   selectedService: Service;
   room: string;
   id: number;
+  allItemsEmpty: boolean;
   // doctors: User[];
   // selectedDoctor: User;
 
@@ -59,6 +60,8 @@ export class MedCardComponent implements OnInit {
       this.services = data;
     });
     this.actRoute.params.subscribe((params: Params) => this.id = params.id);
+    this.room = null;
+    this.selectedService = null;
   }
 
 
@@ -72,13 +75,21 @@ export class MedCardComponent implements OnInit {
 
   onServiceChange(){
     this.allItems = this.medCard.appointments.filter(app => app.appointmentRegistration.service === this.selectedService.toString());
+    if (this.room != undefined) {
+      console.log(this.room);
+      this.allItems = this.allItems.filter(app => app.appointmentRegistration.room === this.room);
+    }
     this.setPage(1);
+    if (this.allItems.length == 0) { this.allItemsEmpty = true; }
   }
 
   roomSearch(){
-    this.allItems = this.medCard.appointments.filter(app => app.appointmentRegistration.service === this.selectedService.toString());
+    if (this.selectedService != null){
+      this.allItems = this.medCard.appointments.filter(app => app.appointmentRegistration.service === this.selectedService.toString());
+    }
     this.allItems = this.allItems.filter(app => app.appointmentRegistration.room === this.room);
     this.setPage(1);
+    if (this.allItems.length == 0) { this.allItemsEmpty = true; }
   }
 
   getHereditary(){
