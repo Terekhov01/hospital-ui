@@ -1,6 +1,6 @@
 <div class="col-md-8 offset-md-2">
   <h3> Новый прием </h3>
-  <form>
+  <form (ngSubmit)="confirmationButtonClicked()">
 
     <div>
       <label> <b> Услуга: </b>  </label> {{appointmentRegistration.service}}
@@ -96,7 +96,7 @@
       </div>
     </div>
 
-    <button mat-raised-button color="primary" (click) = "confirmationButtonClicked()"> Подтвердить </button>
+    <button type="button" mat-raised-button color="primary" (click) = "confirmationButtonClicked()"> Подтвердить </button>
 
   </form>
 </div>

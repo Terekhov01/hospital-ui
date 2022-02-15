@@ -49,7 +49,9 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.appointmentDTO = new AppointmentCreationDTO();
     this.id = this.route.snapshot.params['id'];
+    this.appointmentDTO.appointmentRegistrationId = this.id;
     let appointmentRegistrationSubscription = this.appointmentRegistrationService.getAppointmentRegistrationByID(this.id).subscribe({
       next: (data) => {
       this.appointmentRegistration = data;
@@ -59,6 +61,8 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
         appointmentRegistrationSubscription.unsubscribe();
       }
     })
+
+    // document.body.appendChild(this.sickLeaveDatePickerFormGroup)
 
     this.sickLeaveDatePickerSubscription = this.sickLeaveDatePickerFormGroup.get('sickLeaveDatePickerFormControl').valueChanges.subscribe({
       next: (value) =>
@@ -78,7 +82,8 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
       },
       error: (error) =>
       {
-        alert(error.error);
+        console.log("ERROR 1")
+        alert(error.toString());
       }
     });
   }
@@ -93,8 +98,6 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
   }
 
   saveAppointment() {
-    this.appointmentDTO = new AppointmentCreationDTO();
-    this.appointmentDTO.appointmentRegistrationId = this.id;
     this.appointmentDTO.sickListNeeded = this.sickLeaveButtonToggled;
 
     if (this.sickLeaveDatePickerFormGroup.get('sickLeaveDatePickerFormControl').valid)
@@ -125,7 +128,9 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
       },
       error: (error) =>
       {
-        alert(error.error);
+        console.log("ERROR 2")
+        console.log(error);
+        alert(error.toString());
       },
       complete: () =>
       {
@@ -158,5 +163,7 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
   {
     console.log(this.appointmentDTO);
     this.saveAppointment();
+
+    this.goToAppointmentList();
   }
 }

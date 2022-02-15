@@ -7,15 +7,15 @@
     </div>
 
     <div class = "form-group">
-      <label> Фамилия доктора </label>
-      <input type="text" class="form-control" id = "docLastName"
-             [(ngModel)]="appointment.appointmentRegistration.doctor.user.lastName" name = "docLastName">
+      <label> Фамилия доктора </label> {{appointment.appointmentRegistration.doctor.user.lastName}}
+<!--      <input type="text" class="form-control" id = "docLastName"-->
+<!--             [(ngModel)]="appointment.appointmentRegistration.doctor.user.lastName" name = "docLastName">-->
     </div>
 
     <div class = "form-group">
-      <label> Фамилия пациента </label>
-      <input type="text" class="form-control" id = "patLastName"
-             [(ngModel)]="appointment.appointmentRegistration.patient.user.lastName" name = "patLastName">
+      <label> Фамилия пациента </label> {{appointment.appointmentRegistration.patient.user.lastName}}
+<!--      <input type="text" class="form-control" id = "patLastName"-->
+<!--             [(ngModel)]="appointment.appointmentRegistration.patient.user.lastName" name = "patLastName">-->
     </div>
 
     <div class = "form-group">

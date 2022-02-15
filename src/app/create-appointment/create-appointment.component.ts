@@ -33,9 +33,19 @@ export class CreateAppointmentComponent implements OnInit {
               private router: Router, public datePipe: DatePipe) { }
 
   ngOnInit(): void {
-    this.appointmentRegistrationService.getAppointmentRegistrationsList().subscribe(data => {
-      this.appointmentRegistrations = data;
-    })
+    let usr_role = window.sessionStorage.getItem("USER_ROLE")
+    console.log("ROLE: " + usr_role)
+    if (usr_role == "ROLE_DOCTOR") {
+      this.appointmentRegistrationService.getDoctorAppointmentRegistrations(BigInt(window.sessionStorage.getItem("USER_ID"))).subscribe(data => {
+        this.appointmentRegistrations = data;
+      })
+    } else if (usr_role == "ROLE_PATIENT") {
+      this.appointmentRegistrationService.getPatientAppointmentRegistrations(BigInt(window.sessionStorage.getItem("USER_ID"))).subscribe(data => {
+        this.appointmentRegistrations = data;
+      })
+    } else {
+      alert("ERROR: UNAUTHORIZED")
+    }
   }
 
   /*saveAppointment() {
@@ -54,7 +64,7 @@ export class CreateAppointmentComponent implements OnInit {
         console.log(error);
       }
     });
-    
+
     this.patientService.getPatientByLastName(this.patient).subscribe({
       next: (data) => {
       // this.appointment.patient = data;
@@ -76,7 +86,7 @@ export class CreateAppointmentComponent implements OnInit {
     this.appointment.appointmentRegistration.address = this.address;
     this.appointment.appointmentRegistration.start = this.start;
     this.appointment.appointmentRegistration.end = this.end;
-    
+
     this.appointmentService.createAppointment(this.appointment).subscribe({
       next: (data) => {
       console.log(data);
