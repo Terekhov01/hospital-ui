@@ -37,7 +37,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    this.user = this.tokenStorageService.getUser();
     this.userService.getPublicContent().subscribe(
       data => {
         this.content = data;
@@ -68,7 +67,6 @@ export class HomeComponent implements OnInit {
 
   maxCount(){
     const obj = {};
-    console.log(this.appRegs);
     for (let i = 0 ; i < this.appRegs.length; i++){
       let key = this.appRegs[i].service;
       if (obj[key]){

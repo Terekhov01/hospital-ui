@@ -27,13 +27,13 @@ export class MainComponent implements OnInit {
               private appRegServ: AppointmentRegistrationService,) {
   }
   ngOnInit(): void {
-    this.user = this.tokenStorageService.getUser();
+    // this.user = this.tokenStorageService.getUser();
     // this.serviceService.getServicesList().subscribe(data => {
     //   this.services = data;
     // });
-    console.log(this.user);
     this.doctorService.getDoctorsList().subscribe(data => {
       this.doctorAmount = data.length;
+      console.log(this.doctorAmount);
     });
     this.patientService.getAllPatients().subscribe(data => {
       this.patientAmount = data.length;
