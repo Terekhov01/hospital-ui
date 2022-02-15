@@ -95,16 +95,17 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import {DoctorComponent} from "./DoctorInList/doctorList/doctor.component";
 import {AddDoctorComponent} from "./AddNewDoctorInList/add-doctor.component";
 import {UpdateDoctorComponent} from "./UpdateDoctorInList/update-doctor.component";
+import {AccessDeniedPageComponent} from "./access-denied-page/access-denied-page.component";
 
 const routes: Routes =
   [
+    { path: "accessDeniedPage", component: AccessDeniedPageComponent},
     { path: "medCard/:id", component: MedCardComponent },
     { path: "medCard/hereditary/:id", component: HereditaryComponent },
     { path: "medCard/contraindications/:id", component: ContrComponent },
     { path: "medCard/edit-hereditary/:id", component: EditHereditaryComponent },
     { path: "medCard/edit-contr/:id", component: EditContrComponent },
-    { path: "", component: MainComponent},
-    //{ path: "", redirectTo: 'medCard', pathMatch: 'full'},
+    { path: "", redirectTo: 'home', pathMatch: 'full'},
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
