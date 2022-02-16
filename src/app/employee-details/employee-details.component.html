@@ -11,9 +11,7 @@
                 class="profile-img-card"
               />
               <div class="mt-3">
-                <h4>{{employee.firstName}} {{employee.lastName}} {{employee.patronymic}}</h4>
-                <p class="text-secondary mb-1" *ngFor="let role of employee.roles">{{role.name}}</p>
-                <button class="btn btn-outline-primary">Message</button>
+                <h4>{{employee.lastName}} {{employee.firstName}} {{employee.patronymic}}</h4>
               </div>
             </div>
           </div>
@@ -24,7 +22,7 @@
           <div class="card-body">
             <div class="row mb-3">
               <div class="col-sm-3">
-                <h6 class="mb-0">Username</h6>
+                <h2 class="mb-0">Логин</h2>
               </div>
               <div class="col-sm-9 text-secondary">
                 <input type="text" class="form-control" value="{{employee.username}}" readonly>
@@ -32,15 +30,15 @@
             </div>
             <div class="row mb-3">
               <div class="col-sm-3">
-                <h6 class="mb-0">Full Name</h6>
+                <h2 class="mb-0">ФИО</h2>
               </div>
               <div class="col-sm-9 text-secondary">
-                <input type="text" class="form-control" value="{{employee.firstName}} {{employee.lastName}} {{employee.patronymic}}" readonly>
+                <input type="text" class="form-control" value="{{employee.lastName}} {{employee.firstName}} {{employee.patronymic}}" readonly>
               </div>
             </div>
             <div class="row mb-3">
               <div class="col-sm-3">
-                <h6 class="mb-0">Email</h6>
+                <h2 class="mb-0">Эл.Почта</h2>
               </div>
               <div class="col-sm-9 text-secondary">
                 <input type="text" class="form-control" value="{{employee.email}}" readonly>
@@ -48,7 +46,7 @@
             </div>
             <div class="row mb-3">
               <div class="col-sm-3">
-                <h6 class="mb-0">Phone</h6>
+                <h2 class="mb-0">Телефон</h2>
               </div>
               <div class="col-sm-9 text-secondary">
                 <input type="text" class="form-control" value="{{employee.phone}}" readonly>
