@@ -96,6 +96,7 @@ import {DoctorComponent} from "./DoctorInList/doctorList/doctor.component";
 import {AddDoctorComponent} from "./AddNewDoctorInList/add-doctor.component";
 import {UpdateDoctorComponent} from "./UpdateDoctorInList/update-doctor.component";
 import {AccessDeniedPageComponent} from "./access-denied-page/access-denied-page.component";
+import {UpdateprofileComponent} from './updateprofile/updateprofile.component';
 
 const routes: Routes =
   [
@@ -106,6 +107,7 @@ const routes: Routes =
     { path: "medCard/edit-hereditary/:id", component: EditHereditaryComponent },
     { path: "medCard/edit-contr/:id", component: EditContrComponent },
     { path: "", redirectTo: 'home', pathMatch: 'full'},
+    { path: 'updateprofile/:id', component: UpdateprofileComponent },
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },

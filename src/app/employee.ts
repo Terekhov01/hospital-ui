@@ -1,5 +1,6 @@
 import {Erole} from './erole';
 import {Role} from './role';
+import {Patient} from './patient';
 
 export class Employee {
   id: number;
@@ -11,4 +12,8 @@ export class Employee {
   email: string;
   roles: Set<Role>;
   password: string;
+  passport: string;
+  patient: Patient;
+  polys: string;
+
 }

@@ -119,6 +119,7 @@ import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { MaterialMultiSelectorComponent } from './doctor-selector/doctor-selector.component';
 import {TranslateLoader, TranslateModule, TranslateService, TranslateStore} from "@ngx-translate/core";
+import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 
 @NgModule({
   declarations: [
@@ -171,6 +172,7 @@ import {TranslateLoader, TranslateModule, TranslateService, TranslateStore} from
     UpdateDoctorComponent,
     SafePipe,
     FileViewerComponent,
+    UpdateprofileComponent,
   ],
   imports: [
     TranslateModule.forRoot(),
