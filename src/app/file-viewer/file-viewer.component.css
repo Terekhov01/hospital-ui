@@ -16,3 +16,30 @@ page[size="A4"] {
     box-shadow: 0;
   }
 }
+
+.fileList
+{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.filePresentationRow
+{
+  min-width: 250px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.fileName
+{
+  display: inline-block;
+  font-size: 20px;
+  margin-right: 20px;
+}
+
+#downloadAllButton
+{
+  width: fit-content;
+  height: fit-content;
+}

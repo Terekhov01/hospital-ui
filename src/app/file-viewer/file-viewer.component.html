@@ -2,55 +2,75 @@
   <br>
 </div>
 
-<ngx-extended-pdf-viewer
-  [src]="fileURL"
-  [useBrowserLocale]="true"
-  [textLayer]="true"
-  [showHandToolButton]="true"
-  [showPresentationModeButton]="true"
-  [showDownloadButton]="false"
->
-</ngx-extended-pdf-viewer>
+<div class = "mat-elevation-z4 fileList">
+  <span *ngFor = "let fileResource of fileResources" class = "filePresentationRow">
+    <p class = "fileName">{{fileResource.fileName}}</p>
+    <span *ngIf = "fileResource.mimetype !== ''" style = "display: inline-block; margin-right: 10px">
+      <button mat-mini-fab color = "primary" aria-label = "Preview button" (click) = "displayFile(fileResource)">
+        <mat-icon>preview</mat-icon>
+      </button>
+    </span>
+    <button mat-mini-fab color = "primary" aria-label = "Preview button" (click) = "downloadFile(fileResource)">
+      <mat-icon>download</mat-icon>
+    </button>
+  </span>
 
-<!--<ngx-doc-viewer id="docViewer" viewer="google"-->
-<!--                style="width:100%;height:93vh;">-->
-<!--</ngx-doc-viewer>-->
-
-<!--<iframe [attr.src]="safeURL" type="pdf"></iframe>-->
-
-<!--<iframe src="https://docs.google.com/gview?url=http://ieee802.org/secmail/docIZSEwEqHFr.doc&embedded=true" frameborder="0">-->
-<!--</iframe>-->
+</div>
 
 <div>
   <br>
 </div>
 
-<!--<iframe src="https://onedrive.live.com/embed?cid=CA582F2BC3AD1590&resid=CA582F2BC3AD1590%2133463&authkey=AFh1O3tkDLAQzzw&em=2" width="402" height="327" frameborder="0" scrolling="no"></iframe>-->
+<div *ngIf = "displayedFile !== null">
 
-<!--<iframe src="{{this.safeURL}}" width="402" height="327" frameborder="0" scrolling="no"></iframe>-->
+  <!-- Present each file differently based on file type (extension) -->
 
+  <div [ngSwitch] = "displayedFile.mimetype">
 
-<!--<iframe id="frame" frameborder="0" allowfullscreen></iframe>-->
+    <div *ngSwitchCase = "'application/pdf'">
+      <ngx-extended-pdf-viewer
+      [src]="displayedFile.fileUrl"
+      [useBrowserLocale]="true"
+      [textLayer]="true"
+      [showHandToolButton]="true"
+      [showPresentationModeButton]="true"
+      [showDownloadButton]="false"
+      >
+      </ngx-extended-pdf-viewer>
+    </div>
 
-<!--<object id="object" type="application/pdf">-->
-<!--  <iframe id="frame"></iframe>-->
-<!--</object>-->
+    <div *ngSwitchCase = "displayedFile.mimetype === 'application/msword' 
+                      || displayedFile.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? displayedFile.mimetype : ''">
+      <ngx-doc-viewer 
+        id = "docViewer" 
+        [url] = "displayedFile.fileUrl"
+        style = "width:100%;height:93vh;"
+        >
+      </ngx-doc-viewer>
+    </div>
 
-<!--<iframe class="doc" src="https://docs.google.com/gview?url=http://writing.engr.psu.edu/workbooks/formal_report_template.doc&embedded=true"></iframe>-->
+    <div *ngSwitchCase = "'text/plain'">
+      <iframe 
+      [src] = "displayedFile.fileUrl"
+      frameborder = "0">
+      </iframe>
+    </div>
+
+    <div *ngSwitchDefault>
+      Предпросмотр документа {{ displayedFile.fileName }} недоступен
+    </div>
+  </div>
+  
+</div>
+
+<div>
+  <br>
+</div>
+
+<button mat-raised-button color="primary" (click)="downloadAllFiles()" id = "downloadAllButton"> Скачать все </button>
 
 <div>
   <br>
 </div>
 
 <button (click)="backToDetails(this.id)" mat-raised-button color="primary"> Назад </button>
-
-<div>
-  <br>
-</div>
-
-
-<button mat-raised-button color="primary" (click)="downloadFiles()"> Скачать файлы </button>
-
-<div>
-  <br>
-</div>

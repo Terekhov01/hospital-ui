@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Patient} from "./patient";
 import {AppointmentRegistration} from "./appointment-registration";
 import {Doctor} from "./doctor";
+import { FileDTO } from "./file-transfer-data/file-transfer-data.data-transfer-object";
 
 @Injectable({
   providedIn: 'root'
@@ -60,10 +61,8 @@ export class PatientService {
   //   })
   // }
 
-  download(id: number): Observable<Blob> {
-    return this.httpClient.get(`${this.downloadURL}${id}`, {
-      responseType: 'blob'
-    })
+  download(id: number): Observable<FileDTO[]> {
+    return this.httpClient.get<FileDTO[]>(`${this.downloadURL}${id}`);
   }
 
   printRecipe(id: bigint): Observable<Blob> {
