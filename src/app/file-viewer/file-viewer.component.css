@@ -43,3 +43,22 @@ page[size="A4"] {
   width: fit-content;
   height: fit-content;
 }
+
+.documentBlock
+{
+  width: 100%;
+  max-height: 75vh + 50px;
+}
+
+#docxContainer
+{
+  height: 75vh;
+  width: 100%;
+  overflow: auto;
+}
+
+#plainTextContainer
+{
+  padding: 5px;
+  overflow: auto;
+}

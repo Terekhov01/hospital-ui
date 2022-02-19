@@ -21,8 +21,10 @@
   <br>
 </div>
 
-<div *ngIf = "displayedFile !== null">
+<div *ngIf = "displayedFile !== null" class = "documentBlock">
 
+  <h1> {{ displayedFile.fileName }} </h1> 
+  <h3> Дата загрузки: {{ this.datePipe.transform(displayedFile.creationDate, 'dd.MM.yyyy hh:mm:ss') }} </h3>
   <!-- Present each file differently based on file type (extension) -->
 
   <div [ngSwitch] = "displayedFile.mimetype">
@@ -41,19 +43,14 @@
 
     <div *ngSwitchCase = "displayedFile.mimetype === 'application/msword' 
                       || displayedFile.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? displayedFile.mimetype : ''">
-      <ngx-doc-viewer 
-        id = "docViewer" 
-        [url] = "displayedFile.fileUrl"
-        style = "width:100%;height:93vh;"
-        >
-      </ngx-doc-viewer>
+                      
+      <div id = "docxContainer"></div>
     </div>
 
     <div *ngSwitchCase = "'text/plain'">
-      <iframe 
-      [src] = "displayedFile.fileUrl"
-      frameborder = "0">
-      </iframe>
+      <div class="form-group blue-border">
+        <textarea class="form-control" id = "plainTextContainer" rows="3"></textarea>
+      </div>
     </div>
 
     <div *ngSwitchDefault>

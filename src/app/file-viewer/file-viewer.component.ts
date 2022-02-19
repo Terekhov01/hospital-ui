@@ -1,24 +1,33 @@
-import {Component, OnInit, SecurityContext} from '@angular/core';
+import {AfterContentChecked, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnInit, SecurityContext} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AppointmentService} from "../appointment.service";
 import {DatePipe} from "@angular/common";
 import {PatientService} from "../patient.service";
 import { saveAs } from 'file-saver';
 
-import {DomSanitizer,SafeResourceUrl,} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { FileDTO } from '../file-transfer-data/file-transfer-data.data-transfer-object';
+
+import { renderAsync } from "docx-preview";
+import { FormControl } from '@angular/forms';
+
+//declare var docx: any;
 
 class FileResourceInfo
 {
   fileName: string;
   fileUrl: string;
+  fileBlob: Blob;
   mimetype: string;
+  creationDate: Date;
 
-  constructor(fileName: string, fileUrl: string, mimetype: string)
+  constructor(fileName: string, fileBlob: Blob, mimetype: string, creationDate: Date)
   {
     this.fileName = fileName;
-    this.fileUrl = fileUrl;
+    this.fileBlob = fileBlob;
+    this.fileUrl = URL.createObjectURL(fileBlob);
     this.mimetype = mimetype;
+    this.creationDate = creationDate;
   }
 }
 
@@ -27,9 +36,10 @@ class FileResourceInfo
   templateUrl: './file-viewer.component.html',
   styleUrls: ['./file-viewer.component.css']
 })
-export class FileViewerComponent implements OnInit
+export class FileViewerComponent implements OnInit, AfterViewChecked
 {
   fileResources: FileResourceInfo[] = [];
+  isRenderedFileDirty = true;
   displayedFile: FileResourceInfo = null;
   id: number;
 
@@ -46,13 +56,13 @@ export class FileViewerComponent implements OnInit
         for (let file of files)
         {
           let fileBlob = this.base64toBlob(file.content, file.mimetype);
-          let fileResource = new FileResourceInfo(file.originalName, URL.createObjectURL(fileBlob), file.mimetype);
+          let fileResource = new FileResourceInfo(file.originalName, fileBlob, file.mimetype, file.creationDate);
           this.fileResources.push(fileResource);
 
           // Open first file so page opens up nicely
           if (this.displayedFile == null && file.mimetype != "")
           {
-            this.displayedFile = fileResource;
+            this.displayFile(fileResource);
           }
         }
        },
@@ -67,6 +77,35 @@ export class FileViewerComponent implements OnInit
     })
   }
 
+  // Some magic bound to life cycle hooks to make it possible to render docx file after "div" container becomes available (loads in DOM file)
+  // div is loaded if and only if displayed file has mime type of word document
+  ngAfterViewChecked(): void
+  {
+    if (this.displayedFile !== null && this.isRenderedFileDirty)
+    {
+      if (this.displayedFile.mimetype === "text/plain")
+      {
+        let docxFileContainer = document.getElementById("plainTextContainer");
+        if (docxFileContainer !== null)
+        {
+          this.isRenderedFileDirty = false;
+          this.displayedFile.fileBlob.text().then(text => docxFileContainer.textContent = text);
+        }
+      }
+    
+      if (this.displayedFile.mimetype == "application/msword" ||
+          this.displayedFile.mimetype == "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+      {
+        let docxFileContainer = document.getElementById("docxContainer");
+        if (docxFileContainer !== null)
+        {
+          this.isRenderedFileDirty = false;
+          renderAsync(this.displayedFile.fileBlob, docxFileContainer).then(x => {});
+        }
+      }
+    }
+  }
+
   backToDetails(id: number)
   {
     this.router.navigate(['appointment-details', id])
@@ -74,7 +113,10 @@ export class FileViewerComponent implements OnInit
 
   displayFile(file: FileResourceInfo)
   {
+    this.isRenderedFileDirty = true;
     this.displayedFile = file;
+    console.log(file.fileName);
+    
   }
 
   downloadFile(file: FileResourceInfo)
