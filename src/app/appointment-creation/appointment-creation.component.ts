@@ -38,7 +38,7 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
   sickLeaveButtonToggled = false;
   sickLeaveDatePickerSubscription: Subscription | undefined = undefined;
 
-  fileToUpload: File | null = null;
+  filesToUpload: File[] = [];
 
   constructor(private appointmentService: AppointmentService,
               private route: ActivatedRoute,
@@ -61,8 +61,6 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
         appointmentRegistrationSubscription.unsubscribe();
       }
     })
-
-    // document.body.appendChild(this.sickLeaveDatePickerFormGroup)
 
     this.sickLeaveDatePickerSubscription = this.sickLeaveDatePickerFormGroup.get('sickLeaveDatePickerFormControl').valueChanges.subscribe({
       next: (value) =>
@@ -116,9 +114,10 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
       }
     }
 
-    if (this.fileToUpload !== null)
+    this.appointmentDTO.filesToUpload = [];
+    for (let file of this.filesToUpload)
     {
-      this.appointmentDTO.filesToUpload.push(this.fileToUpload);
+      this.appointmentDTO.filesToUpload.push(file);
     }
 
     let uploadSubscription = this.appointmentService.createAppointment(this.appointmentDTO).subscribe({
@@ -128,13 +127,12 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
       },
       error: (error) =>
       {
-        console.log("ERROR 2")
-        console.log(error);
-        alert(error.toString());
+        alert(error.error);
       },
       complete: () =>
       {
         uploadSubscription.unsubscribe();
+        this.goToAppointmentList();
       }
     });
   }
@@ -155,15 +153,16 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
     }
   }
 
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
+  handleFileInput(files: FileList)
+  {
+    for (let i = 0; i < files.length; i++)
+    {
+      this.filesToUpload.push(files.item(i));
+    }
   }
 
   confirmationButtonClicked()
   {
-    console.log(this.appointmentDTO);
     this.saveAppointment();
-
-    this.goToAppointmentList();
   }
 }

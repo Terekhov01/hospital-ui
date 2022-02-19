@@ -116,10 +116,10 @@ import { AddDoctorComponent } from "./AddNewDoctorInList/add-doctor.component";
 import { UpdateDoctorComponent } from "./UpdateDoctorInList/update-doctor.component";
 import { SafePipe } from './safe.pipe';
 import { FileViewerComponent } from './file-viewer/file-viewer.component';
-import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { MaterialMultiSelectorComponent } from './doctor-selector/doctor-selector.component';
 import {TranslateLoader, TranslateModule, TranslateService, TranslateStore} from "@ngx-translate/core";
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
+import { FileTransferDataComponent } from './file-transfer-data/file-transfer-data.component';
 
 @NgModule({
   declarations: [
@@ -173,10 +173,10 @@ import { UpdateprofileComponent } from './updateprofile/updateprofile.component'
     SafePipe,
     FileViewerComponent,
     UpdateprofileComponent,
+    FileTransferDataComponent,
   ],
   imports: [
     TranslateModule.forRoot(),
-    NgxDocViewerModule,
     NgxExtendedPdfViewerModule,
     PdfViewerModule,
     BrowserModule,
