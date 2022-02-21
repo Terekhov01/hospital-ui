@@ -1,6 +1,6 @@
 <div class="col-md-8 offset-md-2">
   <h3> Новый прием </h3>
-  <form (ngSubmit)="confirmationButtonClicked()">
+  <form>
 
     <div>
       <label> <b> Услуга: </b>  </label> {{appointmentRegistration.service}}
@@ -56,9 +56,9 @@
 
     <div class="form-group">
 <!--      <label for="file">Choose File</label>-->
-      <input type="file"
-             id="file"
-             (change)="handleFileInput($any($event).target.files)">
+      <input type = "file"
+             id = "file"
+             (change)="handleFileInput($any($event).target.files)" multiple>
     </div>
 
 <!--    <form enctype="multipart/form-data">-->
