@@ -20,9 +20,12 @@ export class DoctorScheduleService
     private schedulePatternViewUrl: string;
     private schedulePatternProlong: string;
     private schedulePatternDelete: string;
+    private scheduleIntervalUpdate: string;
+    private docId: string;
+    private startDateTime: string;
 
-    constructor(private http: HttpClient, private tokenStorage: TokenStorageService) 
-    { 
+    constructor(private http: HttpClient, private tokenStorage: TokenStorageService)
+    {
         this.tableUrl = "http://localhost:8080/schedule/table";
         this.calendarUrl = "http://localhost:8080/schedule/calendar";
         this.schedulePatternListUrl = "http://localhost:8080/schedule-pattern/list-patterns";
@@ -30,6 +33,23 @@ export class DoctorScheduleService
         this.scheduleAddPatternUrl = "http://localhost:8080/schedule-pattern/add-pattern";
         this.schedulePatternProlong = "http://localhost:8080/schedule-pattern/apply-pattern";
         this.schedulePatternDelete = "http://localhost:8080/schedule-pattern/delete";
+        this.scheduleIntervalUpdate = "http://localhost:8080/schedule/markAsAssigned";
+    }
+
+    markScheduleIntervalAsAssigned(id: bigint, startDate: Date): Observable<Object> {
+      let httpParams = new HttpParams();
+      this.docId = id.toString();
+      this.startDateTime = startDate.toISOString();
+      const stateData = {
+        docId: this.docId,
+        startDateTime: this.startDateTime
+      };
+      console.log("Doctor id in schedule service: " + id)
+      console.log("Doctor longId in schedule service: " + this.docId)
+      console.log("Start time in schedule service: " + this.startDateTime);
+      httpParams = httpParams.append("docId", this.docId);
+      httpParams = httpParams.append("startDateTime", this.startDateTime);
+      return this.http.put("http://localhost:8080/schedule/markAsAssigned", stateData, {responseType: 'text'});
     }
 
     getDoctorScheduleTableObservables(startDate: Date, endDate: Date, doctorIds: number[]): Observable<IDoctorSchedule[]>
@@ -57,7 +77,7 @@ export class DoctorScheduleService
     postDoctorSchedulePattern(pattern: ScheduleTablePattern): Observable<string>
     {
         let httpParams = new HttpParams();
-        let patternString = JSON.stringify(pattern, (key, value) => 
+        let patternString = JSON.stringify(pattern, (key, value) =>
         {
             if (value instanceof TimeRounded)
             {
