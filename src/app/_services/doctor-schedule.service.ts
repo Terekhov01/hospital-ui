@@ -23,6 +23,8 @@ export class DoctorScheduleService
     private scheduleIntervalUpdate: string;
     private docId: string;
     private startDateTime: string;
+    private isAssigned: string;
+    private dateFromString: Date;
 
     constructor(private http: HttpClient, private tokenStorage: TokenStorageService)
     {
@@ -33,23 +35,28 @@ export class DoctorScheduleService
         this.scheduleAddPatternUrl = "http://localhost:8080/schedule-pattern/add-pattern";
         this.schedulePatternProlong = "http://localhost:8080/schedule-pattern/apply-pattern";
         this.schedulePatternDelete = "http://localhost:8080/schedule-pattern/delete";
-        this.scheduleIntervalUpdate = "http://localhost:8080/schedule/markAsAssigned";
+        this.scheduleIntervalUpdate = "http://localhost:8080/schedule/updateIntervalIsAssigned";
     }
 
-    markScheduleIntervalAsAssigned(id: bigint, startDate: Date): Observable<Object> {
+    updateIntervalIsAssigned(id: bigint, assignedValue: string, startDate: Date): Observable<Object> {
       let httpParams = new HttpParams();
       this.docId = id.toString();
-      this.startDateTime = startDate.toISOString();
+      if (startDate instanceof Date) {
+        this.startDateTime = startDate.toISOString();
+      } else {
+        this.dateFromString = new Date(startDate)
+        this.dateFromString.setTime(this.dateFromString.getTime() - new Date().getTimezoneOffset()*60*1000)
+        this.startDateTime = this.dateFromString.toISOString();
+      }
+      this.isAssigned = assignedValue;
       const stateData = {
         docId: this.docId,
-        startDateTime: this.startDateTime
+        startDateTime: this.startDateTime,
+        isAssigned: this.isAssigned
       };
-      console.log("Doctor id in schedule service: " + id)
-      console.log("Doctor longId in schedule service: " + this.docId)
-      console.log("Start time in schedule service: " + this.startDateTime);
       httpParams = httpParams.append("docId", this.docId);
       httpParams = httpParams.append("startDateTime", this.startDateTime);
-      return this.http.put("http://localhost:8080/schedule/markAsAssigned", stateData, {responseType: 'text'});
+      return this.http.put(this.scheduleIntervalUpdate, stateData, {responseType: 'text'});
     }
 
     getDoctorScheduleTableObservables(startDate: Date, endDate: Date, doctorIds: number[]): Observable<IDoctorSchedule[]>

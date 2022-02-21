@@ -125,7 +125,7 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
   }
 
   goToAppointmentRegistragtionList() {
-    this.doctorScheduleService.markScheduleIntervalAsAssigned(this.doc_id, this.appointmentRegistration.start).subscribe(response => {});
+    this.doctorScheduleService.updateIntervalIsAssigned(this.doc_id, "true", this.appointmentRegistration.start).subscribe(response => {});
     this.router.navigate(['/appointmentRegistrations']);
   }
 
