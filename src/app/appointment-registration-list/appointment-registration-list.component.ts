@@ -3,6 +3,7 @@ import { AppointmentRegistration } from "../appointment-registration";
 import { AppointmentRegistrationService } from "../appointment-registration.service";
 import {Router} from "@angular/router";
 import {DatePipe} from "@angular/common";
+import {DoctorScheduleService} from "../_services/doctor-schedule.service";
 
 @Component({
   selector: 'app-appointment-registration-list',
@@ -12,9 +13,10 @@ import {DatePipe} from "@angular/common";
 export class AppointmentRegistrationListComponent implements OnInit {
 
   appointmentRegistrations: AppointmentRegistration[] = [];
+  dateString: string;
 
   constructor(private appointmentRegistrationService: AppointmentRegistrationService, public datePipe: DatePipe,
-              private router: Router) { }
+              private router: Router, private doctorScheduleService: DoctorScheduleService) { }
 
   ngOnInit(): void {
     this.getAppointmentRegistrations();
@@ -46,8 +48,9 @@ export class AppointmentRegistrationListComponent implements OnInit {
     let result = this.router.navigate(['update-appointment-registration', id]);
   }
 
-  deleteAppointmentRegistration(id: bigint) {
-    this.appointmentRegistrationService.deleteAppointmentRegistration(id).subscribe(data => {
+  deleteAppointmentRegistration(appointmentRegistration: AppointmentRegistration) {
+    this.doctorScheduleService.updateIntervalIsAssigned(appointmentRegistration.doctor.user.id, "false", appointmentRegistration.start).subscribe(response => {});
+    this.appointmentRegistrationService.deleteAppointmentRegistration(BigInt(appointmentRegistration.id)).subscribe(data => {
       console.log(data);
       this.getAppointmentRegistrations();
     })

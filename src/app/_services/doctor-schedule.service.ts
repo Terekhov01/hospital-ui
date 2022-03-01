@@ -20,9 +20,14 @@ export class DoctorScheduleService
     private schedulePatternViewUrl: string;
     private schedulePatternProlong: string;
     private schedulePatternDelete: string;
+    private scheduleIntervalUpdate: string;
+    private docId: string;
+    private startDateTime: string;
+    private isAssigned: string;
+    private dateFromString: Date;
 
-    constructor(private http: HttpClient, private tokenStorage: TokenStorageService) 
-    { 
+    constructor(private http: HttpClient, private tokenStorage: TokenStorageService)
+    {
         this.tableUrl = "http://localhost:8080/schedule/table";
         this.calendarUrl = "http://localhost:8080/schedule/calendar";
         this.schedulePatternListUrl = "http://localhost:8080/schedule-pattern/list-patterns";
@@ -30,6 +35,28 @@ export class DoctorScheduleService
         this.scheduleAddPatternUrl = "http://localhost:8080/schedule-pattern/add-pattern";
         this.schedulePatternProlong = "http://localhost:8080/schedule-pattern/apply-pattern";
         this.schedulePatternDelete = "http://localhost:8080/schedule-pattern/delete";
+        this.scheduleIntervalUpdate = "http://localhost:8080/schedule/updateIntervalIsAssigned";
+    }
+
+    updateIntervalIsAssigned(id: bigint, assignedValue: string, startDate: Date): Observable<Object> {
+      let httpParams = new HttpParams();
+      this.docId = id.toString();
+      if (startDate instanceof Date) {
+        this.startDateTime = startDate.toISOString();
+      } else {
+        this.dateFromString = new Date(startDate)
+        this.dateFromString.setTime(this.dateFromString.getTime() - new Date().getTimezoneOffset()*60*1000)
+        this.startDateTime = this.dateFromString.toISOString();
+      }
+      this.isAssigned = assignedValue;
+      const stateData = {
+        docId: this.docId,
+        startDateTime: this.startDateTime,
+        isAssigned: this.isAssigned
+      };
+      httpParams = httpParams.append("docId", this.docId);
+      httpParams = httpParams.append("startDateTime", this.startDateTime);
+      return this.http.put(this.scheduleIntervalUpdate, stateData, {responseType: 'text'});
     }
 
     getDoctorScheduleTableObservables(startDate: Date, endDate: Date, doctorIds: number[]): Observable<IDoctorSchedule[]>
@@ -57,7 +84,7 @@ export class DoctorScheduleService
     postDoctorSchedulePattern(pattern: ScheduleTablePattern): Observable<string>
     {
         let httpParams = new HttpParams();
-        let patternString = JSON.stringify(pattern, (key, value) => 
+        let patternString = JSON.stringify(pattern, (key, value) =>
         {
             if (value instanceof TimeRounded)
             {

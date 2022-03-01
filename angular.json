@@ -13,10 +13,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-"sourceMap": true,
-"buildOptimizer": false,
-"optimization": false,
-"serviceWorker": false,
+            "sourceMap": true,
+            "buildOptimizer": false,
+            "optimization": false,
+            "serviceWorker": false,
             "outputPath": "dist/hospitalApplication",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -35,9 +35,18 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/primeng/resources/themes/saga-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/quill/dist/quill.snow.css"
+
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/datatables.net/js/jquery.dataTables.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -130,6 +139,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "hospitalApplication"
 }

@@ -1,36 +1,56 @@
 <div  *ngIf="!showAdminBoard">
   <meta http-equiv="refresh" content="1; url=http://localhost:4200">
 </div>
+  <p-table #dt [value]="employees" [(selection)]="selectedEmployees" dataKey="id" styleClass="p-datatable-employees" [rowHover]="true"
+           [rows]="15" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+           [paginator]="true" currentPageReportTemplate="C {first} по {last} из {totalRecords}"
+           [filterDelay]="0" [globalFilterFields]="['username','firstName','lastName', 'patronymic', 'email','phone', 'roles']" *ngIf="showAdminBoard">
+    <ng-template pTemplate="caption">
+      <div class="table-header">
+        База данных
+        <span class="p-input-icon-left">
+                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Поиск" />
+                    </span>
 
-<table class = "usersTable table table-stripped table-hover" *ngIf="showAdminBoard">
-  <thead>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
   <tr>
-    <th> Имя пользователя</th>
-    <th> Имя</th>
-    <th> Фамилия </th>
-    <th> Отчество</th>
-    <th> Электронная почта </th>
-    <th> Телефон </th>
-    <th> Роль </th>
+    <th pSortableColumn="username">Логин <p-sortIcon field="username"></p-sortIcon></th>
+    <th pSortableColumn="firstName">Имя <p-sortIcon field="firstName"></p-sortIcon></th>
+    <th pSortableColumn="lastName">Фамилия <p-sortIcon field="lastName"></p-sortIcon></th>
+    <th pSortableColumn="patronymic">Отчество<p-sortIcon field="patronymic"></p-sortIcon></th>
+    <th pSortableColumn="email">Электронная почта <p-sortIcon field="email"></p-sortIcon></th>
+    <th pSortableColumn="phone">Телефон <p-sortIcon field="phone"></p-sortIcon></th>
+    <th>
+      <p-dropdown [options]="statuses" (onChange)="dt.filter($event.value, 'role', 'equals')" styleClass="p-column-filter" placeholder="Select a Status" [showClear]="true">
+        <ng-template let-option pTemplate="item">
+          <span [class]="'customer-badge status-' + option.value">&#123;&#123;option.label&#125;&#125;</span>
+        </ng-template>
+      </p-dropdown>
+    </th>
     <th> Действия </th>
   </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor = "let employee of employees" >
-    <td> {{ employee.username }} </td>
+    </ng-template>
+    <ng-template pTemplate="body" let-employee >
+  <tr class="p-selectable-row">
+    <td >
+      <span class="p-column-title" >Логин</span>
+      {{employee.username}}
+    </td>
     <td> {{ employee.firstName }} </td>
     <td> {{ employee.lastName }} </td>
     <td> {{ employee.patronymic }} </td>
     <td> {{ employee.email }} </td>
     <td> {{ employee.phone }} </td>
-    <td *ngFor="let role of employee.roles">
-      {{ role.name}}
-    </td>
+
+    <td>{{ employee.role}}</td>
     <td>
-      <button (click) = "updateEmployee(employee.id)" mat-raised-button color="primary"> Редактировать</button>
-      <button (click) = "deleteEmployee(employee.id)" mat-raised-button color="warn" style="margin-left: 5px"> Удалить</button>
-      <button (click) = "employeeDetails(employee.id)" mat-raised-button color="primary" style="margin-left: 5px"> Подробности</button>
+
+      <span><button (click) = "deleteEmployee(employee.id)" mat-raised-button color="warn" style="margin-left: 5px">Удалить</button></span>
+      <span><button (click) = "employeeDetails(employee.id)" mat-raised-button color="primary" style="margin-left: 5px" >Подробности</button></span>
     </td>
   </tr>
-  </tbody>
-</table>
+    </ng-template>
+
+</p-table>

@@ -18,8 +18,7 @@ import { DateAdapter, MatNativeDateModule, MatRippleModule } from '@angular/mate
 import { MatIconModule } from '@angular/material/icon';
 import {Ng2SearchPipeModule} from "ng2-search-filter";
 import {DoctorService} from "./DoctorInList/doctorList/doctor.service";
-
-
+import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -62,6 +61,18 @@ import { UpdateAppointmentRegistrationComponent } from './update-appointment-reg
 import { AppointmentDetailsComponent } from './appointment-details/appointment-details.component';
 import { AppointmentRegistrationDetailsComponent } from './appointment-registration-details/appointment-registration-details.component';
 
+import {TableModule} from 'primeng/table';
+import {CalendarModule} from 'primeng/calendar';
+import {SliderModule} from 'primeng/slider';
+import {DialogModule} from 'primeng/dialog';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {ContextMenuModule} from 'primeng/contextmenu';
+import {ButtonModule} from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
+import {InputTextModule} from 'primeng/inputtext';
+import {ProgressBarModule} from 'primeng/progressbar';
+import {DropdownModule} from 'primeng/dropdown';
+import {CheckboxModule} from 'primeng/checkbox';
 // import { PdfViewerComponent } from 'ng2-pdf-viewer';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer'
 import { PdfViewerModule } from 'ng2-pdf-viewer';
@@ -200,7 +211,20 @@ import { FileTransferDataComponent } from './file-transfer-data/file-transfer-da
     MatFormFieldModule,
     MatGridListModule,
     Ng2SearchPipeModule,
-    NgbModule
+    NgbModule,
+    DataTablesModule,
+    TableModule,
+    CalendarModule,
+    SliderModule,
+    DialogModule,
+    MultiSelectModule,
+    ContextMenuModule,
+    DropdownModule,
+    ButtonModule,
+    ToastModule,
+    InputTextModule,
+    ProgressBarModule,
+    CheckboxModule
   ],
   providers: [authInterceptorProviders,
     DatePipe,
@@ -210,7 +234,7 @@ import { FileTransferDataComponent } from './file-transfer-data/file-transfer-da
     // { provide: LOCALE_ID, useValue: "en" }
     { provide: DateAdapter, useClass: CustomDateAdapter }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent, EmployeeListComponent],
   exports: [
     TranslateModule,
     A11yModule,

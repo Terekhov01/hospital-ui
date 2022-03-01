@@ -15,5 +15,5 @@ export class Employee {
   passport: string;
   patient: Patient;
   polys: string;
-
+  role: string;
 }

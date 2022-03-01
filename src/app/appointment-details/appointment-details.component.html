@@ -4,7 +4,7 @@
     <label> <b> Фамилия доктора: </b>  </label> {{appointment.appointmentRegistration.doctor.user.lastName}}
   </div>
   <div>
-    <label> <b> Фамилия врача: </b>  </label> {{appointment.appointmentRegistration.patient.user.lastName}}
+    <label> <b> Фамилия пациента: </b>  </label> {{appointment.appointmentRegistration.patient.user.lastName}}
   </div>
   <div>
     <label> <b> Дата и время начала приема: </b>  </label> {{datePipe.transform(appointment.appointmentRegistration.start, "yyyy/MM/dd HH:mm")}}

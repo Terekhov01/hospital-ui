@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = true;
       }
     );
-    this.router.navigate(['']);
   }
 
   reloadPage(): void {
