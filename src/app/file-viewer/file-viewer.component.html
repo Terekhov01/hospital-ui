@@ -44,7 +44,7 @@
     <div *ngSwitchCase = "displayedFile.mimetype === 'application/msword' 
                       || displayedFile.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? displayedFile.mimetype : ''">
                       
-      <div id = "docxContainer"></div>
+      <div id = "docxContainer" style = "border-bottom: solid 10px #808080;"></div>
     </div>
 
     <div *ngSwitchCase = "'text/plain'">

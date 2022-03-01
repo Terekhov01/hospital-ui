@@ -10,6 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse, HttpEvent, HttpEventType} from "@angular/common/http";
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { E } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-appointment-creation',
@@ -34,8 +35,10 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
   {
       sickLeaveDatePickerFormControl: new FormControl()
   });
+
   sickLeaveButtonDisabled = true;
   sickLeaveButtonToggled = false;
+  confirmationButtonDisabled = false;
   sickLeaveDatePickerSubscription: Subscription | undefined = undefined;
 
   filesToUpload: File[] = [];
@@ -127,10 +130,19 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
       },
       error: (error) =>
       {
-        alert(error.error);
+        if (error.error.message !== undefined)
+        {
+          alert(error.error.message);
+        }
+        else
+        {
+          alert(error.error);
+        }
+        this.confirmationButtonDisabled = false;
       },
       complete: () =>
       {
+        this.confirmationButtonDisabled = false;
         uploadSubscription.unsubscribe();
         this.goToAppointmentList();
       }
@@ -163,6 +175,7 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
 
   confirmationButtonClicked()
   {
+    this.confirmationButtonDisabled = true;
     this.saveAppointment();
   }
 }

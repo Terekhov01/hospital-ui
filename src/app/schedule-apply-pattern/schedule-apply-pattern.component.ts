@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { MAT_DATE_RANGE_SELECTION_STRATEGY } from '@angular/material/datepicker';
-import { BehaviorSubject, of, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { SchedulePatternDataSource } from '../schedule-create-pattern/schedule-create-pattern.data-source';
 import { ScheduleDayPattern, ScheduleTablePattern } from '../schedule-transfer-data/schedule-prolong-page.data-transfer-objects';
@@ -25,6 +25,7 @@ import { TimeRounded } from '../schedule-transfer-data/schedule-interval.data-tr
 })
 export class ScheduleApplyPatternComponent implements OnInit
 {
+    isHintShown = false;
 
     public patternAutocompleteFormControl = new PatternAutocompleteFormControl();
 
@@ -35,6 +36,9 @@ export class ScheduleApplyPatternComponent implements OnInit
     public changeButtonFormControl = new FormControl();
 
     tableData: SchedulePatternDataSource = new SchedulePatternDataSource(this.formBuilder);
+
+    @Input()
+    private patternSavedEvent: Observable<void>;
 
     public patternRangePicker = this.formBuilder.group(
     {
@@ -56,6 +60,17 @@ export class ScheduleApplyPatternComponent implements OnInit
     ngOnInit(): void
     {
         this.updatePatternListFromServer();
+
+        let subscription = this.patternSavedEvent.subscribe({
+            next: () =>
+            {
+                this.updatePatternListFromServer();
+            },
+            complete: () =>
+            {
+                subscription.unsubscribe();
+            }
+        });
 
         this.patternAutocompleteFormControl.getFormControl().valueChanges.subscribe(
             {
@@ -232,6 +247,7 @@ export class ScheduleApplyPatternComponent implements OnInit
             {
                 next: (value) =>
                 {
+                    this.updatePatternListFromServer();
                     alert("Уделено успешно");
                 },
                 error: (error) =>

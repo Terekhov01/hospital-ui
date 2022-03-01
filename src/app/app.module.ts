@@ -14,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { DateAdapter, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import {Ng2SearchPipeModule} from "ng2-search-filter";
 import {DoctorService} from "./DoctorInList/doctorList/doctor.service";
@@ -39,6 +39,7 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 import { CreateEmployeeComponent } from './create-employee/create-employee.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { CustomDateAdapter } from './common-utility-classes/custom-date-adapter';
 import { ScheduleTablePageComponent } from './schedule-table-page/schedule-table-page.component';
 import { ScheduleFilterComponent } from './schedule-filter/schedule-filter.component';
 import { ScheduleAppointmentBlockComponent } from './schedule-appointment-block/schedule-appointment-block.component';
@@ -207,6 +208,7 @@ import { FileTransferDataComponent } from './file-transfer-data/file-transfer-da
     TranslateService,
     TranslateStore,
     // { provide: LOCALE_ID, useValue: "en" }
+    { provide: DateAdapter, useClass: CustomDateAdapter }
   ],
   bootstrap: [AppComponent],
   exports: [

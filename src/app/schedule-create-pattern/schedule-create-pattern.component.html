@@ -1,8 +1,12 @@
 <div class = "scheduleTableDiv mat-elevation-z4">
     <div class = "schedulePatternInputBlock">
 
+        <div>
+            <h1 class = "headerText">Создание шаблона расписания</h1>
+        </div>
+
         <!-- TODO - make reactive too -->
-        <mat-form-field class="inputPatternName" appearance="fill">
+        <mat-form-field class = "inputPatternName" appearance="fill">
             <mat-label>Название шаблона</mat-label>
             <input matInput type="text" [(ngModel)]="newPatternName">
             
@@ -11,6 +15,42 @@
             </button>
             
         </mat-form-field>
+
+        <button mat-mini-fab color="primary" id = "patternCreateHint" aria-label="Example icon button with a menu icon" (click) = "isHintShown = !isHintShown">
+            <mat-icon *ngIf = "!isHintShown; else minimizeHint">question_mark</mat-icon>
+            <ng-template #minimizeHint>
+                <mat-icon>close</mat-icon>
+            </ng-template>
+          </button>
+
+          <div *ngIf = "isHintShown">
+            <p> Для того, чтобы заполнить/отредактировать Ваше расписание, нужно:</p>
+            <ul>
+                <li> Создать шаблон расписания. </li>
+                
+                <li> Применить шаблон, используя блок ниже. Шаблон встраивается в расписание, при этом его можно повторить несколько раз.
+                    Ниже есть подсказка, как изменить расписание с помощью шаблона. </li>
+            </ul>
+
+            <p> Сделано это для того, чтобы сэкономить Ваше время. Заполнять информацию о каждом дне вручную - очень долго, 
+                особенно если расписание составляется на полгода вперед.</p>
+            
+            <p> Для заполнения шаблона выберите интервал времени, когда Ваше расписание повторяется. 
+                Обычно это - неделя, но может быть, например, 4 дня, если график 2/2 или 2 недели - если график зависит от четности недели.
+                Затем создайте столько колонок, сколько дней в этом интервале.
+                Добавить или убрать колонку можно кнопками "+" и "-" справа.
+                Заполните Интервалы времени, когда Вы работаете.
+                Для указания нескольких интервалов в один день добавьте строки кнопками снизу. </p>
+
+            <p> Если нужно очистить расписание - создайте шаблон на нужное количество дней, но не заполняйте интервалы времени. </p>
+
+            <p> Если расписание не периодическое - создавайте новый шаблон каждый раз, когда хотите его дополнить.</p>
+
+            <p> Дайте шаблону название. </p>
+
+            <p> Наконец, нажмите кнопку сохранения и переходите к блоку ниже.
+                Вы создали шаблон для заполнения расписания, но само расписание пока еще не изменилось. </p>
+          </div>
 
         <form [formGroup] = "tableData.getTableDataSubject().value">
 
@@ -75,4 +115,4 @@
     </div>
 </div>
 
-<app-schedule-apply-pattern></app-schedule-apply-pattern>
+<app-schedule-apply-pattern [patternSavedEvent]="patternSavedEvent.asObservable()"></app-schedule-apply-pattern>

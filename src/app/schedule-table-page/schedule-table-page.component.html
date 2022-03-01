@@ -1,4 +1,9 @@
 <div class = "scheduleDiv mat-elevation-z4">
+
+    <div class = "titleText">
+        <h1>Расписания докторов</h1>
+    </div>
+
     <div class = "filtersDiv">
         <app-doctor-selector (pickedDoctors) = "doctorsPickedChanged($event)" [maxPickAmount] = "5" id = "doctorSelector"></app-doctor-selector>
         <app-material-date-range-picker (pickedDateRange) = "calendarDateRangeChanged($event)" [rangeMaxLengthInDays] = "31" id = "dateRangePicker"></app-material-date-range-picker>
@@ -9,7 +14,7 @@
 
         <hr>
 
-        <div class = "preTableDiv mat-elevation-z4">
+        <div class = "preTableDiv">
             <div class = "doctorNameDiv">
                 Врач: 
                 {{ dataSource.getDoctorsInfoSubject().value[doctorCounter].lastName }}

@@ -5,6 +5,7 @@ import { DoctorScheduleService } from '../_services/doctor-schedule.service';
 import { SchedulePatternDataSource } from './schedule-create-pattern.data-source';
 import { ScheduleDayPattern, ScheduleTablePattern } from '../schedule-transfer-data/schedule-prolong-page.data-transfer-objects';
 import { Interval, TimeRounded } from '../schedule-transfer-data/schedule-interval.data-transfer-objects';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-create-pattern',
@@ -12,6 +13,9 @@ import { Interval, TimeRounded } from '../schedule-transfer-data/schedule-interv
   styleUrls: ['./schedule-create-pattern.component.css']
 })
 export class ScheduleCreatePatternComponent implements OnInit {
+    isHintShown: boolean = false;
+    // Used to update pattern list in autocomplete below
+    patternSavedEvent: Subject<void> = new Subject<void>();
 
     primaryTheme: NgxMaterialTimepickerTheme = {
         container:
@@ -150,14 +154,19 @@ export class ScheduleCreatePatternComponent implements OnInit {
 
         let response = this.scheduleService.postDoctorSchedulePattern(scheduleTablePattern);
 
-        response.subscribe({
+        let subscription = response.subscribe({
             next: (responseStr) => 
             {
+                this.patternSavedEvent.next();
                 alert("Сохранено");
             },
             error: (error) =>
             {
                 alert (error.error);
+            },
+            complete: () =>
+            {
+                subscription.unsubscribe();
             }
         });
     }
