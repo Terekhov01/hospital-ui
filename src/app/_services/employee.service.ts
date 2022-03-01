@@ -33,4 +33,11 @@ export class EmployeeService {
   deleteEmployee(id: number): Observable<Object>{
     return this.httpClient.delete(`${this.baseURL}/${id}`);
   }
+
+  getEmployeesLarge() {
+    return this.httpClient.get<any>(`${this.baseURL}`)
+      .toPromise()
+      .then(res => <Employee[]>res.data)
+      .then(data => { return data; });
+  }
 }
