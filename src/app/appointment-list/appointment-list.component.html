@@ -19,7 +19,7 @@
 <!--      <td> {{appointment.appointmentRegistration.start}} </td>-->
       <td> {{datePipe.transform(appointment.appointmentRegistration.start, "yyyy/MM/dd HH:mm")}} </td>
       <td>
-        <button (click)="updateAppointment(appointment.id)" mat-raised-button color="primary"> Изменить </button>
+<!--        <button (click)="updateAppointment(appointment.id)" mat-raised-button color="primary"> Изменить </button>-->
 <!--        <button (click)="deleteAppointment(appointment.id)" class="btn btn-danger" style="margin-left: 10px"> Удалить </button>-->
         <button (click)="appointmentDetails(appointment.id)" mat-raised-button color="primary" style="margin-left: 10px"> Детали </button>
       </td>

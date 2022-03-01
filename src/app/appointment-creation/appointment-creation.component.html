@@ -56,9 +56,9 @@
 
     <div class="form-group">
 <!--      <label for="file">Choose File</label>-->
-      <input type = "file"
-             id = "file"
-             (change)="handleFileInput($any($event).target.files)" multiple>
+      <input type = "file" multiple accept=".pdf"
+             id = "file" placeholder="Выбертие .pdf файлы для прикрепления"
+             (change)="handleFileInput($any($event).target.files)">
     </div>
 
 <!--    <form enctype="multipart/form-data">-->
