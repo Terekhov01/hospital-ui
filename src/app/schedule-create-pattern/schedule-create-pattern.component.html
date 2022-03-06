@@ -8,15 +8,15 @@
         <!-- TODO - make reactive too -->
         <mat-form-field class = "inputPatternName" appearance="fill">
             <mat-label>Название шаблона</mat-label>
-            <input matInput type="text" [(ngModel)]="newPatternName">
+            <input matInput type="text" [formControl]="newPatternName">
             
-            <button *ngIf="newPatternName.length !== 0" matSuffix mat-icon-button aria-label="Clear" (click)="newPatternName=''">
+            <button *ngIf="newPatternName.value.length !== 0" matSuffix mat-icon-button aria-label="Clear" (click)="newPatternName.setValue('')">
                 <mat-icon>close</mat-icon>
             </button>
             
         </mat-form-field>
 
-        <button mat-mini-fab color="primary" id = "patternCreateHint" aria-label="Example icon button with a menu icon" (click) = "isHintShown = !isHintShown">
+        <button mat-mini-fab color="primary" id = "patternCreateHint" aria-label="Hint pop up button" (click) = "isHintShown = !isHintShown">
             <mat-icon *ngIf = "!isHintShown; else minimizeHint">question_mark</mat-icon>
             <ng-template #minimizeHint>
                 <mat-icon>close</mat-icon>

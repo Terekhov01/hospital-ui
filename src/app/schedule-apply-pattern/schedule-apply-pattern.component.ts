@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { MAT_DATE_RANGE_SELECTION_STRATEGY } from '@angular/material/datepicker';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
@@ -11,6 +11,7 @@ import { ISchedulePatternShortInfo, SchedulePatternShortInfo } from '../schedule
 import { PatternDayRangeSelectionStrategy } from './schedule-apply-pattern.selection-stratedy';
 import { PatternAutocompleteFormControl } from './schedule-pattern-name-autocomplete.form-control';
 import { TimeRounded } from '../schedule-transfer-data/schedule-interval.data-transfer-objects';
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 @Component({
   selector: 'app-schedule-apply-pattern',
@@ -52,7 +53,8 @@ export class ScheduleApplyPatternComponent implements OnInit
 
     private patternSubscription: Subscription | null = null;
 
-    constructor(private scheduleService: DoctorScheduleService, private formBuilder: FormBuilder, private _adapter: DateAdapter<any>)
+    constructor(private scheduleService: DoctorScheduleService, private formBuilder: FormBuilder, private _adapter: DateAdapter<any>,
+        private popUpMessageService: PopUpMessageService)
     {
         this._adapter.setLocale('ru');
     }
@@ -84,7 +86,6 @@ export class ScheduleApplyPatternComponent implements OnInit
 
                     if (this.patternAutocompleteFormControl.getAutocompleteInsertedSchedulePattern() == null)
                     {
-                        //Not a valid pattern name
                         return;
                     }
 
@@ -94,7 +95,8 @@ export class ScheduleApplyPatternComponent implements OnInit
                         
                         if (this.patternAutocompleteFormControl.getAutocompleteInsertedSchedulePattern()!.daysLength < 1)
                         {
-                            alert("Шаблон некорректен - его длина менее 1 дня");
+                            this.popUpMessageService.displayWarning("Шаблон некорректен - его длина менее 1 дня");
+                            //alert("Шаблон некорректен - его длина менее 1 дня");
                             return;
                         }
         
@@ -133,7 +135,8 @@ export class ScheduleApplyPatternComponent implements OnInit
                         error: (error) =>
                         {
                             this.tableData = new SchedulePatternDataSource(this.formBuilder);
-                            alert(error.error);
+                            this.popUpMessageService.displayError(error);
+                            //alert(error.error);
                         },
                         complete: () =>
                         {}
@@ -141,7 +144,8 @@ export class ScheduleApplyPatternComponent implements OnInit
                 },
                 error: (error) =>
                 {
-                    alert("Внутренняя ошибка. Имя шаблона расписания изменено, но событие не может быть обработано. " + error.error);
+                    this.popUpMessageService.displayError(error, "Внутренняя ошибка. Имя шаблона расписания изменено, но событие не может быть обработано");
+                    //alert("Внутренняя ошибка. Имя шаблона расписания изменено, но событие не может быть обработано. " + error.error);
                 },
                 complete: () =>
                 {},
@@ -163,7 +167,20 @@ export class ScheduleApplyPatternComponent implements OnInit
                     {
                         if (this.scheduleApplyRepeatFormControl.value !== null)
                         {
-                            alert(this.scheduleApplyRepeatFormControl.errors);
+                            let aggerateErrorStr = "Поле ввода количества повторений шаблона:\n";
+                            Object.keys(this.scheduleApplyRepeatFormControl).forEach(key =>
+                            {
+                                const controlErrors: ValidationErrors = this.scheduleApplyRepeatFormControl.get(key).errors;
+                                if (controlErrors != null)
+                                {
+                                    Object.keys(controlErrors).forEach(keyError => {
+                                        aggerateErrorStr.concat('Ошибка: ', keyError, '.\tОписание: ', controlErrors[keyError], '\n');
+                                    });
+                                }
+                            });
+                            
+                            this.popUpMessageService.displayWarning(aggerateErrorStr);
+                            //alert(this.scheduleApplyRepeatFormControl.errors);
                         }
                     }
                 }
@@ -198,7 +215,8 @@ export class ScheduleApplyPatternComponent implements OnInit
             },
             error: (error) => 
             { 
-                alert(error.error);
+                this.popUpMessageService.displayError(error);
+                //alert(error.error);
             },
             complete: () => 
             { 
@@ -225,11 +243,13 @@ export class ScheduleApplyPatternComponent implements OnInit
         {
             next: (value) =>
             {
-                alert("Расписание изменено");
+                this.popUpMessageService.displayConfirmation("Расписание изменено");
+                //alert("Расписание изменено");
             },
             error: (error) =>
             {
-                alert(error.error);
+                this.popUpMessageService.displayError(error);
+                //alert(error.error);
             },
             complete: () =>
             {
@@ -248,11 +268,13 @@ export class ScheduleApplyPatternComponent implements OnInit
                 next: (value) =>
                 {
                     this.updatePatternListFromServer();
-                    alert("Уделено успешно");
+                    this.popUpMessageService.displayConfirmation("Удалено успешно");
+                    //alert("Уделено успешно");
                 },
                 error: (error) =>
                 {
-                    alert(error.error);
+                    this.popUpMessageService.displayError(error);
+                    //alert(error.error);
                 },
                 complete: () =>
                 {

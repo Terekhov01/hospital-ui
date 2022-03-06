@@ -22,6 +22,11 @@ export class PatientService {
     return this.httpClient.get<Patient>(`${this.baseURL}/lastname/${lastName}`);
   }
 
+  getPatientAmount(): Observable<bigint>
+  {
+    return this.httpClient.get<bigint>(`${this.baseURL}/count-all`);
+  }
+
   getPatientById(id: bigint): Observable<Patient> {
     return this.httpClient.get<Patient>(`${this.baseURL}/id/${id}`)
   }

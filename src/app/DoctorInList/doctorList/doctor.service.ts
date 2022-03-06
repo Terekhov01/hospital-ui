@@ -62,6 +62,11 @@ export class DoctorService {
     return this.http.get<User[]>(`${this.userUrl}`);
   }
 
+  getDoctourAmount(): Observable<bigint>
+  {
+    return this.http.get<bigint>(`${this.userUrl}/count-all`);
+  }
+
 //| undefined
   getDoctorByID(id: number | undefined): Observable<User> {
     return this.http.get<User>(`${this.userUrl}/${id}`)

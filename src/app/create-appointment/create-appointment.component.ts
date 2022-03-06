@@ -9,6 +9,7 @@ import {AppointmentRegistrationService} from "../appointment-registration.servic
 import {DoctorService} from "../_services/doctor.service";
 import {PatientService} from "../patient.service";
 import {DatePipe} from "@angular/common";
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 @Component({
   selector: 'app-create-appointment',
@@ -30,7 +31,8 @@ export class CreateAppointmentComponent implements OnInit {
               private doctorService: DoctorService,
               private patientService: PatientService,
               private appointmentRegistrationService: AppointmentRegistrationService,
-              private router: Router, public datePipe: DatePipe) { }
+              private router: Router, public datePipe: DatePipe,
+              private popUpMessageService: PopUpMessageService) { }
 
   ngOnInit(): void {
     let usr_role = window.sessionStorage.getItem("USER_ROLE")
@@ -44,7 +46,8 @@ export class CreateAppointmentComponent implements OnInit {
         this.appointmentRegistrations = data;
       })
     } else {
-      alert("ERROR: UNAUTHORIZED")
+      this.popUpMessageService.displayError("Ошибка авторизации. Войдите на сайт");
+      //alert("ERROR: UNAUTHORIZED")
     }
   }
 

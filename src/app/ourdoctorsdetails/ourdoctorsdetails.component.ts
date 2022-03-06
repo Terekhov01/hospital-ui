@@ -6,6 +6,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 // import {DoctorRequest} from "../user/user/doctor-request.model";
 import {ourdoctorsModel} from "../OurDoctorsInClinic/ourdoctors.model";
 import {Subscription} from "rxjs";
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 @Component({
   selector: 'app-ourdoctorsdetails',
@@ -23,7 +24,8 @@ export class OurdoctorsdetailsComponent implements OnInit {
 
   private subscription?: Subscription;
 
-  constructor(private router: Router,private route: ActivatedRoute,private userService: OurdoctorsService) {
+  constructor(private router: Router,private route: ActivatedRoute,private userService: OurdoctorsService,
+    private popUpMessageService: PopUpMessageService) {
 
     this.subscription = route.params.subscribe(params=>this.doctorId=params['id']);
 //     console.log("конструктор");
@@ -78,7 +80,8 @@ export class OurdoctorsdetailsComponent implements OnInit {
 
     this.userService.updateDoctorRating(this.doctorRating)
       .subscribe(data => {
-        alert("User created successfully.");
+        this.popUpMessageService.displayConfirmation("Рейтинг обновлен");
+        //alert("User created successfully.");
         this.goToDoctorList()
       });
 

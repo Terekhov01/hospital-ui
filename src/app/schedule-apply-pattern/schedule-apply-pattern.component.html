@@ -27,7 +27,7 @@
                     </mat-autocomplete>
                 </mat-form-field>
 
-                <button mat-mini-fab color="primary" id = "patternApplyHint" aria-label="Example icon button with a menu icon" (click) = "isHintShown = !isHintShown">
+                <button mat-mini-fab color = "primary" id = "patternApplyHint" aria-label = "Hint pop up button" (click) = "isHintShown = !isHintShown">
                     <mat-icon *ngIf = "!isHintShown; else minimizeHint">question_mark</mat-icon>
                     <ng-template #minimizeHint>
                         <mat-icon>close</mat-icon>

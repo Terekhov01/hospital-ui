@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { NgxMaterialTimepickerTheme } from 'ngx-material-timepicker';
 import { DoctorScheduleService } from '../_services/doctor-schedule.service';
 import { SchedulePatternDataSource } from './schedule-create-pattern.data-source';
 import { ScheduleDayPattern, ScheduleTablePattern } from '../schedule-transfer-data/schedule-prolong-page.data-transfer-objects';
 import { Interval, TimeRounded } from '../schedule-transfer-data/schedule-interval.data-transfer-objects';
 import { Subject } from 'rxjs';
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 @Component({
   selector: 'app-create-pattern',
@@ -39,11 +40,11 @@ export class ScheduleCreatePatternComponent implements OnInit {
         }
     };
 
-    newPatternName = "";
+    newPatternName = new FormControl("", [Validators.required, this.notEmptyValidator]);
 
     tableData: SchedulePatternDataSource = new SchedulePatternDataSource(this.formBuilder);
 
-    constructor(private formBuilder: FormBuilder, private scheduleService: DoctorScheduleService)
+    constructor(private formBuilder: FormBuilder, private scheduleService: DoctorScheduleService, private popUpMessageService: PopUpMessageService)
     {}
     
     ngOnInit(): void
@@ -137,9 +138,16 @@ export class ScheduleCreatePatternComponent implements OnInit {
     {
         let tableData = this.getDataFromTable();
 
+        if (this.newPatternName.invalid)
+        {
+            this.popUpMessageService.displayWarning("У шаблона должно быть осмысленное имя. Оно должно что-то содержать. Имя только из пробелов не допускается");
+            return;
+        }
+
         if (tableData.length === 0)
         {
-            alert("Шаблон не может быть пустым!");
+            this.popUpMessageService.displayWarning("Шаблон не может быть пустым");
+            //alert("Шаблон не может быть пустым!");
             return;
         }
         
@@ -148,7 +156,7 @@ export class ScheduleCreatePatternComponent implements OnInit {
             return;
         }
 
-        let scheduleTablePattern = new ScheduleTablePattern(this.newPatternName, 
+        let scheduleTablePattern = new ScheduleTablePattern(this.newPatternName.value, 
                                                             this.tableData.getColumnAmount(),
                                                             tableData);
 
@@ -158,11 +166,13 @@ export class ScheduleCreatePatternComponent implements OnInit {
             next: (responseStr) => 
             {
                 this.patternSavedEvent.next();
-                alert("Сохранено");
+                this.popUpMessageService.displayConfirmation("Шаблон сохранен");
+                //alert("Сохранено");
             },
             error: (error) =>
             {
-                alert (error.error);
+                this.popUpMessageService.displayError(error);
+                //alert(error.error);
             },
             complete: () =>
             {
@@ -175,8 +185,8 @@ export class ScheduleCreatePatternComponent implements OnInit {
     {
         if (this.tableData.getTableDataSubject().value.invalid)
         {
-            alert(this.getFormGroupValidationErrors(this.tableData.getTableDataSubject().value));
-            //alert("Some of non-empty input fields do not represent valid time interval!");
+            this.popUpMessageService.displayWarning(this.getFormGroupValidationErrors(this.tableData.getTableDataSubject().value));
+            //alert(this.getFormGroupValidationErrors(this.tableData.getTableDataSubject().value));
             return undefined;
         }
 
@@ -227,10 +237,10 @@ export class ScheduleCreatePatternComponent implements OnInit {
         return retVal;
     }
 
-    debugger(value: any): boolean
+    public notEmptyValidator(control: FormControl)
     {
-        console.log(value);
-
-        return true;
+        const isWhitespace = (control.value || '').trim().length === 0;
+        const isValid = !isWhitespace;
+        return isValid ? null : { 'whitespace': true };
     }
 }

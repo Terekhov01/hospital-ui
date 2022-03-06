@@ -22,6 +22,13 @@ import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
+import {
+  NgxAwesomePopupModule,
+  DialogConfigModule,
+  ConfirmBoxConfigModule,
+  ToastNotificationConfigModule
+} from '@costlydeveloper/ngx-awesome-popup';
+
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 import { AppComponent } from './app.component';
@@ -185,7 +192,7 @@ import { FileTransferDataComponent } from './file-transfer-data/file-transfer-da
     SafePipe,
     FileViewerComponent,
     UpdateprofileComponent,
-    FileTransferDataComponent,
+    FileTransferDataComponent
   ],
   imports: [
     TranslateModule.forRoot(),
@@ -224,7 +231,11 @@ import { FileTransferDataComponent } from './file-transfer-data/file-transfer-da
     ToastModule,
     InputTextModule,
     ProgressBarModule,
-    CheckboxModule
+    CheckboxModule,
+    NgxAwesomePopupModule.forRoot(), // Essential, mandatory main module.
+    DialogConfigModule.forRoot(), // Needed for instantiating dynamic components.
+    ConfirmBoxConfigModule.forRoot(), // Needed for instantiating confirm boxes.
+    ToastNotificationConfigModule.forRoot() // Needed for instantiating toast notifications.
   ],
   providers: [authInterceptorProviders,
     DatePipe,
@@ -234,7 +245,7 @@ import { FileTransferDataComponent } from './file-transfer-data/file-transfer-da
     // { provide: LOCALE_ID, useValue: "en" }
     { provide: DateAdapter, useClass: CustomDateAdapter }
   ],
-  bootstrap: [AppComponent, EmployeeListComponent],
+  bootstrap: [AppComponent],
   exports: [
     TranslateModule,
     A11yModule,
