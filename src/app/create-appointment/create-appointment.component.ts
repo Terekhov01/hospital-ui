@@ -24,7 +24,7 @@ export class CreateAppointmentComponent implements OnInit {
   room: string;
   doctor: string;
   patient: string
-  appointmentRegistrations: AppointmentRegistration[];
+  appointmentRegistrations: AppointmentRegistration[] = [];
 
   constructor(private appointmentService: AppointmentService,
               private doctorService: DoctorService,

@@ -164,5 +164,6 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
   confirmationButtonClicked()
   {
     this.saveAppointment();
+    this.goToAppointmentList();
   }
 }

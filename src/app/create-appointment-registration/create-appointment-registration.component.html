@@ -18,24 +18,24 @@
       <label> Фамилия пациента:    </label> {{appointmentRegistration.patient.user.lastName}}
     </div>
 
-    <div class = "form-group">
-      <label> Услуга:    </label>
-      <div>
+<!--    <div class = "form-group">-->
+<!--      <label> Услуга:    </label>-->
+<!--      <div>-->
 
-      </div>
+<!--      </div>-->
 
-      <input size="39" type = "text"
-             [formControl] = "serviceFormControl.ServiceFormControl"
-             [matAutocomplete] = "auto">
+<!--      <input size="39" type = "text"-->
+<!--             [formControl] = "serviceFormControl.ServiceFormControl"-->
+<!--             [matAutocomplete] = "auto">-->
 
-      <mat-autocomplete [panelWidth]="300" autoActiveFirstOption #auto="matAutocomplete" class = "autocompleteDoctorFilterField">
-        <!-- TODO - introduce categories of doctors by their profession -->
-        <mat-option *ngFor="let service of serviceFormControl.ServiceFiltered.value" [value] = "service.toString()">
-          {{ service.toString() }}
-        </mat-option>
-      </mat-autocomplete>
+<!--      <mat-autocomplete [panelWidth]="300" autoActiveFirstOption #auto="matAutocomplete" class = "autocompleteDoctorFilterField">-->
+<!--        &lt;!&ndash; TODO - introduce categories of doctors by their profession &ndash;&gt;-->
+<!--        <mat-option *ngFor="let service of serviceFormControl.ServiceFiltered.value" [value] = "service.toString()">-->
+<!--          {{ service.toString() }}-->
+<!--        </mat-option>-->
+<!--      </mat-autocomplete>-->
 
-    </div>
+<!--    </div>-->
 
     <button mat-raised-button color="primary"> Подтвердить запись </button>
 

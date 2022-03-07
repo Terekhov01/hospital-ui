@@ -7,11 +7,11 @@
     <label> <b> Фамилия пациента: </b>  </label> {{appointmentRegistration.patient.user.lastName}}
   </div>
   <div>
-    <label> <b> Специализация доктора: </b>  </label> {{appointmentRegistration.doctor.education}}
+    <label> <b> Образование доктора: </b>  </label> {{appointmentRegistration.doctor.education}}
   </div>
-  <div>
-    <label> <b> Услуга: </b>  </label> {{appointmentRegistration.service}}
-  </div>
+<!--  <div>-->
+<!--    <label> <b> Услуга: </b>  </label> {{appointmentRegistration.service}}-->
+<!--  </div>-->
   <div>
     <label> <b> Дата и время начала приема: </b>  </label> {{datePipe.transform(appointmentRegistration.start, "yyyy/MM/dd HH:mm")}}
   </div>
