@@ -14,13 +14,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { DateAdapter, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import {Ng2SearchPipeModule} from "ng2-search-filter";
 import {DoctorService} from "./DoctorInList/doctorList/doctor.service";
 import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+
+import {
+  NgxAwesomePopupModule,
+  DialogConfigModule,
+  ConfirmBoxConfigModule,
+  ToastNotificationConfigModule
+} from '@costlydeveloper/ngx-awesome-popup';
 
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
@@ -38,6 +45,7 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 import { CreateEmployeeComponent } from './create-employee/create-employee.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { CustomDateAdapter } from './common-utility-classes/custom-date-adapter';
 import { ScheduleTablePageComponent } from './schedule-table-page/schedule-table-page.component';
 import { ScheduleFilterComponent } from './schedule-filter/schedule-filter.component';
 import { ScheduleAppointmentBlockComponent } from './schedule-appointment-block/schedule-appointment-block.component';
@@ -184,7 +192,7 @@ import { FileTransferDataComponent } from './file-transfer-data/file-transfer-da
     SafePipe,
     FileViewerComponent,
     UpdateprofileComponent,
-    FileTransferDataComponent,
+    FileTransferDataComponent
   ],
   imports: [
     TranslateModule.forRoot(),
@@ -223,7 +231,11 @@ import { FileTransferDataComponent } from './file-transfer-data/file-transfer-da
     ToastModule,
     InputTextModule,
     ProgressBarModule,
-    CheckboxModule
+    CheckboxModule,
+    NgxAwesomePopupModule.forRoot(), // Essential, mandatory main module.
+    DialogConfigModule.forRoot(), // Needed for instantiating dynamic components.
+    ConfirmBoxConfigModule.forRoot(), // Needed for instantiating confirm boxes.
+    ToastNotificationConfigModule.forRoot() // Needed for instantiating toast notifications.
   ],
   providers: [authInterceptorProviders,
     DatePipe,
@@ -231,8 +243,9 @@ import { FileTransferDataComponent } from './file-transfer-data/file-transfer-da
     TranslateService,
     TranslateStore,
     // { provide: LOCALE_ID, useValue: "en" }
+    { provide: DateAdapter, useClass: CustomDateAdapter }
   ],
-  bootstrap: [AppComponent, EmployeeListComponent],
+  bootstrap: [AppComponent],
   exports: [
     TranslateModule,
     A11yModule,

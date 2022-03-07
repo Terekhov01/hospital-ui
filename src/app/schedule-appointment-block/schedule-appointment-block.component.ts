@@ -10,6 +10,7 @@ import { FilterSettings } from '../schedule-filter/schedule-filter.filter-settin
 import { IDoctorScheduleAppointmentsData, DoctorScheduleAppointmentsDataDaily, ScheduleInterval } from '../schedule-transfer-data/schedule-appointment.data-transfer-objects';
 import { AppointmentRegistrationInfoService } from "../appointment-registration-info.service";
 import { Router } from "@angular/router";
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 @Component({
   selector: 'app-schedule-appointment-block',
@@ -26,7 +27,8 @@ export class ScheduleAppointmentBlockComponent implements OnInit
     public doctorScheduleDailyAppointmentsArray: DoctorScheduleAppointmentsDataDaily[] = [];
 
     constructor(private doctorScheduleService: DoctorScheduleService, private doctorShortInfoService: DoctorSharedShortInformationService, public utilsService: CommonUtilsService,
-                private appointmentRegistrationInfoService: AppointmentRegistrationInfoService, private router: Router)
+                private appointmentRegistrationInfoService: AppointmentRegistrationInfoService, private router: Router,
+                private popUpMessageService: PopUpMessageService)
     {}
 
     ngOnInit(): void
@@ -40,9 +42,10 @@ export class ScheduleAppointmentBlockComponent implements OnInit
             },
             error: (error) =>
             {
-                alert("Internal error. \
-                            Failed loading available appointments data to ScheduleAppointmentBlockComponent. \
-                            Cannot invoke presentAppointmentDates method.")
+                this.popUpMessageService.displayError(error);
+                //alert("Internal error. \
+                //            Failed loading available appointments data to ScheduleAppointmentBlockComponent. \
+                //            Cannot invoke presentAppointmentDates method.")
             }
         });
     }
@@ -79,12 +82,15 @@ export class ScheduleAppointmentBlockComponent implements OnInit
                 //the only doctor. Next if statement checks if server responds with relative information.
                 if (doctorScheduleAppointmentsSubjects.value.length > 1)
                 {
-                    alert("Server responce is invalid - multiple doctors' information recieved. Parsing first doctor.");
+                    this.popUpMessageService.displayWarning("Ответ сервера неверен: он содержит информацию о нескольких докторах. Вся информация не может быть обработана.\
+                    Показывается только информация о первом докторе");
+                    //alert("Server responce is invalid - multiple doctors' information recieved. Parsing first doctor.");
                 }
 
                 if (doctorScheduleAppointmentsSubjects.value.length === 0)
                 {
-                    alert("Нет доступного для записи времени");
+                    this.popUpMessageService.displayWarning("Нет доступного для записи времени");
+                    //alert("Нет доступного для записи времени");
                 }
 
                 let doctorScheduleAppointments = doctorScheduleAppointmentsSubjects.value[0];
@@ -126,7 +132,8 @@ export class ScheduleAppointmentBlockComponent implements OnInit
             },
             error: (error) =>
             {
-                alert(error.error);
+                this.popUpMessageService.displayError(error);
+                //alert(error.error);
             },
             complete: () =>
             {

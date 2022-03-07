@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {DoctorService} from "../DoctorInList/doctorList/doctor.service";
 import {User} from "../DoctorInList/doctorList/doctor.models";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 @Component({
     selector: 'app-update-doctor',
@@ -19,7 +20,7 @@ export class UpdateDoctorComponent implements OnInit {
 
     constructor(private userService: DoctorService,
                 private route: ActivatedRoute,
-                private router: Router) {
+                private router: Router, private popUpMessageService: PopUpMessageService) {
 
         this.user = {
             id: 0,
@@ -71,8 +72,10 @@ export class UpdateDoctorComponent implements OnInit {
         this.user.specialist[0].specialization = this.updatedoctorform?.get('specialist')?.value;
         console.log(this.user);
         this.userService.updateDoctor(this.user)
-            .subscribe(data => {
-                alert("User update successfully.");
+            .subscribe(data =>
+            {
+                this.popUpMessageService.displayConfirmation("Информация о Вас успешно обновлена");
+                //alert("User update successfully.");
                 this.goToDoctorList()
             });
     }

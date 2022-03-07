@@ -21,9 +21,9 @@
   <br>
 </div>
 
-<div *ngIf = "displayedFile !== null else NoFiles" class = "documentBlock">
+<div *ngIf = "displayedFile !== null" class = "documentBlock">
 
-  <h1> {{ displayedFile.fileName }} </h1>
+  <h1> {{ displayedFile.fileName }} </h1> 
   <h3> Дата загрузки: {{ this.datePipe.transform(displayedFile.creationDate, 'dd.MM.yyyy hh:mm:ss') }} </h3>
   <!-- Present each file differently based on file type (extension) -->
 
@@ -41,10 +41,10 @@
       </ngx-extended-pdf-viewer>
     </div>
 
-    <div *ngSwitchCase = "displayedFile.mimetype === 'application/msword'
+    <div *ngSwitchCase = "displayedFile.mimetype === 'application/msword' 
                       || displayedFile.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? displayedFile.mimetype : ''">
-
-      <div id = "docxContainer"></div>
+                      
+      <div id = "docxContainer" style = "border-bottom: solid 10px #808080;"></div>
     </div>
 
     <div *ngSwitchCase = "'text/plain'">
@@ -57,24 +57,14 @@
       Предпросмотр документа {{ displayedFile.fileName }} недоступен
     </div>
   </div>
-
-
-  <div>
-    <br>
-  </div>
-
-  <button mat-raised-button color="primary" (click)="downloadAllFiles()" id = "downloadAllButton"> Скачать все </button>
-
+  
 </div>
 
-<ng-template #NoFiles>
-  Нет файлов
+<div>
+  <br>
+</div>
 
-  <div>
-    <br>
-  </div>
-
-</ng-template>
+<button mat-raised-button color="primary" (click)="downloadAllFiles()" id = "downloadAllButton"> Скачать все </button>
 
 <div>
   <br>

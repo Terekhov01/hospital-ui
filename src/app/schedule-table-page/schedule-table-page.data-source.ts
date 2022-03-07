@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, of, Subscription, timeInterval } from "rxj
 import { DoctorScheduleService } from "../_services/doctor-schedule.service";
 import { DailyInformation, DoctorInfo, IDoctorSchedule } from "../schedule-transfer-data/schedule-table-page.data-transfer-objects";
 import { Interval, RoundedTimeIntervalConverter, TimeRounded } from "../schedule-transfer-data/schedule-interval.data-transfer-objects";
+import { PopUpMessageService } from "../_services/pop-up-message.service";
 
 export class ScheduleTableDataSource implements DataSource<Interval[][]>//, OnDestroy
 {
@@ -14,7 +15,7 @@ export class ScheduleTableDataSource implements DataSource<Interval[][]>//, OnDe
 
     public loading$ = this.loadingSubject.asObservable();
 
-    constructor(private doctorScheduleService: DoctorScheduleService) {}
+    constructor(private doctorScheduleService: DoctorScheduleService, private popUpMessageService: PopUpMessageService) {}
     
     /*ngOnDestroy(): void
     {
@@ -133,7 +134,8 @@ export class ScheduleTableDataSource implements DataSource<Interval[][]>//, OnDe
             }, 
             error: (error) => 
             { 
-                alert(error.error);
+                this.popUpMessageService.displayError(error);
+                //alert(error.error);
             },
             complete: () =>
             { 

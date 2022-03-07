@@ -16,9 +16,9 @@
       <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/admin" class="nav-link" routerLink="admin">Панель администратора</a>
       </li>
-      <li class="nav-item" *ngIf="showModeratorBoard">
+<!--  <li class="nav-item" *ngIf="showModeratorBoard">
         <a href="/mod" class="nav-link" routerLink="mod">Панель врача</a>
-      </li>
+      </li>-->
       <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/create-employee" class="nav-link" routerLink="create-employee">Добавить врача</a>
       </li>
@@ -35,10 +35,10 @@
         <a href="/create-appointment" class="nav-link" routerLink="create-appointment">Новый прием</a>
       </li>
       <li class="nav-item">
-        <a href="/appointmentRegistrations" class="nav-link" *ngIf="!showModeratorBoard && !showAdminBoard && isLoggedIn" routerLink="appointmentRegistrations">Мои записи</a>
+        <a href="/appointmentRegistrations" class="nav-link" *ngIf="showPatientBoard" routerLink="appointmentRegistrations">Мои записи</a>
       </li>
       <li class="nav-item">
-        <a href="/schedule/specifyAppointment" class="nav-link" *ngIf="!showModeratorBoard && !showAdminBoard && isLoggedIn" routerLink="schedule/specifyAppointment">Записаться ко врачу</a>
+        <a href="/schedule/specifyAppointment" class="nav-link" *ngIf="showPatientBoard" routerLink="schedule/specifyAppointment">Записаться ко врачу</a>
       </li>
 
       <!-- Выпадающее меню расписания https://ng-bootstrap.github.io/#/components/dropdown/examples -->
@@ -53,7 +53,7 @@
         </div>
       </div>
 
-      <li *ngIf="isLoggedIn && !showModeratorBoard">
+      <li *ngIf="!showModeratorBoard">
         <a class = "nav-link" routerLink = "schedule/doctorsTable">Расписание</a>
       </li>
     </ul>

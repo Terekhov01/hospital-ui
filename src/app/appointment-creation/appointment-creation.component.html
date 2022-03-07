@@ -96,7 +96,7 @@
       </div>
     </div>
 
-    <button type="button" mat-raised-button color="primary" (click) = "confirmationButtonClicked()"> Подтвердить </button>
+    <button type="button" mat-raised-button color="primary" (click) = "confirmationButtonClicked()" [disabled] = "confirmationButtonDisabled"> Подтвердить </button>
 
   </form>
 </div>

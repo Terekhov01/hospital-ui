@@ -10,6 +10,8 @@ import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse, HttpEvent, HttpEventType} from "@angular/common/http";
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { E } from '@angular/cdk/keycodes';
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 @Component({
   selector: 'app-appointment-creation',
@@ -34,8 +36,10 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
   {
       sickLeaveDatePickerFormControl: new FormControl()
   });
+
   sickLeaveButtonDisabled = true;
   sickLeaveButtonToggled = false;
+  confirmationButtonDisabled = false;
   sickLeaveDatePickerSubscription: Subscription | undefined = undefined;
 
   filesToUpload: File[] = [];
@@ -46,7 +50,8 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
               private patientService: PatientService,
               private appointmentRegistrationService: AppointmentRegistrationService,
               private router: Router,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private popUpMessageService: PopUpMessageService) { }
 
   ngOnInit(): void {
     this.appointmentDTO = new AppointmentCreationDTO();
@@ -81,7 +86,8 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
       error: (error) =>
       {
         console.log("ERROR 1")
-        alert(error.toString());
+        this.popUpMessageService.displayError(error);
+        //alert(error.toString());
       }
     });
   }
@@ -123,14 +129,26 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
     let uploadSubscription = this.appointmentService.createAppointment(this.appointmentDTO).subscribe({
       next: (value) =>
       {
-        alert("Результаты приема записаны");
+        this.popUpMessageService.displayConfirmation("Результаты приема записаны");
+        //alert("Результаты приема записаны");
       },
       error: (error) =>
       {
-        alert(error.error);
+        this.popUpMessageService.displayError(error);
+        
+        /*if (error.error.message !== undefined)
+        {
+          alert(error.error.message);
+        }
+        else
+        {
+          alert(error.error);
+        }*/
+        this.confirmationButtonDisabled = false;
       },
       complete: () =>
       {
+        this.confirmationButtonDisabled = false;
         uploadSubscription.unsubscribe();
         this.goToAppointmentList();
       }
@@ -144,12 +162,14 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
     if (this.sickLeaveButtonToggled)
     {
       this.sickLeaveDatePickerFormGroup.get('sickLeaveDatePickerFormControl').disable();
-      alert("Больничный прикреплен");
+      this.popUpMessageService.displayConfirmation("Больничный прикреплен");
+      //alert("Больничный прикреплен");
     }
     else
     {
       this.sickLeaveDatePickerFormGroup.get('sickLeaveDatePickerFormControl').enable();
-      alert("Больничный откреплен");
+      this.popUpMessageService.displayConfirmation("Больничный откреплен");
+      //alert("Больничный откреплен");
     }
   }
 
@@ -163,6 +183,7 @@ export class AppointmentCreationComponent implements OnInit, OnDestroy {
 
   confirmationButtonClicked()
   {
+    this.confirmationButtonDisabled = true;
     this.saveAppointment();
     this.goToAppointmentList();
   }

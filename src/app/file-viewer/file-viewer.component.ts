@@ -10,6 +10,7 @@ import { FileDTO } from '../file-transfer-data/file-transfer-data.data-transfer-
 
 import { renderAsync } from "docx-preview";
 import { FormControl } from '@angular/forms';
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 //declare var docx: any;
 
@@ -44,7 +45,8 @@ export class FileViewerComponent implements OnInit, AfterViewChecked
   id: number;
 
   constructor(private route: ActivatedRoute, private router: Router, public sanitizer: DomSanitizer,
-              private appointmentService: AppointmentService, public datePipe: DatePipe, private patientService: PatientService) { }
+              private appointmentService: AppointmentService, public datePipe: DatePipe, private patientService: PatientService,
+              private popUpMessageService: PopUpMessageService) { }
 
   ngOnInit(): void
   {
@@ -68,7 +70,8 @@ export class FileViewerComponent implements OnInit, AfterViewChecked
        },
       error: (error) =>
       {
-        alert(error.error);
+        this.popUpMessageService.displayError(error);
+        //alert(error.error);
       },
       complete: () =>
       {

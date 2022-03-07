@@ -7,6 +7,7 @@ import { DoctorService } from '../_services/doctor.service';
 import { SpecializationService } from '../_services/specialization.service';
 import { IUserNameId, UserNameId } from './doctor-selector.i-raw-data';
 import { BehaviorEventEmitter } from "../common-utility-classes/behavior-event-emitter";
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 @Component({
     selector: 'app-doctor-selector',
@@ -42,7 +43,8 @@ export class MaterialMultiSelectorComponent implements OnInit
     @Output()
     pickedDoctors = new BehaviorEventEmitter<number[]>();
 
-    constructor(private _formBuilder: FormBuilder, private specializationService: SpecializationService, private doctorService: DoctorService)
+    constructor(private _formBuilder: FormBuilder, private specializationService: SpecializationService, private doctorService: DoctorService,
+        private popUpMessageService: PopUpMessageService)
     {}
 
     ngOnInit()
@@ -123,7 +125,8 @@ export class MaterialMultiSelectorComponent implements OnInit
                 }
                 else if (value.length > this.maxPickAmount)
                 {
-                    alert("Можно выбрать только " + this.maxPickAmount + " или меньше докторов одновременно");
+                    this.popUpMessageService.displayWarning("Можно выбрать только " + this.maxPickAmount + " или меньше докторов одновременно");
+                    //alert("Можно выбрать только " + this.maxPickAmount + " или меньше докторов одновременно");
                     this.doctorsMultiselectForm.get('doctorsMultiselectControl').setValue(this.pickedDoctors.value);
                 }
                 else

@@ -40,8 +40,8 @@
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeflex/primeflex.css",
               "node_modules/primeicons/primeicons.css",
-              "node_modules/quill/dist/quill.snow.css"
-
+              "node_modules/quill/dist/quill.snow.css",
+              "node_modules/@costlydeveloper/ngx-awesome-popup/styles/theme.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

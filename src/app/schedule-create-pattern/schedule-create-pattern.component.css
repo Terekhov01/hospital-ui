@@ -4,6 +4,11 @@
     margin: 10px 0px;
 }
 
+.headerText
+{
+    text-align: center;
+}
+
 .schedulePatternInputBlock
 {
     padding: 20px;
@@ -20,6 +25,11 @@
 .inputPatternName
 {
     width: 300px;
+}
+
+#patternCreateHint
+{
+    margin: 0px 10px;
 }
 
 .table

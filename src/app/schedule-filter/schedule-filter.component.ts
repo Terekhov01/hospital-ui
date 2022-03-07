@@ -9,6 +9,7 @@ import { DoctorShortInformation } from '../schedule-transfer-data/schedule-filte
 import { FilterSettings } from './schedule-filter.filter-settings';
 import { PickedDates } from '../material-date-range-picker/material-date-range-picker.component';
 import { AppointmentRegistrationInfoService } from "../appointment-registration-info.service";
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 @Component({
     selector: 'app-schedule-filter',
@@ -19,10 +20,11 @@ export class ScheduleFilterComponent implements OnInit
 {
     //public doctorsShortInformationSubject = new BehaviorSubject<DoctorShortInformation[]>([]);
     private doctorShortInformationSubscription: Subscription | undefined;
-    public doctorShortInformationFormControl: DoctorShortInformationFormControls = new DoctorShortInformationFormControls();
+    public doctorShortInformationFormControl: DoctorShortInformationFormControls = new DoctorShortInformationFormControls(this.popUpMessageService);
     private pickedDates = new PickedDates(undefined, undefined);
 
-    constructor(private doctorScheduleService: DoctorScheduleService, private doctorShortInfoService: DoctorSharedShortInformationService, private appointmentRegistrationInfoService: AppointmentRegistrationInfoService)
+    constructor(private doctorScheduleService: DoctorScheduleService, private doctorShortInfoService: DoctorSharedShortInformationService,
+        private appointmentRegistrationInfoService: AppointmentRegistrationInfoService, private popUpMessageService: PopUpMessageService)
     {
     }
 
@@ -50,7 +52,8 @@ export class ScheduleFilterComponent implements OnInit
             },
             error: (error) =>
             {
-                alert(error.error);
+                this.popUpMessageService.displayError(error);
+                //alert(error.error);
             },
             complete: () =>
             {
@@ -91,8 +94,8 @@ export class ScheduleFilterComponent implements OnInit
         }
         else
         {
-            //TODO - draw nice pop-up menu
-            alert("Filter is invalid!");
+            this.popUpMessageService.displayWarning("Фильтры содержат незаполненные поля или некорректные значения");
+            //alert("Filter is invalid!");
         }
     }
 

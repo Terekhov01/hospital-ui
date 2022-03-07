@@ -5,8 +5,7 @@ import {Employee} from '../employee';
 import {TokenStorageService} from '../_services/token-storage.service';
 import { Table } from 'primeng/table';
 import { PrimeNGConfig } from 'primeng/api';
-import {of} from 'rxjs';
-import {callbackify} from 'util';
+
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',

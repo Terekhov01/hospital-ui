@@ -23,5 +23,4 @@ export class ServiceServiceService {
     console.log("getting service list")
     return this.httpClient.get<Service[]>(`${this.baseURL}`);
   }
-
 }

@@ -5,6 +5,7 @@ import { PickedDates } from '../material-date-range-picker/material-date-range-p
 import { ScheduleTableDataSource } from './schedule-table-page.data-source';
 import { DatePipe } from '@angular/common';
 import { DailyInformation } from '../schedule-transfer-data/schedule-table-page.data-transfer-objects';
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 class FilterSettings
 {
@@ -84,9 +85,10 @@ export class ScheduleTablePageComponent implements OnInit
         return str.charAt(0).toUpperCase() + str.slice(1)
     }
 
-    constructor(private doctorScheduleService: DoctorScheduleService, private utilsService: CommonUtilsService, public datePipe: DatePipe)
+    constructor(private doctorScheduleService: DoctorScheduleService, private utilsService: CommonUtilsService, public datePipe: DatePipe,
+        private popUpMessageService: PopUpMessageService)
     {
-        this.dataSource = new ScheduleTableDataSource(this.doctorScheduleService);
+        this.dataSource = new ScheduleTableDataSource(this.doctorScheduleService, this.popUpMessageService);
         this.userLocale = this.getUserLocale();
         this.displayedColumns = [];
         this.columnHeaderDates = [];
@@ -141,7 +143,8 @@ export class ScheduleTablePageComponent implements OnInit
         }
         else
         {
-            alert("Заполните фильтры. Интервал времени не может быть больше месяца.");
+            this.popUpMessageService.displayWarning("Заполните фильтры корректно. Интервал времени не может быть больше месяца");
+            //alert("Заполните фильтры. Интервал времени не может быть больше месяца.");
         }
     }
 }
