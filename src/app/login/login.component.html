@@ -1,10 +1,17 @@
 <div class="col-md-12">
   <div class="card card-container">
-    <img
+    <img *ngIf = "!isLoggedIn; else welcomeImg"
       id="profile-img"
       src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
       class="profile-img-card"
     />
+    <ng-template #welcomeImg>
+      <img
+        src = "/assets/images/loginCheckMark.png"
+        alt = "Confirmation check mark"
+        class = "img-card"
+      />
+    </ng-template>
     <form
       *ngIf="!isLoggedIn"
       name="form"
@@ -52,11 +59,9 @@
           </div>
         </div>
       </div>
-      <div class="form-group">
-        <button class="btn btn-primary btn-block"  mat-raised-button color="primary">
-          Войти
-        </button>
 
+      <div class="form-group">
+        <button mat-raised-button color="primary" class="form-group" style = "margin-top: 10px;">Войти</button>
       </div>
 
       <div class="form-group">
@@ -72,9 +77,8 @@
       </div>
     </form>
 
-    <!-- <div class="alert alert-success" *ngIf="isLoggedIn">
-      Logged in as {{ roles }}.
+    <div class="alert alert-success" *ngIf="isLoggedIn">
+      Добро пожаловать!
     </div>
-    -->
   </div>
 </div>

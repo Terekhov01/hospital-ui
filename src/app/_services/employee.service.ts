@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Employee } from '../employee';
+import { Employee, EmployeeDTO } from '../employee';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +16,11 @@ export class EmployeeService {
     return this.httpClient.get<Employee[]>(`${this.baseURL}`);
   }
 
-  createEmployee(employee: Employee): Observable<Object>{
+  /*createEmployee(employee: EmployeeDTO): Observable<Object>{
     return this.httpClient.post(`${this.REGURL}`, employee);
-  }
-  createDoctor(doctor: Employee): Observable<Object>{
+  }*/
+  
+  createDoctor(doctor: EmployeeDTO): Observable<Object>{
     return this.httpClient.post(`${this.REGURL}/doctor`, doctor);
   }
   getEmployeeById(id: number): Observable<Employee>{
