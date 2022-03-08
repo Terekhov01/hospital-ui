@@ -10,7 +10,9 @@ export class ErrorHandleService {
     public getMessage(error: any): string
     {
         if (this.hasTypeString(error))
+        {
             return error.toString();
+        }
 
         if ("error" in error)
         {
@@ -21,6 +23,11 @@ export class ErrorHandleService {
 
             if ("message" in error.error && this.hasTypeString(error.error.message))
             {
+                if (error.error.message == "Error: Unauthorized")
+                {
+                    return "Ошибка авторизации. Попытайтесь войти в аккаунт еще раз";
+                }
+
                 return error.error.message;
             }
         }
@@ -31,7 +38,7 @@ export class ErrorHandleService {
             {
                 if (error.message.includes("0 Unknown Error"))
                 {
-                    return error.message.concat("\nВероятно, сервер отключен / недоступен. Попробуйте повторить позже");
+                    return error.message.concat(" - вероятно, сервер отключен / недоступен. Попробуйте повторить позже");
                 }
 
                 return error.message;
@@ -41,7 +48,7 @@ export class ErrorHandleService {
         return error.toString();
     }
 
-    public hasTypeString(value: any): boolean
+    private hasTypeString(value: any): boolean
     {
         return typeof value === 'string' || value instanceof String;
     }

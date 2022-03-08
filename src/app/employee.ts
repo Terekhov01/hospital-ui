@@ -17,3 +17,18 @@ export class Employee {
   polys: string;
   role: string;
 }
+
+export class EmployeeDTO
+{
+  userName: string;
+  password: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  phone: string;
+  passport: string;
+  roomNumber: number;
+  education: string;
+  specializations: string[];
+}

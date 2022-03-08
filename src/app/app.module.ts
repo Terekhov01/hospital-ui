@@ -33,7 +33,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { CreatePatientComponent } from './create-patient/create-patient.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
@@ -146,7 +146,7 @@ import { FileTransferDataComponent } from './file-transfer-data/file-transfer-da
     SafePipe,
     AppComponent,
     LoginComponent,
-    RegisterComponent,
+    CreatePatientComponent,
     HomeComponent,
     ProfileComponent,
     BoardAdminComponent,
