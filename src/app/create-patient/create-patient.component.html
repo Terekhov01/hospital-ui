@@ -153,7 +153,7 @@
         />
         <div class="alert-danger" *ngIf="f.submitted && passport.invalid">
           <div *ngIf="passport.errors.required">Требуется паспорт</div>
-          <div *ngIf="passport.errors.passport">
+          <div *ngIf="passport.errors.pattern">
             Номер паспорта должен состоять из 3-20 букв или цифр (без пробелов и тире)
           </div>
         </div>
@@ -172,7 +172,7 @@
         />
         <div class="alert-danger" *ngIf="f.submitted && polys.invalid">
           <div *ngIf="polys.errors.required">Требуется полис</div>
-          <div *ngIf="polys.errors.polys">
+          <div *ngIf="polys.errors.pattern">
             Номер полиса пациента должен состоять из 16 цифр (без пробелов и тире)
           </div>
         </div>

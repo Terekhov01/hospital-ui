@@ -92,11 +92,11 @@
           <mat-datepicker #picker [startAt]="sickLeaveStartDate"></mat-datepicker>
         </mat-form-field>
 
-        <button mat-raised-button color = "primary" id = "sickLeaveButton" [disabled] = "sickLeaveButtonDisabled" (click) = "sickLeaveButtonClicked()">{{ sickLeaveButtonToggled ? 'Открепить' : 'Прикрепить' }}</button>
+        <button class = "btn btn-primary" id = "sickLeaveButton" [disabled] = "sickLeaveButtonDisabled" (click) = "sickLeaveButtonClicked()">{{ sickLeaveButtonToggled ? 'Открепить' : 'Прикрепить' }}</button>
       </div>
     </div>
 
-    <button type="button" mat-raised-button color="primary" (click) = "confirmationButtonClicked()" [disabled] = "confirmationButtonDisabled"> Подтвердить </button>
+    <button type="button" class = "btn btn-primary" (click) = "confirmationButtonClicked()" [disabled] = "confirmationButtonDisabled"> Подтвердить </button>
 
   </form>
 </div>

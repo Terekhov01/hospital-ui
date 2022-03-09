@@ -89,24 +89,24 @@
                 </ng-container>
 
                 <div class = "columnButtonBlock">
-                    <button mat-stroked-button color = "primary" (click) = "tableData.addColumn()">
+                    <button class = "btn btn-outline-primary" (click) = "tableData.addColumn()">
                         <mat-icon>add</mat-icon>
                     </button>
-                    <button mat-stroked-button color = "primary" (click) = "tableData.removeColumn()">
+                    <button class = "btn btn-outline-primary" (click) = "tableData.removeColumn()">
                         <mat-icon>remove</mat-icon>
                     </button>
                 </div>
         
                 <div class = "rowButtonBlock">
-                    <button mat-stroked-button color = "primary" (click) = "tableData.addRow()">
+                    <button class = "btn btn-outline-primary" (click) = "tableData.addRow()">
                         <mat-icon>add</mat-icon>
                     </button>
-                    <button mat-stroked-button color = "primary" (click) = "tableData.removeRow()">
+                    <button class = "btn btn-outline-primary" (click) = "tableData.removeRow()">
                         <mat-icon>remove</mat-icon>
                     </button>
                 </div>
                 
-                <button mat-raised-button color="primary" class = "saveButtonBlock" (click) = "onSubmitClicked()">
+                <button class = "btn btn-primary saveButtonBlock" (click) = "onSubmitClicked()">
                     <mat-icon>save</mat-icon>
                 </button>
 

@@ -7,7 +7,7 @@
     <div class = "filtersDiv">
         <app-doctor-selector (pickedDoctors) = "doctorsPickedChanged($event)" [maxPickAmount] = "5" id = "doctorSelector"></app-doctor-selector>
         <app-material-date-range-picker (pickedDateRange) = "calendarDateRangeChanged($event)" [rangeMaxLengthInDays] = "31" id = "dateRangePicker"></app-material-date-range-picker>
-        <button mat-raised-button color = "primary" (click) = "showSchedule()" id = "showScheduleButton">Показать</button>
+        <button class = "btn btn-primary" (click) = "showSchedule()" id = "showScheduleButton">Показать</button>
     </div>
 
     <div *ngFor = "let doctorSchedule of dataSource.getSchedulesSubject() | async; let doctorCounter = index">    

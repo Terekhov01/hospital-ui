@@ -23,8 +23,8 @@
       <div class="form-group">
         <input class="mt-2 p-0" type="text" [(ngModel)]="room" name="room"/>
       </div>
-      <button type="submit" mat-stroked-button color="primary">Найти</button>
-      <button (click)="ngOnInit()" type="submit" mat-stroked-button color="primary">Сбросить фильтры</button>
+      <button type="submit" class = "btn btn-outline-primary">Найти</button>
+      <button (click)="ngOnInit()" type="submit" class = "btn btn-outline-primary">Сбросить фильтры</button>
     </form>
     <mat-card *ngFor="let appointment of pagedItems">
       <mat-card>
@@ -33,7 +33,7 @@
         <mat-card-content>Описание: {{appointment.description}}</mat-card-content>
         <mat-card-content>Заключение: {{appointment.docStatement}}</mat-card-content>
         <mat-card-actions>
-          <button (click)="appointmentOne(appointment.id)" mat-stroked-button color="primary">Просмотреть прием</button>
+          <button (click)="appointmentOne(appointment.id)" class = "btn btn-outline-primary">Просмотреть прием</button>
         </mat-card-actions>
       </mat-card>
       <br>

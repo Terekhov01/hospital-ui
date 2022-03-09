@@ -46,7 +46,7 @@
         <!--      </mat-autocomplete>-->
 
         <!--    </div>-->
-        <button mat-raised-button color="primary"> Подтвердить запись</button>
+        <button class = "btn btn-primary"> Подтвердить запись</button>
 
       </form>
     </div>
@@ -64,7 +64,7 @@
             </h1>
 
             <div class = "appointmentBlockButtons">
-                <button *ngFor="let doctorDailyAppointment of doctorScheduleAppointmentsDataDaily.getIntervalCollection()" mat-stroked-button color="primary" class = "appointmentBlockButton"
+                <button *ngFor="let doctorDailyAppointment of doctorScheduleAppointmentsDataDaily.getIntervalCollection()" class = "btn btn-outline-primary" class = "appointmentBlockButton"
                         (click)="selectDateTime(content, doctorDailyAppointment.getIntervalStartTime())">
                     {{ doctorDailyAppointment.getIntervalStartTime().toISOString().substr(11, 5) }}
                 </button>

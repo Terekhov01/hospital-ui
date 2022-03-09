@@ -35,7 +35,7 @@
                 </button>
             </div>
 
-            <button mat-raised-button color = "primary" id = "deleteButton" [disabled] = "deleteButtonFormControl.disabled" (click) = "onDeleteButtonClicked()">Удалить</button>
+            <button class = "btn btn-primary" id = "deleteButton" [disabled] = "deleteButtonFormControl.disabled" (click) = "onDeleteButtonClicked()">Удалить</button>
         </div>
 
         <div *ngIf = "isHintShown" style = "margin-top: 10px;">
@@ -108,7 +108,7 @@
                 </mat-form-field>
             </form>
 
-            <button mat-raised-button color = "primary" id = "changeButton" [disabled] = "changeButtonFormControl.disabled" (click) = "onProlongButtonClicked()">Изменить</button>
+            <button class = "btn btn-primary" id = "changeButton" [disabled] = "changeButtonFormControl.disabled" (click) = "onProlongButtonClicked()">Изменить</button>
         </div>
     </div>
 
