@@ -7,17 +7,16 @@
     </div>
 
     <div class = "form-group">
-      <label> Дата и время начала приема:    </label> {{dateTime}}
+      <label> <b> Дата и время начала приема: </b>   </label> {{dateTime}}
     </div>
 
     <div class = "form-group">
-      <label> Кабинет:    </label> {{appointmentRegistration.doctor.room.num}}
+      <label> <b> Кабинет:  </b>  </label> {{appointmentRegistration.doctor.room.num}}
     </div>
 
     <div class = "form-group">
-      <label> Фамилия пациента:    </label> {{appointmentRegistration.patient.user.lastName}}
+      <label> <b> Фамилия пациента: </b>   </label> {{appointmentRegistration.patient.user.lastName}}
     </div>
-
 <!--    <div class = "form-group">-->
 <!--      <label> Услуга:    </label>-->
 <!--      <div>-->
@@ -36,7 +35,6 @@
 <!--      </mat-autocomplete>-->
 
 <!--    </div>-->
-
     <button mat-raised-button color="primary"> Подтвердить запись </button>
 
   </form>

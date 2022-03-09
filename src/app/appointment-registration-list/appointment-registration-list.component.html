@@ -1,30 +1,133 @@
-<h1>Список записей ко врачам</h1>
-<table class = "table table-striped">
-  <thead>
-  <tr>
-<!--    <th> Id </th>-->
-    <th> Адрес </th>
-    <th> Кабинет </th>
-    <th> Доктор </th>
-<!--    <th> Пациент </th>-->
-    <th> Дата и время </th>
-    <th> Действия </th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor = "let appointmentRegistration of appointmentRegistrations">
-<!--    <td> {{appointmentRegistration.id}} </td>-->
-    <td> {{appointmentRegistration.address}} </td>
-    <td> {{appointmentRegistration.room}} </td>
-    <td> {{appointmentRegistration.doctor.user.lastName}} </td>
-<!--    <td> {{appointmentRegistration.patient.lastName}} </td>-->
-    <td> {{datePipe.transform(appointmentRegistration.start, "yyyy/MM/dd HH:mm")}} </td>
-    <td>
-<!--      <button (click)="updateAppointmentRegistration(appointmentRegistration.id)" mat-raised-button color="primary"> Изменить запись </button>-->
-      <button (click)="deleteAppointmentRegistration(appointmentRegistration)" mat-raised-button color="warn" style="margin-left: 10px"> Отменить запись </button>
-      <button (click)="appointmentRegistrationDetails(appointmentRegistration.id)" mat-raised-button color="primary" style="margin-left: 10px"> Детали </button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h2 class="modal-title">Информация о записи на прием</h2>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <div *ngIf = "!isDetailsPresent">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <div *ngIf = "isDetailsPresent">
+      <div>
+        <label> <b> Фамилия доктора: </b>  </label> {{ar.doctor.user.lastName}}
+      </div>
+      <div>
+        <label> <b> Фамилия пациента: </b>  </label> {{ar.patient.user.lastName}}
+      </div>
+      <div>
+        <label> <b> Образование доктора: </b>  </label> {{ar.doctor.education}}
+      </div>
+      <div>
+        <label> <b> Дата и время начала приема: </b>  </label> {{datePipe.transform(ar.start, "yyyy/MM/dd HH:mm")}}
+      </div>
+      <!--  <div>-->
+      <!--    <label> <b> Адрес: </b>  </label> {{appointmentRegistration.address}}-->
+      <!--  </div>-->
+      <div>
+        <label> <b> Кабинет: </b>  </label> {{ar.room}}
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Закрыть</button>
+  </div>
+</ng-template>
+
+<ng-template #deleteWarning let-modal>
+  <div class="modal-header">
+    <h2 class="modal-title" id="modal-title">Удаление записи на прием</h2>
+    <button type="button" class="btn-close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <p><strong> Вы уверены, что хотите удалить данную запись на прием?</strong></p>
+    <p>Вся информация о записи на прием будет навсегда удалена.
+      <span class="text-danger">Эту операцию нельзя отменить.</span>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Закрыть</button>
+    <button type="button" ngbAutofocus class="btn btn-danger" (click)="deleteAppointmentRegistration(arToDelete)">OK</button>
+  </div>
+</ng-template>
+
+<h1>Список записей ко врачам</h1>
+
+<div *ngIf = "!isLoaded">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<div *ngIf = "isLoaded">
+
+  <div *ngIf = "appointmentRegistrations !== null">
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <!--    <th> Id </th>-->
+      <th> Адрес</th>
+      <th> Кабинет</th>
+      <th> Доктор</th>
+      <!--    <th> Пациент </th>-->
+      <th> Дата и время</th>
+      <th> Действия</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let appointmentRegistration of appointmentRegistrations">
+      <!--    <td> {{appointmentRegistration.id}} </td>-->
+      <td> {{appointmentRegistration.address}} </td>
+      <td> {{appointmentRegistration.room}} </td>
+      <td> {{appointmentRegistration.doctor.user.lastName}} </td>
+      <!--    <td> {{appointmentRegistration.patient.lastName}} </td>-->
+      <td> {{datePipe.transform(appointmentRegistration.start, "yyyy/MM/dd HH:mm")}} </td>
+      <td>
+        <!--      <button (click)="updateAppointmentRegistration(appointmentRegistration.id)" mat-raised-button color="primary"> Изменить запись </button>-->
+<!--        <button (click)="deleteAppointmentRegistration(appointmentRegistration)" type="button" style="margin-left: 10px"-->
+<!--                matTooltip="Отменить запись на прием"> <i class="bi bi-calendar-x-fill" aria-hidden="true"></i> </button>-->
+        <!--      <button (click)="appointmentRegistrationDetails(appointmentRegistration.id)" mat-raised-button color="primary" style="margin-left: 10px"> Детали </button>-->
+<!--        <button class="btn"><i class="fa fa-home"></i></button>-->
+        <button (click)="showDeleteModal(deleteWarning, appointmentRegistration)" class="btn btn-primary" mat-raised-button color="warn" style="margin-left: 10px"
+                matTooltip="Отменить запись на прием"> 	<mat-icon>delete</mat-icon> </button>
+        <button (click)="showDetailsModal(content, appointmentRegistration.id)" class="btn btn-primary" mat-raised-button color="primary" style="margin-left: 10px"
+                matTooltip="Показать детали записи на прием"> <mat-icon>info</mat-icon>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+  <div *ngIf = "appointmentRegistrations == null">
+
+    <mat-card class="text-center">
+      <mat-card-header><h1>Ooops...</h1></mat-card-header>
+      <mat-card-body>
+        <mat-card-title>
+          <h3>Похоже, что у вас нет предстоящих записей ко врачам</h3>
+        </mat-card-title>
+        <mat-card-text>Для записи на прием ко врачу нажмите </mat-card-text>
+        <a href="/schedule/specifyAppointment" mdbBtn color="primary">сюда</a>
+      </mat-card-body>
+<!--      <mat-card-footer class="text-muted">2 days ago</mat-card-footer>-->
+    </mat-card>
+
+<!--    <div class="card text-body bg-info mb-3" style="max-width: 64rem;">-->
+<!--      <div class="card-header">Header</div>-->
+<!--      <div class="card-body">-->
+<!--        <h5 class="card-title">Primary card title</h5>-->
+<!--        <p class="card-text">-->
+<!--          Some quick example text to build on the card title and make up the bulk of the-->
+<!--          card's content.-->
+<!--        </p>-->
+<!--      </div>-->
+<!--    </div>-->
+
+  </div>
+
+</div>
+
+<!--class="btn btn-primary"-->

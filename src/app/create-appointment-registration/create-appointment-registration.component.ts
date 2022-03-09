@@ -21,6 +21,7 @@ import {DatePipe} from "@angular/common";
 import {PatientService} from "../patient.service";
 import {DoctorScheduleService} from "../_services/doctor-schedule.service";
 import { PopUpMessageService } from '../_services/pop-up-message.service';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-create-appointment-registration',
@@ -46,7 +47,7 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
   constructor(private appointmentRegistrationService: AppointmentRegistrationService, private activatedRoute: ActivatedRoute, private serviceService: ServiceServiceService,
               private router: Router, private doctorService: DoctorService, public appointmentRegistrationInfoService: AppointmentRegistrationInfoService,
               private tokenStorageService: TokenStorageService, public datePipe: DatePipe, private patientService: PatientService, private doctorScheduleService: DoctorScheduleService,
-              private popUpMessageService: PopUpMessageService) { }
+              private popUpMessageService: PopUpMessageService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.appointmentRegistration = new AppointmentRegistration();
@@ -73,7 +74,9 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
     });
     console.log("Date received: " + this.appointmentRegistration.start.toISOString())
     let str = this.appointmentRegistration.start.toISOString();
-    this.dateTime = str.substr(0, 10) + " " + str.substr(11,5);;
+    this.dateTime = str.substr(0, 10) + " " + str.substr(11,5);
+
+
     let serviceSubject = new BehaviorSubject<Service[]>([]);
     this.serviceSubscription = this.serviceService.getServicesList().subscribe(
       {
