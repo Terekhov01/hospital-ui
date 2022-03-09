@@ -185,7 +185,7 @@ export class ScheduleAppointmentBlockComponent implements OnInit
       // this.router.navigate(['/create-appointment-registration'])
     }
 
-    initModalContent() {
+    async initModalContent() {
       this.appointmentRegistration = new AppointmentRegistration();
       this.appointmentRegistration.doctor = new Doctor("", "", "", "123", "", "", "", new Date(), "");
       this.appointmentRegistration.patient = new Patient("", "", BigInt(0), "", this.patient, "", "", "", "", "")
@@ -210,35 +210,31 @@ export class ScheduleAppointmentBlockComponent implements OnInit
       });
       console.log("Date received: " + this.appointmentRegistration.start.toISOString())
       let str = this.appointmentRegistration.start.toISOString();
-      this.dateTime = str.substr(0, 10) + " " + str.substr(11,5);
+      this.dateTime = str.substr(0, 10) + " " + str.substr(11, 5);
 
 
       let serviceSubject = new BehaviorSubject<Service[]>([]);
       this.serviceSubscription = this.serviceService.getServicesList().subscribe(
         {
-          next: (IServiceArray) =>
-          {
+          next: (IServiceArray) => {
             let serviceArray = <Service[]>([]);
             console.log("IserviceArray size 1: " + IServiceArray.length)
-            for (let service of IServiceArray)
-            {
+            for (let service of IServiceArray) {
               serviceArray.push(new Service(service.serviceName));
             }
             serviceSubject.next(serviceArray);
           },
-          error: (error) =>
-          {
+          error: (error) => {
             this.popUpMessageService.displayError(error);
             //alert(error.error);
           },
-          complete: () =>
-          {
+          complete: () => {
             this.serviceFormControl.setServiceList(serviceSubject);
           }
         });
-      // console.log("Before delay")
-      // delay(2000);
-      // console.log("After delay")
+      console.log("Before delay")
+      await delay(1500);
+      console.log("After delay")
       this.isInitiated = true;
     }
 
