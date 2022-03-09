@@ -5,6 +5,7 @@ import localeRu from '@angular/common/locales/ru';
 import {registerLocaleData} from "@angular/common";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {DoctorRequest} from "../DoctorInList/doctorList/doctor-request.model";
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 registerLocaleData(localeRu);
 
@@ -22,7 +23,7 @@ export class AddDoctorComponent implements OnInit {
   // @ts-ignore
   adddoctorform: FormGroup;
 
-  constructor(private router: Router, private userService: DoctorService) {
+  constructor(private router: Router, private userService: DoctorService, private popUpMessageService: PopUpMessageService) {
 
     this.user = {
       // id: 0,
@@ -60,7 +61,8 @@ export class AddDoctorComponent implements OnInit {
 
     this.userService.createDoctor(this.user)
       .subscribe(data => {
-        alert("User created successfully.");
+        this.popUpMessageService.displayConfirmation("Врач успешно зарегистрирован");
+        //alert("User created successfully.");
         this.goToDoctorList()
       });
 

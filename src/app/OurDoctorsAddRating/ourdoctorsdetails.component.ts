@@ -5,6 +5,7 @@ import {OurdoctorsService} from "../OurDoctorsInClinic/ourdoctors.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ourdoctorsModel} from "../OurDoctorsInClinic/ourdoctors.model";
 import {Subscription} from "rxjs";
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 @Component({
   selector: 'app-ourdoctorsdetails',
@@ -22,7 +23,8 @@ export class OurdoctorsdetailsComponent implements OnInit {
 
   private subscription?: Subscription;
 
-  constructor(private router: Router, private route: ActivatedRoute, private userService: OurdoctorsService) {
+  constructor(private router: Router, private route: ActivatedRoute, private userService: OurdoctorsService,
+    private popUpMessageService: PopUpMessageService) {
 
     this.subscription = route.params.subscribe(params => this.doctorId = params['id']);
 //     console.log("конструктор");
@@ -34,11 +36,7 @@ export class OurdoctorsdetailsComponent implements OnInit {
       // @ts-ignore
       doctorId: this.doctorId,
       userId: 1 //fixme hardcode ass
-
-
     }
-
-
   }
 
   ngOnInit(): void {
@@ -46,11 +44,9 @@ export class OurdoctorsdetailsComponent implements OnInit {
 
     this.updateRatingForm = new FormGroup({
 
-
       rating: new FormControl('', Validators.required),
       feedback: new FormControl('', Validators.required),
       doctorId: new FormControl('', Validators.required)
-
 
     })
 
@@ -77,7 +73,8 @@ export class OurdoctorsdetailsComponent implements OnInit {
 
     this.userService.updateDoctorRating(this.doctorRating)
       .subscribe(data => {
-        alert("User created successfully.");
+        this.popUpMessageService.displayConfirmation("Доктор зарегистрирован");
+        //alert("User created successfully.");
         this.goToDoctorList()
       });
 

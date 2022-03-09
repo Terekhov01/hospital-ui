@@ -20,6 +20,7 @@ import {TokenStorageService} from "../_services/token-storage.service";
 import {DatePipe} from "@angular/common";
 import {PatientService} from "../patient.service";
 import {DoctorScheduleService} from "../_services/doctor-schedule.service";
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 @Component({
   selector: 'app-create-appointment-registration',
@@ -44,7 +45,8 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
 
   constructor(private appointmentRegistrationService: AppointmentRegistrationService, private activatedRoute: ActivatedRoute, private serviceService: ServiceServiceService,
               private router: Router, private doctorService: DoctorService, public appointmentRegistrationInfoService: AppointmentRegistrationInfoService,
-              private tokenStorageService: TokenStorageService, public datePipe: DatePipe, private patientService: PatientService, private doctorScheduleService: DoctorScheduleService) { }
+              private tokenStorageService: TokenStorageService, public datePipe: DatePipe, private patientService: PatientService, private doctorScheduleService: DoctorScheduleService,
+              private popUpMessageService: PopUpMessageService) { }
 
   ngOnInit(): void {
     this.appointmentRegistration = new AppointmentRegistration();
@@ -87,7 +89,8 @@ export class CreateAppointmentRegistrationComponent implements OnInit {
         },
         error: (error) =>
         {
-          alert(error.error);
+          this.popUpMessageService.displayError(error);
+          //alert(error.error);
         },
         complete: () =>
         {

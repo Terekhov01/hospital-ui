@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { DoctorShortInformation } from '../schedule-transfer-data/schedule-filter.data-transfer-objects';
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 @Injectable()
 export class DoctorShortInformationFormControls implements OnInit
@@ -11,7 +12,7 @@ export class DoctorShortInformationFormControls implements OnInit
     public doctorShortInformationFormControl: FormControl = new FormControl();
     private formValueSubscription: Subscription | undefined;
 
-    DoctorShortInformationFormControls()
+    constructor(private popUpMessageService: PopUpMessageService)
     {}
 
     ngOnInit(): void
@@ -40,7 +41,8 @@ export class DoctorShortInformationFormControls implements OnInit
             },
             error: (error) =>
             {
-                alert("Internal error: " + error.error);
+                this.popUpMessageService.displayError(error);
+                //alert("Internal error: " + error.error);
             }
         });
 

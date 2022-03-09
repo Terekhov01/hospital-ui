@@ -8,6 +8,7 @@ import {User} from "../user";
 import {TokenStorageService} from "../_services/token-storage.service";
 import {DoctorService} from "../DoctorInList/doctorList/doctor.service";
 import {PatientService} from "../patient.service";
+import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 
 @Component({
@@ -16,10 +17,10 @@ import {PatientService} from "../patient.service";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  patientAmount: number = 589;
-  doctorAmount: number = 136;
+  patientAmount: number = null;
+  doctorAmount: number = null;
   services: Service[];
-  popularService: string;
+  popularService: string = null;
   content: string;
   appRegs: AppointmentRegistration[];
   user: User;
@@ -33,31 +34,67 @@ export class HomeComponent implements OnInit {
               private appRegServ: AppointmentRegistrationService,
               private tokenStorageService: TokenStorageService,
               private doctorService: DoctorService,
-              private patientService: PatientService) { }
+              private patientService: PatientService,
+              private popUpMessageService: PopUpMessageService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    this.userService.getPublicContent().subscribe(
-      data => {
-        this.content = data;
-      },
-      err => {
-        this.content = JSON.parse(err.error).message;
-      }
-    );
+
     this.serviceService.getServicesList().subscribe(data => {
       this.services = data;
     });
-    this.appRegServ.getAppointmentRegistrationsList().subscribe(data => {
-      this.appRegs = data;
-      this.maxCount();
+    
+    let appointmentSubscription = this.appRegServ.getAppointmentRegistrationsList().subscribe({
+      next: (data) =>
+      {
+        this.appRegs = data;
+        this.maxCount();
+      },
+      error: (error) =>
+      {
+        this.appRegs = [new AppointmentRegistration()];
+        this.appRegs[0].service = "____";
+        this.maxCount();
+        this.popUpMessageService.displayWarning("Не удалось получить информацию о самой популярной услуге. Возможно, сервер недоступен");
+      },
+      complete: () =>
+      {
+        appointmentSubscription.unsubscribe();
+      }
     });
-    this.doctorService.getDoctorsList().subscribe(data => {
-      this.doctorAmount = data.length;
+
+    let doctorAmountSubscription = this.doctorService.getDoctourAmount().subscribe({
+      next: (data: bigint) =>
+      {
+        this.doctorAmount = Number(data);
+      },
+      error: (error) =>
+      {
+        this.doctorAmount = -1;
+        this.popUpMessageService.displayWarning("Не удалось получить информацию о количестве врачей в поликлинике. Возможно, сервер недоступен");
+      },
+      complete: () =>
+      {
+        doctorAmountSubscription.unsubscribe();
+      }
     });
-    this.patientService.getAllPatients().subscribe(data => {
-      this.patientAmount = data.length;
+
+    let patientAmountSubscription = this.patientService.getPatientAmount().subscribe({
+      next: (data: bigint) =>
+      {
+        this.patientAmount = Number(data);
+      },
+      error: (error) =>
+      {
+        this.patientAmount = -1;
+        this.popUpMessageService.displayWarning("Не удалось получить информацию о количестве пациентов в поликлинике. Возможно, сервер недоступен");
+      },
+      complete: () =>
+      {
+        patientAmountSubscription.unsubscribe();
+      }
     });
+
     if (this.isLoggedIn){
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;

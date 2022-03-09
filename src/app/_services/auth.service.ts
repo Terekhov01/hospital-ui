@@ -22,15 +22,31 @@ export class AuthService {
     }, httpOptions);
   }
 
-  register(user): Observable<any> {
+  registerPatient(user): Observable<any>
+  {
+    return this.http.post(AUTH_API + 'signup/patient', 
+    {
+      userName: user.userName,
+      password: user.password,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      middleName: user.middleName,
+      phone: user.phone,
+      passport: user.passport,
+      polys: user.polys
+    }, httpOptions);
+  }
+
+  /*register(user): Observable<any> {
     return this.http.post(AUTH_API + 'signup', {
       username: user.username,
-      email: user.email,
       password: user.password,
+      email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
       patronymic: user.patronymic,
       phone: user.phone
     }, httpOptions);
-  }
+  }*/
 }

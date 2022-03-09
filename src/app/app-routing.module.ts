@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import {DoctorinfoComponent} from "./OurDoctorsMoreInfo/doctorinfo.component";
 import { CommonModule } from '@angular/common';
-import { RegisterComponent } from './register/register.component';
+import { CreatePatientComponent } from './create-patient/create-patient.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -78,7 +78,6 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -110,10 +109,10 @@ const routes: Routes =
     { path: 'updateprofile/:id', component: UpdateprofileComponent },
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
+    { path: 'register', component: CreatePatientComponent },
     { path: 'profile', component: ProfileComponent },
-    { path: 'user', component: BoardUserComponent },
-    { path: 'mod', component: BoardModeratorComponent },
+    /*{ path: 'user', component: BoardUserComponent },
+    { path: 'mod', component: BoardModeratorComponent },*/
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'admin', component: EmployeeListComponent },
     { path: 'update-employee/:id', component: UpdateEmployeeComponent },
@@ -195,7 +194,6 @@ const routes: Routes =
     MatSidenavModule,
     MatSliderModule,
     MatSlideToggleModule,
-    MatSnackBarModule,
     MatSortModule,
     MatTableModule,
     MatTabsModule,
