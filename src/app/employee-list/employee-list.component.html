@@ -23,7 +23,7 @@
     <th pSortableColumn="email">Электронная почта <p-sortIcon field="email"></p-sortIcon></th>
     <th pSortableColumn="phone">Телефон <p-sortIcon field="phone"></p-sortIcon></th>
     <th>
-      <p-dropdown [options]="statuses" (onChange)="dt.filter($event.value, 'role', 'equals')" styleClass="p-column-filter" placeholder="Select a Status" [showClear]="true">
+      <p-dropdown [options]="statuses" (onChange)="dt.filter($event.value, 'role', 'equals')" styleClass="p-column-filter" placeholder="Роль" [showClear]="true">
         <ng-template let-option pTemplate="item">
           <span [class]="'customer-badge status-' + option.value">&#123;&#123;option.label&#125;&#125;</span>
         </ng-template>
@@ -46,9 +46,8 @@
 
     <td>{{ employee.role}}</td>
     <td>
-
-      <span><button (click) = "deleteEmployee(employee.id)" mat-raised-button color="warn" style="margin-left: 5px">Удалить</button></span>
-      <span><button (click) = "employeeDetails(employee.id)" mat-raised-button color="primary" style="margin-left: 5px" >Подробности</button></span>
+      <span><i class="pi pi-trash"(click) = "deleteEmployee(employee.id)" ></i></span>
+      <span><i class="pi pi-info-circle" (click) = "employeeDetails(employee.id)" style="margin-left: 15px"></i></span>
     </td>
   </tr>
     </ng-template>
