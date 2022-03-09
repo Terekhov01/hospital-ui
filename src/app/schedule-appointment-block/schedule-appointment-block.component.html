@@ -64,7 +64,7 @@
             </h1>
 
             <div class = "appointmentBlockButtons">
-                <button *ngFor="let doctorDailyAppointment of doctorScheduleAppointmentsDataDaily.getIntervalCollection()" class = "btn btn-outline-primary" class = "appointmentBlockButton"
+                <button *ngFor="let doctorDailyAppointment of doctorScheduleAppointmentsDataDaily.getIntervalCollection()" class = "btn btn-outline-primary appointmentBlockButton"
                         (click)="selectDateTime(content, doctorDailyAppointment.getIntervalStartTime())">
                     {{ doctorDailyAppointment.getIntervalStartTime().toISOString().substr(11, 5) }}
                 </button>

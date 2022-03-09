@@ -27,12 +27,22 @@
                     </mat-autocomplete>
                 </mat-form-field>
 
-                <button mat-mini-fab color = "primary" id = "patternApplyHint" aria-label = "Hint pop up button" (click) = "isHintShown = !isHintShown">
+
+                <i-bs *ngIf = "!isHintShown; else hintShown" name = "question-circle" id = "patternApplyHint" aria-label = "Hint pop up button" (click) = "isHintShown = !isHintShown"></i-bs>
+
+                <ng-template #hintShown>
+                    <i-bs *ngIf = "isHintShown" name = "x-circle" id = "patternApplyHint" aria-label = "Hint hide button" (click) = "isHintShown = !isHintShown"></i-bs>
+                </ng-template>
+                
+                <!--<button mat-mini-fab color = "primary" id = "patternApplyHint" aria-label = "Hint pop up button" (click) = "isHintShown = !isHintShown">
+                    <i class = "bi" [ngClass] = "isHintShown ? 'bi-question-circle' : 'bi-x-circle'" id = "patternApplyHint" aria-label = "Hint pop up button" (click) = "isHintShown = !isHintShown"></i>
+
+
                     <mat-icon *ngIf = "!isHintShown; else minimizeHint">question_mark</mat-icon>
                     <ng-template #minimizeHint>
                         <mat-icon>close</mat-icon>
                     </ng-template>
-                </button>
+                </button>-->
             </div>
 
             <button class = "btn btn-primary" id = "deleteButton" [disabled] = "deleteButtonFormControl.disabled" (click) = "onDeleteButtonClicked()">Удалить</button>

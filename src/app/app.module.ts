@@ -22,6 +22,10 @@ import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
+import { questionCircle, xCircle, download, fileEarmarkMedical, ColorTheme } from 'ngx-bootstrap-icons';
+import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
+
+
 import {
   NgxAwesomePopupModule,
   DialogConfigModule,
@@ -140,6 +144,14 @@ import {TranslateLoader, TranslateModule, TranslateService, TranslateStore} from
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 import { FileTransferDataComponent } from './file-transfer-data/file-transfer-data.component';
 
+// Select bootstrap icons (use an object, not an array)
+const icons = {
+  questionCircle,
+  xCircle,
+  download,
+  fileEarmarkMedical
+};
+
 @NgModule({
   declarations: [
     // PdfViewerComponent,
@@ -235,7 +247,12 @@ import { FileTransferDataComponent } from './file-transfer-data/file-transfer-da
     NgxAwesomePopupModule.forRoot(), // Essential, mandatory main module.
     DialogConfigModule.forRoot(), // Needed for instantiating dynamic components.
     ConfirmBoxConfigModule.forRoot(), // Needed for instantiating confirm boxes.
-    ToastNotificationConfigModule.forRoot() // Needed for instantiating toast notifications.
+    ToastNotificationConfigModule.forRoot(), // Needed for instantiating toast notifications.
+    NgxBootstrapIconsModule.pick(icons, { 
+      width: '2em', 
+      height: '2em', 
+      theme: ColorTheme.Primary
+    }) // Bootstrap icons in angular way
   ],
   providers: [authInterceptorProviders,
     DatePipe,

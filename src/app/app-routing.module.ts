@@ -111,8 +111,6 @@ const routes: Routes =
     { path: 'login', component: LoginComponent },
     { path: 'register', component: CreatePatientComponent },
     { path: 'profile', component: ProfileComponent },
-    /*{ path: 'user', component: BoardUserComponent },
-    { path: 'mod', component: BoardModeratorComponent },*/
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'admin', component: EmployeeListComponent },
     { path: 'update-employee/:id', component: UpdateEmployeeComponent },

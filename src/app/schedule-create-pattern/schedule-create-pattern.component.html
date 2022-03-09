@@ -16,12 +16,17 @@
             
         </mat-form-field>
 
-        <button mat-mini-fab color="primary" id = "patternCreateHint" aria-label="Hint pop up button" (click) = "isHintShown = !isHintShown">
+        <i-bs *ngIf = "!isHintShown; else hintShown" name = "question-circle" id = "patternCreateHint" aria-label = "Hint pop up button" (click) = "isHintShown = !isHintShown"></i-bs>
+
+        <ng-template #hintShown>
+            <i-bs *ngIf = "isHintShown" name = "x-circle" id = "patternCreateHint" aria-label = "Hint hide button" (click) = "isHintShown = !isHintShown"></i-bs>
+        </ng-template>
+        <!--<button mat-mini-fab color="primary" id = "patternCreateHint" aria-label="Hint pop up button" (click) = "isHintShown = !isHintShown">
             <mat-icon *ngIf = "!isHintShown; else minimizeHint">question_mark</mat-icon>
             <ng-template #minimizeHint>
                 <mat-icon>close</mat-icon>
             </ng-template>
-          </button>
+          </button>-->
 
           <div *ngIf = "isHintShown">
             <p> Для того, чтобы заполнить/отредактировать Ваше расписание, нужно:</p>
