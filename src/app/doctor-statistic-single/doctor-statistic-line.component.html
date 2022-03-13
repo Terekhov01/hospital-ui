@@ -1,0 +1,45 @@
+<html>
+
+<head>
+  <link href="./doctor-statistic-line.component.css" rel="stylesheet" type="text/css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8"/>
+</head>
+<style>
+
+
+</style>
+<header>
+</header>
+<body>
+<div class="col-md-6">
+  <h2 class="text-center">Информация о докторе</h2>
+  <form [formGroup]="statisticDoctorForm">
+
+    <td *ngFor='let statistic of statistic'>{{statistic[2]}}</td>
+<!--    <label >Имя Фамилия: {{statistic.responseStatistic[0]+' '+ statistic.responseStatistic[1]}} </label>-->
+    <div style="display: block">
+<!--      <canvas baseChart-->
+<!--              [datasets]="lineChartData"-->
+<!--              [labels]="lineChartLabels"-->
+<!--              [legend]="lineChartLegend"-->
+<!--              [type]="lineChartType">-->
+<!--      </canvas>-->
+
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [plugins]="barChartPlugins"
+              [legend]="barChartLegend"
+              [type]="barChartType">
+>
+      </canvas>
+
+    </div>
+  </form>
+</div>
+
+
+</body>

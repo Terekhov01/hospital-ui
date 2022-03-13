@@ -1,26 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
 // import { registerLocaleData } from '@angular/common';
 // import localeRu from '@angular/common/locales/ru';
 //
 // registerLocaleData(localeRu);
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatTableModule } from '@angular/material/table';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DateAdapter, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatTableModule} from '@angular/material/table';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {DateAdapter,MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+import {MatIconModule} from '@angular/material/icon';
 import {Ng2SearchPipeModule} from "ng2-search-filter";
 import {DoctorService} from "./DoctorInList/doctorList/doctor.service";
 import { DataTablesModule } from 'angular-datatables';
-import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import {AppRoutingModule} from './app-routing.module';
+import {HttpClientModule} from '@angular/common/http';
 
 import {
   NgxAwesomePopupModule,
@@ -29,44 +29,44 @@ import {
   ToastNotificationConfigModule
 } from '@costlydeveloper/ngx-awesome-popup';
 
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { CreatePatientComponent } from './create-patient/create-patient.component';
-import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from './profile/profile.component';
-import { BoardAdminComponent } from './board-admin/board-admin.component';
-import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
-import { BoardUserComponent } from './board-user/board-user.component';
+import {AppComponent} from './app.component';
+import {LoginComponent} from './login/login.component';
+import {CreatePatientComponent} from './create-patient/create-patient.component';
+import {HomeComponent} from './home/home.component';
+import {ProfileComponent} from './profile/profile.component';
+import {BoardAdminComponent} from './board-admin/board-admin.component';
+import {BoardModeratorComponent} from './board-moderator/board-moderator.component';
+import {BoardUserComponent} from './board-user/board-user.component';
 
-import { authInterceptorProviders } from './_helpers/auth.interceptor';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
-import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
-import { CreateEmployeeComponent } from './create-employee/create-employee.component';
-import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
-import { CustomDateAdapter } from './common-utility-classes/custom-date-adapter';
-import { ScheduleTablePageComponent } from './schedule-table-page/schedule-table-page.component';
-import { ScheduleFilterComponent } from './schedule-filter/schedule-filter.component';
-import { ScheduleAppointmentBlockComponent } from './schedule-appointment-block/schedule-appointment-block.component';
-import { ScheduleTransferDataComponent } from './schedule-transfer-data/schedule-transfer-data.component';
+import {authInterceptorProviders} from './_helpers/auth.interceptor';
+import {EmployeeListComponent} from './employee-list/employee-list.component';
+import {UpdateEmployeeComponent} from './update-employee/update-employee.component';
+import {CreateEmployeeComponent} from './create-employee/create-employee.component';
+import {EmployeeDetailsComponent} from './employee-details/employee-details.component';
+import {CustomDateAdapter } from './common-utility-classes/custom-date-adapter';
+import {ScheduleTablePageComponent} from './schedule-table-page/schedule-table-page.component';
+import {ScheduleFilterComponent} from './schedule-filter/schedule-filter.component';
+import {ScheduleAppointmentBlockComponent} from './schedule-appointment-block/schedule-appointment-block.component';
+import {ScheduleTransferDataComponent } from './schedule-transfer-data/schedule-transfer-data.component';
 import { ScheduleCreatePatternComponent } from './schedule-create-pattern/schedule-create-pattern.component';
 import { ScheduleApplyPatternComponent } from "./schedule-apply-pattern/schedule-apply-pattern.component";
-import { MaterialDateRangePickerComponent } from './material-date-range-picker/material-date-range-picker.component';
-import { ScheduleSpecifyAppointmentPageComponent } from './schedule-specify-appointment-page/schedule-specify-appointment-page.component';
-import { MatSelectModule } from '@angular/material/select';
-import { OurdoctorsComponent } from './OurDoctorsInClinic/ourdoctors.component';
-import { OurdoctorsdetailsComponent } from './ourdoctorsdetails/ourdoctorsdetails.component';
-import { OrderByPipe } from './order-by.pipe';
+import {MaterialDateRangePickerComponent} from './material-date-range-picker/material-date-range-picker.component';
+import {ScheduleSpecifyAppointmentPageComponent} from './schedule-specify-appointment-page/schedule-specify-appointment-page.component';
+import {MatSelectModule} from '@angular/material/select';
+import {OurdoctorsComponent} from './OurDoctorsInClinic/ourdoctors.component';
+import {OurdoctorsdetailsComponent} from './ourdoctorsdetails/ourdoctorsdetails.component';
+import {OrderByPipe} from './order-by.pipe';
 
-import { AppointmentListComponent } from './appointment-list/appointment-list.component';
-import { CreateAppointmentComponent } from './create-appointment/create-appointment.component';
-import { AppointmentRegistrationListComponent } from './appointment-registration-list/appointment-registration-list.component';
-import { CreateAppointmentRegistrationComponent } from './create-appointment-registration/create-appointment-registration.component';
-import { UpdateAppointmentComponent } from './update-appointment/update-appointment.component';
-import { UpdateAppointmentRegistrationComponent } from './update-appointment-registration/update-appointment-registration.component';
-import { AppointmentDetailsComponent } from './appointment-details/appointment-details.component';
-import { AppointmentRegistrationDetailsComponent } from './appointment-registration-details/appointment-registration-details.component';
+import {AppointmentListComponent} from './appointment-list/appointment-list.component';
+import {CreateAppointmentComponent} from './create-appointment/create-appointment.component';
+import {AppointmentRegistrationListComponent} from './appointment-registration-list/appointment-registration-list.component';
+import {CreateAppointmentRegistrationComponent} from './create-appointment-registration/create-appointment-registration.component';
+import {UpdateAppointmentComponent} from './update-appointment/update-appointment.component';
+import {UpdateAppointmentRegistrationComponent} from './update-appointment-registration/update-appointment-registration.component';
+import {AppointmentDetailsComponent} from './appointment-details/appointment-details.component';
+import {AppointmentRegistrationDetailsComponent} from './appointment-registration-details/appointment-registration-details.component';
 
 import {TableModule} from 'primeng/table';
 import {CalendarModule} from 'primeng/calendar';
@@ -122,23 +122,59 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import {AppointmentRegistrationInfoService} from "./appointment-registration-info.service";
 import {DoctorSharedShortInformationService} from "./doctor-shared-short-information.service";
 import {DatePipe} from '@angular/common';
-import { MedCardComponent } from './med-card/med-card.component';
-import { HereditaryComponent } from './hereditary/hereditary.component';
-import { ContrComponent } from './contr/contr.component';
-import { EditHereditaryComponent } from './edit-hereditary/edit-hereditary.component';
-import { EditContrComponent } from './edit-contr/edit-contr.component';
-import { MainComponent } from './main/main.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DoctorinfoComponent } from "./OurDoctorsMoreInfo/doctorinfo.component";
-import { DoctorComponent } from "./DoctorInList/doctorList/doctor.component";
-import { AddDoctorComponent } from "./AddNewDoctorInList/add-doctor.component";
-import { UpdateDoctorComponent } from "./UpdateDoctorInList/update-doctor.component";
-import { SafePipe } from './safe.pipe';
-import { FileViewerComponent } from './file-viewer/file-viewer.component';
-import { MaterialMultiSelectorComponent } from './doctor-selector/doctor-selector.component';
-import {TranslateLoader, TranslateModule, TranslateService, TranslateStore} from "@ngx-translate/core";
+// import { MedCardComponent } from './med-card/med-card.component';
+// import { HereditaryComponent } from './hereditary/hereditary.component';
+// import { ContrComponent } from './contr/contr.component';
+// import { EditHereditaryComponent } from './edit-hereditary/edit-hereditary.component';
+// import { EditContrComponent } from './edit-contr/edit-contr.component';
+// import { MainComponent } from './main/main.component';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { DoctorinfoComponent } from "./OurDoctorsMoreInfo/doctorinfo.component";
+// import { DoctorComponent } from "./DoctorInList/doctorList/doctor.component";
+// import { AddDoctorComponent } from "./AddNewDoctorInList/add-doctor.component";
+// import { UpdateDoctorComponent } from "./UpdateDoctorInList/update-doctor.component";
+// import { SafePipe } from './safe.pipe';
+// import { FileViewerComponent } from './file-viewer/file-viewer.component';
+// import { MaterialMultiSelectorComponent } from './doctor-selector/doctor-selector.component';
+// import {TranslateLoader, TranslateModule, TranslateService, TranslateStore} from "@ngx-translate/core";
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 import { FileTransferDataComponent } from './file-transfer-data/file-transfer-data.component';
+// import { MedCardComponent } from './med-card/med-card.component';
+// import { HereditaryComponent } from './hereditary/hereditary.component';
+// import { ContrComponent } from './contr/contr.component';
+// import { EditHereditaryComponent } from './edit-hereditary/edit-hereditary.component';
+// import { EditContrComponent } from './edit-contr/edit-contr.component';
+// import { MainComponent } from './main/main.component';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { DoctorinfoComponent } from "./OurDoctorsMoreInfo/doctorinfo.component";
+// import { DoctorComponent } from "./DoctorInList/doctorList/doctor.component";
+// import { AddDoctorComponent } from "./AddNewDoctorInList/add-doctor.component";
+// import { UpdateDoctorComponent } from "./UpdateDoctorInList/update-doctor.component";
+import { SafePipe } from './safe.pipe';
+import { FileViewerComponent } from './file-viewer/file-viewer.component';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
+import { MaterialMultiSelectorComponent } from './doctor-selector/doctor-selector.component';
+import {TranslateLoader, TranslateModule, TranslateService, TranslateStore} from "@ngx-translate/core";
+import {MedCardComponent} from './med-card/med-card.component';
+import {HereditaryComponent} from './hereditary/hereditary.component';
+import {ContrComponent} from './contr/contr.component';
+import {EditHereditaryComponent} from './edit-hereditary/edit-hereditary.component';
+import {EditContrComponent} from './edit-contr/edit-contr.component';
+import {MainComponent} from './main/main.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {DoctorinfoComponent} from "./OurDoctorsMoreInfo/doctorinfo.component";
+import {DoctorComponent} from "./DoctorInList/doctorList/doctor.component";
+import {AddDoctorComponent} from "./AddNewDoctorInList/add-doctor.component";
+import {UpdateDoctorComponent} from "./UpdateDoctorInList/update-doctor.component";
+import {DoctorStatisticLineComponent} from './doctor-statistic-single/doctor-statistic-line.component';
+import {NgChartsModule} from "ng2-charts";
+import { DoctorStatisticEmploymentComponent } from './doctor-statistic-employment/doctor-statistic-employment.component';
+import { LocalChatComponent } from './local-chat/local-chat.component';
+import { SendQuestionEmailComponent } from './send-question-email/send-question-email.component';
+import { ResponceemailComponent } from './send-question-email/responceemail/responceemail.component';
+//
+
+
 
 @NgModule({
   declarations: [
@@ -191,6 +227,13 @@ import { FileTransferDataComponent } from './file-transfer-data/file-transfer-da
     UpdateDoctorComponent,
     SafePipe,
     FileViewerComponent,
+    UpdateDoctorComponent,
+    DoctorStatisticLineComponent,
+    DoctorStatisticEmploymentComponent,
+    LocalChatComponent,
+    SendQuestionEmailComponent,
+    ResponceemailComponent,
+
     UpdateprofileComponent,
     FileTransferDataComponent
   ],
@@ -199,6 +242,8 @@ import { FileTransferDataComponent } from './file-transfer-data/file-transfer-da
     NgxExtendedPdfViewerModule,
     PdfViewerModule,
     BrowserModule,
+
+    NgChartsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -218,7 +263,8 @@ import { FileTransferDataComponent } from './file-transfer-data/file-transfer-da
     MatFormFieldModule,
     MatGridListModule,
     Ng2SearchPipeModule,
-    NgbModule,
+    NgbModule
+,
     DataTablesModule,
     TableModule,
     CalendarModule,
@@ -294,4 +340,5 @@ import { FileTransferDataComponent } from './file-transfer-data/file-transfer-da
     ScrollingModule
   ]
 })
-export class AppModule { }
+export class AppModule {
+}

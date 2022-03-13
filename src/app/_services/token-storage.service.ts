@@ -32,6 +32,7 @@ export class TokenStorageService {
 
   public getUser(): any {
     console.log("LOGGGGG: " + sessionStorage.getItem(USER_KEY));
+    // console.log(sessionStorage.getItem(USER_KEY.split(',')[2]));
     let usr = JSON.parse(sessionStorage.getItem(USER_KEY));
     let role = JSON.parse(sessionStorage.getItem(USER_KEY));
     this.user_role = role.roles;

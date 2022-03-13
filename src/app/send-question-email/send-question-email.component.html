@@ -1,0 +1,30 @@
+<html>
+<head>
+  <link href="send-question-email.component.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+<form (ngSubmit)="sendEmail()" [formGroup]="emailform" method="post">
+  <div id="inline">
+    <h2>Онлайн заявка</h2>
+
+      <input  [(ngModel)]="emailRequest.firstname" [formControlName]="'firstname'" class="txt" id="id_remarks"
+             minlength="1" placeholder="Ваше имя" >
+      <input  [(ngModel)]="emailRequest.phone" [formControlName]="'phone'" class="txt" id="id_remarks2"
+             minlength="1" placeholder="Ваш телефон">
+      <input [(ngModel)]="emailRequest.email" [formControlName]="'email'" class="txt" required minlength="1" id="id_remarks3" placeholder="Ваш e-mail">
+      <textarea [(ngModel)]="emailRequest.message" [formControlName]="'message'" class="txtarea" id="id_remarks4" placeholder="Ваше сообщение:">
+
+    </textarea>
+      <button type="submit" id="send" class="btn btn-primary">Отправить </button>
+  </div>
+</form>
+
+</body>
+
+
+
+</html>
+
+
