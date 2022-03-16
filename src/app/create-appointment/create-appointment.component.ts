@@ -276,6 +276,11 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
     this.goToAppointmentList();
   }
 
+  MedCard(id: bigint){
+    let result = this.router.navigate(['medCard', id]);
+  }
+
+
   /*onSubmit() {
     console.log(this.appointment);
     this.saveAppointment();

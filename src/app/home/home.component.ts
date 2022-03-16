@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../_services/user.service';
-import {Service} from "../service";
-import {ServiceServiceService} from "../service-service.service";
-import {AppointmentRegistrationService} from "../appointment-registration.service";
-import {AppointmentRegistration} from "../appointment-registration";
-import {User} from "../user";
-import {TokenStorageService} from "../_services/token-storage.service";
-import {DoctorService} from "../DoctorInList/doctorList/doctor.service";
-import {PatientService} from "../patient.service";
+import {Service} from '../service';
+import {ServiceServiceService} from '../service-service.service';
+import {AppointmentRegistrationService} from '../appointment-registration.service';
+import {AppointmentRegistration} from '../appointment-registration';
+import {User} from '../user';
+import {TokenStorageService} from '../_services/token-storage.service';
+import {DoctorService} from '../DoctorInList/doctorList/doctor.service';
+import {PatientService} from '../patient.service';
 import { PopUpMessageService } from '../_services/pop-up-message.service';
 
 
@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   isDoctor = false;
   isLoggedIn = false;
   private roles: string[];
+  contentLoaded = false;
 
 
   constructor(private userService: UserService,
@@ -38,13 +39,16 @@ export class HomeComponent implements OnInit {
               private popUpMessageService: PopUpMessageService) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.contentLoaded = true;
+    }, 1500);
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     this.serviceService.getServicesList().subscribe(data => {
       this.services = data;
     });
-    
-    let appointmentSubscription = this.appRegServ.getAppointmentRegistrationsList().subscribe({
+
+    const appointmentSubscription = this.appRegServ.getAppointmentRegistrationsList().subscribe({
       next: (data) =>
       {
         this.appRegs = data;
@@ -53,9 +57,9 @@ export class HomeComponent implements OnInit {
       error: (error) =>
       {
         this.appRegs = [new AppointmentRegistration()];
-        this.appRegs[0].service = "____";
+        this.appRegs[0].service = '____';
         this.maxCount();
-        this.popUpMessageService.displayWarning("Не удалось получить информацию о самой популярной услуге. Возможно, сервер недоступен");
+        this.popUpMessageService.displayWarning('Не удалось получить информацию о самой популярной услуге. Возможно, сервер недоступен');
       },
       complete: () =>
       {
@@ -63,7 +67,7 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    let doctorAmountSubscription = this.doctorService.getDoctourAmount().subscribe({
+    const doctorAmountSubscription = this.doctorService.getDoctourAmount().subscribe({
       next: (data: bigint) =>
       {
         this.doctorAmount = Number(data);
@@ -71,7 +75,7 @@ export class HomeComponent implements OnInit {
       error: (error) =>
       {
         this.doctorAmount = -1;
-        this.popUpMessageService.displayWarning("Не удалось получить информацию о количестве врачей в поликлинике. Возможно, сервер недоступен");
+        this.popUpMessageService.displayWarning('Не удалось получить информацию о количестве врачей в поликлинике. Возможно, сервер недоступен');
       },
       complete: () =>
       {
@@ -79,7 +83,7 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    let patientAmountSubscription = this.patientService.getPatientAmount().subscribe({
+    const patientAmountSubscription = this.patientService.getPatientAmount().subscribe({
       next: (data: bigint) =>
       {
         this.patientAmount = Number(data);
@@ -87,7 +91,7 @@ export class HomeComponent implements OnInit {
       error: (error) =>
       {
         this.patientAmount = -1;
-        this.popUpMessageService.displayWarning("Не удалось получить информацию о количестве пациентов в поликлинике. Возможно, сервер недоступен");
+        this.popUpMessageService.displayWarning('Не удалось получить информацию о количестве пациентов в поликлинике. Возможно, сервер недоступен');
       },
       complete: () =>
       {
@@ -102,10 +106,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line:typedef
   maxCount(){
     const obj = {};
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0 ; i < this.appRegs.length; i++){
-      let key = this.appRegs[i].service;
+      const key = this.appRegs[i].service;
       if (obj[key]){
         obj[key]++;
       }else {
@@ -113,7 +119,7 @@ export class HomeComponent implements OnInit {
       }
     }
     let maxCount = 0;
-    for (let key in obj){
+    for (const key in obj){
       if (maxCount < obj[key]){
         maxCount = obj[key];
         this.popularService = key;
