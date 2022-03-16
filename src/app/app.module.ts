@@ -172,6 +172,7 @@ import { DoctorStatisticEmploymentComponent } from './doctor-statistic-employmen
 import { LocalChatComponent } from './local-chat/local-chat.component';
 import { SendQuestionEmailComponent } from './send-question-email/send-question-email.component';
 import { ResponceemailComponent } from './send-question-email/responceemail/responceemail.component';
+import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 //
 
 
@@ -281,7 +282,8 @@ import { ResponceemailComponent } from './send-question-email/responceemail/resp
     NgxAwesomePopupModule.forRoot(), // Essential, mandatory main module.
     DialogConfigModule.forRoot(), // Needed for instantiating dynamic components.
     ConfirmBoxConfigModule.forRoot(), // Needed for instantiating confirm boxes.
-    ToastNotificationConfigModule.forRoot() // Needed for instantiating toast notifications.
+    ToastNotificationConfigModule.forRoot(), // Needed for instantiating toast notifications.
+    NgxSkeletonLoaderModule,
   ],
   providers: [authInterceptorProviders,
     DatePipe,

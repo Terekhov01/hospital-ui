@@ -32,6 +32,7 @@ export class MedCardComponent implements OnInit {
   room: string;
   id: number;
   allItemsEmpty: boolean;
+  contentLoaded = false;
   // doctors: User[];
   // selectedDoctor: User;
 
@@ -45,6 +46,9 @@ export class MedCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.contentLoaded = true;
+    }, 2000);
     this.id = this.actRoute.snapshot.params.id;
     this.medCardService.getAll(this.id).subscribe(
       data => {

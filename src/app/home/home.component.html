@@ -3,9 +3,15 @@
 <h2>О больнице</h2>
 <br>
 <div>
-  <p>В нашей замечательной больнице побывало пациентов: {{patientAmount}}</p>
-  <p>Здесь работают {{doctorAmount}} специалистов </p>
-  <p>Самая популярная услуга: {{popularService}}</p>
+  <ngx-skeleton-loader *ngIf="!contentLoaded" count="3" appearance="line" animation="pulse">
+  </ngx-skeleton-loader>
+  <div *ngIf="contentLoaded">
+    <p>В нашей замечательной больнице побывало пациентов: {{patientAmount}}</p>
+    <p>Здесь работают {{doctorAmount}} специалистов </p>
+    <p>Самая популярная услуга: {{popularService}}</p>
+  </div>
 </div>
+
+
 
 
