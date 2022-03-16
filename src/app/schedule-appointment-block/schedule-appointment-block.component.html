@@ -11,44 +11,51 @@
 
     <div *ngIf="isInitiated">
 
-      <form (ngSubmit)="onSubmit()">
+      <div class="card">
+        <div class="card-body">
 
-        <div class="form-group">
-          <label> <b> Фамилия доктора: </b> </label> {{appointmentRegistration.doctor.user.lastName}}
+          <form (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+              <label> <b> Доктор: </b> </label> {{appointmentRegistration.doctor.user.lastName}} {{appointmentRegistration.doctor.user.firstName}} {{appointmentRegistration.doctor.user.patronymic}}
+            </div>
+
+            <div class="form-group">
+              <label> <b> Пациент: </b> </label> {{appointmentRegistration.patient.user.lastName}}  {{appointmentRegistration.patient.user.firstName}} {{appointmentRegistration.patient.user.patronymic}}
+            </div>
+
+            <div class="form-group">
+              <label> <b> Дата и время начала приема: </b> </label> {{dateTime}}
+            </div>
+
+            <div class="form-group">
+              <label> <b> Кабинет: </b> </label> {{appointmentRegistration.doctor.room.num}}
+            </div>
+            <!--    <div class = "form-group">-->
+            <!--      <label> Услуга:    </label>-->
+            <!--      <div>-->
+
+            <!--      </div>-->
+
+            <!--      <input size="39" type = "text"-->
+            <!--             [formControl] = "serviceFormControl.ServiceFormControl"-->
+            <!--             [matAutocomplete] = "auto">-->
+
+            <!--      <mat-autocomplete [panelWidth]="300" autoActiveFirstOption #auto="matAutocomplete" class = "autocompleteDoctorFilterField">-->
+            <!--        &lt;!&ndash; TODO - introduce categories of doctors by their profession &ndash;&gt;-->
+            <!--        <mat-option *ngFor="let service of serviceFormControl.ServiceFiltered.value" [value] = "service.toString()">-->
+            <!--          {{ service.toString() }}-->
+            <!--        </mat-option>-->
+            <!--      </mat-autocomplete>-->
+
+            <!--    </div>-->
+            <button class="SubmitButton" mat-stroked-button> Подтвердить запись</button>
+
+          </form>
+
         </div>
+      </div>
 
-        <div class="form-group">
-          <label> <b> Фамилия пациента: </b> </label> {{appointmentRegistration.patient.user.lastName}}
-        </div>
-
-        <div class="form-group">
-          <label> <b> Дата и время начала приема: </b> </label> {{dateTime}}
-        </div>
-
-        <div class="form-group">
-          <label> <b> Кабинет: </b> </label> {{appointmentRegistration.doctor.room.num}}
-        </div>
-        <!--    <div class = "form-group">-->
-        <!--      <label> Услуга:    </label>-->
-        <!--      <div>-->
-
-        <!--      </div>-->
-
-        <!--      <input size="39" type = "text"-->
-        <!--             [formControl] = "serviceFormControl.ServiceFormControl"-->
-        <!--             [matAutocomplete] = "auto">-->
-
-        <!--      <mat-autocomplete [panelWidth]="300" autoActiveFirstOption #auto="matAutocomplete" class = "autocompleteDoctorFilterField">-->
-        <!--        &lt;!&ndash; TODO - introduce categories of doctors by their profession &ndash;&gt;-->
-        <!--        <mat-option *ngFor="let service of serviceFormControl.ServiceFiltered.value" [value] = "service.toString()">-->
-        <!--          {{ service.toString() }}-->
-        <!--        </mat-option>-->
-        <!--      </mat-autocomplete>-->
-
-        <!--    </div>-->
-        <button mat-raised-button color="primary"> Подтвердить запись</button>
-
-      </form>
     </div>
   </div>
 <div class="modal-footer">

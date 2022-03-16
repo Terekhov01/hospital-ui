@@ -121,7 +121,7 @@ import { AppointmentCreationComponent } from './appointment-creation/appointment
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import {AppointmentRegistrationInfoService} from "./appointment-registration-info.service";
 import {DoctorSharedShortInformationService} from "./doctor-shared-short-information.service";
-import {DatePipe} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 // import { MedCardComponent } from './med-card/med-card.component';
 // import { HereditaryComponent } from './hereditary/hereditary.component';
 // import { ContrComponent } from './contr/contr.component';
@@ -168,7 +168,7 @@ import {AddDoctorComponent} from "./AddNewDoctorInList/add-doctor.component";
 import {UpdateDoctorComponent} from "./UpdateDoctorInList/update-doctor.component";
 import {DoctorStatisticLineComponent} from './doctor-statistic-single/doctor-statistic-line.component';
 import {NgChartsModule} from "ng2-charts";
-import { DoctorStatisticEmploymentComponent } from './doctor-statistic-employment/doctor-statistic-employment.component';
+// import { DoctorStatisticEmploymentComponent } from './doctor-statistic-employment/doctor-statistic-employment.component';
 import { LocalChatComponent } from './local-chat/local-chat.component';
 import { SendQuestionEmailComponent } from './send-question-email/send-question-email.component';
 import { ResponceemailComponent } from './send-question-email/responceemail/responceemail.component';
@@ -229,7 +229,7 @@ import { ResponceemailComponent } from './send-question-email/responceemail/resp
     FileViewerComponent,
     UpdateDoctorComponent,
     DoctorStatisticLineComponent,
-    DoctorStatisticEmploymentComponent,
+    // DoctorStatisticEmploymentComponent,
     LocalChatComponent,
     SendQuestionEmailComponent,
     ResponceemailComponent,
@@ -256,6 +256,7 @@ import { ResponceemailComponent } from './send-question-email/responceemail/resp
     MatDatepickerModule,
     MatNativeDateModule,
     FormsModule,
+    CommonModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,

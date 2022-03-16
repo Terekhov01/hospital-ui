@@ -13,12 +13,14 @@ import { PopUpMessageService } from '../_services/pop-up-message.service';
 export class AppointmentListComponent implements OnInit {
 
   appointments: Appointment[];
+  isLoaded: boolean;
 
   constructor(private appointmentService: AppointmentService, public datePipe: DatePipe,
               private router: Router,
               private popUpMessageService: PopUpMessageService) { }
 
   ngOnInit(): void {
+    this.isLoaded = false;
     this.getAppointments();
   }
 
@@ -27,10 +29,12 @@ export class AppointmentListComponent implements OnInit {
     console.log("ROLE: " + usr_role)
     if (usr_role == "ROLE_DOCTOR") {
       this.appointmentService.getDoctorAppointments(BigInt(window.sessionStorage.getItem("USER_ID"))).subscribe(data => {
+        this.isLoaded = true;
         this.appointments = data;
       })
     } else if (usr_role == "ROLE_PATIENT") {
       this.appointmentService.getPatientAppointments(BigInt(window.sessionStorage.getItem("USER_ID"))).subscribe(data => {
+        this.isLoaded = true;
         this.appointments = data;
       })
     } else {

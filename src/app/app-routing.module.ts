@@ -89,7 +89,7 @@ import {DoctorComponent} from "./DoctorInList/doctorList/doctor.component";
 import {AddDoctorComponent} from "./AddNewDoctorInList/add-doctor.component";
 import {UpdateDoctorComponent} from "./UpdateDoctorInList/update-doctor.component";
 import {DoctorStatisticLineComponent} from "./doctor-statistic-single/doctor-statistic-line.component";
-import {DoctorStatisticEmploymentComponent} from "./doctor-statistic-employment/doctor-statistic-employment.component";
+// import {DoctorStatisticEmploymentComponent} from "./doctor-statistic-employment/doctor-statistic-employment.component";
 import {LocalChatComponent} from "./local-chat/local-chat.component";
 import {SendQuestionEmailComponent} from "./send-question-email/send-question-email.component";
 import {AccessDeniedPageComponent} from "./access-denied-page/access-denied-page.component";
@@ -146,7 +146,7 @@ const routes: Routes =
     {path: "appointment-registration-details/:id", component: AppointmentRegistrationDetailsComponent},
     {path: "appointment-creation/:id", component: AppointmentCreationComponent},
     {path: "file-viewer/:id", component: FileViewerComponent},
-    {path: "doctorstatictic", component: DoctorStatisticEmploymentComponent},
+    // {path: "doctorstatictic", component: DoctorStatisticEmploymentComponent},
     {path: "doctorstatictic/:id", component: DoctorStatisticLineComponent},
     {path:"local-chat",component: LocalChatComponent},
     {path:"send-email",component: SendQuestionEmailComponent},

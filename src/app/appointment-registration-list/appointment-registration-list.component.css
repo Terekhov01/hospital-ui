@@ -1,0 +1,31 @@
+@import '~primeicons/primeicons.css';
+
+.button{
+  background-color: #118bf1;
+}
+
+.list-group-item {
+  width: 95%;
+  margin: 1% !important;
+}
+
+@media (min-width: 576px) {
+  .list-group-item {
+    width: 47%;
+    margin: 5px 1.5% !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .list-group-item {
+    width: 31.333%;
+    margin: 5px 1% !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .list-group-item {
+    width: 23%;
+    margin: 5px 1% !important;
+  }
+}

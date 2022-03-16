@@ -1,28 +1,74 @@
-<h1>Список прошедших приемов</h1>
-<table class = "table table-striped">
-  <thead>
-    <tr>
-<!--      <th> Id </th>-->
-      <th> Описание </th>
-<!--      <th> Доктор </th>-->
-      <th> Пациент </th>
-      <th> Дата и время </th>
-      <th> Действия </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor = "let appointment of appointments">
-<!--      <td> {{appointment.id}} </td>-->
-      <td> {{appointment.description}} </td>
-<!--      <td> {{appointment.appointmentRegistration.doctor.lastName}} </td>-->
-      <td> {{appointment.appointmentRegistration.patient.user.lastName}} </td>
-<!--      <td> {{appointment.appointmentRegistration.start}} </td>-->
-      <td> {{datePipe.transform(appointment.appointmentRegistration.start, "yyyy/MM/dd HH:mm")}} </td>
-      <td>
-<!--        <button (click)="updateAppointment(appointment.id)" mat-raised-button color="primary"> Изменить </button>-->
-<!--        <button (click)="deleteAppointment(appointment.id)" class="btn btn-danger" style="margin-left: 10px"> Удалить </button>-->
-        <button (click)="appointmentDetails(appointment.id)" mat-raised-button color="primary" style="margin-left: 10px"> Детали </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="card text-center">
+  <div class="card-body">
+    <h1>Список прошедших приемов</h1>
+  </div>
+</div>
+
+<div *ngIf = "!isLoaded">
+<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<div *ngIf="isLoaded">
+
+  <div *ngIf="appointments !== null">
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <!--      <th> Id </th>-->
+        <th> Описание</th>
+        <!--      <th> Доктор </th>-->
+        <th> Пациент</th>
+        <th> Дата и время</th>
+        <th> Действия</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let appointment of appointments">
+        <!--      <td> {{appointment.id}} </td>-->
+        <td> {{appointment.description}} </td>
+        <!--      <td> {{appointment.appointmentRegistration.doctor.lastName}} </td>-->
+        <td> {{appointment.appointmentRegistration.patient.user.lastName}} {{appointment.appointmentRegistration.patient.user.firstName.substr(0,1)}}. {{appointment.appointmentRegistration.patient.user.patronymic.substr(0,1)}}. </td>
+        <!--      <td> {{appointment.appointmentRegistration.start}} </td>-->
+        <td> {{datePipe.transform(appointment.appointmentRegistration.start, "yyyy/MM/dd HH:mm")}} </td>
+        <td>
+          <!--        <button (click)="updateAppointment(appointment.id)" mat-raised-button color="primary"> Изменить </button>-->
+          <!--        <button (click)="deleteAppointment(appointment.id)" class="btn btn-danger" style="margin-left: 10px"> Удалить </button>-->
+          <button (click)="appointmentDetails(appointment.id)" mat-raised-button color="primary"
+                  style="margin-left: 10px"> Детали
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div *ngIf = "appointments == null">
+
+    <mat-card class="text-center">
+      <mat-card-header><h1>Ooops...</h1></mat-card-header>
+      <mat-card-body>
+        <mat-card-title>
+          <h3>Похоже, что у вас еще не было пациентов!</h3>
+        </mat-card-title>
+        <mat-card-text>Чтобы начать новый прием перейдите на страницу </mat-card-text>
+        <a href="/create-appointment" mdbBtn color="primary">начать новый прием</a>
+      </mat-card-body>
+      <!--      <mat-card-footer class="text-muted">2 days ago</mat-card-footer>-->
+    </mat-card>
+
+    <!--    <div class="card text-body bg-info mb-3" style="max-width: 64rem;">-->
+    <!--      <div class="card-header">Header</div>-->
+    <!--      <div class="card-body">-->
+    <!--        <h5 class="card-title">Primary card title</h5>-->
+    <!--        <p class="card-text">-->
+    <!--          Some quick example text to build on the card title and make up the bulk of the-->
+    <!--          card's content.-->
+    <!--        </p>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+  </div>
+
+</div>
