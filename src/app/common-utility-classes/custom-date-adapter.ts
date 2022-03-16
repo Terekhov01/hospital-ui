@@ -3,9 +3,10 @@ import { NativeDateAdapter } from "@angular/material/core";
 
 
 @Injectable()
-export class CustomDateAdapter extends NativeDateAdapter {
-  getFirstDayOfWeek(): number
-  {
-     return 1;
-   }
+export class CustomDateAdapter extends NativeDateAdapter
+{
+    getFirstDayOfWeek(): number
+    {
+        return 1;
+    }
 }

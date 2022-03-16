@@ -1,3 +1,4 @@
+import { CommonUtilsService } from "../_services/common-utils.service";
 import { Interval, TimeRounded } from "./schedule-interval.data-transfer-objects";
 
 export interface IDailyInformation
@@ -20,6 +21,65 @@ export class DailyInformation
 {
     date: Date;
     timeIntervals: Interval[];
+
+    constructor(date: Date)
+    {
+        this.date = new Date(date);
+    }
+
+    fillDefaultIntervalAmount(intervalAmount: number)
+    {
+        this.timeIntervals = [];
+        for (let i = 0; i < intervalAmount; i++)
+        {
+            this.timeIntervals.push(null);
+        }
+    }
+
+    isWeekend(): boolean
+    {
+        return !this.timeIntervals.some((element) => element != null);
+    }
+}
+
+export class WeeklyInformation
+{
+    dailyInformation: DailyInformation[];
+
+    constructor(weekStartDate: Date, intervalAmount: number)
+    {
+        this.dailyInformation = [];
+
+        if (weekStartDate.getDay() != 1)
+        {
+            console.warn("В конструктор недели передана дата, не являющаяся понедельником. Используется ближайший понедельник перед указанной датой!");
+            
+            let day = weekStartDate.getDay();
+            let diff = weekStartDate.getDate() - day + (day == 0 ? -6:1);
+            weekStartDate =  new Date(weekStartDate.setDate(diff));
+        }
+        
+        let weekStartDateCpy = new Date(weekStartDate);
+
+        for (let dateCounter = new Date(weekStartDate); dateCounter < CommonUtilsService.getSundayAfter(weekStartDate); dateCounter.setDate(dateCounter.getDate() + 1))
+        {
+            let dailyInformation = new DailyInformation(dateCounter);
+            dailyInformation.fillDefaultIntervalAmount(intervalAmount);
+            this.dailyInformation.push(dailyInformation);
+        }
+    }
+}
+
+export class DoctorSchedule
+{
+    doctorInfo: DoctorInfo;
+    weeklyInformation: WeeklyInformation[];
+
+    constructor()
+    {
+        this.weeklyInformation = [];
+        this.doctorInfo = new DoctorInfo();
+    }
 }
 
 export class DoctorInfo
@@ -29,5 +89,9 @@ export class DoctorInfo
     firstName: string;
     lastName: string;
     middleName: string;
-    //dailyInformation: DailyInformation[];
+
+    constructor()
+    {
+        this.specializationNames = [];
+    }
 }

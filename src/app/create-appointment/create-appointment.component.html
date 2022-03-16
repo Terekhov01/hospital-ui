@@ -1,6 +1,6 @@
 <h3> Выберите запись для приема </h3>
 
-<div *ngIf="appointmentRegistrations.length != 0 else NothingFound">
+<div *ngIf="appointmentRegistrations != null && appointmentRegistrations.length != 0 else NothingFound">
 
   <table class="table table-striped">
     <thead>

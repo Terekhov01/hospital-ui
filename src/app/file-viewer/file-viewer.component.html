@@ -6,13 +6,13 @@
   <span *ngFor = "let fileResource of fileResources" class = "filePresentationRow">
     <p class = "fileName">{{fileResource.fileName}}</p>
     <span *ngIf = "fileResource.mimetype !== ''" style = "display: inline-block; margin-right: 10px">
-      <button (click) = "downloadFile(fileResource)" class = "btn">
+      <button class = "btn">
         <i-bs name = "file-earmark-medical" aria-label = "Preview button" (click) = "displayFile(fileResource)"></i-bs>
       </button>
     </span>
     <span>
-      <button (click) = "downloadFile(fileResource)" class = "btn">
-        <i-bs name = "download" aria-label = "Download file button"></i-bs>
+      <button class = "btn">
+        <i-bs name = "download" aria-label = "Download file button" (click) = "downloadFile(fileResource)"></i-bs>
       </button>
     </span>
   </span>
