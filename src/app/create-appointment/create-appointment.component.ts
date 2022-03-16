@@ -24,7 +24,7 @@ export class CreateAppointmentComponent implements OnInit {
   address: string;
   room: string;
   doctor: string;
-  patient: string
+  patient: string;
   appointmentRegistrations: AppointmentRegistration[] = [];
 
   constructor(private appointmentService: AppointmentService,
@@ -105,6 +105,10 @@ export class CreateAppointmentComponent implements OnInit {
 
   SelectAppointmentRegistration(id: number) {
     let result = this.router.navigate(['appointment-creation', id]);
+  }
+
+  MedCard(id: bigint){
+    let result = this.router.navigate(['medCard', id]);
   }
 
   /*onSubmit() {
