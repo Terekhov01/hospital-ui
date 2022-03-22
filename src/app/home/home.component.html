@@ -3,8 +3,7 @@
 <h2>О больнице</h2>
 <br>
 <div>
-  <ngx-skeleton-loader *ngIf="!contentLoaded" count="3" appearance="line" animation="pulse">
-  </ngx-skeleton-loader>
+  <mat-progress-bar *ngIf="!contentLoaded" mode="indeterminate"></mat-progress-bar>
   <div *ngIf="contentLoaded">
     <p>В нашей замечательной больнице побывало пациентов: {{patientAmount}}</p>
     <p>Здесь работают {{doctorAmount}} специалистов </p>

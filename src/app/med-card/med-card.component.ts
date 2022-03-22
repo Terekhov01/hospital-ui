@@ -48,7 +48,7 @@ export class MedCardComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.contentLoaded = true;
-    }, 2000);
+    }, 2500);
     this.id = this.actRoute.snapshot.params.id;
     this.medCardService.getAll(this.id).subscribe(
       data => {
