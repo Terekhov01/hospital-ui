@@ -29,4 +29,7 @@ export class ProfileComponent implements OnInit {
   updateProfile(id: number){
     this.router.navigate(['updateprofile', id]);
   }
+  MedCard(id: bigint){
+    this.router.navigate(['medCard', id]);
+  }
 }
