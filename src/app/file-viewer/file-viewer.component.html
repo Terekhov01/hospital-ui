@@ -1,75 +1,78 @@
-<div>
-  <br>
+<div *ngIf = "isFilesLoading; else showFiles">
+  <h1 style = "text-align: center; margin: 20">Загрузка файлов</h1>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 
-<div class = "mat-elevation-z4 fileList">
-  <span *ngFor = "let fileResource of fileResources" class = "filePresentationRow">
-    <p class = "fileName">{{fileResource.fileName}}</p>
-    <span *ngIf = "fileResource.mimetype !== ''" style = "display: inline-block; margin-right: 10px">
-      <button class = "btn">
-        <i-bs name = "file-earmark-medical" aria-label = "Preview button" (click) = "displayFile(fileResource)"></i-bs>
-      </button>
+<ng-template #showFiles>
+  <div class = "mat-elevation-z4 fileList">
+    <span *ngFor = "let fileResource of fileResources" class = "filePresentationRow">
+      <p class = "fileName">{{fileResource.fileName}}</p>
+      <span *ngIf = "fileResource.mimetype !== ''" style = "display: inline-block; margin-right: 10px">
+        <button class = "btn">
+          <i-bs name = "file-earmark-medical" aria-label = "Preview button" (click) = "displayFile(fileResource)"></i-bs>
+        </button>
+      </span>
+      <span>
+        <button class = "btn">
+          <i-bs name = "download" aria-label = "Download file button" (click) = "downloadFile(fileResource)"></i-bs>
+        </button>
+      </span>
     </span>
-    <span>
-      <button class = "btn">
-        <i-bs name = "download" aria-label = "Download file button" (click) = "downloadFile(fileResource)"></i-bs>
-      </button>
-    </span>
-  </span>
 
-</div>
+  </div>
 
-<div>
-  <br>
-</div>
+  <div>
+    <br>
+  </div>
 
-<div *ngIf = "displayedFile !== null" class = "documentBlock">
+  <div *ngIf = "displayedFile !== null" class = "documentBlock">
 
-  <h1> {{ displayedFile.fileName }} </h1> 
-  <h3> Дата загрузки: {{ this.datePipe.transform(displayedFile.creationDate, 'dd.MM.yyyy hh:mm:ss') }} </h3>
-  <!-- Present each file differently based on file type (extension) -->
+    <h1> {{ displayedFile.fileName }} </h1> 
+    <h3> Дата загрузки: {{ this.datePipe.transform(displayedFile.creationDate, 'dd.MM.yyyy hh:mm:ss') }} </h3>
+    <!-- Present each file differently based on file type (extension) -->
 
-  <div [ngSwitch] = "displayedFile.mimetype">
+    <div [ngSwitch] = "displayedFile.mimetype">
 
-    <div *ngSwitchCase = "'application/pdf'">
-      <ngx-extended-pdf-viewer
-      [src]="displayedFile.fileUrl"
-      [useBrowserLocale]="true"
-      [textLayer]="true"
-      [showHandToolButton]="true"
-      [showPresentationModeButton]="true"
-      [showDownloadButton]="false"
-      >
-      </ngx-extended-pdf-viewer>
-    </div>
+      <div *ngSwitchCase = "'application/pdf'">
+        <ngx-extended-pdf-viewer
+        [src]="displayedFile.fileUrl"
+        [useBrowserLocale]="true"
+        [textLayer]="true"
+        [showHandToolButton]="true"
+        [showPresentationModeButton]="true"
+        [showDownloadButton]="false"
+        >
+        </ngx-extended-pdf-viewer>
+      </div>
 
-    <div *ngSwitchCase = "displayedFile.mimetype === 'application/msword' 
-                      || displayedFile.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? displayedFile.mimetype : ''">
-                      
-      <div id = "docxContainer" style = "border-bottom: solid 10px #808080;"></div>
-    </div>
+      <div *ngSwitchCase = "displayedFile.mimetype === 'application/msword' 
+                        || displayedFile.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? displayedFile.mimetype : ''">
+                        
+        <div id = "docxContainer" style = "border-bottom: solid 10px #808080;"></div>
+      </div>
 
-    <div *ngSwitchCase = "'text/plain'">
-      <div class="form-group blue-border">
-        <textarea class="form-control" id = "plainTextContainer" rows="3"></textarea>
+      <div *ngSwitchCase = "'text/plain'">
+        <div class="form-group blue-border">
+          <textarea class="form-control" id = "plainTextContainer" rows="3"></textarea>
+        </div>
+      </div>
+
+      <div *ngSwitchDefault>
+        Предпросмотр документа {{ displayedFile.fileName }} недоступен
       </div>
     </div>
-
-    <div *ngSwitchDefault>
-      Предпросмотр документа {{ displayedFile.fileName }} недоступен
-    </div>
+    
   </div>
-  
-</div>
 
-<div>
-  <br>
-</div>
+  <div>
+    <br>
+  </div>
 
-<button class = "btn btn-primary" (click)="downloadAllFiles()" id = "downloadAllButton"> Скачать все </button>
+  <button class = "btn btn-primary" (click)="downloadAllFiles()" id = "downloadAllButton"> Скачать все </button>
 
-<div>
-  <br>
-</div>
+  <div>
+    <br>
+  </div>
 
-<button (click)="backToDetails(this.id)" class = "btn btn-primary"> Назад </button>
+  <button (click)="backToDetails(this.id)" class = "btn btn-primary"> Назад </button>
+</ng-template>

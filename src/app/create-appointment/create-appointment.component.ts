@@ -186,7 +186,10 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void
   {
-    this.sickLeaveDatePickerSubscription.unsubscribe();
+    if (this.sickLeaveDatePickerSubscription != null)
+    {
+      this.sickLeaveDatePickerSubscription.unsubscribe();
+    }
   }
 
   saveAppointment() {

@@ -43,6 +43,7 @@ export class FileViewerComponent implements OnInit, AfterViewChecked
   isRenderedFileDirty = true;
   displayedFile: FileResourceInfo = null;
   id: number;
+  isFilesLoading = true;
 
   constructor(private route: ActivatedRoute, private router: Router, public sanitizer: DomSanitizer,
               private appointmentService: AppointmentService, public datePipe: DatePipe, private patientService: PatientService,
@@ -70,11 +71,13 @@ export class FileViewerComponent implements OnInit, AfterViewChecked
        },
       error: (error) =>
       {
+        this.isFilesLoading = false;
         this.popUpMessageService.displayError(error);
         //alert(error.error);
       },
       complete: () =>
       {
+        this.isFilesLoading = false;
         downloadSubscription.unsubscribe();
       }
     })

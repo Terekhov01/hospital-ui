@@ -1,3 +1,8 @@
+:host
+{
+  margin: 20px;
+}
+
 body {
   background: rgb(204,204,204);
 }

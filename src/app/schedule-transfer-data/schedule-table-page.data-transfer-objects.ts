@@ -72,11 +72,15 @@ export class WeeklyInformation
 
 export class DoctorSchedule
 {
+    startDate: Date;
+    endDate: Date;
     doctorInfo: DoctorInfo;
     weeklyInformation: WeeklyInformation[];
 
-    constructor()
+    constructor(startDate: Date, endDate: Date)
     {
+        this.startDate = new Date(startDate);
+        this.endDate = new Date(endDate);
         this.weeklyInformation = [];
         this.doctorInfo = new DoctorInfo();
     }
