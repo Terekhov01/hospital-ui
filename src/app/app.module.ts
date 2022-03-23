@@ -22,6 +22,10 @@ import { DataTablesModule } from 'angular-datatables';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 
+import { questionCircle, xCircle, download, fileEarmarkMedical, ColorTheme } from 'ngx-bootstrap-icons';
+import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
+
+
 import {
   NgxAwesomePopupModule,
   DialogConfigModule,
@@ -172,9 +176,14 @@ import {NgChartsModule} from "ng2-charts";
 import { LocalChatComponent } from './local-chat/local-chat.component';
 import { SendQuestionEmailComponent } from './send-question-email/send-question-email.component';
 import { ResponceemailComponent } from './send-question-email/responceemail/responceemail.component';
-//
 
-
+// Select bootstrap icons (use an object, not an array)
+const icons = {
+  questionCircle,
+  xCircle,
+  download,
+  fileEarmarkMedical
+};
 
 @NgModule({
   declarations: [
@@ -242,7 +251,6 @@ import { ResponceemailComponent } from './send-question-email/responceemail/resp
     NgxExtendedPdfViewerModule,
     PdfViewerModule,
     BrowserModule,
-
     NgChartsModule,
     AppRoutingModule,
     HttpClientModule,
@@ -264,8 +272,7 @@ import { ResponceemailComponent } from './send-question-email/responceemail/resp
     MatFormFieldModule,
     MatGridListModule,
     Ng2SearchPipeModule,
-    NgbModule
-,
+    NgbModule,
     DataTablesModule,
     TableModule,
     CalendarModule,
@@ -282,7 +289,12 @@ import { ResponceemailComponent } from './send-question-email/responceemail/resp
     NgxAwesomePopupModule.forRoot(), // Essential, mandatory main module.
     DialogConfigModule.forRoot(), // Needed for instantiating dynamic components.
     ConfirmBoxConfigModule.forRoot(), // Needed for instantiating confirm boxes.
-    ToastNotificationConfigModule.forRoot() // Needed for instantiating toast notifications.
+    ToastNotificationConfigModule.forRoot(), // Needed for instantiating toast notifications.
+    NgxBootstrapIconsModule.pick(icons, { 
+      width: '2em', 
+      height: '2em', 
+      theme: ColorTheme.Primary
+    }) // Bootstrap icons in angular way
   ],
   providers: [authInterceptorProviders,
     DatePipe,

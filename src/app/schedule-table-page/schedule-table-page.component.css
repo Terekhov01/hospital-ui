@@ -194,6 +194,11 @@ td.mat-column-name
     width: 110px;
 }
 
+.emptyCell
+{
+    background-color: #e9e9e9;
+}
+
 [class *= "mat-column-day"],
 .dynamicAmountColumnHeader > div
 {
@@ -201,4 +206,9 @@ td.mat-column-name
     min-width: 110px;
     width: 110px;
     max-width: 110px;
+}
+
+.lastColumn
+{
+    margin-left: 20px;
 }

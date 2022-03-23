@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 // import * as Stomp from 'stompjs';
 // import * as SockJS from 'sockjs-client';
-import Stomp from 'stompjs';
+import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import * as $ from 'jquery';
 

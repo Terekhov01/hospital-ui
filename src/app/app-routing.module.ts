@@ -1,23 +1,23 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
 import {DoctorinfoComponent} from "./OurDoctorsMoreInfo/doctorinfo.component";
-import {CommonModule} from '@angular/common';
-import {CreatePatientComponent} from './create-patient/create-patient.component';
-import {LoginComponent} from './login/login.component';
-import {HomeComponent} from './home/home.component';
-import {ProfileComponent} from './profile/profile.component';
-import {BoardUserComponent} from './board-user/board-user.component';
-import {BoardModeratorComponent} from './board-moderator/board-moderator.component';
-import {EmployeeListComponent} from './employee-list/employee-list.component';
-import {UpdateEmployeeComponent} from './update-employee/update-employee.component';
-import {CreateEmployeeComponent} from './create-employee/create-employee.component';
-import {EmployeeDetailsComponent} from './employee-details/employee-details.component';
+import { CommonModule } from '@angular/common';
+import { CreatePatientComponent } from './create-patient/create-patient.component';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
+import { BoardUserComponent } from './board-user/board-user.component';
+import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
+import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
+import { CreateEmployeeComponent } from './create-employee/create-employee.component';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 // import { DoctorComponent } from "./user/user/doctor.component";
 // import { AddDoctorComponent } from "./add-doctor/add-doctor.component";
 // import { UpdateDoctorComponent } from "./update-doctor/update-doctor.component";
-import {OurdoctorsComponent} from "./OurDoctorsInClinic/ourdoctors.component";
-import {OurdoctorsdetailsComponent} from "./ourdoctorsdetails/ourdoctorsdetails.component";
+import { OurdoctorsComponent } from "./OurDoctorsInClinic/ourdoctors.component";
+import { OurdoctorsdetailsComponent } from "./ourdoctorsdetails/ourdoctorsdetails.component";
 import {AppointmentListComponent} from "./appointment-list/appointment-list.component";
 import {CreateAppointmentComponent} from "./create-appointment/create-appointment.component";
 import {CreateAppointmentRegistrationComponent} from "./create-appointment-registration/create-appointment-registration.component";
@@ -42,6 +42,7 @@ import { MaterialMultiSelectorComponent } from "./doctor-selector/doctor-selecto
 import { FileViewerComponent } from "./file-viewer/file-viewer.component";
 
 //import { MaterialMultiSelectorComponent } from './material-multi-selector/material-multi-selector.component';
+
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -84,7 +85,12 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {A} from "@angular/cdk/keycodes";
+import {ScheduleFilterComponent} from "./schedule-filter/schedule-filter.component";
+import {ScheduleAppointmentBlockComponent} from "./schedule-appointment-block/schedule-appointment-block.component";
+import {MaterialDateRangePickerComponent} from "./material-date-range-picker/material-date-range-picker.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import {DoctorComponent} from "./DoctorInList/doctorList/doctor.component";
 import {AddDoctorComponent} from "./AddNewDoctorInList/add-doctor.component";
 import {UpdateDoctorComponent} from "./UpdateDoctorInList/update-doctor.component";
@@ -97,44 +103,41 @@ import {UpdateprofileComponent} from './updateprofile/updateprofile.component';
 
 const routes: Routes =
   [
-    {path: "accessDeniedPage", component: AccessDeniedPageComponent},
-    {path: "medCard/:id", component: MedCardComponent},
-    {path: "medCard/hereditary/:id", component: HereditaryComponent},
-    {path: "medCard/contraindications/:id", component: ContrComponent},
-    {path: "medCard/edit-hereditary/:id", component: EditHereditaryComponent},
-    {path: "medCard/edit-contr/:id", component: EditContrComponent},
-
+    { path: "accessDeniedPage", component: AccessDeniedPageComponent},
+    { path: "medCard/:id", component: MedCardComponent },
+    { path: "medCard/hereditary/:id", component: HereditaryComponent },
+    { path: "medCard/contraindications/:id", component: ContrComponent },
+    { path: "medCard/edit-hereditary/:id", component: EditHereditaryComponent },
+    { path: "medCard/edit-contr/:id", component: EditContrComponent },
     { path: "", redirectTo: 'home', pathMatch: 'full'},
     { path: 'updateprofile/:id', component: UpdateprofileComponent },
-    {path: 'home', component: HomeComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'register', component: CreatePatientComponent},
-    {path: 'profile', component: ProfileComponent},
-    /*{path: 'user', component: BoardUserComponent},
-    {path: 'mod', component: BoardModeratorComponent},*/
-    {path: '', redirectTo: 'home', pathMatch: 'full'},
-    {path: 'admin', component: EmployeeListComponent},
-    {path: 'update-employee/:id', component: UpdateEmployeeComponent},
-    {path: 'create-employee', component: CreateEmployeeComponent},
-    {path: 'doctorlist', component: DoctorComponent},
-    {path: 'doctoradd', component: AddDoctorComponent},
-    {path: 'doctorInfo/:id', component: DoctorinfoComponent},
+    { path: 'home', component: HomeComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: CreatePatientComponent },
+    { path: 'profile', component: ProfileComponent },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'admin', component: EmployeeListComponent },
+    { path: 'update-employee/:id', component: UpdateEmployeeComponent },
+    { path: 'create-employee', component: CreateEmployeeComponent },
+  {path: 'doctorlist', component: DoctorComponent},
+  {path: 'doctoradd', component: AddDoctorComponent},
+  {path: 'doctorInfo/:id', component: DoctorinfoComponent},
 
-    {path: 'employee-details/:id', component: EmployeeDetailsComponent},
+    { path: 'employee-details/:id', component: EmployeeDetailsComponent },
     {
       path: "schedule",
       children:
-        [
-          {path: "doctorsTable", component: ScheduleTablePageComponent},
-          {path: "specifyAppointment", component: ScheduleSpecifyAppointmentPageComponent},
-          {path: "edit", component: ScheduleCreatePatternComponent}
-        ]
+      [
+        { path: "doctorsTable", component: ScheduleTablePageComponent },
+        { path: "specifyAppointment", component: ScheduleSpecifyAppointmentPageComponent },
+        { path: "edit", component: ScheduleCreatePatternComponent }
+      ]
     },
-    {path: 'doctor-users', component: DoctorComponent},
-    {path: 'add', component: AddDoctorComponent},
-    {path: 'update-doctor/:id', component: UpdateDoctorComponent},
-    {path: 'ourdoctors', component: OurdoctorsComponent},
-    {path: 'ourDoctorsDetails/:id', component: OurdoctorsdetailsComponent},
+    { path: 'doctor-users', component: DoctorComponent },
+    { path: 'add', component: AddDoctorComponent },
+    { path: 'update-doctor/:id', component: UpdateDoctorComponent },
+    { path: 'ourdoctors', component: OurdoctorsComponent },
+    { path: 'ourDoctorsDetails/:id', component: OurdoctorsdetailsComponent },
 
     {path: "appointments", component: AppointmentListComponent},
     {path: "create-appointment", component: CreateAppointmentComponent},
@@ -207,5 +210,4 @@ const routes: Routes =
     ScrollingModule
   ]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }

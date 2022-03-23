@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonUtilsService } from '../_services/common-utils.service';
 import { DoctorScheduleService } from '../_services/doctor-schedule.service';
 import { PickedDates } from '../material-date-range-picker/material-date-range-picker.component';
-import { ScheduleTableDataSource } from './schedule-table-page.data-source';
+import { ScheduleTablesDataSource as ScheduleTablesDataSource } from './schedule-table-page.data-source';
 import { DatePipe } from '@angular/common';
 import { DailyInformation } from '../schedule-transfer-data/schedule-table-page.data-transfer-objects';
 import { PopUpMessageService } from '../_services/pop-up-message.service';
@@ -67,9 +67,9 @@ export class ScheduleTablePageComponent implements OnInit
     filterSettings = new FilterSettings();
 
     displayedColumns: string[];
-    columnHeaderDates: string[];
-    columnHeaderDayOfWeekNames: string[];
-    dataSource: ScheduleTableDataSource;
+    /*columnHeaderDates: string[];
+    columnHeaderDayOfWeekNames: string[];*/
+    dataSource: ScheduleTablesDataSource;
     userLocale: string;
 
     getUserLocale() : string
@@ -88,31 +88,33 @@ export class ScheduleTablePageComponent implements OnInit
     constructor(private doctorScheduleService: DoctorScheduleService, private utilsService: CommonUtilsService, public datePipe: DatePipe,
         private popUpMessageService: PopUpMessageService)
     {
-        this.dataSource = new ScheduleTableDataSource(this.doctorScheduleService, this.popUpMessageService);
+        this.dataSource = new ScheduleTablesDataSource(this.doctorScheduleService, this.popUpMessageService);
         this.userLocale = this.getUserLocale();
         this.displayedColumns = [];
-        this.columnHeaderDates = [];
-        this.columnHeaderDayOfWeekNames = [];
+        //this.columnHeaderDates = [];
+        //this.columnHeaderDayOfWeekNames = [];
     }
 
     ngOnInit(): void
-    {}
+    {
+        this.displayedColumns = ["day0", "day1", "day2", "day3", "day4", "day5", "day6"];
+    }
 
     fillTableContents(startDate: Date, endDate: Date): void
     {
-        this.columnHeaderDates = [];
-        this.columnHeaderDayOfWeekNames = [];
-        this.displayedColumns = [];
+        //this.columnHeaderDates = [];
+        //this.columnHeaderDayOfWeekNames = [];
+        //this.displayedColumns = [];
         let counter = 0;
 
         let curDate = new Date(startDate);
         while (curDate <= endDate)
         {
-            this.columnHeaderDates.push(this.datePipe.transform(curDate, 'dd.MM.yyyy'));
-            this.columnHeaderDayOfWeekNames.push(this.getDayName(curDate, this.userLocale));
+            //this.columnHeaderDates.push(this.datePipe.transform(curDate, 'dd.MM.yyyy'));
+            //this.columnHeaderDayOfWeekNames.push(this.getDayName(curDate, this.userLocale));
             let newDate = curDate.setDate(curDate.getDate() + 1);
             curDate = new Date(newDate);
-            this.displayedColumns.push("day" + counter);
+            //this.displayedColumns.push("day" + counter);
             counter++;
         }
     }

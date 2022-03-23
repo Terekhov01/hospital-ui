@@ -30,7 +30,10 @@ export class LoginComponent implements OnInit {
       this.phone = this.tokenStorage.getUser().phone;
       setTimeout(() => 
       {
-        this.router.navigate(['home']);
+        if (this.router.url == '/login')
+        {
+          this.router.navigate(['home']);
+        }
       }, 2000);
     }
   }

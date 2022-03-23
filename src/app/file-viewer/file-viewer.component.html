@@ -6,13 +6,15 @@
   <span *ngFor = "let fileResource of fileResources" class = "filePresentationRow">
     <p class = "fileName">{{fileResource.fileName}}</p>
     <span *ngIf = "fileResource.mimetype !== ''" style = "display: inline-block; margin-right: 10px">
-      <button mat-mini-fab color = "primary" aria-label = "Preview button" (click) = "displayFile(fileResource)">
-        <mat-icon>preview</mat-icon>
+      <button class = "btn">
+        <i-bs name = "file-earmark-medical" aria-label = "Preview button" (click) = "displayFile(fileResource)"></i-bs>
       </button>
     </span>
-    <button mat-mini-fab color = "primary" aria-label = "Preview button" (click) = "downloadFile(fileResource)">
-      <mat-icon>download</mat-icon>
-    </button>
+    <span>
+      <button class = "btn">
+        <i-bs name = "download" aria-label = "Download file button" (click) = "downloadFile(fileResource)"></i-bs>
+      </button>
+    </span>
   </span>
 
 </div>
@@ -64,10 +66,10 @@
   <br>
 </div>
 
-<button mat-raised-button color="primary" (click)="downloadAllFiles()" id = "downloadAllButton"> Скачать все </button>
+<button class = "btn btn-primary" (click)="downloadAllFiles()" id = "downloadAllButton"> Скачать все </button>
 
 <div>
   <br>
 </div>
 
-<button (click)="backToDetails(this.id)" mat-raised-button color="primary"> Назад </button>
+<button (click)="backToDetails(this.id)" class = "btn btn-primary"> Назад </button>

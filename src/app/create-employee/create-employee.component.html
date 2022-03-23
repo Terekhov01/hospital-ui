@@ -35,7 +35,6 @@
           #userName="ngModel"
         />
         <div class="alert-danger" *ngIf="f.submitted && userName.invalid">
-          <div>Login</div>
           <div *ngIf="userName.errors.required">Требуется логин</div>
           <div *ngIf="userName.errors.minlength">
             Логин должен состоять не менее чем из 3 символов
@@ -66,7 +65,6 @@
         </div>
 
         <div class="alert-danger" *ngIf="f.submitted && password.invalid">
-          <div>Passord</div>
           <div *ngIf="password.errors.required">Требуется пароль</div>
           <div *ngIf="password.errors.minlength">
             Пароль должен состоять не менее чем из 6 символов
@@ -86,7 +84,6 @@
           #email="ngModel"
         />
         <div class="alert-danger" *ngIf="f.submitted && email.invalid">
-          <div>Email</div>
           <div *ngIf="email.errors.required">Требуется электронная почта</div>
           <div *ngIf="email.errors.email">
             Адрес электронной почты должен быть действительным адресом электронной почты
@@ -105,7 +102,6 @@
           #lastName="ngModel"
         />
         <div class="alert-danger" *ngIf="f.submitted && lastName.invalid">
-          <div>Last name</div>
           <div *ngIf="password.errors.required">Требуется фамилия</div>
         </div>
       </div>
@@ -121,7 +117,6 @@
           #firstName="ngModel"
         />
         <div class="alert-danger" *ngIf="f.submitted && firstName.invalid">
-          <div>Name</div>
           <div *ngIf="firstName.errors.required">Требуется имя</div>
         </div>
       </div>
@@ -164,9 +159,8 @@
           required
         />
         <div class="alert-danger" *ngIf="f.submitted && passport.invalid">
-          <div>Passport</div>
           <div *ngIf="passport.errors.required">Требуется паспорт</div>
-          <div *ngIf="passport.errors.passport">
+          <div *ngIf="passport.errors.pattern">
             Номер паспорта должен состоять из 3-20 букв или цифр (без пробелов и тире)
           </div>
         </div>
@@ -184,7 +178,6 @@
           #roomNumber="ngModel"
         />
         <div class="alert-danger" *ngIf="f.submitted && roomNumber.invalid">
-          <div>Room number</div>
           <div *ngIf="roomNumber.value < 1 || roomNumber.value > 1000000000 || roomNumber.errors.roomNumber">
             Номер комнаты должен состоять из цифр, в пределах 0 - 10^9
           </div>
@@ -217,7 +210,7 @@
         </mat-form-field>
       </div>
 
-      <button mat-raised-button color="primary" class="form-group" style = "margin-top: -10px;">Зарегистрировать</button>
+      <button class = "btn btn-primary form-group" style = "margin-top: -10px;">Зарегистрировать</button>
 
       <div class="alert alert-warning finalMessage" *ngIf="f.submitted && isSignUpFailed">
         Не удалось зарегистрироваться!<br />{{ errorMessage }}
