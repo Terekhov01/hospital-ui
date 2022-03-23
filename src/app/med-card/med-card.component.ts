@@ -28,10 +28,9 @@ export class MedCardComponent implements OnInit {
   pagedItems: Appointment[];
   allItems: Appointment[];
   services: any[];
-  selectedService: Service;
+  selectedService;
   room: string;
   id: number;
-  allItemsEmpty: boolean;
   contentLoaded = false;
   // doctors: User[];
   // selectedDoctor: User;
@@ -48,7 +47,7 @@ export class MedCardComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.contentLoaded = true;
-    }, 2000);
+    }, 2500);
     this.id = this.actRoute.snapshot.params.id;
     this.medCardService.getAll(this.id).subscribe(
       data => {
@@ -65,7 +64,7 @@ export class MedCardComponent implements OnInit {
     });
     this.actRoute.params.subscribe((params: Params) => this.id = params.id);
     this.room = null;
-    this.selectedService = null;
+    this.selectedService = "0";
   }
 
 
@@ -78,13 +77,12 @@ export class MedCardComponent implements OnInit {
   }
 
   onServiceChange(){
-    this.allItems = this.medCard.appointments.filter(app => app.appointmentRegistration.service === this.selectedService.toString());
-    if (this.room != undefined) {
-      console.log(this.room);
+    if (this.selectedService === "0") { this.allItems = this.medCard.appointments; }
+    else { this.allItems = this.medCard.appointments.filter(app => app.appointmentRegistration.service === this.selectedService.toString()); }
+    if (this.room !== null) {
       this.allItems = this.allItems.filter(app => app.appointmentRegistration.room === this.room);
     }
     this.setPage(1);
-    if (this.allItems.length == 0) { this.allItemsEmpty = true; }
   }
 
   roomSearch(){
@@ -93,7 +91,6 @@ export class MedCardComponent implements OnInit {
     }
     this.allItems = this.allItems.filter(app => app.appointmentRegistration.room === this.room);
     this.setPage(1);
-    if (this.allItems.length == 0) { this.allItemsEmpty = true; }
   }
 
   getHereditary(){

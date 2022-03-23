@@ -14,6 +14,11 @@
                 <h4>{{employee.lastName}} {{employee.firstName}} {{employee.patronymic}}</h4>
               </div>
             </div>
+            <button *ngIf="currentUser.roles.includes('ROLE_PATIENT')"
+                    (click)="MedCard(employee.patient.id)"
+                    class="btn btn-primary btn-block">
+              Медицинская карта
+            </button>
           </div>
         </div>
       </div>

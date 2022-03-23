@@ -1,6 +1,6 @@
 <h1>{{title}}</h1>
 <div>
-  <ngx-skeleton-loader *ngIf="!contentLoaded" count="4"></ngx-skeleton-loader>
+  <mat-progress-bar *ngIf="!contentLoaded" mode="buffer"></mat-progress-bar>
 
   <div *ngIf="contentLoaded">
     <mat-list>
@@ -22,16 +22,16 @@
     <mat-card>
       <mat-card-title>Мои приемы в клинике</mat-card-title>
       <br>
-      <select required  [(ngModel)]="selectedService" (ngModelChange)="onServiceChange()">
-        <option value="">Выберите услугу</option>
-        <option *ngFor="let service of services">{{service.serviceName}}</option>
+      <select required [selectedIndex]="0" [(ngModel)]="selectedService" (ngModelChange)="onServiceChange()">
+        <option selected="selected" value="0">Выберите услугу</option>
+        <option *ngFor="let item of medCard.appointments">{{item.appointmentRegistration.service}}</option>
       </select>
       <form (ngSubmit)="roomSearch()">
         <div class="form-group">
           <input class="mt-2 p-0" placeholder="Номер кабинета" type="text" [(ngModel)]="room" name="room"/>
         </div>
         <button class="mr-1 btn-primary" type="submit" mat-stroked-button>Найти</button>
-        <button class="ml-1 btn-primary" (click)="ngOnInit()" type="submit" mat-stroked-button>Сбросить фильтры</button>
+        <button *ngIf="room || selectedService != '0'" class="ml-1 btn-primary" (click)="ngOnInit()" type="submit" mat-stroked-button>Сбросить фильтры</button>
       </form>
       <mat-card *ngFor="let appointment of pagedItems">
         <mat-card>
@@ -45,7 +45,7 @@
         </mat-card>
         <br>
       </mat-card>
-      <a *ngIf="allItemsEmpty">Поиск не дал результатов</a>
+      <a *ngIf="!(allItems.length && allItems)">Поиск не дал результатов</a>
       <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
         <li [ngClass]="{disabled:pager.currentPage === 1}">
           <button (click)="setPage(1)" mat-icon-button color="primary">Первая</button>
