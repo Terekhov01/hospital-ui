@@ -1,13 +1,56 @@
-<h1>NetClinic</h1>
-
-<h2>О больнице</h2>
+<!--<h1 xmlns="http://www.w3.org/1999/html">NetClinic</h1>-->
+<div class="slider">
+  <div class="card">
+    <div class="card-body">
+      <ngb-carousel *ngIf="images">
+        <ng-template ngbSlide>
+          <div class="pic w-auto">
+            <img [src]="images[0].url" alt="first slide">
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="pic w-auto">
+            <img [src]="images[1].url" alt="second slide">
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="pic w-auto">
+            <img [src]="images[2].url" alt="third slide">
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+  </div>
+</div>
+<br>
+<h2>Больница Нэткрекер</h2>
 <br>
 <div>
   <mat-progress-bar *ngIf="!contentLoaded" mode="indeterminate"></mat-progress-bar>
   <div *ngIf="contentLoaded">
-    <p>В нашей замечательной больнице побывало пациентов: {{patientAmount}}</p>
-    <p>Здесь работают {{doctorAmount}} специалистов </p>
-    <p>Самая популярная услуга: {{popularService}}</p>
+    <div>
+      <ul>
+        <li>В нашей замечательной больнице побывало пациентов: {{patientAmount}}</li>
+        <li>Здесь работают {{doctorAmount}} специалистов </li>
+        <li>Самая популярная услуга: {{popularService}}</li>
+      </ul>
+    </div>
+    <div class="info">
+      <p>Место нахождения/почтовый адрес:</p>
+      <ul>
+        <li><b class="text-primary">123456, г. Москва, Учебная, д. 333</b></li>
+      </ul>
+      <p>КОНТАКТНАЯ ИНФОРМАЦИЯ:</p>
+      <ul>
+        <li>Адрес электронной почты: <b class="text-primary">netcracker@zdrav.mos.ru</b></li>
+        <li>СПРАВОЧНАЯ: <b class="text-primary">+7 (495) 333-22-11</b></li>
+      </ul>
+    </div>
+    <div class="work-info">
+      <p>Прием осуществляется по предварительной записи по прежним телефонам отделения:</p>
+      <p><b class="text-primary">+7(495) 151-12-45; +7(495) 123-45-67</b></p>
+      <p>Режим работы с 8.00 до 19.00, суббота и воскресенье - выходные.</p>
+    </div>
   </div>
 </div>
 
