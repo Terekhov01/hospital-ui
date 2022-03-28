@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit, Directive, EventEmitter, Input, Output, QueryList, ViewChildren} from '@angular/core';
 import {Appointment, AppointmentCreationDTO} from "../appointment";
 import {AppointmentService} from "../appointment.service";
 import {Router} from "@angular/router";
@@ -14,12 +14,27 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormControl} from "@angular/forms";
 import {Subscription} from "rxjs";
 
+import {NgbdSortableHeader} from "./sortable.directive";
+
+export type SortColumn = keyof AppointmentRegistration | '';
+export type SortDirection = 'asc' | 'desc';
+const rotate: {[key: string]: SortDirection} = { 'asc': 'desc' };
+
+const compare = (v1: string | number | Date | Patient | Doctor, v2: string | number | Date | Patient | Doctor) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+
+export interface SortEvent {
+  column: SortColumn;
+  direction: SortDirection;
+}
+
 @Component({
   selector: 'app-create-appointment',
   templateUrl: './create-appointment.component.html',
   styleUrls: ['./create-appointment.component.css']
 })
-export class CreateAppointmentComponent implements OnInit, OnDestroy {
+export class CreateAppointmentComponent implements OnInit {
+
+  @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
   appointment: Appointment = new Appointment();
   start: Date;
@@ -91,6 +106,40 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
     }
   }
 
+  onSort({column, direction}: SortEvent) {
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = 'desc';
+      }
+    });
+
+    // if (direction === '' || column === '') {
+    // } else {
+      this.appointmentRegistrations = [...this.appointmentRegistrations].sort((a, b) => {
+        const res = compare(a[column], b[column]);
+        return direction === 'asc' ? res : -res;
+      });
+    // }
+  }
+
+  onSort1({column, direction}: SortEvent) {
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = 'desc';
+      }
+    });
+
+    // if (direction === '' || column === '') {
+    // } else {
+    this.appointmentRegistrations = [...this.appointmentRegistrations].sort((a, b) => {
+      const res = compare(a.patient.user[column], b.patient.user[column]);
+      return direction === 'asc' ? res : -res;
+    });
+    // }
+  }
+
   /*saveAppointment() {
     // this.appointment.doctor = new Doctor(this.doctor);
     // this.appointment.patient = new Patient(this.patient);
@@ -140,6 +189,7 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
   }*/
 
   goToAppointmentList() {
+    this.sickLeaveDatePickerSubscription.unsubscribe();
     this.router.navigate(['/appointments']);
   }
 
@@ -152,7 +202,6 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
   async initCreationForm(id: number) {
     this.isFormLoaded = false;
     this.appointmentDTO = new AppointmentCreationDTO();
-    // this.id = this.route.snapshot.params['id'];
     this.id = BigInt(id);
     this.appointmentDTO.appointmentRegistrationId = this.id;
     let appointmentRegistrationSubscription = this.appointmentRegistrationService.getAppointmentRegistrationByID(this.id).subscribe({
@@ -177,16 +226,10 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
       error: (error) => {
         console.log("ERROR 1")
         this.popUpMessageService.displayError(error);
-        //alert(error.toString());
       }
     });
     await delay(1500);
     this.isFormLoaded = true;
-  }
-
-  ngOnDestroy(): void
-  {
-    this.sickLeaveDatePickerSubscription.unsubscribe();
   }
 
   saveAppointment() {
@@ -218,20 +261,10 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
       next: (value) =>
       {
         this.popUpMessageService.displayConfirmation("Результаты приема записаны");
-        //alert("Результаты приема записаны");
       },
       error: (error) =>
       {
         this.popUpMessageService.displayError(error);
-
-        /*if (error.error.message !== undefined)
-        {
-          alert(error.error.message);
-        }
-        else
-        {
-          alert(error.error);
-        }*/
         this.confirmationButtonDisabled = false;
       },
       complete: () =>
@@ -251,13 +284,11 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
     {
       this.sickLeaveDatePickerFormGroup.get('sickLeaveDatePickerFormControl').disable();
       this.popUpMessageService.displayConfirmation("Больничный прикреплен");
-      //alert("Больничный прикреплен");
     }
     else
     {
       this.sickLeaveDatePickerFormGroup.get('sickLeaveDatePickerFormControl').enable();
       this.popUpMessageService.displayConfirmation("Больничный откреплен");
-      //alert("Больничный откреплен");
     }
   }
 
@@ -269,10 +300,12 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
     }
   }
 
-  confirmationButtonClicked()
+  confirmationButtonClicked(content)
   {
     this.confirmationButtonDisabled = true;
     this.saveAppointment();
+    this.modalService.dismissAll();
+    this.modalService.open(content,  {size: 'xl', centered: true });
     this.goToAppointmentList();
   }
 

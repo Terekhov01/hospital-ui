@@ -1,0 +1,43 @@
+@import '~primeicons/primeicons.css';
+
+.MyButton{
+  background-color: #2096f3;
+  color: white;
+}
+
+table.table-bordered {
+  border: 1px solid #ddd;
+  border-collapse: separate;
+  border-left: 0;
+  border-radius: 4px;
+  border-spacing: 0px;
+}
+thead {
+  /*background-color: #2096f3;*/
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+  border-collapse: separate;
+}
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+th, td {
+  padding: 5px 4px 6px 4px;
+  text-align: center;
+  vertical-align: middle;
+  border-left: 1px solid #ddd;
+}
+td {
+  border-top: 1px solid #ddd;
+  text-align: center;
+  vertical-align: middle;
+}
+thead:first-child tr:first-child th:first-child, tbody:first-child tr:first-child td:first-child {
+  border-radius: 4px 0 0 0;
+}
+thead:last-child tr:last-child th:first-child, tbody:last-child tr:last-child td:first-child {
+  border-radius: 0 0 0 4px;
+}

@@ -174,10 +174,11 @@ import { SendQuestionEmailComponent } from './send-question-email/send-question-
 import { ResponceemailComponent } from './send-question-email/responceemail/responceemail.component';
 //
 
-
+import {NgbdSortableHeader} from "./create-appointment/sortable.directive";
 
 @NgModule({
   declarations: [
+    NgbdSortableHeader,
     // PdfViewerComponent,
     SafePipe,
     AppComponent,
@@ -235,7 +236,9 @@ import { ResponceemailComponent } from './send-question-email/responceemail/resp
     ResponceemailComponent,
 
     UpdateprofileComponent,
-    FileTransferDataComponent
+    FileTransferDataComponent,
+    CreateAppointmentComponent,
+    NgbdSortableHeader
   ],
   imports: [
     TranslateModule.forRoot(),

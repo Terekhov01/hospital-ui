@@ -23,27 +23,29 @@
 
 <div *ngIf = "displayedFile !== null" class = "documentBlock">
 
-  <h1> {{ displayedFile.fileName }} </h1> 
+  <h1> {{ displayedFile.fileName }} </h1>
   <h3> Дата загрузки: {{ this.datePipe.transform(displayedFile.creationDate, 'dd.MM.yyyy hh:mm:ss') }} </h3>
   <!-- Present each file differently based on file type (extension) -->
 
   <div [ngSwitch] = "displayedFile.mimetype">
 
     <div *ngSwitchCase = "'application/pdf'">
-      <ngx-extended-pdf-viewer
-      [src]="displayedFile.fileUrl"
-      [useBrowserLocale]="true"
-      [textLayer]="true"
-      [showHandToolButton]="true"
-      [showPresentationModeButton]="true"
-      [showDownloadButton]="false"
-      >
-      </ngx-extended-pdf-viewer>
+      <div id="pdfContainer" style="border-bottom: solid 10px #808080;">
+        <ngx-extended-pdf-viewer
+        [src]="displayedFile.fileUrl"
+        [useBrowserLocale]="true"
+        [textLayer]="true"
+        [showHandToolButton]="true"
+        [showPresentationModeButton]="true"
+        [showDownloadButton]="false"
+        >
+        </ngx-extended-pdf-viewer>
+      </div>
     </div>
 
-    <div *ngSwitchCase = "displayedFile.mimetype === 'application/msword' 
+    <div *ngSwitchCase = "displayedFile.mimetype === 'application/msword'
                       || displayedFile.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? displayedFile.mimetype : ''">
-                      
+
       <div id = "docxContainer" style = "border-bottom: solid 10px #808080;"></div>
     </div>
 
@@ -57,7 +59,7 @@
       Предпросмотр документа {{ displayedFile.fileName }} недоступен
     </div>
   </div>
-  
+
 </div>
 
 <div>
@@ -70,4 +72,4 @@
   <br>
 </div>
 
-<button (click)="backToDetails(this.id)" mat-raised-button color="primary"> Назад </button>
+<!--<button (click)="backToDetails(this.id)" mat-raised-button color="primary"> Назад </button>-->

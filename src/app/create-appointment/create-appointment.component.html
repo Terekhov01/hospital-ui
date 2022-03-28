@@ -1,11 +1,23 @@
+<br>
+
 <div class="card text-center">
   <div class="card-body">
     <h1> Выберите запись для приема </h1>
   </div>
 </div>
 
-<ng-template #content let-modal>
+<ng-template #loading let-modal>
   <div class="modal-header">
+    <h2 class="modal-title">Пожайлуйста, подождите...</h2>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+</ng-template>
+
+<ng-template #content let-modal>
+  <div class="modal-header bg-primary">
     <h2 class="modal-title">Информация о записи на прием</h2>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
@@ -13,93 +25,47 @@
     <div *ngIf = "!isFormLoaded">
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </div>
-
     <div *ngIf = "isFormLoaded">
-
       <div class="card">
         <div class="card-body">
-
           <form>
-
-<!--            <div>-->
-<!--              <label> <b> Услуга: </b>  </label> {{appointmentRegistration.service}}-->
-<!--            </div>-->
-
             <div class = "form-group">
-              <label> Фамилия доктора:    </label> {{appointmentRegistration.doctor.user.lastName}}
-              <!--      <input type="text" class="form-control" id = "docLastName"-->
-              <!--             [(ngModel)]="appointmentRegistration.doctor.lastName" name = "docLastName">-->
+              <label> <b>Доктор:</b>    </label> {{appointmentRegistration.doctor.user.lastName}} {{appointmentRegistration.doctor.user.firstName}} {{appointmentRegistration.doctor.user.patronymic}}
             </div>
-
             <div class = "form-group">
-              <label> Фамилия пациента:    </label> {{appointmentRegistration.patient.user.lastName}}
-              <!--      <input type="text" class="form-control" id = "patLastName"-->
-              <!--             [(ngModel)]="appointmentRegistration.patient.lastName" name = "patLastName">-->
+              <label> <b>Пациент: </b>   </label> {{appointmentRegistration.patient.user.lastName}} {{appointmentRegistration.patient.user.firstName}} {{appointmentRegistration.patient.user.patronymic}}
             </div>
-
+            <hr>
             <div class = "form-group">
-              <label> Описание </label>
-              <input type="text" class="form-control" id = "description"
-                     [(ngModel)]="appointmentDTO.description" name = "description">
+              <label> <b>Описание</b> </label>
+              <textarea class="form-control" id = "description" name="message" #message='ngModel' [(ngModel)]="appointmentDTO.description"
+                        cols="80" rows="4"></textarea>
             </div>
-
             <div class = "form-group">
-              <label> Заключение врача </label>
-              <input type="text" class="form-control" id = "docStatement"
-                     [(ngModel)]="appointmentDTO.docStatement" name = "docStatement">
+              <label> <b>Заключение врача</b> </label>
+              <textarea class="form-control" id = "docStatement" name="message" #message='ngModel'  [(ngModel)]="appointmentDTO.docStatement"
+                        cols="80" rows="4"></textarea>
             </div>
-
             <div class = "form-group">
-              <label> Рецепт </label>
-              <input type="text" class="form-control" id = "recipe"
-                     [(ngModel)]="appointmentDTO.recipe" name = "recipe">
+              <label> <b>Рецепт</b> </label>
+              <textarea class="form-control" id = "recipe" name="message" #message='ngModel'   [(ngModel)]="appointmentDTO.recipe"
+                        cols="80" rows="4"></textarea>
             </div>
-
             <div class = "form-group">
-              <label> План реабилитации </label>
-              <input type="text" class="form-control" id = "rehabPlan"
-                     [(ngModel)]="appointmentDTO.rehabPlan" name = "rehabPlan">
+              <label> <b>План реабилитации</b> </label>
+              <textarea class="form-control" id = "rehabPlan" name="message" #message='ngModel'   [(ngModel)]="appointmentDTO.rehabPlan"
+                        cols="80" rows="4"></textarea>
             </div>
-
-            <!--  <div class = "form-group">-->
-            <!--    <label> Service </label>-->
-            <!--    <input type="text" class="form-control" id = "service"-->
-            <!--           [(ngModel)]="appointment.service" name = "service">-->
-            <!--  </div>-->
-
             <div class = "form-group">
-              <label> План лечения </label>
-              <input type="text" class="form-control" id = "treatPlan"
-                     [(ngModel)]="appointmentDTO.treatPlan" name = "treatPlan">
+              <label> <b>План лечения</b> </label>
+              <textarea class="form-control" id = "treatPlan" name="message" #message='ngModel'   [(ngModel)]="appointmentDTO.treatPlan"
+                        cols="80" rows="4"></textarea>
             </div>
-
             <div class="form-group">
-              <!--      <label for="file">Choose File</label>-->
               <input type = "file" multiple accept=".pdf"
                      id = "file" placeholder="Выбертие .pdf файлы для прикрепления"
                      (change)="handleFileInput($any($event).target.files)">
             </div>
-
-            <!--    <form enctype="multipart/form-data">-->
-            <!--      <fieldset>-->
-            <!--        <div class="form-group">-->
-            <!--          <div>-->
-            <!--            <input type="file" (change)="onUploadFiles($event.target.files, appointmentRegistration.patient.id)" name="files" multiple class="form-control" />-->
-            <!--          </div>-->
-            <!--        </div>-->
-            <!--      </fieldset>-->
-            <!--    </form>-->
-
-            <!--    <form enctype="multipart/form-data">-->
-            <!--      <fieldset>-->
-            <!--        <div class="form-group">-->
-            <!--          <div>-->
-            <!--            <input type="file" (change)="onUploadFiles($event.target.files)" name="files" multiple class="form-control" />-->
-            <!--          </div>-->
-            <!--        </div>-->
-            <!--      </fieldset>-->
-            <!--    </form>-->
-
             <div class = "mat-elevation-z4 container" id = "sickLeaveContainer">
               <label id = "sickListLabel">Больничный лист</label>
               <hr>
@@ -110,66 +76,58 @@
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker [startAt]="sickLeaveStartDate"></mat-datepicker>
                 </mat-form-field>
-
-                <button mat-raised-button color = "primary" id = "sickLeaveButton" [disabled] = "sickLeaveButtonDisabled" (click) = "sickLeaveButtonClicked()">{{ sickLeaveButtonToggled ? 'Открепить' : 'Прикрепить' }}</button>
+                <button mat-raised-button color = "primary" class="MyButton" id = "sickLeaveButton" [disabled] = "sickLeaveButtonDisabled" (click) = "sickLeaveButtonClicked()">{{ sickLeaveButtonToggled ? 'Открепить' : 'Прикрепить' }}</button>
               </div>
             </div>
-
-            <button type="button" mat-raised-button color="primary" (click) = "confirmationButtonClicked()" [disabled] = "confirmationButtonDisabled"> Подтвердить </button>
-
+            <button type="button" mat-raised-button color="primary" class="MyButton" (click) = "confirmationButtonClicked(loading)" [disabled] = "confirmationButtonDisabled"> Подтвердить </button>
           </form>
-
         </div>
       </div>
-
     </div>
-
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Закрыть</button>
   </div>
 </ng-template>
-
+<br>
 <div *ngIf="!isLoaded">
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
-
 <div *ngIf="isLoaded">
-
+  <div *ngIf = "appointmentRegistrations == null">
+    <mat-card class="text-center">
+      <mat-card-header><h1>Ooops...</h1></mat-card-header>
+      <mat-card-body>
+        <mat-card-title>
+          <h3>Похоже, что у вас нет предстоящих пациентов!</h3>
+        </mat-card-title>
+        <mat-card-text>Если произошла какая-то ошибка, обратитесь к администратору. </mat-card-text>
+      </mat-card-body>
+    </mat-card>
+  </div>
   <div *ngIf="appointmentRegistrations !== null">
-
-    <div class="card text-center">
-      <div class="card-body">
-
-        <table class="table table-striped">
-          <thead>
-          <tr>
-<!--            <th> Адрес</th>-->
-            <th> Пациент</th>
-            <th> Дата и время</th>
-            <th> Выбор</th>
-          </tr>
+        <table class="table table-bordered">
+          <thead class="table-secondary">
+            <tr>
+              <th scope="col" sortable="lastName" (sort)="onSort1($any($event))"> <a>Пациент <button style="background-color: transparent; border:0px"> <i class="pi pi-sort"></i></button> </a></th>
+              <th scope="col" sortable="start" (sort)="onSort($any($event))"> <a>Дата и время <button style="background-color: transparent; border:0px"> <i class="pi pi-sort"></i></button> </a> </th>
+              <th scope="col"> Выбор</th>
+            </tr>
           </thead>
           <tbody>
           <tr *ngFor="let appointmentRegistration of appointmentRegistrations">
-<!--            <td> {{appointmentRegistration.address}} </td>-->
             <td> {{appointmentRegistration.patient.user.lastName}} {{appointmentRegistration.patient.user.firstName.substr(0,1)}}. {{appointmentRegistration.patient.user.patronymic.substr(0,1)}}. </td>
             <td> {{datePipe.transform(appointmentRegistration.start, "yyyy/MM/dd HH:mm")}} </td>
             <td>
-              <button (click)="SelectAppointmentRegistration(content, appointmentRegistration.id)" mat-raised-button class="StartButton">
+              <button (click)="SelectAppointmentRegistration(content, appointmentRegistration.id)" mat-raised-button class="MyButton">
                 Начать прием
               </button>
-              <button (click)="MedCard(appointmentRegistration.patient.id)" mat-raised-button color="primary" class="m-2" >
+              <button (click)="MedCard(appointmentRegistration.patient.id)" mat-raised-button class="m-2" style="background-color: #2096f3; color: white">
                 Медицинская карта
               </button>
-
             </td>
           </tr>
           </tbody>
         </table>
-
-      </div>
-    </div>
-
   </div>
 </div>

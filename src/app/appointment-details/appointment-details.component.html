@@ -1,76 +1,112 @@
-<h2> Детали приема </h2>
 <div>
-  <div>
-    <label> <b> Фамилия доктора: </b>  </label> {{appointment.appointmentRegistration.doctor.user.lastName}}
+  <br>
+</div>
+<div class="card text-center">
+  <div class="card-body">
+    <h1> <b>Детали приема</b> </h1>
   </div>
-  <div>
-    <label> <b> Фамилия пациента: </b>  </label> {{appointment.appointmentRegistration.patient.user.lastName}}
-  </div>
-  <div>
-    <label> <b> Дата и время начала приема: </b>  </label> {{datePipe.transform(appointment.appointmentRegistration.start, "yyyy/MM/dd HH:mm")}}
-  </div>
-<!--  <div>-->
-<!--    <label> <b> Дата и время конца приема: </b>  </label> {{appointment.appointmentRegistration.end}}-->
-<!--  </div>-->
-  <div>
-    <label> <b> Специализация доктора: </b>  </label> {{appointment.appointmentRegistration.doctor.education}}
-  </div>
-  <div>
-    <label> <b> Адрес: </b>  </label> {{appointment.appointmentRegistration.address}}
-  </div>
-  <div>
-    <label> <b> Кабинет: </b>  </label> {{appointment.appointmentRegistration.room}}
-  </div>
-  <div>
-    <label> <b> Описание: </b>  </label> {{appointment.description}}
-  </div>
-  <div>
-    <label> <b> Заключение врача: </b>  </label> {{appointment.docStatement}}
-  </div>
-  <div>
-    <label> <b> Рецепт: </b>  </label> {{appointment.recipe}}
-  </div>
-  <div>
-    <label> <b> Услуга: </b>  </label> {{appointment.appointmentRegistration.service}}
-  </div>
-  <div>
-    <label> <b> План реабилитации: </b>  </label> {{appointment.rehabPlan}}
-  </div>
-  <div>
-    <label> <b> План лечения: </b>  </label> {{appointment.treatPlan}}
-  </div>
+</div>
+<div>
+  <br>
+</div>
 
-<!--  <div>-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--      <th> Файл </th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--      <tr *ngFor = "let file of files">-->
-<!--        <td> {{file.toString()}} </td>-->
-<!--      </tr>-->
-<!--    </tbody>-->
-<!--  </div>-->
-
+<div>
+  <div class="card">
+    <div class="card-body">
+      <div>
+        <label> <b> Фамилия доктора: </b>  </label> {{appointment.appointmentRegistration.doctor.user.lastName}} {{appointment.appointmentRegistration.doctor.user.firstName}} {{appointment.appointmentRegistration.doctor.user.patronymic}}
+      </div>
+      <div>
+        <label> <b> Фамилия пациента: </b>  </label> {{appointment.appointmentRegistration.patient.user.lastName}} {{appointment.appointmentRegistration.patient.user.firstName}} {{appointment.appointmentRegistration.patient.user.patronymic}}
+      </div>
+      <div>
+        <label> <b> Дата и время начала приема: </b>  </label> {{datePipe.transform(appointment.appointmentRegistration.start, "yyyy/MM/dd HH:mm")}}
+      </div>
+      <div>
+        <label> <b> Образование доктора: </b>  </label> {{appointment.appointmentRegistration.doctor.education}}
+      </div>
+      <div>
+        <label> <b> Кабинет: </b>  </label> {{appointment.appointmentRegistration.room}}
+      </div>
+  </div>
+  </div>
   <div>
     <br>
   </div>
-
-  <div>
-
-    <button (click)="goToFileViewer(this.id)" mat-raised-button color="primary"> Просмотреть файлы </button>
-
+  <div class="card">
+    <div class="card-body">
+      <div>
+        <div class="card">
+          <div class="card-header" style="vertical-align: bottom">
+            <h4> <b> Описание: </b>  </h4>
+          </div>
+          <div class="card-body">
+            <span style="white-space: pre">{{appointment.description}}</span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <h4> <b> Заключение врача: </b>  </h4>
+          </div>
+          <div class="card-body">
+            <span style="white-space: pre">{{appointment.docStatement}}</span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <h4> <b> Рецепт: </b>  </h4>
+          </div>
+          <div class="card-body">
+            <span style="white-space: pre">{{appointment.recipe}}</span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <h4> <b> План реабилитации: </b>  </h4>
+          </div>
+          <div class="card-body">
+            <span style="white-space: pre">{{appointment.rehabPlan}}</span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <h4> <b> План лечения: </b>  </h4>
+          </div>
+          <div class="card-body">
+            <span style="white-space: pre">{{appointment.treatPlan}}</span>
+          </div>
+        </div>
+      </div>
   </div>
-
+  </div>
   <div>
     <br>
   </div>
-
-  <div>
-
-    <button (click)="printRecipe(this.id)" mat-raised-button color="primary"> Напечатать рецепт </button>
-
+  <div class="card">
+    <div class="card-body">
+      <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+          <button (click)="goToFileViewer(this.id)" mat-raised-button color="primary"> Просмотреть файлы </button>
+        </div>
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+          <button (click)="printRecipe(this.id)" mat-raised-button color="primary"> Напечатать рецепт </button>
+        </div>
+      </div>
+    </div>
   </div>
-
+  <div>
+    <br>
+  </div>
 </div>
