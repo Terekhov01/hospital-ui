@@ -116,15 +116,15 @@
           </thead>
           <tbody>
           <tr *ngFor="let appointmentRegistration of appointmentRegistrations">
-            <td> {{appointmentRegistration.patient.user.lastName}} {{appointmentRegistration.patient.user.firstName.substr(0,1)}}. {{appointmentRegistration.patient.user.patronymic.substr(0,1)}}. </td>
+            <td> <button (click)="MedCard(appointmentRegistration.patient.user.id)" style="background-color: transparent; border:0px; color: #0b6efd" matTooltip="Просмотреть медкарту" [matTooltipPosition]="'right'">{{appointmentRegistration.patient.user.lastName}} {{appointmentRegistration.patient.user.firstName.substr(0,1)}}. {{appointmentRegistration.patient.user.patronymic.substr(0,1)}}. </button> </td>
             <td> {{datePipe.transform(appointmentRegistration.start, "yyyy/MM/dd HH:mm")}} </td>
             <td>
               <button (click)="SelectAppointmentRegistration(content, appointmentRegistration.id)" mat-raised-button class="MyButton">
                 Начать прием
               </button>
-              <button (click)="MedCard(appointmentRegistration.patient.id)" mat-raised-button class="m-2" style="background-color: #2096f3; color: white">
-                Медицинская карта
-              </button>
+<!--              <button (click)="MedCard(appointmentRegistration.patient.id)" mat-raised-button class="m-2" style="background-color:  #0b6efd; color: white">-->
+<!--                Медицинская карта-->
+<!--              </button>-->
             </td>
           </tr>
           </tbody>

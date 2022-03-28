@@ -84,6 +84,7 @@ export class AppointmentRegistrationListComponent implements OnInit {
   }
 
   showDetailsModal(content, id: bigint) {
+    this.isDetailsPresent = false;
     this.modalService.open(content, { size: 'xl', centered: true });
     this.appointmentRegistrationService.getAppointmentRegistrationByID(id).subscribe(data => {
       this.isDetailsPresent = true;

@@ -9,7 +9,7 @@
                 matInput
                 [formControl] = "doctorShortInformationFormControl.doctorShortInformationFormControl"
                 [matAutocomplete] = "auto">
-                
+
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" class = "autocompleteDoctorFilterField">
                 <!-- TODO - introduce categories of doctors by their profession -->
                 <!-- <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter"> -->
@@ -23,6 +23,6 @@
     <div class = "datePickerAndFilterButton">
         <app-material-date-range-picker (pickedDateRange) = "calendarDateRangeChanged($event)" [rangeMaxLengthInDays] = "31"></app-material-date-range-picker>
 
-        <button class = "btn btn-primary filterButton" (click)="checkInputAndPresentAppointmentDates()">Filter</button>
+        <button class = "btn btn-primary filterButton" (click)="checkInputAndPresentAppointmentDates()">Показать</button>
     </div>
 </div>

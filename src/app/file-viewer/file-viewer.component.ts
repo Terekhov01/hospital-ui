@@ -43,6 +43,8 @@ export class FileViewerComponent implements OnInit, AfterViewChecked
   isRenderedFileDirty = true;
   displayedFile: FileResourceInfo = null;
   id: number;
+  isLoaded: boolean;
+  isEmpty: boolean;
 
   constructor(private route: ActivatedRoute, private router: Router, public sanitizer: DomSanitizer,
               private appointmentService: AppointmentService, public datePipe: DatePipe, private patientService: PatientService,
@@ -50,10 +52,12 @@ export class FileViewerComponent implements OnInit, AfterViewChecked
 
   ngOnInit(): void
   {
+    this.isLoaded = false;
+    this.isEmpty = false;
     this.id = this.route.snapshot.params['id'];
     let downloadSubscription = this.patientService.download(this.id).subscribe(
     {
-      next: (files: FileDTO[]) => 
+      next: (files: FileDTO[]) =>
       {
         for (let file of files)
         {
@@ -67,9 +71,11 @@ export class FileViewerComponent implements OnInit, AfterViewChecked
             this.displayFile(fileResource);
           }
         }
+        this.isLoaded = true;
        },
       error: (error) =>
       {
+        this.isEmpty = true;
         this.popUpMessageService.displayError(error);
         //alert(error.error);
       },
@@ -95,7 +101,7 @@ export class FileViewerComponent implements OnInit, AfterViewChecked
           this.displayedFile.fileBlob.text().then(text => docxFileContainer.textContent = text);
         }
       }
-    
+
       if (this.displayedFile.mimetype == "application/msword" ||
           this.displayedFile.mimetype == "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
       {
@@ -116,10 +122,11 @@ export class FileViewerComponent implements OnInit, AfterViewChecked
 
   displayFile(file: FileResourceInfo)
   {
+    this.isLoaded = false;
     this.isRenderedFileDirty = true;
     this.displayedFile = file;
     console.log(file.fileName);
-    
+    this.isLoaded = true;
   }
 
   downloadFile(file: FileResourceInfo)
@@ -135,7 +142,7 @@ export class FileViewerComponent implements OnInit, AfterViewChecked
     }
 
     /*let downloadSubscription = this.patientService.download(this.id).subscribe({
-      next: (files: FileDTO[]) => 
+      next: (files: FileDTO[]) =>
       {
         //let fileUrls: string[] = [];
         for (let file of files)
@@ -145,7 +152,7 @@ export class FileViewerComponent implements OnInit, AfterViewChecked
           saveAs(fileUrl, file.originalName);
         }
       },
-      error: (error) => 
+      error: (error) =>
       {
         alert(error.error);
       },

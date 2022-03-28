@@ -269,11 +269,12 @@
 
 
         <div class="mb-3 row">
+          <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label" style="text-align: center"> <h2> Поиск: </h2> </label>
           <div class="col col-form-label">
             <input id="table-complete-search" type="text" class="form-control" name="searchTerm" [(ngModel)]="keyWord" matTooltip="Введите ключевые слова для поиска" [matTooltipPosition]="'above'">
           </div>
-          <span class="col col-form-label"> <button (click)="search()" mat-raised-button class="MyButton"> Поиск
-          </button> <button (click)="reset()" mat-raised-button class="MyButton" style="margin-left: 30px"> Сброс
+          <span class="col col-form-label"> <button (click)="search()" mat-raised-button class="MyButton"> Найти
+          </button> <button (click)="reset()" mat-raised-button class="MyButton" style="margin-left: 30px" matTooltip="Сбросить критерии поиска" [matTooltipPosition]="'above'"> Сброс
           </button> </span>
         </div>
 
@@ -297,7 +298,7 @@
             {{appointment.description.substr(0,47)}}&hellip;
           </div>
         </td>
-        <td> {{appointment.appointmentRegistration.patient.user.lastName}} {{appointment.appointmentRegistration.patient.user.firstName.substr(0,1)}}. {{appointment.appointmentRegistration.patient.user.patronymic.substr(0,1)}}. </td>
+        <td> <button (click)="MedCard(appointment.appointmentRegistration.patient.user.id)" style="background-color: transparent; border:0px; color: #0b6efd" matTooltip="Просмотреть медкарту" [matTooltipPosition]="'left'">{{appointment.appointmentRegistration.patient.user.lastName}} {{appointment.appointmentRegistration.patient.user.firstName.substr(0,1)}}. {{appointment.appointmentRegistration.patient.user.patronymic.substr(0,1)}}. </button> </td>
         <td> {{datePipe.transform(appointment.appointmentRegistration.start, "yyyy/MM/dd HH:mm")}} </td>
         <td>
           <button (click)="appointmentDetails(content, appointment.id, appointment)" mat-raised-button class="MyButton"

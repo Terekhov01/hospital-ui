@@ -12,6 +12,10 @@ import {Observable} from 'rxjs';
 import {error} from 'protractor';
 import {OurdoctorsService} from '../OurDoctorsInClinic/ourdoctors.service';
 import {query} from '@angular/animations';
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import * as printJS from "print-js";
+import {PatientService} from "../patient.service";
+import { DatePipe } from '@angular/common';
 // import {DoctorService} from "../user/user/doctor.service";
 // import {User} from "../user/user/doctor.models";
 
@@ -31,20 +35,31 @@ export class MedCardComponent implements OnInit {
   selectedService;
   room: string;
   id: number;
+  activateLoadingModal: boolean;
   contentLoaded = false;
+
   // doctors: User[];
   // selectedDoctor: User;
+
+  appointments: Appointment[];
+  appointment: Appointment;
+  isLoaded: boolean;
+  isEmpty: boolean;
 
   constructor(private medCardService: MedCardService,
               private serviceService: ServiceServiceService,
               private router: Router,
               private pagerService: PagerService,
               private actRoute: ActivatedRoute,
+              private modalService: NgbModal,
+              private patientService: PatientService,
+              public datePipe: DatePipe
               ) {
     this.medCard = new MedCard();
   }
 
   ngOnInit(): void {
+    this.activateLoadingModal = false;
     setTimeout(() => {
       this.contentLoaded = true;
     }, 2500);
@@ -108,4 +123,46 @@ export class MedCardComponent implements OnInit {
   appointmentOne(id: number){
     this.router.navigate(['appointment-details', id]);
   }
+
+  appointmentDetails(content, id: bigint, a: Appointment) {
+    this.appointment = a;
+    this.modalService.open(content, { size: 'xl', centered: true, scrollable: true });
+    // let result = this.router.navigate(['appointment-details', id]);
+  }
+
+  oToFileViewer1(id: bigint) {
+    console.log("passing id: " + id)
+    // let res = this.router.navigate(['file-viewer', id])
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['file-viewer', id])
+    )
+    window.open(url, '_blank');
+  }
+
+  printRecipe(content, id: bigint) {
+    this.modalService.open(content, { size: 'sm', centered: true })
+    this.patientService.printRecipe(id).subscribe(data => {
+      const blobUrl = URL.createObjectURL(data);
+      printJS(blobUrl);
+      // const iframe = document.createElement('iframe');
+      // iframe.style.display = 'none';
+      // iframe.src = blobUrl;
+      // document.body.appendChild(iframe);
+      // iframe.contentWindow.print();
+    })
+    console.log("printed!!")
+    window.onafterprint = () => console.log("ONAFTERPRINT")
+
+    window.onbeforeprint = () => console.log('This will be called before the user prints.')
+  }
+
+  goToFileViewer1(id: bigint) {
+    console.log("passing id: " + id)
+    // let res = this.router.navigate(['file-viewer', id])
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['file-viewer', id])
+    )
+    window.open(url, '_blank');
+  }
+
 }

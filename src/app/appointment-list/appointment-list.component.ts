@@ -128,8 +128,8 @@ export class AppointmentListComponent implements OnInit {
         }
       });
     await delay(2000);
-    this.isTableLoaded = true;
-    this.isLoaded = true;
+    // this.isTableLoaded = true;
+    // this.isLoaded = true;
   }
 
   nextPage(event: PageEvent) {
@@ -381,6 +381,10 @@ export class AppointmentListComponent implements OnInit {
       byteArrays[sliceIndex] = new Uint8Array(bytes);
     }
     return new Blob(byteArrays, { type: contentType });
+  }
+
+  MedCard(id: bigint){
+    let result = this.router.navigate(['medCard', id]);
   }
 
 }

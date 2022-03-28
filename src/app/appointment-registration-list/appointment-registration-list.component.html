@@ -37,9 +37,9 @@
     </div>
 
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Закрыть</button>
-  </div>
+<!--  <div class="modal-footer">-->
+<!--    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Закрыть</button>-->
+<!--  </div>-->
 </ng-template>
 
 <ng-template #deleteWarning let-modal>
@@ -62,7 +62,7 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Закрыть</button>
+<!--    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Закрыть</button>-->
     <button type="button" ngbAutofocus class="btn btn-danger" (click)="deleteAppointmentRegistration(arToDelete)">OK</button>
   </div>
 </ng-template>
