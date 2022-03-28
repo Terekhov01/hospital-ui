@@ -8,8 +8,9 @@ export class Doctor {
   user: User;
   room: Room;
 
-  constructor(firstname: string, lastname: string, patronymic: string, phone: string, username: string, email:string, password:string, dateOfEmployment: Date, education: string) {
-    this.user = new User(firstname, lastname, patronymic, phone, username, email, password);
+  initFields(firstname: string, lastname: string, patronymic: string, phone: string, username: string, email:string, password:string, dateOfEmployment: Date, education: string) {
+    this.user = new User();
+    this.user.initFields(firstname, lastname, patronymic, phone, username, email, password);
     this.dateOfEmployment = dateOfEmployment;
     this.education = education;
     this.room = new Room();

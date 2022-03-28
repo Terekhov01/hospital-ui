@@ -27,6 +27,7 @@ import { PopUpMessageService } from '../_services/pop-up-message.service';
 export class ScheduleApplyPatternComponent implements OnInit
 {
     isHintShown = false;
+    isScheduleChanging = false;
 
     public patternAutocompleteFormControl = new PatternAutocompleteFormControl();
 
@@ -61,6 +62,8 @@ export class ScheduleApplyPatternComponent implements OnInit
 
     ngOnInit(): void
     {
+        this.deleteButtonFormControl.disable();
+        this.changeButtonFormControl.disable();
         this.updatePatternListFromServer();
 
         let subscription = this.patternSavedEvent.subscribe({
@@ -96,7 +99,6 @@ export class ScheduleApplyPatternComponent implements OnInit
                         if (this.patternAutocompleteFormControl.getAutocompleteInsertedSchedulePattern()!.daysLength < 1)
                         {
                             this.popUpMessageService.displayWarning("Шаблон некорректен - его длина менее 1 дня");
-                            //alert("Шаблон некорректен - его длина менее 1 дня");
                             return;
                         }
         
@@ -136,7 +138,6 @@ export class ScheduleApplyPatternComponent implements OnInit
                         {
                             this.tableData = new SchedulePatternDataSource(this.formBuilder);
                             this.popUpMessageService.displayError(error);
-                            //alert(error.error);
                         },
                         complete: () =>
                         {}
@@ -145,7 +146,6 @@ export class ScheduleApplyPatternComponent implements OnInit
                 error: (error) =>
                 {
                     this.popUpMessageService.displayError(error, "Внутренняя ошибка. Имя шаблона расписания изменено, но событие не может быть обработано");
-                    //alert("Внутренняя ошибка. Имя шаблона расписания изменено, но событие не может быть обработано. " + error.error);
                 },
                 complete: () =>
                 {},
@@ -180,7 +180,6 @@ export class ScheduleApplyPatternComponent implements OnInit
                             });
                             
                             this.popUpMessageService.displayWarning(aggerateErrorStr);
-                            //alert(this.scheduleApplyRepeatFormControl.errors);
                         }
                     }
                 }
@@ -216,7 +215,6 @@ export class ScheduleApplyPatternComponent implements OnInit
             error: (error) => 
             { 
                 this.popUpMessageService.displayError(error);
-                //alert(error.error);
             },
             complete: () => 
             { 
@@ -228,6 +226,12 @@ export class ScheduleApplyPatternComponent implements OnInit
 
     onProlongButtonClicked(): void
     {
+        if (this.isScheduleChanging)
+        {
+            return;
+        }
+
+        this.isScheduleChanging = true;
         if (this.scheduleApplyRepeatFormControl.invalid)
         {
             return;
@@ -244,15 +248,15 @@ export class ScheduleApplyPatternComponent implements OnInit
             next: (value) =>
             {
                 this.popUpMessageService.displayConfirmation("Расписание изменено");
-                //alert("Расписание изменено");
             },
             error: (error) =>
             {
+                this.isScheduleChanging = false;
                 this.popUpMessageService.displayError(error);
-                //alert(error.error);
             },
             complete: () =>
             {
+                this.isScheduleChanging = false;
                 subscription.unsubscribe();
             }
         });
@@ -261,6 +265,7 @@ export class ScheduleApplyPatternComponent implements OnInit
     onDeleteButtonClicked()
     {
         let patternName = this.patternAutocompleteFormControl.getFormControl().value;
+        this.deleteButtonFormControl.disable();
 
         let response = this.scheduleService.deletePattern(patternName);
         let subscription = response.subscribe(
@@ -269,12 +274,11 @@ export class ScheduleApplyPatternComponent implements OnInit
                 {
                     this.updatePatternListFromServer();
                     this.popUpMessageService.displayConfirmation("Удалено успешно");
-                    //alert("Уделено успешно");
                 },
                 error: (error) =>
                 {
                     this.popUpMessageService.displayError(error);
-                    //alert(error.error);
+                    this.updatePatternListFromServer();
                 },
                 complete: () =>
                 {
@@ -308,12 +312,12 @@ export class ScheduleApplyPatternComponent implements OnInit
 
             if (startDate == null || startDate.value == "")
             {
-                return { dateRangePickerValidator: { message: "Start date range contains no information" } };
+                return { dateRangePickerValidator: { message: "Не задана дата начала промежутка времени" } };
             }
 
             if (endDate == null || endDate.value == "")
             {
-                return { dateRangePickerValidator: { message: "End date range contains no information. This most probably is an internal application error!" } };
+                return { dateRangePickerValidator: { message: "Не задана дата конца промежутка времени" } };
             }
 
             return null;

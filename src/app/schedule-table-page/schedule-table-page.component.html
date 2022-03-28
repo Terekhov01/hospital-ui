@@ -59,8 +59,7 @@
                         <ng-container *ngFor = "let currentDay of currentWeek.dailyInformation; let columnCounter = index" matColumnDef = {{displayedColumns[columnCounter]}}>
                             
                             <th mat-header-cell *matHeaderCellDef class = "dynamicAmountColumnHeader" 
-                            [hidden] = "currentDay.date > doctorSchedule.endDate"
-                            [ngClass] = "(currentDay.date < doctorSchedule.startDate) ? 'emptyCell' : ''">
+                            [hidden] = "currentDay.date < doctorSchedule.startDate || currentDay.date > doctorSchedule.endDate">
                                 <ng-container *ngIf = "currentDay.date >= doctorSchedule.startDate && currentDay.date <= doctorSchedule.endDate">
                                     <div>{{this.getDayName(currentDay.date, this.userLocale)}}</div> 
                                     <div>{{this.datePipe.transform(currentDay.date, 'dd.MM.yyyy')}}</div>
@@ -68,8 +67,7 @@
                             </th>
         
                             <td mat-cell *matCellDef = "let row; let rowCounter = index;" class = "dynamicAmountColumnContents" 
-                            [hidden] = "currentDay.date > doctorSchedule.endDate"
-                            [ngClass] = "(currentDay.date < doctorSchedule.startDate) ? 'emptyCell' : ''">
+                            [hidden] = "currentDay.date < doctorSchedule.startDate || currentDay.date > doctorSchedule.endDate">
 
                                 <ng-container *ngIf = "currentDay.timeIntervals[rowCounter] != null;
                                                 then printInterval;

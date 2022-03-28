@@ -3,33 +3,113 @@ import { TokenStorageService } from '../_services/token-storage.service';
 import {Employee} from '../employee';
 import {EmployeeService} from '../_services/employee.service';
 import { Router } from '@angular/router';
+import { Patient } from '../patient';
+import { PatientService } from '../patient.service';
+import { UserService } from '../_services/user.service';
+import { PopUpMessageService } from '../_services/pop-up-message.service';
+import { User, Role } from '../user';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
+  Role = Role;
   currentUser: any;
-  id: number;
-  employee: Employee;
-  constructor(private token: TokenStorageService, private employeeService: EmployeeService,private router: Router) { }
+  currentUserRole: Role = Role.ROLE_ADMIN;
+  currentUserInfo: any = 
+  {
+    userName: "",
+    firstName: "",
+    lastName: "",
+    middleName: "",
+    email: "",
+    phoneNumber: ""
+  };
+
+  constructor(private token: TokenStorageService, private employeeService: EmployeeService, private patientService: PatientService, 
+    private userService: UserService, private popUpMessageService: PopUpMessageService, private router: Router) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
-    this.employee = new Employee();
-    this.id = this.currentUser.id;
-    this.employeeService.getEmployeeById(this.id).subscribe( data => {
-      this.employee = data;
+    this.currentUserRole = Role[this.currentUser.roles[0]];
+
+    let userInfoObservable: any = null;
+    switch (this.currentUserRole)
+    {
+      case Role.ROLE_PATIENT:
+      {
+        userInfoObservable = this.patientService.getAccountDetailsById(BigInt(this.currentUser.id));
+        break;
+      }
+
+      case Role.ROLE_DOCTOR:
+      {
+        userInfoObservable = this.employeeService.getAccountDetailsById(this.currentUser.id);
+        break;
+      }
+
+      case Role.ROLE_ADMIN:
+      {
+        userInfoObservable = this.userService.getAccountDetailsById(this.currentUser.id);
+        break;
+      }
+    }
+
+    let subscription = userInfoObservable.subscribe({
+      next: (data) =>
+      {
+        this.currentUserInfo = data;
+      },
+      error: (error) =>
+      {
+        this.popUpMessageService.displayError(error);
+      },
+      complete: () =>
+      {
+        subscription.unsubscribe();
+      }
     });
   }
-  onSubmit() {
-    this.employeeService.updateEmployee(this.id, this.employee).subscribe(data => error => console.log(error));
+  
+  onSubmit()
+  {
   }
-  updateProfile(id: number){
-    this.router.navigate(['updateprofile', id]);
+
+  updateProfile()
+  {
+    switch(this.currentUserRole)
+    {
+      case Role.ROLE_PATIENT:
+      {
+        this.router.navigate(['updateprofile', this.currentUser.patientId]);
+        break;
+      }
+      
+      case Role.ROLE_DOCTOR:
+      {
+        this.router.navigate(['updateprofile', this.currentUser.doctorId]);
+        break;
+      }
+
+      case Role.ROLE_ADMIN:
+      {
+        this.router.navigate(['updateprofile', this.currentUser.id]);
+        break;
+      }
+    }
   }
-  MedCard(id: bigint){
-    this.router.navigate(['medCard', id]);
+
+  MedCard()
+  {
+    if (this.currentUser.patientId == undefined)
+    {
+      this.popUpMessageService.displayError("Внутренняя ошибка. Только пациенты могут просматривать медицинскую карту");
+      return;
+    }
+
+    this.router.navigate(['medCard', this.currentUser.patientId]);
   }
 }

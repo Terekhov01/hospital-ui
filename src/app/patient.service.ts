@@ -28,14 +28,25 @@ export class PatientService {
   }
 
   getPatientById(id: bigint): Observable<Patient> {
-    return this.httpClient.get<Patient>(`${this.baseURL}/id/${id}`)
+    return this.httpClient.get<Patient>(`${this.baseURL}/id/${id}`);
+  }
+
+  getAccountDetailsById(id: bigint): Observable<any>
+  {
+    return this.httpClient.get<Patient>(`${this.baseURL}/${id}`);
   }
 
   getAllPatients(): Observable<Patient[]>{
     return this.httpClient.get<Patient[]>(`${this.baseURL}`);
   }
+  
   getDoctorById(id: bigint): Observable<Doctor> {
     return this.httpClient.get<Doctor>(`${this.doctorURL}/id/${id}`)
+  }
+
+  update(patient: Patient): Observable<string>
+  {
+    return this.httpClient.put<string>(`${this.baseURL}/${patient.id}`, patient);
   }
 
   // uploadFile(file: File, id: number): Observable<Object>{

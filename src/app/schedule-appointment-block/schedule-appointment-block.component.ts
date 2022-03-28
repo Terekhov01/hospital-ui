@@ -192,8 +192,10 @@ export class ScheduleAppointmentBlockComponent implements OnInit, OnDestroy
 
     async initModalContent() {
       this.appointmentRegistration = new AppointmentRegistration();
-      this.appointmentRegistration.doctor = new Doctor("", "", "", "123", "", "", "", new Date(), "");
-      this.appointmentRegistration.patient = new Patient("", "", BigInt(0), "", this.patient, "", "", "", "", "")
+      this.appointmentRegistration.doctor = new Doctor();
+      this.appointmentRegistration.doctor.initFields("", "", "", "123", "", "", "", new Date(), "");
+      this.appointmentRegistration.patient = new Patient();
+      this.appointmentRegistration.patient.initFields("", "", BigInt(0), "", this.patient, "", "", "", "", "")
       this.user = this.tokenStorageService.getUser();
       let usr_id = window.sessionStorage.getItem("USER_ID")
       console.log("Current user is: " + usr_id);
