@@ -17,6 +17,17 @@ import { PopUpMessageService } from '../_services/pop-up-message.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  images = [
+    {
+      url: '../assets/images/medical1.jpeg',
+    },
+    {
+      url: '../assets/images/medical2.jpeg',
+    },
+    {
+      url: '../assets/images/medical3.jpeg',
+    }
+  ];
   patientAmount: number = null;
   doctorAmount: number = null;
   services: Service[];
