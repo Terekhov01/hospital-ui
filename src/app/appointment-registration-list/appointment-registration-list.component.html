@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <ng-template #content let-modal>
-  <div class="modal-header text-center">
+  <div class="modal-header text-center bg-primary">
     <h2 class="modal-title text-center">Информация о записи на прием</h2>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
@@ -43,7 +43,7 @@
 </ng-template>
 
 <ng-template #deleteWarning let-modal>
-  <div class="modal-header">
+  <div class="modal-header bg-danger" style="color: white">
     <h2 class="modal-title" id="modal-title">Удаление записи на прием</h2>
     <button type="button" class="btn-close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')"></button>
   </div>
@@ -67,6 +67,8 @@
   </div>
 </ng-template>
 
+<br>
+
 <div class="card text-center">
   <div class="card-body">
 
@@ -74,6 +76,8 @@
 
   </div>
 </div>
+
+<br>
 
 <div *ngIf = "!isLoaded">
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
@@ -86,58 +90,16 @@
     <div class="card text-center align-items-center">
       <div class="card-body">
 
-<!--        <table class="table table-striped">-->
-<!--          <thead>-->
-<!--          <tr>-->
-<!--            &lt;!&ndash;    <th> Id </th>&ndash;&gt;-->
-<!--&lt;!&ndash;            <th> Адрес</th>&ndash;&gt;-->
-<!--            <th> Кабинет</th>-->
-<!--            <th> Доктор</th>-->
-<!--            &lt;!&ndash;    <th> Пациент </th>&ndash;&gt;-->
-<!--            <th> Дата и время</th>-->
-<!--            <th> Действия</th>-->
-<!--          </tr>-->
-<!--          </thead>-->
-
-<!--          <tbody>-->
-<!--          <tr *ngFor="let appointmentRegistration of appointmentRegistrations">-->
-<!--            <td> {{appointmentRegistration.room}} </td>-->
-<!--            <td> {{appointmentRegistration.doctor.user.lastName}} {{appointmentRegistration.doctor.user.firstName.substr(0,1)}}. {{appointmentRegistration.doctor.user.patronymic.substr(0,1)}}. </td>-->
-<!--            <td> {{datePipe.transform(appointmentRegistration.start, "yyyy/MM/dd HH:mm")}} </td>-->
-<!--            <td>-->
-<!--&lt;!&ndash;              <button (click)="showDeleteModal(deleteWarning, appointmentRegistration)" class="btn btn-primary" style="margin-left: 10px"&ndash;&gt;-->
-<!--&lt;!&ndash;                      matTooltip="Отменить запись на прием"> 	<mat-icon>delete</mat-icon> </button>&ndash;&gt;-->
-<!--&lt;!&ndash;              <button (click)="showDetailsModal(content, appointmentRegistration.id)" class="btn btn-primary" style="margin-left: 10px"&ndash;&gt;-->
-<!--&lt;!&ndash;                      matTooltip="Показать детали записи на прием"> <mat-icon>info</mat-icon>&ndash;&gt;-->
-<!--&lt;!&ndash;              </button>&ndash;&gt;-->
-<!--              <button (click)="showDeleteModal(deleteWarning, appointmentRegistration)" class="btn btn-primary" style="margin-left: 10px"-->
-<!--                      matTooltip="Отменить запись на прием"> 	<i class="pi pi-trash"></i>-->
-<!--              </button>-->
-<!--              <button (click)="showDetailsModal(content, appointmentRegistration.id)" class="btn btn-primary" style="margin-left: 10px"-->
-<!--                      matTooltip="Показать детали записи на прием"> <i class="pi pi-info-circle"></i>-->
-<!--              </button>-->
-<!--            </td>-->
-<!--          </tr>-->
-<!--          </tbody>-->
-<!--        </table>-->
-
-<!--        <div class="card-deck" *ngFor="let appointmentRegistration of appointmentRegistrations">-->
-
-
-
             <ul class="list-group list-group-horizontal align-items-stretch flex-wrap justify-content-center">
 
               <div class="card-deck" *ngFor="let appointmentRegistration of appointmentRegistrations">
 
                 <li class="list-group-item border-0">
 
-                  <div class="card border-primary mb-3" style="max-width: 18rem;">
+                  <div class="card border-black-alpha-90 mb-3" style="max-width: 18rem;">
                       <div class="card-header"><h1>Запись на прием ко врачу</h1></div>
                       <div class="card-body">
                         <h2 class="card-title">Информация о записи</h2>
-<!--                        <p class="card-text text-left">-->
-<!--                          Кабинет: {{appointmentRegistration.room}}-->
-<!--                        </p>-->
                         <p class="card-text text-left">
                           Доктор: {{appointmentRegistration.doctor.user.lastName}} {{appointmentRegistration.doctor.user.firstName.substr(0,1)}}. {{appointmentRegistration.doctor.user.patronymic.substr(0,1)}}.
                         </p>
@@ -164,7 +126,6 @@
 
             </ul>
 
-  <!--        </div>-->
 
 
 

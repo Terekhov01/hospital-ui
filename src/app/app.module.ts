@@ -177,6 +177,7 @@ import { LocalChatComponent } from './local-chat/local-chat.component';
 import { SendQuestionEmailComponent } from './send-question-email/send-question-email.component';
 import { ResponceemailComponent } from './send-question-email/responceemail/responceemail.component';
 
+import {NgbdSortableHeader} from "./create-appointment/sortable.directive";
 // Select bootstrap icons (use an object, not an array)
 const icons = {
   questionCircle,
@@ -187,6 +188,7 @@ const icons = {
 
 @NgModule({
   declarations: [
+    NgbdSortableHeader,
     // PdfViewerComponent,
     SafePipe,
     AppComponent,
@@ -244,7 +246,9 @@ const icons = {
     ResponceemailComponent,
 
     UpdateprofileComponent,
-    FileTransferDataComponent
+    FileTransferDataComponent,
+    CreateAppointmentComponent,
+    NgbdSortableHeader
   ],
   imports: [
     TranslateModule.forRoot(),
@@ -290,9 +294,9 @@ const icons = {
     DialogConfigModule.forRoot(), // Needed for instantiating dynamic components.
     ConfirmBoxConfigModule.forRoot(), // Needed for instantiating confirm boxes.
     ToastNotificationConfigModule.forRoot(), // Needed for instantiating toast notifications.
-    NgxBootstrapIconsModule.pick(icons, { 
-      width: '2em', 
-      height: '2em', 
+    NgxBootstrapIconsModule.pick(icons, {
+      width: '2em',
+      height: '2em',
       theme: ColorTheme.Primary
     }) // Bootstrap icons in angular way
   ],
