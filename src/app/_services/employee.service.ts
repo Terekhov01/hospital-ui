@@ -7,7 +7,7 @@ import { Employee, EmployeeDTO } from '../employee';
   providedIn: 'root'
 })
 export class EmployeeService {
-
+  private doctorURL = "http://localhost:8080/api/doctors";
   private baseURL = "http://localhost:8080/api/v1/employees";
   private REGURL = "http://localhost:8080/api/auth/signup";
   constructor(private httpClient: HttpClient) { }
@@ -23,12 +23,18 @@ export class EmployeeService {
   createDoctor(doctor: EmployeeDTO): Observable<Object>{
     return this.httpClient.post(`${this.REGURL}/doctor`, doctor);
   }
-  getEmployeeById(id: number): Observable<Employee>{
+  
+  getDoctorById(id: number): Observable<Employee>{
     return this.httpClient.get<Employee>(`${this.baseURL}/${id}`);
   }
 
-  updateEmployee(id: number, employee: Employee): Observable<Object>{
-    return this.httpClient.put(`${this.baseURL}/${id}`, employee);
+  getAccountDetailsById(id: number): Observable<Employee>
+  {
+    return this.httpClient.get<Employee>(`${this.doctorURL}/${id}`);
+  }
+
+  update(employee: Employee): Observable<string>{
+    return this.httpClient.put<string>(`${this.baseURL}/${employee.id}`, employee);
   }
 
   deleteEmployee(id: number): Observable<Object>{

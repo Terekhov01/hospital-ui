@@ -1,6 +1,7 @@
 import {Erole} from './erole';
 import {Role} from './role';
 import {Patient} from './patient';
+import { User } from './user';
 
 export class Employee {
   id: number;
@@ -18,7 +19,7 @@ export class Employee {
   role: string;
 }
 
-export class EmployeeDTO
+export class EmployeeDTO 
 {
   userName: string;
   password: string;

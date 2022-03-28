@@ -1,5 +1,12 @@
 import {Patient} from "./patient";
 
+export enum Role
+{
+  ROLE_PATIENT = "PATIENT",
+  ROLE_DOCTOR = "DOCTOR",
+  ROLE_ADMIN = "ADMIN"
+}
+
 export class User {
   id: bigint;
   firstName: string;
@@ -10,7 +17,7 @@ export class User {
   email: string;
   password: string;
 
-  constructor(firstname: string, lastname: string, patronymic: string, phone: string, username: string, email: string, password: string) {
+  initFields(firstname: string, lastname: string, patronymic: string, phone: string, username: string, email: string, password: string) {
     this.firstName = firstname;
     this.lastName = lastname;
     this.patronymic = patronymic;

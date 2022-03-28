@@ -1,36 +1,48 @@
 <div class="col-md-6 offset-md-3">
   <form (ngSubmit) = "onSubmit()">
     <div class="form-group">
-      <label> Имя</label>
+      <label>Имя</label>
       <input type="text" class ="form-control" id = "firstName"
-             [(ngModel)] = "employee.firstName" name = "firstName">
+             [(ngModel)] = "currentUserInfo.firstName" name = "firstName" placeholder = {{currentUserInfo.firstName}}>
     </div>
 
     <div class="form-group">
       <label> Фамилия</label>
       <input type="text" class ="form-control" id = "lastName"
-             [(ngModel)] = "employee.lastName" name = "lastName">
+             [(ngModel)] = "currentUserInfo.lastName" name = "lastName" placeholder = {{currentUserInfo.lastName}}>
     </div>
 
     <div class="form-group">
       <label>Отечество</label>
-      <input type="text" class ="form-control" id = "patronymic"
-             [(ngModel)] = "employee.patronymic" name = "patronymic">
+      <input type="text" class ="form-control" id = "middleName"
+             [(ngModel)] = "currentUserInfo.middleName" name = "middleName" placeholder = {{currentUserInfo.middleName}}>
     </div>
     <div class="form-group">
-      <label>Номер</label>
+      <label>Номер телефона</label>
       <input type="text" class ="form-control" id = "phone"
-             [(ngModel)] = "employee.phone" name = "phone" >
+             [(ngModel)] = "currentUserInfo.phoneNumber" name = "phoneNumber" placeholder = {{currentUserInfo.phoneNumber}}>
     </div>
-    <div class="form-group">
+    <div class="form-group" *ngIf = "currentUserRole == Role.ROLE_PATIENT">
       <label>Паспорт</label>
       <input type="text" class ="form-control" id = "passport"
-             [(ngModel)] = "employee.passport"  [(ngModel)] = "employee.patient.passport" name = "passport">
+             [(ngModel)] = "currentUserInfo.passport"  [(ngModel)] = "currentUserInfo.passport" name = "passport" placeholder = {{currentUserInfo.passport}}>
     </div>
-    <div class="form-group">
+    <div class="form-group" *ngIf = "currentUserRole == Role.ROLE_PATIENT">
       <label>Полис</label>
       <input type="text" class ="form-control" id = "polys"
-             [(ngModel)] = "employee.polys"  [(ngModel)] = "employee.patient.polys" name = "polys" placeholder= {{employee.patient.polys}}>
+             [(ngModel)] = "currentUserInfo.polys"  [(ngModel)] = "currentUserInfo.polys" name = "polys" placeholder = {{currentUserInfo.polys}}>
+    </div>
+
+    <div class="form-group" *ngIf = "currentUserRole == Role.ROLE_DOCTOR">
+      <label>Образование</label>
+      <input type="text" class ="form-control" id = "education"
+             [(ngModel)] = "currentUserInfo.education"  [(ngModel)] = "currentUserInfo.education" name = "polys" placeholder = {{currentUserInfo.education}}>
+    </div>
+
+    <div class="form-group" *ngIf = "currentUserRole == Role.ROLE_DOCTOR">
+      <label>Дата трудоустройства</label>
+      <input type="text" class ="form-control" id = "dateOfEmployment"
+             [(ngModel)] = "currentUserInfo.dateOfEmployment"  [(ngModel)] = "currentUserInfo.dateOfEmployment" name = "dateOfEmployment" placeholder = {{currentUserInfo.dateOfEmployment}}>
     </div>
 
     <button class = "btn btn-primary btn-block" type ="submit" >Сохранить</button>

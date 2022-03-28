@@ -19,13 +19,13 @@ export class UpdateEmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
 
-    this.employeeService.getEmployeeById(this.id).subscribe(data => {
+    this.employeeService.getDoctorById(this.id).subscribe(data => {
       this.employee = data;
     }, error => console.log(error));
   }
 
   onSubmit(){
-    this.employeeService.updateEmployee(this.id, this.employee).subscribe( data =>{
+    this.employeeService.update(this.employee).subscribe( data =>{
         this.goToEmployeeList();
       }
       , error => console.log(error));

@@ -67,8 +67,6 @@ export class ScheduleTablePageComponent implements OnInit
     filterSettings = new FilterSettings();
 
     displayedColumns: string[];
-    /*columnHeaderDates: string[];
-    columnHeaderDayOfWeekNames: string[];*/
     dataSource: ScheduleTablesDataSource;
     userLocale: string;
 
@@ -91,32 +89,11 @@ export class ScheduleTablePageComponent implements OnInit
         this.dataSource = new ScheduleTablesDataSource(this.doctorScheduleService, this.popUpMessageService);
         this.userLocale = this.getUserLocale();
         this.displayedColumns = [];
-        //this.columnHeaderDates = [];
-        //this.columnHeaderDayOfWeekNames = [];
     }
 
     ngOnInit(): void
     {
         this.displayedColumns = ["day0", "day1", "day2", "day3", "day4", "day5", "day6"];
-    }
-
-    fillTableContents(startDate: Date, endDate: Date): void
-    {
-        //this.columnHeaderDates = [];
-        //this.columnHeaderDayOfWeekNames = [];
-        //this.displayedColumns = [];
-        let counter = 0;
-
-        let curDate = new Date(startDate);
-        while (curDate <= endDate)
-        {
-            //this.columnHeaderDates.push(this.datePipe.transform(curDate, 'dd.MM.yyyy'));
-            //this.columnHeaderDayOfWeekNames.push(this.getDayName(curDate, this.userLocale));
-            let newDate = curDate.setDate(curDate.getDate() + 1);
-            curDate = new Date(newDate);
-            //this.displayedColumns.push("day" + counter);
-            counter++;
-        }
     }
 
     calendarDateRangeChanged(pickedDates: PickedDates): void
@@ -141,12 +118,12 @@ export class ScheduleTablePageComponent implements OnInit
         this.dataSource.clearData();
         if (this.filterSettings.isStateValid())
         {
-            this.dataSource.loadDoctorSchedules(() => { this.fillTableContents(this.filterSettings.getStartDate(), this.filterSettings.getEndDate()); }, this.filterSettings.getStartDate(), this.filterSettings.getEndDate(), this.filterSettings.getPickedDoctors());
+            this.dataSource.isScheduleLoading = true;
+            this.dataSource.loadDoctorSchedules(this.filterSettings.getStartDate(), this.filterSettings.getEndDate(), this.filterSettings.getPickedDoctors());
         }
         else
         {
-            this.popUpMessageService.displayWarning("Заполните фильтры корректно. Интервал времени не может быть больше месяца");
-            //alert("Заполните фильтры. Интервал времени не может быть больше месяца.");
+            this.popUpMessageService.displayWarning("Заполните фильтры корректно. (Интервал времени не может быть больше 28 дней)");
         }
     }
 }

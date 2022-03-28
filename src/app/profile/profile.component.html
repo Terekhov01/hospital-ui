@@ -11,11 +11,11 @@
                 class="profile-img-card"
               />
               <div class="mt-3">
-                <h4>{{employee.lastName}} {{employee.firstName}} {{employee.patronymic}}</h4>
+                <h4>{{currentUserInfo.lastName}} {{currentUserInfo.firstName}} {{currentUserInfo.middleName}}</h4>
               </div>
             </div>
             <button *ngIf="currentUser.roles.includes('ROLE_PATIENT')"
-                    (click)="MedCard(employee.patient.id)"
+                    (click)="MedCard()"
                     class="btn btn-primary btn-block">
               Медицинская карта
             </button>
@@ -30,7 +30,7 @@
                 <h2 class="mb-0">Логин</h2>
               </div>
               <div class="col-sm-9 text-secondary">
-                <input type="text" class="form-control" value="{{employee.username}}" readonly>
+                <input type="text" class="form-control" value="{{currentUserInfo.userName}}" readonly>
               </div>
             </div>
             <div class="row mb-3">
@@ -38,7 +38,7 @@
                 <h2 class="mb-0">ФИО</h2>
               </div>
               <div class="col-sm-9 text-secondary">
-                <input type="text" class="form-control" value="{{employee.lastName}} {{employee.firstName}} {{employee.patronymic}}" readonly>
+                <input type="text" class="form-control" value="{{currentUserInfo.lastName}} {{currentUserInfo.firstName}} {{currentUserInfo.middleName}}" readonly>
               </div>
             </div>
             <div class="row mb-3">
@@ -46,36 +46,64 @@
                 <h2 class="mb-0">Эл. Почта</h2>
               </div>
               <div class="col-sm-9 text-secondary">
-                <input type="text" class="form-control" value="{{employee.email}}" readonly>
+                <input type="text" class="form-control" value="{{currentUserInfo.email}}" readonly>
               </div>
             </div>
             <div class="row mb-3">
               <div class="col-sm-3">
-                <h2 class="mb-0">Телефон</h2>
+                <h2 class="mb-0">Номер телефона</h2>
               </div>
               <div class="col-sm-9 text-secondary">
-                <input type="text" class="form-control" value="{{employee.phone}}" readonly>
+                <input type="text" class="form-control" value="{{currentUserInfo.phoneNumber}}" readonly>
               </div>
             </div>
-            <div class="row mb-3">
+            <div class="row mb-3" *ngIf = "this.currentUserRole == Role.ROLE_PATIENT">
               <div class="col-sm-3">
                 <h2 class="mb-0">Паспорт</h2>
               </div>
               <div class="col-sm-9 text-secondary">
-                 <input type="text" class="form-control" value="{{employee.patient.passport}}" readonly>
+                 <input type="text" class="form-control" value="{{currentUserInfo.passport}}" readonly>
               </div>
             </div>
-            <div class="row mb-3">
+            <div class="row mb-3" *ngIf = "this.currentUserRole == Role.ROLE_PATIENT">
               <div class="col-sm-3">
                 <h2 class="mb-0">Полис</h2>
               </div>
               <div class="col-sm-9 text-secondary">
-                <input type="text" class="form-control" value="{{employee.patient.polys}}" readonly>
+                <input type="text" class="form-control" value="{{currentUserInfo.polys}}" readonly>
               </div>
             </div>
+
+            <div class="row mb-3" *ngIf = "this.currentUserRole == Role.ROLE_DOCTOR">
+              <div class="col-sm-3">
+                <h2 class="mb-0">Образование</h2>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" value="{{currentUserInfo.education}}" readonly>
+              </div>
+            </div>
+            
+            <div class="row mb-3" *ngIf = "this.currentUserRole == Role.ROLE_DOCTOR">
+              <div class="col-sm-3">
+                <h2 class="mb-0">Номер кабинета</h2>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" value="{{currentUserInfo.room}}" readonly>
+              </div>
+            </div>
+
+            <div class="row mb-3" *ngIf = "this.currentUserRole == Role.ROLE_DOCTOR">
+              <div class="col-sm-3">
+                <h2 class="mb-0">Дата трудоустройства</h2>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" value="{{currentUserInfo.dateOfEmployment}}" readonly>
+              </div>
+            </div>
+
             <div class="row mb-3">
               <div class="col-sm-3">
-                <button class = "btn btn-primary btn-block" (click) = "updateProfile(employee.id)" type ="submit">Редактировать</button>
+                <button class = "btn btn-primary btn-block" (click) = "updateProfile()">Редактировать</button>
               </div>
             </div>
           </div>

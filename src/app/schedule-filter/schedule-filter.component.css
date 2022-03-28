@@ -2,7 +2,6 @@
 {
     display: flex;
     max-width: 100%;
-    margin: 20px;
 
     flex-wrap: wrap;
     justify-content: space-evenly;

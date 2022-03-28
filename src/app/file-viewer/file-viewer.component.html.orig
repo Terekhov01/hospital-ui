@@ -1,0 +1,159 @@
+<div *ngIf = "isFilesLoading; else showFiles">
+  <h1 style = "text-align: center; margin: 20">Загрузка файлов</h1>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<<<<<<< HEAD
+<div *ngIf="isLoaded">
+
+=======
+<ng-template #showFiles>
+>>>>>>> gooseBranch2
+  <div class = "mat-elevation-z4 fileList">
+    <span *ngFor = "let fileResource of fileResources" class = "filePresentationRow">
+      <p class = "fileName">{{fileResource.fileName}}</p>
+      <span *ngIf = "fileResource.mimetype !== ''" style = "display: inline-block; margin-right: 10px">
+<<<<<<< HEAD
+        <button class = "btn" matTooltip="Предпросмотр файла">
+=======
+        <button class = "btn">
+>>>>>>> gooseBranch2
+          <i-bs name = "file-earmark-medical" aria-label = "Preview button" (click) = "displayFile(fileResource)"></i-bs>
+        </button>
+      </span>
+      <span>
+<<<<<<< HEAD
+        <button class = "btn" matTooltip="Скачать файл">
+=======
+        <button class = "btn">
+>>>>>>> gooseBranch2
+          <i-bs name = "download" aria-label = "Download file button" (click) = "downloadFile(fileResource)"></i-bs>
+        </button>
+      </span>
+    </span>
+
+  </div>
+
+  <div>
+    <br>
+  </div>
+
+  <div *ngIf = "displayedFile !== null" class = "documentBlock">
+
+<<<<<<< HEAD
+    <h1> {{ displayedFile.fileName }} </h1>
+=======
+    <h1> {{ displayedFile.fileName }} </h1> 
+>>>>>>> gooseBranch2
+    <h3> Дата загрузки: {{ this.datePipe.transform(displayedFile.creationDate, 'dd.MM.yyyy hh:mm:ss') }} </h3>
+    <!-- Present each file differently based on file type (extension) -->
+
+    <div [ngSwitch] = "displayedFile.mimetype">
+
+      <div *ngSwitchCase = "'application/pdf'">
+<<<<<<< HEAD
+        <div id="pdfContainer" style="border-bottom: solid 10px #808080;">
+          <ngx-extended-pdf-viewer
+            [src]="displayedFile.fileUrl"
+            [useBrowserLocale]="true"
+            [textLayer]="true"
+            [showHandToolButton]="true"
+            [showPresentationModeButton]="true"
+            [showDownloadButton]="false"
+          >
+          </ngx-extended-pdf-viewer>
+        </div>
+      </div>
+
+
+      <div *ngSwitchCase = "displayedFile.mimetype === 'application/msword'
+                        || displayedFile.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? displayedFile.mimetype : ''">
+
+        <div id = "docxContainer" style = "border-bottom: solid 10px #808080;"></div>
+      </div>
+
+      <div *ngSwitchCase = "'text/plain'">
+        <div class="form-group blue-border">
+          <textarea class="form-control" id = "plainTextContainer" rows="3"></textarea>
+        </div>
+      </div>
+
+=======
+        <ngx-extended-pdf-viewer
+        [src]="displayedFile.fileUrl"
+        [useBrowserLocale]="true"
+        [textLayer]="true"
+        [showHandToolButton]="true"
+        [showPresentationModeButton]="true"
+        [showDownloadButton]="false"
+        >
+        </ngx-extended-pdf-viewer>
+      </div>
+
+      <div *ngSwitchCase = "displayedFile.mimetype === 'application/msword' 
+                        || displayedFile.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? displayedFile.mimetype : ''">
+                        
+        <div id = "docxContainer" style = "border-bottom: solid 10px #808080;"></div>
+      </div>
+
+      <div *ngSwitchCase = "'text/plain'">
+        <div class="form-group blue-border">
+          <textarea class="form-control" id = "plainTextContainer" rows="3"></textarea>
+        </div>
+      </div>
+
+>>>>>>> gooseBranch2
+      <div *ngSwitchDefault>
+        Предпросмотр документа {{ displayedFile.fileName }} недоступен
+      </div>
+    </div>
+<<<<<<< HEAD
+
+  </div>
+
+</div>
+
+<div *ngIf="!isLoaded">
+  <br>
+  <br>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+=======
+    
+  </div>
+>>>>>>> gooseBranch2
+
+  <div>
+    <br>
+  </div>
+
+<<<<<<< HEAD
+<div *ngIf="isLoaded && fileResources.length > 0">
+  <button class = "btn btn-primary" (click)="downloadAllFiles()" id = "downloadAllButton"> Скачать все </button>
+</div>
+
+<div *ngIf="isLoaded && fileResources.length == 0">
+  <mat-card class="text-center">
+    <mat-card-header><h1>Ooops...</h1></mat-card-header>
+    <mat-card-body>
+      <mat-card-title>
+        <h3>Файлы не найдены!</h3>
+      </mat-card-title>
+      <mat-card-text>Похоже, что файлы отсутствуют. Если произошла ошибка, свяжитесь с администрацией </mat-card-text>
+    </mat-card-body>
+  </mat-card>
+</div>
+=======
+  <button class = "btn btn-primary" (click)="downloadAllFiles()" id = "downloadAllButton"> Скачать все </button>
+>>>>>>> gooseBranch2
+
+  <div>
+    <br>
+  </div>
+
+<<<<<<< HEAD
+<!--<button (click)="backToDetails(this.id)" class = "btn btn-primary"> Назад </button>-->
+=======
+  <button (click)="backToDetails(this.id)" class = "btn btn-primary"> Назад </button>
+</ng-template>
+>>>>>>> gooseBranch2

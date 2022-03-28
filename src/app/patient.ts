@@ -7,8 +7,9 @@ export class Patient {
   polys: string;
 
 
-  constructor(passport: string, polys: string, patient: bigint, firstname: string, lastname: string, patronymic: string, phone: string, username: string, email: string, password: string) {
-    this.user = new User(firstname, lastname, patronymic, phone, username, email, password);
+  initFields(passport: string, polys: string, patient: bigint, firstname: string, lastname: string, patronymic: string, phone: string, username: string, email: string, password: string) {
+    this.user = new User();
+    this.user.initFields(firstname, lastname, patronymic, phone, username, email, password);
     this.passport = passport;
     this.polys = polys;
   }

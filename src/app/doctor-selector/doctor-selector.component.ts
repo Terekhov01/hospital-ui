@@ -61,7 +61,7 @@ export class MaterialMultiSelectorComponent implements OnInit
             },
             error: (error) =>
             {
-                console.log(error.error);
+                this.popUpMessageService.displayError(error);
             },
             complete: () =>
             {
@@ -89,7 +89,7 @@ export class MaterialMultiSelectorComponent implements OnInit
                                     },
                                     error: (error) =>
                                     {
-                                        console.log(error.error);
+                                        this.popUpMessageService.displayError(error);
                                     },
                                     complete: () =>
                                     {
@@ -136,7 +136,7 @@ export class MaterialMultiSelectorComponent implements OnInit
             },
             error: (error) =>
             {
-                console.log(error.error);
+                this.popUpMessageService.displayError(error);
             }
         });
     }

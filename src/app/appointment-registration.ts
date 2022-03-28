@@ -12,7 +12,9 @@ export class AppointmentRegistration {
    doctor: Doctor;
 
   constructor() {
-    this.doctor = new Doctor("", "", "", "123", "", "", "", new Date(), "");
-    this.patient =new Patient("", "", BigInt(0), "", "", "", "", "", "", "")
+    this.doctor = new Doctor();
+    this.doctor.initFields("", "", "", "123", "", "", "", new Date(), "");
+    this.patient =new Patient();
+    this.patient.initFields("", "", BigInt(0), "", "", "", "", "", "", "");
   }
 }

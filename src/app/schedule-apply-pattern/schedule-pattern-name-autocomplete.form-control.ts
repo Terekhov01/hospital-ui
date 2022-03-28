@@ -45,6 +45,11 @@ export class PatternAutocompleteFormControl implements OnInit
         this.patternAutocompleteFormControl.updateValueAndValidity({ onlySelf: false, emitEvent: true });
     }
 
+    getPatternList(): SchedulePatternShortInfo[]
+    {
+        return this.patternShortInfoSourceList;
+    }
+
     getFormControl(): FormControl
     {
         return this.patternAutocompleteFormControl;

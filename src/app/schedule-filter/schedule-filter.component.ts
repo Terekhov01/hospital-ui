@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, of, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { PopUpMessageService } from '../_services/pop-up-message.service';
     templateUrl: './schedule-filter.component.html',
     styleUrls: ['./schedule-filter.component.css']
 })
-export class ScheduleFilterComponent implements OnInit
+export class ScheduleFilterComponent implements OnInit, OnDestroy
 {
     //public doctorsShortInformationSubject = new BehaviorSubject<DoctorShortInformation[]>([]);
     private doctorShortInformationSubscription: Subscription | undefined;
@@ -57,10 +57,14 @@ export class ScheduleFilterComponent implements OnInit
             },
             complete: () =>
             {
-                console.log("Recieving information successful");
                 this.doctorShortInformationFormControl.setDoctorShortInfoList(doctorsShortInformationSubject);
             }
         });
+    }
+
+    ngOnDestroy(): void
+    {
+        this.doctorShortInfoService.setRequestedInfo(null);
     }
 
     checkInputAndPresentAppointmentDates(): void
@@ -70,32 +74,15 @@ export class ScheduleFilterComponent implements OnInit
         if (this.doctorShortInformationFormControl.doctorShortInformationFormControl.valid
                     && startDate != undefined
                     && endDate != undefined)
-                    /*&& this.datePickerGroup.value.daterange.start != null
-                    && this.datePickerGroup.value.daterange.end != null)*/
         {
-            //console.log(this.doctorShortInformationFormControl.doctorShortInformationFormControl.value);
-            console.log("Filter is valid!");
             let pickedDoctorShortInfo = <DoctorShortInformation>this.doctorShortInformationFormControl.getFormControl().value;
-            console.log("Picked doctor is: " + pickedDoctorShortInfo.lastName + " " + pickedDoctorShortInfo.firstName)
-            // console.log("His ID is: " + pickedDoctorShortInfo.id)
             this.appointmentRegistrationInfoService.changeDoctorName(pickedDoctorShortInfo.lastName);
             this.appointmentRegistrationInfoService.changeDoctorId(BigInt(pickedDoctorShortInfo.id));
-            console.log("Picked Doctor id is: " + pickedDoctorShortInfo.id)
             this.doctorShortInfoService.setRequestedInfo(new FilterSettings(pickedDoctorShortInfo.id, startDate, endDate));
-            /*for (let doctorShortInfo of this.doctorShortInformationFormControl.doctorShortInformationFiltered.value)
-            {
-                if (doctorShortInfo.toString() === this.doctorShortInformationFormControl.doctorShortInformationFormControl.value)
-                {
-                    //After this function executes appointment forms pop up. See doctor-shared-short-information service
-                    this.doctorShortInfoService.setRequestedInfo(new FilterSettings(doctorShortInfo.id,
-                                            startDate, endDate));
-                }
-            }*/
         }
         else
         {
             this.popUpMessageService.displayWarning("Фильтры содержат незаполненные поля или некорректные значения");
-            //alert("Filter is invalid!");
         }
     }
 
