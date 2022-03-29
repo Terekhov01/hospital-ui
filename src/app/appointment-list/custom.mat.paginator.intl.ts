@@ -14,6 +14,8 @@ export class CustomMatPaginatorIntl extends MatPaginatorIntl {
     this.itemsPerPageLabel = "Число записей на странице";
     this.nextPageLabel = "Следующая страница";
     this.previousPageLabel = "Предыдущая страница";
+    this.lastPageLabel = "Последняя страница";
+    this.firstPageLabel = "Первая страница";
     this.changes.next();
 
   }
