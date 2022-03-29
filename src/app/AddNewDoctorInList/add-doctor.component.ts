@@ -3,9 +3,10 @@ import {Router} from "@angular/router";
 import {DoctorService} from "../DoctorInList/doctorList/doctor.service";
 import localeRu from '@angular/common/locales/ru';
 import {registerLocaleData} from "@angular/common";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+// import {FormControl, FormGroup, Validators,FormsModule} from "@angular/forms";
 import {DoctorRequest} from "../DoctorInList/doctorList/doctor-request.model";
 import { PopUpMessageService } from '../_services/pop-up-message.service';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 registerLocaleData(localeRu);
 

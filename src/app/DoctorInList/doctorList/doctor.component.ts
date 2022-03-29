@@ -38,6 +38,10 @@ export class DoctorComponent implements OnInit {
     // @ts-ignore
     // this.users = new User(this.users);
   }
+  statisticDoctor(id: number) {
+    console.log(id);
+    let result = this.router.navigate(['doctorstatictic', id]);
+  }
 
   deleteDoctor(id: number) {
     this.userService.deleteDoctor(id).subscribe(data => {

@@ -20,7 +20,7 @@
         <a href="/mod" class="nav-link" routerLink="mod">Панель врача</a>
       </li>-->
       <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/create-employee" class="nav-link" routerLink="create-employee">Добавить врача</a>
+        <a href="/doctorlist" class="nav-link" routerLink="/doctorlist">Врачи</a>
       </li>
 <!--      <li class="nav-item" *ngIf="showModeratorBoard">-->
 <!--        <a href="/mod" class="nav-link" routerLink="mod">Doctor Board</a>-->
@@ -41,6 +41,9 @@
         <a href="/schedule/specifyAppointment" class="nav-link" *ngIf="showPatientBoard" routerLink="schedule/specifyAppointment">Записаться ко врачу</a>
       </li>
 
+      <li class="nav-item">
+        <a href="/ourdoctors" class="nav-link" *ngIf="showPatientBoard" routerLink="/ourdoctors">Наши врачи</a>
+      </li>
       <!-- Выпадающее меню расписания https://ng-bootstrap.github.io/#/components/dropdown/examples -->
       <!-- Для этого нужен ngbootstrap -->
       <!-- Кроме того, выровнял на 1 пиксель вверх, см. css файл по #dropdownScheduleMenu -->

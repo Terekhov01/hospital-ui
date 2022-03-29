@@ -7,6 +7,7 @@ import {DoctorRequest} from "../DoctorInList/doctorList/doctor-request.model";
 import {ResponseStatistic} from "../doctor-statistic-single/response-statistic";
 // import {ResponceStatisticEmployment} from "../doctor-statistic-employment/responce-statistic-employment";
 import {RequestMailModel} from "../send-question-email/responceemail/request-mail.model";
+import {ResponceStatisticEmployment} from "../doctor-statistic-employment/responce-statistic-employment";
 
 
 const httpOptions = {
@@ -51,9 +52,9 @@ export class OurdoctorsService {
     return this.http.get<ResponseStatistic>(`${this.doctorStatistic}/${id}`);
   }
 
-  // getDoctorsEmployment(): Observable<ResponceStatisticEmployment[]> {
-  //   return this.http.get<ResponceStatisticEmployment[]>(`${this.doctorStatistic}`);
-  // }
+  getDoctorsEmployment(): Observable<ResponceStatisticEmployment[]> {
+    return this.http.get<ResponceStatisticEmployment[]>(`${this.doctorStatistic}`);
+  }
 
   sendYourEmail(email: RequestMailModel): Observable<Object> {
     return this.http.post(`${this.sendEmail}`, email);

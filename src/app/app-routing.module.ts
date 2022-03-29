@@ -100,6 +100,7 @@ import {LocalChatComponent} from "./local-chat/local-chat.component";
 import {SendQuestionEmailComponent} from "./send-question-email/send-question-email.component";
 import {AccessDeniedPageComponent} from "./access-denied-page/access-denied-page.component";
 import {UpdateprofileComponent} from './updateprofile/updateprofile.component';
+import {DoctorStatisticEmploymentComponent} from "./doctor-statistic-employment/doctor-statistic-employment.component";
 
 const routes: Routes =
   [
@@ -149,7 +150,7 @@ const routes: Routes =
     {path: "appointment-registration-details/:id", component: AppointmentRegistrationDetailsComponent},
     {path: "appointment-creation/:id", component: AppointmentCreationComponent},
     {path: "file-viewer/:id", component: FileViewerComponent},
-    // {path: "doctorstatictic", component: DoctorStatisticEmploymentComponent},
+    {path: "doctorstatictic", component: DoctorStatisticEmploymentComponent},
     {path: "doctorstatictic/:id", component: DoctorStatisticLineComponent},
     {path:"local-chat",component: LocalChatComponent},
     {path:"send-email",component: SendQuestionEmailComponent},

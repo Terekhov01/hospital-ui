@@ -178,6 +178,7 @@ import { SendQuestionEmailComponent } from './send-question-email/send-question-
 import { ResponceemailComponent } from './send-question-email/responceemail/responceemail.component';
 
 import {NgbdSortableHeader} from "./create-appointment/sortable.directive";
+import {DoctorStatisticEmploymentComponent} from "./doctor-statistic-employment/doctor-statistic-employment.component";
 // Select bootstrap icons (use an object, not an array)
 const icons = {
   questionCircle,
@@ -240,7 +241,7 @@ const icons = {
     FileViewerComponent,
     UpdateDoctorComponent,
     DoctorStatisticLineComponent,
-    // DoctorStatisticEmploymentComponent,
+    DoctorStatisticEmploymentComponent,
     LocalChatComponent,
     SendQuestionEmailComponent,
     ResponceemailComponent,

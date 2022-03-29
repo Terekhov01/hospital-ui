@@ -29,7 +29,6 @@
   <h2 class="text-center">Добавление доктора</h2>
   <form (ngSubmit)="createUser()" [formGroup]="adddoctorform">
 
-
     <div class="form-group">
       <label for="firstname">Имя:</label>
       <input [(ngModel)]="user.firstname" [formControlName]="'firstname'" class="form-control"

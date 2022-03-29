@@ -22,8 +22,11 @@
   </div>
   <div class="col-2" style="text-align: center;">Список врачей
   </div>
-  <div class="col-2">
-    <button class="btn btn-primary" routerLink="/doctoradd" type="submit"> Добавить</button>
+  <div class="col-1">
+    <button class="btn btn-primary" routerLink="/create-employee" type="submit">Добавить</button>
+  </div>
+  <div class="col-1">
+    <button class="btn btn-primary" routerLink="/doctorstatictic" type="submit">Статистика</button>
   </div>
   <div class="col-4">
   </div>
@@ -86,6 +89,10 @@
         <!--        (click)="getEmployeeById(user)"-->
         <!--        (click)="findUser(user)"-->
         <!--        routerLink="/update-doctor/{{user.id}}"-->
+      </td>
+      <td>
+        <button (click)="statisticDoctor(user.id)" class="btn btn-primary"> Статистика</button>
+
       </td>
 
 
