@@ -2,3 +2,35 @@ mat-drawer-container {
   position: absolute;
   left: calc(100% - 200px);
 }
+div.info{
+  border: 3px double red;
+  padding: 10px;
+}
+
+div.work-info{
+  border: 3px double blue;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+div.card{
+  align-items: center;
+  width: 720px;
+  margin-top: 10px;
+}
+
+div.slider{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.pic img{
+  width: 700px;
+}
+
+h2 {
+  margin: 2px;
+  background-color: #2096f3;
+  width: max-content;
+}
