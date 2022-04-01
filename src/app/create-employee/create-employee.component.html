@@ -102,7 +102,7 @@
           #lastName="ngModel"
         />
         <div class="alert-danger" *ngIf="f.submitted && lastName.invalid">
-          <div *ngIf="password.errors.required">Требуется фамилия</div>
+          <div *ngIf="lastName.errors.required">Требуется фамилия</div>
         </div>
       </div>
 

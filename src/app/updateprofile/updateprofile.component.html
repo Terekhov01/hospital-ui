@@ -20,7 +20,7 @@
     <div class="form-group">
       <label>Номер телефона</label>
       <input type="text" class ="form-control" id = "phone"
-             [(ngModel)] = "currentUserInfo.phoneNumber" name = "phoneNumber" placeholder = {{currentUserInfo.phoneNumber}}>
+             [(ngModel)] = "currentUserInfo.phone" name = "phone" placeholder = {{currentUserInfo.phone}}>
     </div>
     <div class="form-group" *ngIf = "currentUserRole == Role.ROLE_PATIENT">
       <label>Паспорт</label>
@@ -37,12 +37,6 @@
       <label>Образование</label>
       <input type="text" class ="form-control" id = "education"
              [(ngModel)] = "currentUserInfo.education"  [(ngModel)] = "currentUserInfo.education" name = "polys" placeholder = {{currentUserInfo.education}}>
-    </div>
-
-    <div class="form-group" *ngIf = "currentUserRole == Role.ROLE_DOCTOR">
-      <label>Дата трудоустройства</label>
-      <input type="text" class ="form-control" id = "dateOfEmployment"
-             [(ngModel)] = "currentUserInfo.dateOfEmployment"  [(ngModel)] = "currentUserInfo.dateOfEmployment" name = "dateOfEmployment" placeholder = {{currentUserInfo.dateOfEmployment}}>
     </div>
 
     <button class = "btn btn-primary btn-block" type ="submit" >Сохранить</button>

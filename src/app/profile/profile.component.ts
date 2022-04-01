@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
     lastName: "",
     middleName: "",
     email: "",
-    phoneNumber: ""
+    phone: ""
   };
 
   constructor(private token: TokenStorageService, private employeeService: EmployeeService, private patientService: PatientService, 

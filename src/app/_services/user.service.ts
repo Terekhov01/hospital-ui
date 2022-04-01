@@ -37,6 +37,6 @@ export class UserService {
 
   update(user: User): Observable<string>
   {
-    return this.http.put<string>(`${this.baseUrl}/${user.id}`, user);
+    return this.http.put<string>(`${this.baseUrl}/update`, user);
   }
 }

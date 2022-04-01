@@ -77,14 +77,6 @@ export class UpdateprofileComponent implements OnInit {
         subscription.unsubscribe();
       }
     });
-
-    /*this.currentUser = this.token.getUser();
-    this.currentUserRole = Role[this.currentUser.roles[0]];
-
-
-    this.employeeService.getDoctorById(this.id).subscribe(data => {
-      this.employee = data;
-    }, error => console.log(error));*/
   }
 
   onSubmit()
@@ -100,7 +92,7 @@ export class UpdateprofileComponent implements OnInit {
 
       case Role.ROLE_DOCTOR:
       {
-        updateResultObservable = this.employeeService.update(this.currentUserInfo as Employee);
+        updateResultObservable = this.employeeService.update(this.currentUserInfo);
         break;
       }
 
@@ -114,7 +106,7 @@ export class UpdateprofileComponent implements OnInit {
     let subscription = updateResultObservable.subscribe({
       next: (data: string) => 
       {
-        this.popUpMessageService.displayConfirmation(data);
+        this.popUpMessageService.displayConfirmation("Информация сохранена");
       },
       error: (error) =>
       {

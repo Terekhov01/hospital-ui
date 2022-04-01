@@ -46,7 +46,7 @@ export class PatientService {
 
   update(patient: Patient): Observable<string>
   {
-    return this.httpClient.put<string>(`${this.baseURL}/${patient.id}`, patient);
+    return this.httpClient.put<string>(`${this.baseURL}/update`, patient);
   }
 
   // uploadFile(file: File, id: number): Observable<Object>{
