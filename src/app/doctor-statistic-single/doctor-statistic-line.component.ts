@@ -112,7 +112,7 @@ export class DoctorStatisticLineComponent implements OnInit {
       this.barChartData = [{
         data: [...userTestStatus.map(value => {
           return value.count;
-        })], label: 'Доктор'
+        })], label: 'Записей к врачу'
       }];
 
       var dt = new Date();
