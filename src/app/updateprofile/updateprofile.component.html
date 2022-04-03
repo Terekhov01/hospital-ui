@@ -1,6 +1,6 @@
-<div class="col-md-6 offset-md-3">
-  <form (ngSubmit) = "onSubmit()">
-    <div class="form-group">
+<div class="col-md-12 card">
+  <form>
+    <div class="form-group mt-2">
       <label>Имя</label>
       <input type="text" class ="form-control" id = "firstName"
              [(ngModel)] = "currentUserInfo.firstName" name = "firstName" placeholder = {{currentUserInfo.firstName}}>
@@ -39,7 +39,10 @@
              [(ngModel)] = "currentUserInfo.education"  [(ngModel)] = "currentUserInfo.education" name = "polys" placeholder = {{currentUserInfo.education}}>
     </div>
 
-    <button class = "btn btn-primary btn-block" type ="submit" >Сохранить</button>
-
+    <div class = "row-cols-6">
+      <button class = "btn btn-primary col" (click) = "closeDialog()" matTooltip = "Закрыть без сохранения"><mat-icon>do_not_disturb</mat-icon></button>
+      <button class = "btn btn-primary col col-offset-8" aria-label = "Save button" (click) = "onSubmit()" matTooltip = "Сохранить изменения"><mat-icon>save</mat-icon></button>
+    </div>
   </form>
+  <br>
 </div>
