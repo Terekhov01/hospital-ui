@@ -27,4 +27,7 @@ export class DoctorService {
 
     return this.httpClient.get<IUserNameId[]>(this.getBySpecializationURL, { params: httpParams });
   }
+  getDoctorList(): Observable<Doctor[]>{
+    return this.httpClient.get<Doctor[]>(`${this.baseURL}`);
+  }
 }

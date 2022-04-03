@@ -19,17 +19,17 @@ export class ProfileComponent implements OnInit {
   Role = Role;
   currentUser: any;
   currentUserRole: Role = Role.ROLE_ADMIN;
-  currentUserInfo: any = 
+  currentUserInfo: any =
   {
     userName: "",
     firstName: "",
     lastName: "",
     middleName: "",
     email: "",
-    phoneNumber: ""
+    phone: ""
   };
 
-  constructor(private token: TokenStorageService, private employeeService: EmployeeService, private patientService: PatientService, 
+  constructor(private token: TokenStorageService, private employeeService: EmployeeService, private patientService: PatientService,
     private userService: UserService, private popUpMessageService: PopUpMessageService, private router: Router) { }
 
   ngOnInit(): void {
@@ -73,7 +73,7 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-  
+
   onSubmit()
   {
   }
@@ -87,7 +87,7 @@ export class ProfileComponent implements OnInit {
         this.router.navigate(['updateprofile', this.currentUserInfo.patientId]);
         break;
       }
-      
+
       case Role.ROLE_DOCTOR:
       {
         this.router.navigate(['updateprofile', this.currentUserInfo.doctorId]);
@@ -111,6 +111,6 @@ export class ProfileComponent implements OnInit {
     }
 
     // Which id shall I pass here?
-    this.router.navigate(['medCard', this.currentUserInfo.patientId]);
+    this.router.navigate(['medCard', this.currentUserInfo.userId]);
   }
 }

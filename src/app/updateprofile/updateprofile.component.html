@@ -20,7 +20,7 @@
     <div class="form-group">
       <label>Номер телефона</label>
       <input type="text" class ="form-control" id = "phone"
-             [(ngModel)] = "currentUserInfo.phoneNumber" name = "phoneNumber" placeholder = {{currentUserInfo.phoneNumber}}>
+             [(ngModel)] = "currentUserInfo.phone" name = "phone" placeholder = {{currentUserInfo.phone}}>
     </div>
     <div class="form-group" *ngIf = "currentUserRole == Role.ROLE_PATIENT">
       <label>Паспорт</label>

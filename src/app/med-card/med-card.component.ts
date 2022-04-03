@@ -4,20 +4,15 @@ import {MedCardService} from '../med-card.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Appointment} from '../appointment';
 import {PagerService} from '../pager.service';
-import {ServiceServiceService} from '../service-service.service';
-import {Service} from '../service';
-import {catchError} from 'rxjs/operators';
-import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {error} from 'protractor';
-import {OurdoctorsService} from '../OurDoctorsInClinic/ourdoctors.service';
-import {query} from '@angular/animations';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import * as printJS from "print-js";
 import {PatientService} from "../patient.service";
-import { DatePipe } from '@angular/common';
-// import {DoctorService} from "../user/user/doctor.service";
-// import {User} from "../user/user/doctor.models";
+import {DatePipe} from '@angular/common';
+import {TokenStorageService} from "../_services/token-storage.service";
+import {DoctorService} from "../_services/doctor.service";
+import {Doctor} from "../doctor";
+import {DoctorRequest} from "../DoctorInList/doctorList/doctor-request.model";
 
 @Component({
   selector: 'app-med-card',
@@ -31,12 +26,15 @@ export class MedCardComponent implements OnInit {
   pager: any = {};
   pagedItems: Appointment[];
   allItems: Appointment[];
-  services: any[];
-  selectedService;
-  room: string;
+  doctors: Doctor[];
+  doctorsRequest: DoctorRequest[];
+  specializations = new Set();
+  selectedSpecialization;
+  description: string;
   id: number;
   activateLoadingModal: boolean;
   contentLoaded = false;
+  roles: string[];
 
   // doctors: User[];
   // selectedDoctor: User;
@@ -47,22 +45,25 @@ export class MedCardComponent implements OnInit {
   isEmpty: boolean;
 
   constructor(private medCardService: MedCardService,
-              private serviceService: ServiceServiceService,
               private router: Router,
               private pagerService: PagerService,
               private actRoute: ActivatedRoute,
               private modalService: NgbModal,
               private patientService: PatientService,
-              public datePipe: DatePipe
+              public datePipe: DatePipe,
+              private tokenStorageService: TokenStorageService,
+              private docService: DoctorService
               ) {
     this.medCard = new MedCard();
   }
 
   ngOnInit(): void {
+    const user = this.tokenStorageService.getUser();
+    this.roles = user.roles;
     this.activateLoadingModal = false;
     setTimeout(() => {
       this.contentLoaded = true;
-    }, 2500);
+    }, 3500);
     this.id = this.actRoute.snapshot.params.id;
     this.medCardService.getAll(this.id).subscribe(
       data => {
@@ -74,12 +75,17 @@ export class MedCardComponent implements OnInit {
         this.router.navigate(['accessDeniedPage']);
       }
     );
-    this.serviceService.getServicesList().subscribe(data => {
-      this.services = data;
+    this.docService.getDoctorList().subscribe(data => {
+      this.doctors = data;
+      for (const item of this.doctors) {
+        for (const spec of item.specialist){
+          this.specializations.add(spec.specialization);
+        }
+      }
     });
     this.actRoute.params.subscribe((params: Params) => this.id = params.id);
-    this.room = null;
-    this.selectedService = "0";
+    this.description = null;
+    this.selectedSpecialization = '0';
   }
 
 
@@ -91,20 +97,25 @@ export class MedCardComponent implements OnInit {
     this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
-  onServiceChange(){
-    if (this.selectedService === "0") { this.allItems = this.medCard.appointments; }
-    else { this.allItems = this.medCard.appointments.filter(app => app.appointmentRegistration.service === this.selectedService.toString()); }
-    if (this.room !== null) {
-      this.allItems = this.allItems.filter(app => app.appointmentRegistration.room === this.room);
+  onServiceChange() {
+    if (this.selectedSpecialization === '0') { this.allItems = this.medCard.appointments; }
+    else {
+      this.allItems = this.medCard.appointments.filter(app =>
+        app.appointmentRegistration.doctor.specialist.some(spec =>
+          spec.specialization === this.selectedSpecialization
+        )); }
+    if (this.description !== null) {
+      this.allItems = this.allItems.filter(app => app.description.includes(this.description));;
     }
     this.setPage(1);
   }
 
-  roomSearch(){
-    if (this.selectedService != null){
-      this.allItems = this.medCard.appointments.filter(app => app.appointmentRegistration.service === this.selectedService.toString());
-    }
-    this.allItems = this.allItems.filter(app => app.appointmentRegistration.room === this.room);
+  descriptionSearch(){
+    // if (this.selectedSpecialization != null){
+    //   this.allItems = this.medCard.appointments.filter(app => app.appointmentRegistration.service === this.selectedSpecialization.toString());
+    // }
+    // this.allItems = this.allItems.filter(app => app.description.includes(this.description));
+    this.onServiceChange();
     this.setPage(1);
   }
 
@@ -131,11 +142,11 @@ export class MedCardComponent implements OnInit {
   }
 
   oToFileViewer1(id: bigint) {
-    console.log("passing id: " + id)
+    console.log("passing id: " + id);
     // let res = this.router.navigate(['file-viewer', id])
     const url = this.router.serializeUrl(
       this.router.createUrlTree(['file-viewer', id])
-    )
+    );
     window.open(url, '_blank');
   }
 

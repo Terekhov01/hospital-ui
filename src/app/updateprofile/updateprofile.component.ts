@@ -20,14 +20,14 @@ export class UpdateprofileComponent implements OnInit {
   Role = Role;
   currentUser: any;
   currentUserRole: Role = Role.ROLE_ADMIN;
-  currentUserInfo: any = 
+  currentUserInfo: any =
   {
     userName: "",
     firstName: "",
     lastName: "",
     middleName: "",
     email: "",
-    phoneNumber: ""
+    phone: ""
   };
   myForm: FormGroup;
   id: number;
@@ -90,6 +90,7 @@ export class UpdateprofileComponent implements OnInit {
   onSubmit()
   {
     let updateResultObservable: Observable<string> = null;
+    this.currentUserInfo.id = this.currentUserInfo.userId;
     switch(this.currentUserRole)
     {
       case Role.ROLE_PATIENT:
@@ -112,7 +113,7 @@ export class UpdateprofileComponent implements OnInit {
     }
 
     let subscription = updateResultObservable.subscribe({
-      next: (data: string) => 
+      next: (data: string) =>
       {
         this.popUpMessageService.displayConfirmation(data);
       },
