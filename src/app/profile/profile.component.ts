@@ -142,6 +142,6 @@ export class ProfileComponent implements OnInit {
     }
 
     // Which id shall I pass here?
-    this.router.navigate(['medCard', this.currentUserInfo.userId]);
+    this.router.navigate(['medCard', this.currentUserInfo.id]);
   }
 }

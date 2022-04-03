@@ -23,7 +23,7 @@
       <mat-card-title>Мои приемы в клинике</mat-card-title>
       <br>
       <select required [selectedIndex]="0" [(ngModel)]="selectedSpecialization" (ngModelChange)="onServiceChange()">
-        <option selected="selected" value="0">Выберите услугу</option>
+        <option selected="selected" value="0">Выберите специализацию</option>
         <option *ngFor="let item of specializations">{{item}}</option>
       </select>
       <form (ngSubmit)="descriptionSearch()">
