@@ -16,15 +16,15 @@ export class MedCardService {
     return this.http.get<MedCard>(`${this.medCardUrl}/${id}`);
   }
   public getHereditary(id: number): Observable<any>{
-    return this.http.get<any>(`${this.medCardUrl}/${id}/hereditary`);
+    return this.http.get<any>(`${this.medCardUrl}/hereditary/${id}`);
   }
   public getContr(id: number): Observable<String>{
-    return this.http.get<String>(`${this.medCardUrl}/${id}/contraindications`);
+    return this.http.get<String>(`${this.medCardUrl}/contraindications/${id}`);
   }
   public editHereditary(id: number, hereditary: string): Observable<Object>{
-    return this.http.put(`${this.medCardUrl}/${id}/edit-hereditary`, hereditary);
+    return this.http.put(`${this.medCardUrl}/edit-hereditary/${id}`, hereditary);
   }
   public editContr(id: number, contraindications: String): Observable<Object>{
-    return this.http.put(`${this.medCardUrl}/${id}/edit-contr`, contraindications);
+    return this.http.put(`${this.medCardUrl}/edit-contr/${id}`, contraindications);
   }
 }
