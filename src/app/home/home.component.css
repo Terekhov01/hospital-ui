@@ -3,12 +3,10 @@ mat-drawer-container {
   left: calc(100% - 200px);
 }
 div.info{
-  border: 3px double red;
   padding: 10px;
 }
 
 div.work-info{
-  border: 3px double blue;
   padding: 10px;
   margin-top: 10px;
 }
@@ -31,6 +29,5 @@ div.pic img{
 
 h2 {
   margin: 2px;
-  background-color: #2096f3;
   width: max-content;
 }

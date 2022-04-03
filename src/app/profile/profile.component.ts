@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
   Role = Role;
   currentUser: any;
   currentUserRole: Role = Role.ROLE_ADMIN;
-  currentUserInfo: any = 
+  currentUserInfo: any =
   {
     userName: "",
     firstName: "",
@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
     phone: ""
   };
 
-  constructor(private token: TokenStorageService, private employeeService: EmployeeService, private patientService: PatientService, 
+  constructor(private token: TokenStorageService, private employeeService: EmployeeService, private patientService: PatientService,
     private userService: UserService, private popUpMessageService: PopUpMessageService, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
     this.currentUserRole = Role[this.currentUser.roles[0]];
     this.getUserInfo();
   }
-  
+
   getUserInfo(): void
   {
     let userInfoObservable: any = null;
@@ -98,7 +98,7 @@ export class ProfileComponent implements OnInit {
         //this.router.navigate(['updateprofile', this.currentUserInfo.patientId]);
         break;
       }
-      
+
       case Role.ROLE_DOCTOR:
       {
         dialogRef = this.dialog.open(UpdateprofileComponent, {
@@ -119,7 +119,7 @@ export class ProfileComponent implements OnInit {
     }
 
     let dialogSubscription = dialogRef.afterClosed().subscribe({
-      next: (isProfileDirty: boolean) => 
+      next: (isProfileDirty: boolean) =>
       {
         if (isProfileDirty == true)
         {
@@ -142,6 +142,6 @@ export class ProfileComponent implements OnInit {
     }
 
     // Which id shall I pass here?
-    this.router.navigate(['medCard', this.currentUserInfo.patientId]);
+    this.router.navigate(['medCard', this.currentUserInfo.userId]);
   }
 }

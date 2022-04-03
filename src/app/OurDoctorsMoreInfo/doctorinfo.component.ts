@@ -38,7 +38,7 @@ export class DoctorinfoComponent implements OnInit {
       id: new FormControl('', Validators.required),
       dateOfEmployment: new FormControl('', Validators.required)
 
-    })
+    });
 
     //this.getDoctorInfo()
     console.log(this.route.snapshot.params['id']);

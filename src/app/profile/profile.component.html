@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-lg-4">
         <div class="card">
-          <div class="card-body">
+          <div class="card-body align-items-center">
             <div class="d-flex flex-column align-items-center text-center">
               <img
                 id="profile-img"
@@ -85,7 +85,7 @@
                 <input type="text" class="form-control" value="{{currentUserInfo.education}}" readonly>
               </div>
             </div>
-            
+
             <div class="row mb-3" *ngIf = "this.currentUserRole == Role.ROLE_DOCTOR">
               <div class="col-sm-3">
                 <h2 class="mb-0">Номер кабинета</h2>
@@ -114,3 +114,4 @@
       </div>
     </div>
   </div>
+</div>
