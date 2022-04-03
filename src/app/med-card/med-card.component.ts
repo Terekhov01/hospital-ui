@@ -120,16 +120,16 @@ export class MedCardComponent implements OnInit {
   }
 
   getHereditary(){
-    this.router.navigate(['medCard/hereditary', this.id]);
+    this.router.navigate(['medCard/hereditary', this.medCard.patient.id]);
   }
   editHereditary(){
-    this.router.navigate(['medCard/edit-hereditary', this.id]);
+    this.router.navigate(['medCard/edit-hereditary', this.medCard.patient.id]);
   }
   getContr(){
-    this.router.navigate(['medCard/contraindications', this.id]);
+    this.router.navigate(['medCard/contraindications', this.medCard.patient.id]);
   }
   editContr(){
-    this.router.navigate(['medCard/edit-contr', this.id]);
+    this.router.navigate(['medCard/edit-contr', this.medCard.patient.id]);
   }
   appointmentOne(id: number){
     this.router.navigate(['appointment-details', id]);

@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MedCard} from "../med-card";
 import {MedCardService} from "../med-card.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-edit-hereditary',
@@ -13,20 +13,21 @@ export class EditHereditaryComponent implements OnInit {
   hereditary: string;
   medCard: MedCard;
   constructor(private medCardService: MedCardService,
-              private router: Router) {
+              private router: Router,
+              private actRoute: ActivatedRoute) {
     this.hereditary = "";
     this.medCard = new MedCard();
   }
 
   ngOnInit(): void {
-    this.medCardService.getAll(0).subscribe(data => {
+    this.medCardService.getAll(this.actRoute.snapshot.params.id).subscribe(data => {
       this.medCard = data;
     });
   }
   update(){
-    this.medCardService.editHereditary(0, this.hereditary).subscribe(data =>{
+    this.medCardService.editHereditary(this.actRoute.snapshot.params.id, this.hereditary).subscribe(data =>{
     });
-    this.router.navigate(['medCard'])
+    this.router.navigate(['medCard', this.actRoute.snapshot.params.id]);
   }
 
   submit(){
