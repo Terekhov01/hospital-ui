@@ -166,18 +166,34 @@ export class SchedulePatternDataSource implements DataSource<AbstractControl>//,
     {
         let stateToUpdate = <FormGroup>this.tableDataSubject.value;
         let rows = <FormArray>stateToUpdate.get("rows");
+        let isColumnRemoved = false;
 
         for (let rowNum = 0; rowNum < rows.length; rowNum++)
         {
             let row = <FormGroup> rows.get(String(rowNum));
             let cellArray = <FormArray> row.get("cells");
 
-            cellArray.removeAt(cellArray.length - 1);
+            if (cellArray.length == 1)
+            {
+                let cell = <FormGroup> cellArray.get(String(cellArray.length - 1));
+                let startFormControl = cell.get("startTime");
+                let endFormControl = cell.get("endTime");
+                startFormControl.setValue(null);
+                endFormControl.setValue(null);
+            }
+            else
+            {
+                isColumnRemoved = true;
+                cellArray.removeAt(cellArray.length - 1);
+            }
         }
 
         this.tableDataSubject.next(stateToUpdate);
         let displayedColumnsToUpdate = this.displayedColumns.value;
-        displayedColumnsToUpdate.pop();
+        if (isColumnRemoved)
+        {
+            displayedColumnsToUpdate.pop();
+        }
         this.displayedColumns.next(displayedColumnsToUpdate);
     }
 
@@ -219,6 +235,32 @@ export class SchedulePatternDataSource implements DataSource<AbstractControl>//,
         let rows = <FormArray>stateToUpdate.get("rows");
 
         rows.removeAt(rows.length - 1);
+
+        if (rows.length == 0)
+        {
+            let newRow = this.formBuilder.group(
+                {
+                    cells: this.formBuilder.array([])
+                }
+            );
+            
+            let newRowCellsArray = <FormArray> newRow.get("cells");
+            for (let i = 0; i < this.displayedColumns.value.length; i++)
+            {
+                let curGroup = this.formBuilder.group(
+                {
+                    startTime: new FormControl(),
+                    endTime: new FormControl()
+                },
+                {
+                    validators: [this.timeIntervalValidator()],
+                    updateOn: 'change'
+                });
+
+                newRowCellsArray.push(curGroup);
+            }
+            rows.push(newRow);
+        }
 
         this.tableDataSubject.next(stateToUpdate);
     }

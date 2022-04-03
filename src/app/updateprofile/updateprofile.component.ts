@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { Patient } from '../patient';
 import { User, Role } from '../user';
 import { PopUpMessageService } from '../_services/pop-up-message.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-updateprofile',
@@ -34,7 +35,7 @@ export class UpdateprofileComponent implements OnInit {
   employee: Employee = new Employee();
   constructor(private patientService: PatientService, private employeeService: EmployeeService, private userService: UserService,
               private token: TokenStorageService, private popUpMessageService: PopUpMessageService,
-              private route: ActivatedRoute,
+              private route: ActivatedRoute, public dialogRef: MatDialogRef<UpdateprofileComponent>,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -71,20 +72,13 @@ export class UpdateprofileComponent implements OnInit {
       error: (error) =>
       {
         this.popUpMessageService.displayError(error);
+        this.dialogRef.close();
       },
       complete: () =>
       {
         subscription.unsubscribe();
       }
     });
-
-    /*this.currentUser = this.token.getUser();
-    this.currentUserRole = Role[this.currentUser.roles[0]];
-
-
-    this.employeeService.getDoctorById(this.id).subscribe(data => {
-      this.employee = data;
-    }, error => console.log(error));*/
   }
 
   onSubmit()
@@ -101,7 +95,7 @@ export class UpdateprofileComponent implements OnInit {
 
       case Role.ROLE_DOCTOR:
       {
-        updateResultObservable = this.employeeService.update(this.currentUserInfo as Employee);
+        updateResultObservable = this.employeeService.update(this.currentUserInfo);
         break;
       }
 
@@ -115,7 +109,7 @@ export class UpdateprofileComponent implements OnInit {
     let subscription = updateResultObservable.subscribe({
       next: (data: string) =>
       {
-        this.popUpMessageService.displayConfirmation(data);
+        this.popUpMessageService.displayConfirmation("Информация сохранена");
       },
       error: (error) =>
       {
@@ -124,15 +118,13 @@ export class UpdateprofileComponent implements OnInit {
       complete: () =>
       {
         subscription.unsubscribe();
+        this.dialogRef.close(true);
       }
     });
-    /*this.employeeService.update(this.id, this.employee).subscribe( data =>{
-        this.goToProfile();
-      }
-      , error => console.log(error));*/
   }
 
-  goToProfile(){
-    this.router.navigate(['/profile']);
+  closeDialog(): void
+  {
+    this.dialogRef.close(false);
   }
 }

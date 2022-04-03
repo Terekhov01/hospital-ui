@@ -94,19 +94,19 @@
                 </ng-container>
 
                 <div class = "columnButtonBlock">
-                    <button class = "btn btn-outline-primary" (click) = "tableData.addColumn()">
+                    <button class = "btn btn-outline-primary" (click) = "tableData.addColumn()" matTooltip = "Добавить колонку справа">
                         <mat-icon>add</mat-icon>
                     </button>
-                    <button class = "btn btn-outline-primary" (click) = "tableData.removeColumn()">
+                    <button class = "btn btn-outline-primary" (click) = "tableData.removeColumn()" matTooltip = "Удалить колонку справа">
                         <mat-icon>remove</mat-icon>
                     </button>
                 </div>
         
                 <div class = "rowButtonBlock">
-                    <button class = "btn btn-outline-primary" (click) = "tableData.addRow()">
+                    <button class = "btn btn-outline-primary" (click) = "tableData.addRow()" matTooltip = "Добавить строку снизу">
                         <mat-icon>add</mat-icon>
                     </button>
-                    <button class = "btn btn-outline-primary" (click) = "tableData.removeRow()">
+                    <button class = "btn btn-outline-primary" (click) = "tableData.removeRow()" matTooltip = "Удалить строку снизу">
                         <mat-icon>remove</mat-icon>
                     </button>
                 </div>

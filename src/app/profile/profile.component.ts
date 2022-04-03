@@ -9,6 +9,8 @@ import { UserService } from '../_services/user.service';
 import { PopUpMessageService } from '../_services/pop-up-message.service';
 import { User, Role } from '../user';
 import { Observable } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { UpdateprofileComponent } from '../updateprofile/updateprofile.component';
 
 @Component({
   selector: 'app-profile',
@@ -30,12 +32,16 @@ export class ProfileComponent implements OnInit {
   };
 
   constructor(private token: TokenStorageService, private employeeService: EmployeeService, private patientService: PatientService,
-    private userService: UserService, private popUpMessageService: PopUpMessageService, private router: Router) { }
+    private userService: UserService, private popUpMessageService: PopUpMessageService, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
     this.currentUserRole = Role[this.currentUser.roles[0]];
+    this.getUserInfo();
+  }
 
+  getUserInfo(): void
+  {
     let userInfoObservable: any = null;
     switch (this.currentUserRole)
     {
@@ -80,26 +86,51 @@ export class ProfileComponent implements OnInit {
 
   updateProfile()
   {
+    let dialogRef: MatDialogRef<unknown, any> = null;
+
     switch(this.currentUserRole)
     {
       case Role.ROLE_PATIENT:
       {
-        this.router.navigate(['updateprofile', this.currentUserInfo.patientId]);
+          dialogRef = this.dialog.open(UpdateprofileComponent, {
+            width: '400px'
+          });
+        //this.router.navigate(['updateprofile', this.currentUserInfo.patientId]);
         break;
       }
 
       case Role.ROLE_DOCTOR:
       {
-        this.router.navigate(['updateprofile', this.currentUserInfo.doctorId]);
+        dialogRef = this.dialog.open(UpdateprofileComponent, {
+          width: '400px'
+        });
+        //this.router.navigate(['updateprofile', this.currentUserInfo.doctorId]);
         break;
       }
 
       case Role.ROLE_ADMIN:
       {
-        this.router.navigate(['updateprofile', this.currentUserInfo.id]);
+        dialogRef = this.dialog.open(UpdateprofileComponent, {
+          width: '400px'
+        });
+        //this.router.navigate(['updateprofile', this.currentUserInfo.id]);
         break;
       }
     }
+
+    let dialogSubscription = dialogRef.afterClosed().subscribe({
+      next: (isProfileDirty: boolean) =>
+      {
+        if (isProfileDirty == true)
+        {
+          this.getUserInfo();
+        }
+      },
+      complete: () =>
+      {
+        dialogSubscription.unsubscribe();
+      }
+    });
   }
 
   MedCard()

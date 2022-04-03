@@ -22,7 +22,7 @@ import { DataTablesModule } from 'angular-datatables';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 
-import { questionCircle, xCircle, download, fileEarmarkMedical, ColorTheme } from 'ngx-bootstrap-icons';
+import { questionCircle, xCircle, download, fileEarmarkMedical, ColorTheme, xSquare, checkSquare } from 'ngx-bootstrap-icons';
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
 
 
@@ -183,6 +183,8 @@ import {DoctorStatisticEmploymentComponent} from "./doctor-statistic-employment/
 const icons = {
   questionCircle,
   xCircle,
+  xSquare,
+  checkSquare,
   download,
   fileEarmarkMedical
 };
