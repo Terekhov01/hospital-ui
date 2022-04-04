@@ -33,7 +33,7 @@ export class EmployeeListComponent implements OnInit {
     });
     this.statuses = [
       {label: 'ROLE_ADMIN', value: 'ROLE_ADMIN'},
-      {label: 'ROLE_USER', value: 'ROLE_USER'},
+      {label: 'ROLE_PATIENT', value: 'ROLE_PATIENT'},
       {label: 'ROLE_DOCTOR', value: 'ROLE_DOCTOR'}
     ];
 
