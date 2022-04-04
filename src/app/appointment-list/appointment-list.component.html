@@ -125,7 +125,7 @@
           </div>
         </div>
         <br>
-        <button type="button" class="btn btn-outline-success" (click)="modal.dismiss('cancel click')">Готово</button>
+        <button type="button" class="btn btn-outline-primary" (click)="modal.dismiss('cancel click')">Готово</button>
       </div>
     </div>
 
@@ -298,11 +298,14 @@
             {{appointment.description.substr(0,47)}}&hellip;
           </div>
         </td>
-        <td> <button (click)="MedCard(appointment.appointmentRegistration.patient.user.id)" style="background-color: transparent; border:0px; color: #0b6efd" matTooltip="Просмотреть медкарту" [matTooltipPosition]="'left'">{{appointment.appointmentRegistration.patient.user.lastName}} {{appointment.appointmentRegistration.patient.user.firstName.substr(0,1)}}. {{appointment.appointmentRegistration.patient.user.patronymic.substr(0,1)}}. </button> </td>
+        <td> {{appointment.appointmentRegistration.patient.user.lastName}} {{appointment.appointmentRegistration.patient.user.firstName.substr(0,1)}}. {{appointment.appointmentRegistration.patient.user.patronymic.substr(0,1)}}. </td>
         <td> {{datePipe.transform(appointment.appointmentRegistration.start, "yyyy/MM/dd HH:mm")}} </td>
         <td>
           <button (click)="appointmentDetails(content, appointment.id, appointment)" mat-raised-button class="MyButton"
                   style="margin-left: 10px"> Детали
+          </button>
+          <button (click)="MedCard(appointment.appointmentRegistration.patient.user.id)" mat-raised-button class="MyButton"
+                  style="margin-left: 10px"> Мед Карта
           </button>
         </td>
       </tr>

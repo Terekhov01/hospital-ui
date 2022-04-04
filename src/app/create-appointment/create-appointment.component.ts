@@ -310,7 +310,11 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   MedCard(id: bigint){
-    let result = this.router.navigate(['medCard', id]);
+    // let result = this.router.navigate(['medCard', id]);
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['medCard', id])
+    )
+    window.open(url, '_blank');
   }
 
 
