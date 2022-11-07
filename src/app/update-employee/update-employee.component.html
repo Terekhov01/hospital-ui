@@ -5,29 +5,29 @@
     <div class="form-group">
       <label> FirstName</label>
       <input type="text" class ="form-control" id = "firstName"
-             [(ngModel)] = "employee.firstName" name = "firstName">
+             [(ngModel)]="employee.firstName" name = "firstName">
     </div>
 
     <div class="form-group">
       <label> LastName</label>
       <input type="text" class ="form-control" id = "lastName"
-             [(ngModel)] = "employee.lastName" name = "lastName">
+             [(ngModel)]="employee.lastName" name = "lastName">
     </div>
 
     <div class="form-group">
       <label>Patronymic</label>
       <input type="text" class ="form-control" id = "patronymic"
-             [(ngModel)] = "employee.patronymic" name = "patronymic">
+             [(ngModel)]="employee.patronymic" name = "patronymic">
     </div>
     <div class="form-group">
       <label>Phone</label>
       <input type="text" class ="form-control" id = "phone"
-             [(ngModel)] = "employee.phone" name = "phone">
+             [(ngModel)]="employee.phone" name = "phone">
     </div>
     <div class="form-group" *ngFor="let role of employee.roles">
       <label>Role</label>
       <input type="text" class ="form-control" id = "role.name"
-             [(ngModel)] = "role.id" name = "role.name">
+             [(ngModel)]="role.id" name = "role.name">
     </div>
     <button class = "btn btn-primary">Submit</button>
 

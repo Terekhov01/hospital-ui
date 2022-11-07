@@ -20,7 +20,7 @@ export class EmployeeListComponent implements OnInit {
   searchStr = '';
   roleAdmin = 'admin';
   statuses: any[];
-  loading: boolean = true;
+  loading = true;
   private roles: string[];
   constructor(private employeeService: EmployeeService,
               private router: Router, private tokenStorageService: TokenStorageService, private primengConfig: PrimeNGConfig) { }

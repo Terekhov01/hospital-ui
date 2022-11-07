@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import {DoctorinfoComponent} from "./OurDoctorsMoreInfo/doctorinfo.component";
+import {DoctorinfoComponent} from './OurDoctorsMoreInfo/doctorinfo.component';
 import { CommonModule } from '@angular/common';
 import { CreatePatientComponent } from './create-patient/create-patient.component';
 import { LoginComponent } from './login/login.component';
@@ -16,32 +16,32 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 // import { DoctorComponent } from "./user/user/doctor.component";
 // import { AddDoctorComponent } from "./add-doctor/add-doctor.component";
 // import { UpdateDoctorComponent } from "./update-doctor/update-doctor.component";
-import { OurdoctorsComponent } from "./OurDoctorsInClinic/ourdoctors.component";
-import { OurdoctorsdetailsComponent } from "./ourdoctorsdetails/ourdoctorsdetails.component";
-import {AppointmentListComponent} from "./appointment-list/appointment-list.component";
-import {CreateAppointmentComponent} from "./create-appointment/create-appointment.component";
-import {CreateAppointmentRegistrationComponent} from "./create-appointment-registration/create-appointment-registration.component";
-import {AppointmentRegistrationListComponent} from "./appointment-registration-list/appointment-registration-list.component";
-import {UpdateAppointmentComponent} from "./update-appointment/update-appointment.component";
-import {UpdateAppointmentRegistrationComponent} from "./update-appointment-registration/update-appointment-registration.component";
-import {AppointmentDetailsComponent} from "./appointment-details/appointment-details.component";
-import {AppointmentRegistrationDetailsComponent} from "./appointment-registration-details/appointment-registration-details.component";
-import {AppointmentCreationComponent} from "./appointment-creation/appointment-creation.component";
+import { OurdoctorsComponent } from './OurDoctorsInClinic/ourdoctors.component';
+import { OurdoctorsdetailsComponent } from './ourdoctorsdetails/ourdoctorsdetails.component';
+import {AppointmentListComponent} from './appointment-list/appointment-list.component';
+import {CreateAppointmentComponent} from './create-appointment/create-appointment.component';
+import {CreateAppointmentRegistrationComponent} from './create-appointment-registration/create-appointment-registration.component';
+import {AppointmentRegistrationListComponent} from './appointment-registration-list/appointment-registration-list.component';
+import {UpdateAppointmentComponent} from './update-appointment/update-appointment.component';
+import {UpdateAppointmentRegistrationComponent} from './update-appointment-registration/update-appointment-registration.component';
+import {AppointmentDetailsComponent} from './appointment-details/appointment-details.component';
+import {AppointmentRegistrationDetailsComponent} from './appointment-registration-details/appointment-registration-details.component';
+import {AppointmentCreationComponent} from './appointment-creation/appointment-creation.component';
 import { ScheduleCreatePatternComponent } from './schedule-create-pattern/schedule-create-pattern.component';
 import { ScheduleSpecifyAppointmentPageComponent } from './schedule-specify-appointment-page/schedule-specify-appointment-page.component';
 import { ScheduleTablePageComponent } from './schedule-table-page/schedule-table-page.component';
-import { MedCardComponent } from "./med-card/med-card.component";
-import { HereditaryComponent } from "./hereditary/hereditary.component";
-import { ContrComponent } from "./contr/contr.component";
-import { EditHereditaryComponent } from "./edit-hereditary/edit-hereditary.component";
-import { EditContrComponent } from "./edit-contr/edit-contr.component";
-import { MainComponent } from "./main/main.component";
-import { DoctorScheduleAppointmentsDataDaily } from "./schedule-transfer-data/schedule-appointment.data-transfer-objects";
-import { AppointmentRegistrationInfoService } from "./appointment-registration-info.service";
-import { MaterialMultiSelectorComponent } from "./doctor-selector/doctor-selector.component";
-import { FileViewerComponent } from "./file-viewer/file-viewer.component";
+import { MedCardComponent } from './med-card/med-card.component';
+import { HereditaryComponent } from './hereditary/hereditary.component';
+import { ContrComponent } from './contr/contr.component';
+import { EditHereditaryComponent } from './edit-hereditary/edit-hereditary.component';
+import { EditContrComponent } from './edit-contr/edit-contr.component';
+import { MainComponent } from './main/main.component';
+import { DoctorScheduleAppointmentsDataDaily } from './schedule-transfer-data/schedule-appointment.data-transfer-objects';
+import { AppointmentRegistrationInfoService } from './appointment-registration-info.service';
+import { MaterialMultiSelectorComponent } from './doctor-selector/doctor-selector.component';
+import { FileViewerComponent } from './file-viewer/file-viewer.component';
 
-//import { MaterialMultiSelectorComponent } from './material-multi-selector/material-multi-selector.component';
+// import { MaterialMultiSelectorComponent } from './material-multi-selector/material-multi-selector.component';
 
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
@@ -84,33 +84,32 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {A} from "@angular/cdk/keycodes";
-import {ScheduleFilterComponent} from "./schedule-filter/schedule-filter.component";
-import {ScheduleAppointmentBlockComponent} from "./schedule-appointment-block/schedule-appointment-block.component";
-import {MaterialDateRangePickerComponent} from "./material-date-range-picker/material-date-range-picker.component";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import {DoctorComponent} from "./DoctorInList/doctorList/doctor.component";
-import {AddDoctorComponent} from "./AddNewDoctorInList/add-doctor.component";
-import {UpdateDoctorComponent} from "./UpdateDoctorInList/update-doctor.component";
-import {DoctorStatisticLineComponent} from "./doctor-statistic-single/doctor-statistic-line.component";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {A} from '@angular/cdk/keycodes';
+import {ScheduleFilterComponent} from './schedule-filter/schedule-filter.component';
+import {ScheduleAppointmentBlockComponent} from './schedule-appointment-block/schedule-appointment-block.component';
+import {MaterialDateRangePickerComponent} from './material-date-range-picker/material-date-range-picker.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {DoctorComponent} from './DoctorInList/doctorList/doctor.component';
+import {AddDoctorComponent} from './AddNewDoctorInList/add-doctor.component';
+import {UpdateDoctorComponent} from './UpdateDoctorInList/update-doctor.component';
+import {DoctorStatisticLineComponent} from './doctor-statistic-single/doctor-statistic-line.component';
 // import {DoctorStatisticEmploymentComponent} from "./doctor-statistic-employment/doctor-statistic-employment.component";
-import {LocalChatComponent} from "./local-chat/local-chat.component";
-import {SendQuestionEmailComponent} from "./send-question-email/send-question-email.component";
-import {AccessDeniedPageComponent} from "./access-denied-page/access-denied-page.component";
+import {LocalChatComponent} from './local-chat/local-chat.component';
+import {SendQuestionEmailComponent} from './send-question-email/send-question-email.component';
+import {AccessDeniedPageComponent} from './access-denied-page/access-denied-page.component';
 import {UpdateprofileComponent} from './updateprofile/updateprofile.component';
-import {DoctorStatisticEmploymentComponent} from "./doctor-statistic-employment/doctor-statistic-employment.component";
+import {DoctorStatisticEmploymentComponent} from './doctor-statistic-employment/doctor-statistic-employment.component';
 
 const routes: Routes =
   [
-    { path: "accessDeniedPage", component: AccessDeniedPageComponent},
-    { path: "medCard/:id", component: MedCardComponent },
-    { path: "medCard/hereditary/:id", component: HereditaryComponent },
-    { path: "medCard/contraindications/:id", component: ContrComponent },
-    { path: "medCard/edit-hereditary/:id", component: EditHereditaryComponent },
-    { path: "medCard/edit-contr/:id", component: EditContrComponent },
-    { path: "", redirectTo: 'home', pathMatch: 'full'},
+    { path: 'accessDeniedPage', component: AccessDeniedPageComponent},
+    { path: 'medCard/:id', component: MedCardComponent },
+    { path: 'medCard/hereditary/:id', component: HereditaryComponent },
+    { path: 'medCard/contraindications/:id', component: ContrComponent },
+    { path: 'medCard/edit-hereditary/:id', component: EditHereditaryComponent },
+    { path: 'medCard/edit-contr/:id', component: EditContrComponent },
     { path: 'updateprofile/:id', component: UpdateprofileComponent },
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
@@ -126,12 +125,12 @@ const routes: Routes =
 
     { path: 'employee-details/:id', component: EmployeeDetailsComponent },
     {
-      path: "schedule",
+      path: 'schedule',
       children:
       [
-        { path: "doctorsTable", component: ScheduleTablePageComponent },
-        { path: "specifyAppointment", component: ScheduleSpecifyAppointmentPageComponent },
-        { path: "edit", component: ScheduleCreatePatternComponent }
+        { path: 'doctorsTable', component: ScheduleTablePageComponent },
+        { path: 'specifyAppointment', component: ScheduleSpecifyAppointmentPageComponent },
+        { path: 'edit', component: ScheduleCreatePatternComponent }
       ]
     },
     { path: 'doctor-users', component: DoctorComponent },
@@ -140,20 +139,20 @@ const routes: Routes =
     { path: 'ourdoctors', component: OurdoctorsComponent },
     { path: 'ourDoctorsDetails/:id', component: OurdoctorsdetailsComponent },
 
-    {path: "appointments", component: AppointmentListComponent},
-    {path: "create-appointment", component: CreateAppointmentComponent},
-    {path: "update-appointment/:id", component: UpdateAppointmentComponent},
-    {path: "create-appointment-registration", component: CreateAppointmentRegistrationComponent},
-    {path: "update-appointment-registration/:id", component: UpdateAppointmentRegistrationComponent},
-    {path: "appointmentRegistrations", component: AppointmentRegistrationListComponent},
-    {path: "appointment-details/:id", component: AppointmentDetailsComponent},
-    {path: "appointment-registration-details/:id", component: AppointmentRegistrationDetailsComponent},
-    {path: "appointment-creation/:id", component: AppointmentCreationComponent},
-    {path: "file-viewer/:id", component: FileViewerComponent},
-    {path: "doctorstatictic", component: DoctorStatisticEmploymentComponent},
-    {path: "doctorstatictic/:id", component: DoctorStatisticLineComponent},
-    {path:"local-chat",component: LocalChatComponent},
-    {path:"send-email",component: SendQuestionEmailComponent},
+    {path: 'appointments', component: AppointmentListComponent},
+    {path: 'create-appointment', component: CreateAppointmentComponent},
+    {path: 'update-appointment/:id', component: UpdateAppointmentComponent},
+    {path: 'create-appointment-registration', component: CreateAppointmentRegistrationComponent},
+    {path: 'update-appointment-registration/:id', component: UpdateAppointmentRegistrationComponent},
+    {path: 'appointmentRegistrations', component: AppointmentRegistrationListComponent},
+    {path: 'appointment-details/:id', component: AppointmentDetailsComponent},
+    {path: 'appointment-registration-details/:id', component: AppointmentRegistrationDetailsComponent},
+    {path: 'appointment-creation/:id', component: AppointmentCreationComponent},
+    {path: 'file-viewer/:id', component: FileViewerComponent},
+    {path: 'doctorstatictic', component: DoctorStatisticEmploymentComponent},
+    {path: 'doctorstatictic/:id', component: DoctorStatisticLineComponent},
+    {path: 'local-chat', component: LocalChatComponent},
+    {path: 'send-email', component: SendQuestionEmailComponent},
     /*{ path: "testPath", component: MaterialMultiSelectorComponent}*/
 ];
 

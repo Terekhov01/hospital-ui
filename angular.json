@@ -4,6 +4,19 @@
   "newProjectRoot": "projects",
   "projects": {
     "hospitalApplication": {
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "ru": {
+            "translation": "src/locale/messages.ru.xlf",
+            "baseHref": ""
+          },
+          "en": {
+            "translation": "src/locale/messages.en.xlf",
+            "baseHref": ""
+          }
+        }
+      },
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,6 +26,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": true,
             "sourceMap": true,
             "buildOptimizer": false,
             "optimization": false,
@@ -49,6 +63,18 @@
             ]
           },
           "configurations": {
+            "en": {
+              "localize": ["en"]
+            },
+            "development": {
+              "localize": false,
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -84,10 +110,17 @@
             "browserTarget": "hospitalApplication:build"
           },
           "configurations": {
+            "en": {
+              "browserTarget": "hospitalApplication:build:development,en"
+            },
             "production": {
               "browserTarget": "hospitalApplication:build:production"
+            },
+            "development": {
+              "browserTarget": "hospitalApplication:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

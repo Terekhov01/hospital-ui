@@ -23,7 +23,7 @@
   </div>
 </div>
 <br>
-<h2>Больница Нэткрекер</h2>
+<h2 i18n>Больница Нэткрекер</h2>
 <br>
 <div>
   <mat-progress-bar *ngIf="!contentLoaded" mode="indeterminate"></mat-progress-bar>
@@ -33,25 +33,25 @@
         <div class="col-6">
           <div>
             <ul>
-              <li>В нашей замечательной больнице побывало пациентов: {{patientAmount}}</li>
-              <li>Здесь работают {{doctorAmount}} специалистов</li>
+              <li i18n>В нашей замечательной больнице побывало пациентов: {{patientAmount}}</li>
+              <li i18n>Здесь работают {{doctorAmount}} специалистов</li>
             </ul>
           </div>
           <div class="info">
-            <p>Место нахождения/почтовый адрес:</p>
+            <p i18n>Место нахождения/почтовый адрес:</p>
             <ul>
-              <li><b class="text-primary">123456, г. Москва, Учебная, д. 333</b></li>
+              <li><b i18n class="text-primary">123456, г. Москва, Учебная, д. 333</b></li>
             </ul>
-            <p>КОНТАКТНАЯ ИНФОРМАЦИЯ:</p>
+            <p i18n>КОНТАКТНАЯ ИНФОРМАЦИЯ:</p>
             <ul>
-              <li>Адрес электронной почты: <b class="text-primary">netcracker@zdrav.mos.ru</b></li>
-              <li>СПРАВОЧНАЯ: <b class="text-primary">+7 (495) 333-22-11</b></li>
+              <li i18n>Адрес электронной почты: <b class="text-primary">netcracker@zdrav.mos.ru</b></li>
+              <li i18n>СПРАВОЧНАЯ: <b class="text-primary">+7 (495) 333-22-11</b></li>
             </ul>
           </div>
           <div class="work-info">
-            <p>Прием осуществляется по предварительной записи по прежним телефонам отделения:</p>
+            <p i18n>Прием осуществляется по предварительной записи по прежним телефонам отделения:</p>
             <p><b class="text-primary">+7(495) 151-12-45; +7(495) 123-45-67</b></p>
-            <p>Режим работы с 8.00 до 19.00, суббота и воскресенье - выходные.</p>
+            <p i18n>Режим работы с 8.00 до 19.00, суббота и воскресенье - выходные.</p>
           </div>
         </div>
         <div class="col-4">
@@ -59,13 +59,13 @@
         <div class="col-2">
           <div class="row">
             <div class="col-12">
-              <button class="btn btn-primary" routerLink="/local-chat" type="submit">Чат c нами</button>
+              <button i18n class="btn btn-primary" routerLink="/local-chat" type="submit">Чат c нами</button>
             </div>
           </div>
 
           <div class="row">
             <div class="col-12">
-              <button class="btn btn-primary" routerLink="/send-email" type="submit">Обратная связь</button>
+              <button i18n class="btn btn-primary" routerLink="/send-email" type="submit">Обратная связь</button>
             </div>
           </div>
 

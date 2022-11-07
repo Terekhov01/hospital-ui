@@ -26,7 +26,7 @@ export class OurdoctorsService {
 
   private sendEmail = 'http://localhost:8080/sendEmail';
 
-//todo
+// todo
   private doctorStatistic = 'http://localhost:8080/doctorstatistic';
 
   // private userUrl = 'http://localhost:8080/user-portal/ourdoctors';
@@ -47,7 +47,7 @@ export class OurdoctorsService {
   getDoctorsInfo(id: number | undefined): Observable<DoctorRequest> {
     return this.http.get<DoctorRequest>(`${this.doctorInfo}/${id}`);
   }
-  //todo
+  // todo
   getDoctorStatistic(id: number | undefined): Observable<ResponseStatistic> {
     return this.http.get<ResponseStatistic>(`${this.doctorStatistic}/${id}`);
   }

@@ -27,6 +27,7 @@ export class MainComponent implements OnInit {
               private appRegServ: AppointmentRegistrationService,) {
   }
   ngOnInit(): void {
+    console.log("main");
     // this.user = this.tokenStorageService.getUser();
     // this.serviceService.getServicesList().subscribe(data => {
     //   this.services = data;

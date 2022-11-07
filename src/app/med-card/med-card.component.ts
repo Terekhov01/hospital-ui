@@ -75,6 +75,7 @@ export class MedCardComponent implements OnInit {
         this.router.navigate(['accessDeniedPage']);
       }
     );
+    console.log(this.medCard);
     this.docService.getDoctorList().subscribe(data => {
       this.doctors = data;
       for (const item of this.doctors) {

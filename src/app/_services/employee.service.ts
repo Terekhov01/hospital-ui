@@ -19,11 +19,11 @@ export class EmployeeService {
   /*createEmployee(employee: EmployeeDTO): Observable<Object>{
     return this.httpClient.post(`${this.REGURL}`, employee);
   }*/
-  
+
   createDoctor(doctor: EmployeeDTO): Observable<Object>{
     return this.httpClient.post(`${this.REGURL}/doctor`, doctor);
   }
-  
+
   getDoctorById(id: number): Observable<Employee>{
     return this.httpClient.get<Employee>(`${this.baseURL}/${id}`);
   }
@@ -33,8 +33,8 @@ export class EmployeeService {
     return this.httpClient.get<Employee>(`${this.doctorURL}/${id}`);
   }
 
-  update(employee: any): Observable<string>{
-    return this.httpClient.put<string>(`${this.doctorURL}/update`, employee);
+  update(employee: Employee): Observable<string>{
+    return this.httpClient.put<string>(`${this.baseURL}/${employee.id}`, employee);
   }
 
   deleteEmployee(id: number): Observable<Object>{
