@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from "./doctor.models";
 import {Observable} from "rxjs";
 import {DoctorRequest} from "./doctor-request.model";
+import {environment} from "../../../environments/environment";
 
 
 const httpOptions = {
@@ -13,7 +14,7 @@ const httpOptions = {
 export class DoctorService {
 
   id?: number;
-  private userUrl = 'http://localhost:8080/doctorusers';
+  private userUrl = environment.apiUrl + '/doctorusers';
   // private userUrl = 'http://localhost:8080/user-portal/doctorusers';
 
   constructor(private http: HttpClient) {

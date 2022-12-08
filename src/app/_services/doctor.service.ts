@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Doctor} from "../doctor";
 import {IUserNameId} from "../doctor-selector/doctor-selector.i-raw-data";
+import {environment} from "../../environments/environment";
 // import {Doctor} from "./doctor";
 // import { IUserNameId } from "./doctor-selector/doctor-selector.i-raw-data";
 
@@ -11,8 +12,8 @@ import {IUserNameId} from "../doctor-selector/doctor-selector.i-raw-data";
 })
 export class DoctorService {
 
-  private baseURL = "http://localhost:8080/api/doctors";
-  private getBySpecializationURL = "http://localhost:8080/doctorusers/find-by/specialization";
+  private baseURL = environment.apiUrl + "/api/doctors";
+  private getBySpecializationURL = environment.apiUrl + "/doctorusers/find-by/specialization";
 
   constructor(private httpClient: HttpClient) { }
 

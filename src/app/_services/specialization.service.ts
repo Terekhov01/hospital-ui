@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { TokenStorageService } from './token-storage.service';
 import { Observable } from "rxjs";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class SpecializationService
 
     constructor(private http: HttpClient, private tokenStorage: TokenStorageService)
     {
-        this.specializationAutocompleteOptions = "http://localhost:8080/specializations";
+        this.specializationAutocompleteOptions = environment.apiUrl + "/specializations";
     }
 
     getSpecializationAutocompleteOptions(): Observable<Map<string, string[]>>

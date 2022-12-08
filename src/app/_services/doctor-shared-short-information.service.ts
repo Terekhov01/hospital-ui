@@ -3,6 +3,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FilterSettings } from '../schedule-filter/schedule-filter.filter-settings';
 import { DoctorShortInformation, IDoctorShortInformation } from '../schedule-transfer-data/schedule-filter.data-transfer-objects';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,10 @@ export class DoctorSharedShortInformationService implements OnInit
     private requestedInfo = new BehaviorSubject<FilterSettings>(new FilterSettings(NaN, new Date(), new Date()));
     sharedRequestedInformationAsObservable = this.requestedInfo.asObservable();
 
-    constructor(private http: HttpClient) 
+    constructor(private http: HttpClient)
     {
-        this.calendarUrl = "http://localhost:8080/schedule/calendar/";
-        this.doctorShortInfoUrl = "http://localhost:8080/schedule/getDoctorShortInfo";
+        this.calendarUrl = environment.apiUrl + "/schedule/calendar/";
+        this.doctorShortInfoUrl = environment.apiUrl + "/schedule/getDoctorShortInfo";
     }
 
     ngOnInit(): void
@@ -33,7 +34,7 @@ export class DoctorSharedShortInformationService implements OnInit
         {
            httpParams = httpParams.append("doctorIds", id.join(","));
         }
-        
+
         return this.http.get<IDoctorShortInformation[]>(this.doctorShortInfoUrl, {params: httpParams});
     }
 

@@ -3,6 +3,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FilterSettings } from './schedule-filter/schedule-filter.filter-settings';
 import { DoctorShortInformation, IDoctorShortInformation } from './schedule-transfer-data/schedule-filter.data-transfer-objects';
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class DoctorSharedShortInformationService implements OnInit
 
   constructor(private http: HttpClient)
   {
-    this.calendarUrl = "http://localhost:8080/schedule/calendar/";
+    this.calendarUrl = environment.apiUrl + "/schedule/calendar/";
   }
 
   ngOnInit(): void

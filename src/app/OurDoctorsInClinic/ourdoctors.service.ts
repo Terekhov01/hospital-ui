@@ -8,6 +8,7 @@ import {ResponseStatistic} from "../doctor-statistic-single/response-statistic";
 // import {ResponceStatisticEmployment} from "../doctor-statistic-employment/responce-statistic-employment";
 import {RequestMailModel} from "../send-question-email/responceemail/request-mail.model";
 import {ResponceStatisticEmployment} from "../doctor-statistic-employment/responce-statistic-employment";
+import {environment} from "../../environments/environment";
 
 
 const httpOptions = {
@@ -20,14 +21,14 @@ const httpOptions = {
 export class OurdoctorsService {
 
   id?: number;
-  private userUrl = 'http://localhost:8080/ourdoctors';
-  private RatingUrl = 'http://localhost:8080/rating';
-  private doctorInfo = 'http://localhost:8080/doctorinfo';
+  private userUrl = environment.apiUrl + '/ourdoctors';
+  private RatingUrl = environment.apiUrl + '/rating';
+  private doctorInfo = environment.apiUrl + '/doctorinfo';
 
-  private sendEmail = 'http://localhost:8080/sendEmail';
+  private sendEmail = environment.apiUrl + '/sendEmail';
 
 // todo
-  private doctorStatistic = 'http://localhost:8080/doctorstatistic';
+  private doctorStatistic = environment.apiUrl + '/doctorstatistic';
 
   // private userUrl = 'http://localhost:8080/user-portal/ourdoctors';
   // private RatingUrl = 'http://localhost:8080/user-portal/rating';

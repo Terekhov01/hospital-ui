@@ -7,6 +7,7 @@ import { TimeRounded } from '../schedule-transfer-data/schedule-interval.data-tr
 import { ISchedulePatternShortInfo } from '../schedule-transfer-data/schedule-apply-pattern.data-transfer-obects';
 import { TokenStorageService } from './token-storage.service';
 import { ScheduleTablePattern } from '../schedule-transfer-data/schedule-prolong-page.data-transfer-objects';
+import {environment} from "../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
@@ -28,14 +29,14 @@ export class DoctorScheduleService
 
     constructor(private http: HttpClient, private tokenStorage: TokenStorageService)
     {
-        this.tableUrl = "http://localhost:8080/schedule/table";
-        this.calendarUrl = "http://localhost:8080/schedule/calendar";
-        this.schedulePatternListUrl = "http://localhost:8080/schedule-pattern/list-patterns";
-        this.schedulePatternViewUrl = "http://localhost:8080/schedule-pattern/view-pattern";
-        this.scheduleAddPatternUrl = "http://localhost:8080/schedule-pattern/add-pattern";
-        this.schedulePatternProlong = "http://localhost:8080/schedule-pattern/apply-pattern";
-        this.schedulePatternDelete = "http://localhost:8080/schedule-pattern/delete";
-        this.scheduleIntervalUpdate = "http://localhost:8080/schedule/updateIntervalIsAssigned";
+        this.tableUrl = environment.apiUrl + "/schedule/table";
+        this.calendarUrl = environment.apiUrl + "/schedule/calendar";
+        this.schedulePatternListUrl = environment.apiUrl + "/schedule-pattern/list-patterns";
+        this.schedulePatternViewUrl = environment.apiUrl + "/schedule-pattern/view-pattern";
+        this.scheduleAddPatternUrl = environment.apiUrl + "/schedule-pattern/add-pattern";
+        this.schedulePatternProlong = environment.apiUrl + "/schedule-pattern/apply-pattern";
+        this.schedulePatternDelete = environment.apiUrl + "/schedule-pattern/delete";
+        this.scheduleIntervalUpdate = environment.apiUrl + "/schedule/updateIntervalIsAssigned";
     }
 
     updateIntervalIsAssigned(id: bigint, assignedValue: string, startDate: Date): Observable<Object> {

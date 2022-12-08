@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Appointment, AppointmentCreationDTO} from "./appointment";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppointmentService {
 
-  private baseURL = "http://localhost:8080/api/appointments";
-  private fileURL = "http://localhost:8080/api/files";
+  private baseURL = environment.apiUrl + "/api/appointments";
+  private fileURL = environment.apiUrl + "/api/files";
 
   constructor(private httpClient: HttpClient) { }
 

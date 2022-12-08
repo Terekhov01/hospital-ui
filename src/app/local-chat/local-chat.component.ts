@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import * as $ from 'jquery';
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-local-chat',
@@ -13,7 +14,7 @@ import * as $ from 'jquery';
 })
 export class LocalChatComponent {
 
-  private serverUrl = 'http://localhost:8080/socket'
+  private serverUrl = environment.apiUrl + '/socket';
 
   private stompClient;
 

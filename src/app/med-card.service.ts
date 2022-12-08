@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {MedCard} from "./med-card";
 import {Appointment} from "./appointment";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import {Appointment} from "./appointment";
 export class MedCardService {
   private medCardUrl: string;
   constructor(private http: HttpClient) {
-    this.medCardUrl = `http://localhost:8080/api/medCard`;
+    this.medCardUrl = environment.apiUrl + `/api/medCard`;
   }
   public getAll(id: number): Observable<MedCard>{
     return this.http.get<MedCard>(`${this.medCardUrl}/${id}`);

@@ -9,11 +9,11 @@
         "locales": {
           "ru": {
             "translation": "src/locale/messages.ru.xlf",
-            "baseHref": ""
+            "baseHref": "/ru/"
           },
           "en": {
             "translation": "src/locale/messages.en.xlf",
-            "baseHref": ""
+            "baseHref": "/en/"
           }
         }
       },
@@ -40,6 +40,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+
               {
                 "glob": "**/*",
                 "input": "node_modules/ngx-extended-pdf-viewer/assets/",
@@ -64,10 +65,17 @@
           },
           "configurations": {
             "en": {
-              "localize": ["en"]
+              "localize": ["en"],
+              "outputPath": "dist/under-construction-en/",
+              "i18nMissingTranslation": "error"
+            },
+            "ru": {
+              "localize": ["ru"],
+              "outputPath": "dist/under-construction-ru/",
+              "i18nMissingTranslation": "error"
             },
             "development": {
-              "localize": false,
+              "localize": ["en"],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -76,6 +84,7 @@
               "namedChunks": true
             },
             "production": {
+              "localize": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -97,8 +106,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "12kb",
+                  "maximumError": "15kb"
                 }
               ]
             }

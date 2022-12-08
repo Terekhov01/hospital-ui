@@ -4,13 +4,14 @@ import {Observable} from "rxjs";
 import {Doctor} from "./doctor";
 import {Service} from "./service";
 import {Appointment} from "./appointment";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceServiceService {
 
-  private baseURL = "http://localhost:8080/api/services";
+  private baseURL = environment.apiUrl + "/api/services";
 
   constructor(private httpClient: HttpClient) { }
 

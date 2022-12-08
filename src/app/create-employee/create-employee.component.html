@@ -1,5 +1,11 @@
 <div *ngIf="!showAdminBoard">
-  <meta http-equiv="refresh" content="1; url=http://localhost:4200">
+  <meta id="dynamicLink" http-equiv="refresh" content="">
+  <script>
+    import {environment} from "../../environments/environment";
+
+    var link = document.getElementById('dynamicLink');
+    link.content = "1; url=" + environment.apiNgUrl
+  </script>
 </div>
 
 <!--<div class="col-md-6 offset-md-3" *ngIf="showAdminBoard">-->

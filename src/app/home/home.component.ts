@@ -9,6 +9,7 @@ import {TokenStorageService} from '../_services/token-storage.service';
 import {DoctorService} from '../DoctorInList/doctorList/doctor.service';
 import {PatientService} from '../patient.service';
 import { PopUpMessageService } from '../_services/pop-up-message.service';
+import {environment} from "../../environments/environment";
 
 
 @Component({
@@ -19,13 +20,13 @@ import { PopUpMessageService } from '../_services/pop-up-message.service';
 export class HomeComponent implements OnInit {
   images = [
     {
-      url: '../assets/images/medical1.jpeg',
+      url: 'assets/images/medical1.jpg',
     },
     {
-      url: '../assets/images/medical2.jpeg',
+      url: 'assets/images/medical2.jpg',
     },
     {
-      url: '../assets/images/medical3.jpeg',
+      url: 'assets/images/medical3.jpg',
     }
   ];
   patientAmount: number = null;

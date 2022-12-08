@@ -1,5 +1,11 @@
 <div  *ngIf="!showAdminBoard">
-  <meta http-equiv="refresh" content="1; url=http://localhost:4200">
+  <meta id="dynamicLink2" http-equiv="refresh" content="">
+  <script>
+    import {environment} from "../../environments/environment";
+
+    var link = document.getElementById('dynamicLink2');
+    link.content = "1; url=" + environment.apiNgUrl
+  </script>
 </div>
   <p-table #dt [value]="employees" [(selection)]="selectedEmployees" dataKey="id" styleClass="p-datatable-employees" [rowHover]="true"
            [rows]="15" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"

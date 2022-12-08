@@ -5,16 +5,17 @@ import {Patient} from "./patient";
 import {AppointmentRegistration} from "./appointment-registration";
 import {Doctor} from "./doctor";
 import { FileDTO } from "./file-transfer-data/file-transfer-data.data-transfer-object";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
 
-  private baseURL = "http://localhost:8080/api/patients";
-  private fileURL = "http://localhost:8080/api/files";
-  private downloadURL = "http://localhost:8080/api/files/download/"
-  private doctorURL = "http://localhost:8080/api/doctors";
+  private baseURL = environment.apiUrl + "/api/patients";
+  private fileURL = environment.apiUrl + "/api/files";
+  private downloadURL = environment.apiUrl + "/api/files/download/"
+  private doctorURL = environment.apiUrl + "/api/doctors";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -39,7 +40,7 @@ export class PatientService {
   getAllPatients(): Observable<Patient[]>{
     return this.httpClient.get<Patient[]>(`${this.baseURL}`);
   }
-  
+
   getDoctorById(id: bigint): Observable<Doctor> {
     return this.httpClient.get<Doctor>(`${this.doctorURL}/id/${id}`)
   }
